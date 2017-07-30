@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+	var person = {}
+	Object.defineProperty(person,"name",{
+		writable:false,
+		value : "lifeng"
+	})
+	console.info(person.name)
+	delete person.name;
+	console.info(person.name)
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

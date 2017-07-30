@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Function Demo</title>
+	<script type="text/javascript">
+		function createEatFunction() {
+			var desc = "is eating";
+			function eat(animanl) {
+				console.log(animal.name + desc);
+			}
+			return eat;
+		}
+		var eat = createEatFunction();
+		let animal = {name: "dog"};
+		var desc = "正在吃东西";
+		eat(animal);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

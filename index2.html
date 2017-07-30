@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		var animals = ["cat","dog","fish"];
+		var lengths = []; 
+		var item; 
+		var count; 
+		var loops = animals.length; 
+		for (count = 0; count < loops; count++)	
+		{   item = animals[count];   
+			lengths.push(item.length); 
+		} 
+		console.log(lengths); //[3, 3, 4]
+		////////
+		console.info("----------------------------");
+		var animals = ["cat","dog","fish"]; 
+		var lengths = animals.map(function(animal) {   return animal.length; });
+		console.info("lengths : " + lengths);
+		////////
+		console.info("-----------------------------");
+		var animals = ["cat","dog","fish"]; 
+		function getLength(word){   
+			return word.length; 
+		} 
+		console.log(animals.map(getLength));
+		console.log("map end.....");
+		////////
+		var animals2 = ["cat","dog","fish"]; 
+		var total = animals2.reduce(function(sum2, word) {
+			return sum2 + word.length;
+		}, 0); 
+		console.log(total);
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

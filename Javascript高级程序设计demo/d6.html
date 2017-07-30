@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<title>title</title>
+		<script type="text/javascript">
+			"use strict"
+			var person = {};
+			person.name = "lifeng";
+			Object.defineProperty(person, "name", {
+				configurable: false,
+				value: "chegnweilin"
+			});
+			
+			Object.defineProperty(person, "name", {
+				configurable: false,
+				writable:true,
+				value: "chengweilin"
+			});
+			
+			// person.name = "ddddddd"
+			// delete person.name;
+			console.info(person.name)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

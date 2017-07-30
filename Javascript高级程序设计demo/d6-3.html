@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>title</title>
+		<script type="text/javascript">
+			/**
+			 * 构造函数模式
+			 **/
+			"use strict"
+			function Person(name, age) {
+				this.name = name;
+				this.age = age;
+				this.sayName = function() {
+					console.info(this.name);
+				}
+			}
+			var p1 = new Person("lifeng", 20);
+			var p2 = new Person("chengweilin", 10);
+			p1.sayName();
+			p2.sayName();	
+			console.info(p1.sayName == p2.sayName)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

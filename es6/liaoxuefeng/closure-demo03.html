@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		function count() {
+			var arr = [];
+			for (var i=1; i<=3; i++) {
+				arr.push(function () {
+					return i * i;
+				});
+			}
+			return arr;
+		}
+		var results = count();
+		console.info(results);
+		
+		var f1 = results[0];
+		var f2 = results[1];
+		var f3 = results[2];
+		console.info("f1 : " + f1);
+		console.info("f2 : " + f2);
+		console.info("f3 : " + f3);
+		
+		console.info("f1() : " + f1());
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

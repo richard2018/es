@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Function Demo</title>
+	<script type="text/javascript">
+	function sum(a,b){
+		return a + b;
+	}
+	console.info(sum.call(this,3,2));
+	console.info(sum.apply(this,[2,1]))
+
+	// 函数的call和apply方法可以显示指定thisArg,函数表达式则隐式指定这个参数
+	var foo = function(){
+    	console.log(this);
+	};
+	var obj = {name:'object'};
+	foo();
+	obj.foo = foo;
+	obj.foo();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

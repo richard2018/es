@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>附录B</title>
+	<script type="text/javascript">
+	"use strict"
+    var message = "Hello World "
+    // var v1 = 010
+    // console.info(v1)
+
+    // 7.抑制this
+    var color = "red"
+    function displayColor(){
+    	console.info(this)
+    }
+    // displayColor.call(null);
+
+    // var eval = 3
+    function doSth(){
+    	eval("var x = 10")
+    	console.info(x)
+    }
+    doSth.call(window)
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		function createFunctions(){
+			var result = new Array();
+			for(var i = 0;i < 10;i++){
+				result[i] = function(){
+					console.info(i)
+					return i;
+				};
+			}
+			// console.info(result)
+			return result;
+		}
+		var result = createFunctions();
+		for(var i = 0;i < 10;i++){
+			console.info(i+" , " + result[i]());
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

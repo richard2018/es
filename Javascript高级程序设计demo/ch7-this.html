@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this</title>
+	<script type="text/javascript">
+	"use strict"
+	var name = "The Window";
+	var object = {
+		name : "My Object",
+		getNameFunc:function(){
+			return function(){
+				return this.name;
+			}
+		}
+	}
+
+	var func = object.getNameFunc();
+	console.info(func());
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		// 反序列化
+		JSON.parse('[1,2,3,true]'); // [1, 2, 3, true]
+		JSON.parse('{"name":"小明","age":14}'); // Object {name: '小明', age: 14}
+		JSON.parse('true'); // true
+		JSON.parse('123.45'); // 123.45
+		
+		var obj = JSON.parse('{"name":"小明","age":14}', function (key, value) {
+			// 把number * 2:
+			if (key === 'name') {
+				return value + '同学';
+			}
+			return value;
+		});
+		console.info(obj);
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

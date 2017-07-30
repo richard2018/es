@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+// 静态私有变量的定义方式
+	(function(){
+		var name = "";
+		Person = function(value){
+			name = value;
+		};
+		Person.prototype.getName = function(){
+			return name;
+		};
+		Person.prototype.setName = function(value){
+			name = value;
+		};
+	})();
+	var person1 = new Person("Lifeng");
+	console.info(person1.getName());
+
+	person1.setName("lee");
+	console.info(person1.getName());
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

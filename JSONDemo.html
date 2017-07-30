@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JSON</title>
+	<script type="text/javascript">
+		var book = {
+			title:"Professional javascript",
+			authors :[
+				"lifeng","lover","other"
+			],
+			edition:"3",
+			year:"2011",
+			releaseDate: new Date(2011,2,2)
+		}
+		var jsonText = JSON.stringify(book);
+		console.info("jsonText 1 : " + jsonText);
+
+		// 增加过滤器
+		jsonText = JSON.stringify(book,["title"]);
+		console.info("jsonText 2 : " + jsonText);
+
+		// 函数过滤
+		jsonText = JSON.stringify(book,function(key,value){
+			switch(key){
+				case "authors":
+					return value.join("*");
+				case "year":
+					return 5000;
+				default:
+					return value;
+			}
+		});
+		console.info("jsonText 函数 : " + jsonText)
+
+		jsonText = JSON.stringify(book,null," ")
+		console.info("jsonText 3 : " + jsonText);
+
+		// 结合toJSON
+		// jsonText = JSON.stringify(book);
+		console.info("jsonText toJSON 4 : " + jsonText);
+
+		var bookCopy = JSON.parse(jsonText,function(key,value){
+			if(key == "releaseDate"){
+				return new Date(value)
+			}else {
+				return value
+			}
+		})
+		console.info("bookCopy : " + bookCopy.releaseDate.getFullYear())
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

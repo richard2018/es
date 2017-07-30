@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		function make_pow(n) {
+			return function (x) {
+				return Math.pow(x, n);
+			}
+		}
+		
+		var pow2 = make_pow(2);
+		var pow3 = make_pow(3);
+
+		console.info("pow2 : " + pow2(5)); // 25
+		console.info("pow3 : " + pow3(7)); // 343
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
