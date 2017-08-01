@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		var a, b;
+		a = new Array(0,1,2,3,4);
+		b = a.join(",");
+		console.info((a instanceof Array) + " , " + typeof a);
+		console.info((b.Constructor) + " ,b " + typeof b);
+		c = a.toString();
+		console.info((c instanceof String) + " , " + typeof c);
+		
+		
+		var obj=new Object("one day");  
+		console.info(obj instanceof String);//true 
+		
+		var v1 = "a,b,c";
+		console.info(v1 instanceof Object);
+
+		var n1 = 123;
+		console.info(n1.toString());
+		console.info(n1.toString() instanceof String);
+		
+		
+		console.info(a.indexOf(0))
+		
+		
+		let cuisineDefine = [
+        {"0":"上海菜"},{"1":"浙江菜"},{"2":"川菜"},{"3":"粤菜"},{"4":"江苏菜"}
+		];
+		let l1 = "0,1,2";
+		let arr1 = l1.split(",");
+		
+		cuisineDefine.forEach((item) => {
+			for (key in item) {
+			console.info(item);
+			console.info(typeof arr1[0] + " , " + key);
+				console.info("l1 : " + arr1.indexOf(key));
+			}
+		});
+</script>
+	</head>
+	<body>
+	</body>
+</html>

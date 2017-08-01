@@ -1,0 +1,313 @@
+1.ES6 module的用法总结:
+子模块content.js:
+export default "Test1"
+export function say() {
+	return "Hello!"
+}
+export const type = 'A cat'
+
+主模块:
+import {say,type} from './content'
+let says = say();
+console.log(`The ${type} says ${says}`);
+
+模块的整体加载:
+import animal, * as content from './content'
+let says = content.say();
+console.log(`The ${content.type} says ${says} to ${animal}`);
+// The dog says Hello to A cat
+
+2.传统的模块写法:
+CommonJS
+//index.js
+var animal = require('./content.js')
+
+//content.js
+module.exports = 'A cat'
+
+3.AMD写法:
+//content.js
+define('content.js', function(){
+    return 'A cat';
+})
+
+//index.js
+require(['./content.js'], function(animal){
+    console.log(animal);   //A cat
+})
+
+4.Set和Map数据结构
+set:
+const s = new Set();
+[2, 3, 5, 4, 5, 2, 2].forEach(x => s.add(x));
+for (let i of s) {
+  console.log(i);
+}
+// 2,3,5,4
+
+set = new Set([...set].filter(x => (x % 2) == 0));
+
+5.destructuring
+传统写法:
+let cat = 'ken';
+let dog = 'lili';
+let zoo = {cat: cat, dog: dog};
+console.log(zoo);// Object {cat: "ken", dog: "lili"}
+
+ES6写法:
+let cat = 'ken'
+let dog = 'lili'
+let zoo = {cat, dog}
+console.log(zoo) // Object {cat: "ken", dog: "lili"}
+
+反过来的写法:
+let dog = {type: 'animal', many: 2}
+let {type, many} = dog
+console.log(type, many)
+
+6.default, rest
+function animal(type) {
+	type = type || 'cat'
+	console.log(type)
+}
+ES6写法:
+function animal(type = 'cat') {
+	console.log(type);
+}
+animal();
+
+rest:
+function animals(...types) {
+	console.log(types);
+}
+animals('cat', 'dog', 'fish')
+
+7.template string
+`test ${var} content`
+
+8.arrow function
+箭头函数本身没有this,它的this是继承外面的.
+
+9.
+
+5.建站系统前端运行原理机制:
+(1) webpack基本配置原理:
+module.exports = {
+	entry: {
+		'bm001_login': './module/bm001/register/index.js'
+	},
+	resolve: {
+		moduleDirectories: ['', 'common', 'node_modules']
+	},
+	output:{
+		filename: 'qianmi-[name].js'
+	}
+}
+最终生成的文件名称为:
+qianmi-bm001_login.js
+
+(2) site.properties
+配置业务模块真实的js路径,在java代码里注入，如:
+site.bm001_Login.js = =<script type=\"text/javascript\" src=\"/static/site/build/qianmi-bm001_Login.js\"></script>
+
+(3) site.ejs(这个目前感觉没用)
+site.bm001_Login.js=<script type=\"text/javascript\" src=\"<$=bm001_Login$>\"></script>
+
+(4) BuildSiteServiceImpl
+initEhomeUnionRouter
+配置url与内部路由关系
+
+(5) SiteEhomeUnionRouter
+getEhomePage 路由到具体的业务方法,业务方法把脚本加载路径返回到前端
+
+iflux的使用技术点:
+(1) Store
+var appStore = Store({
+    addForm: {
+        financeType: ''
+    },
+    //结果集
+    data: {
+        dataList: [],
+    },
+	name: ''
+});
+// 设置对象
+appStore.cursor().setIn(["addForm", 'financeType'], "");
+
+// 获取数据
+let checkId = appStore.data().get("checkedIdList");
+let dataList = appStore.data().getIn(['data', 'dataList']);
+
+// 设置数据:各种使用方法
+appStore.cursor().set('checkedIdList', checkId);
+appStore.cursor().setIn(["data", "pageNum"], Immutable.fromJS(res.pageNum));
+appStore.cursor().set('form', Immutable.fromJS(form));
+
+// 设置取数据综合1： 
+z1. 演示toArray
+var dataList = appStore.data().getIn(['data', 'dataList']);
+appStore.cursor().setIn(['data', "dataList"], Immutable.fromJS(dataList.map(function (item) {
+	if (item.get('auntId') == auntId) {
+		var d = item.toJS();
+		d.blackState = blackState;
+		return d;
+	}
+	return item;
+}).toArray()));
+	
+z2. 演示List的map方法	
+ Request.post('/auntLevel/queryAuntLevelList').then((res) => {
+        appStore.cursor().setIn(["auntLevelData", "dataList"], Immutable.fromJS(res));
+        let auntLevelList = [];
+        res.map(function (item) {
+            auntLevelList.push({value: item.id, text: item.levelName});
+        });
+    })
+	
+z3.演示filter
+var auntDataList = Immutable.fromJS(res.dataList).filter(function (data) {
+                return item.get('auntId') ==data.get('auntId');
+            });
+
+z4.演示Confirm
+    Confirm("确认修改阿姨级别吗", () => {
+        var checkedIdList = appStore.data().get("checkedIdList");
+        var params = {};
+        params.levelId = batchlevelId;
+
+        checkedIdList.map(function (item, index) {
+            params["auntIdList[" + index + "]"] = item;
+        });
+
+        Request.post('/aunt/batchUpdateLevel', params).then(() => {
+            tip("操作成功");
+            Messages.emit("aunt-list:queryList");
+        }).fail((data) => {
+            if (data.result == 'fail') {
+                tip(data.msg);
+            } else {
+                tip("系统异常，请稍后再试！");
+            }
+        });
+    });
+
+// z5 校验框架
+var validator = new Validator(appStore, {
+  'form.name': {
+    minLength: 2,
+    maxLength: 15,
+    required: true,
+    message: {
+      minLength: "用户姓名最少2位",
+      maxLength: "用户姓名最多15位",
+      required: "请输入正确的用户姓名"
+    }
+  },
+  'form.idcard': {
+    cardNo:   true,
+    required: true,
+    message: {
+      cardNo: "请输入正确的身份证号码",
+      required: "请输入正确的身份证号码"
+    }
+  },
+  'form.phone': {
+    mobile:   true,
+    required: true,
+    message: {
+      mobile: "请输入正确的手机号码",
+      required: "请输入正确的手机号码"
+    }
+  },
+  'form.email': {
+    email: true,
+    message: {
+      email: "请输入正确的邮箱地址"
+    }
+  },
+  'form.qq': {
+    qq: true,
+    message: {
+      qq: "请输入正确的qq号码"
+    }
+  },
+  'form.address': {
+    minLength: 2,
+    maxLength: 50,
+    message: {
+      minLength: "用户地址最少2位",
+      maxLength: "用户地址最多100位"
+    }
+  }
+});
+
+
+
+// 常用代码片段
+import Iflux,{msg as Messages,Store} from 'iflux'
+
+appStore.cursor().withMutations(function (cursor) {
+            cursor.set('isSearching', false);
+			cursor.set('isSearching', false);
+		});
+
+
+$.cookie(hostName + 'userInfo', JSON.stringify(data.user), {path: "/"});
+	
+<a href="javascript:void(0);" className="" onClick={that._signIn}>立即登录</a>	
+(2) Immutable
+Immutable.fromJS([1,2])
+Immutable.fromJS({a: 1})
+
+从不可变数据生成js对象:
+immutableData.toJS();
+
+例子:
+foo = Immutable.fromJS({a: {b: 1}});
+bar = foo.setIn(['a', 'b'], 2);
+console.log(foo.getIn(['a', 'b']));
+
+
+Immutable.is 比较的是两个对象的 hashCode 或 valueOf（对于 JavaScript 对象）。由于 immutable 内部使用了 Trie 数据结构来存储，只要两个对象的 hashCode 相等，值就是一样的。这样的算法避免了深度遍历比较，性能非常好。
+
+immutable 则提供了简洁高效的判断数据是否变化的方法，只需 === 和 is 比较就能知道是否需要执行 render()，而这个操作几乎 0 成本，所以可以极大提高性能。修改后的 shouldComponentUpdate 是这样的：
+
+shouldComponentUpdate: (nextProps = {}, nextState = {}) => {
+  const thisProps = this.props || {}, thisState = this.state || {};
+
+  if (Object.keys(thisProps).length !== Object.keys(nextProps).length ||
+      Object.keys(thisState).length !== Object.keys(nextState).length) {
+    return true;
+  }
+
+  for (const key in nextProps) {
+    if (!is(thisProps[key], nextProps[key])) {
+      return true;
+    }
+  }
+
+  for (const key in nextState) {
+    if (thisState[key] !== nextState[key] || !is(thisState[key], nextState[key])) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+(3) Cursor:
+import Immutable from 'immutable';
+import Cursor from 'immutable/contrib/cursor';
+
+let data = Immutable.fromJS({ a: { b: { c: 1 } } });
+// 让 cursor 指向 { c: 1 }
+let cursor = Cursor.from(data, ['a', 'b'], newData => {
+  // 当 cursor 或其子 cursor 执行 update 时调用
+  console.log(newData);
+});
+
+cursor.get('c'); // 1
+cursor = cursor.update('c', x => x + 1);
+cursor.get('c'); // 2
+
