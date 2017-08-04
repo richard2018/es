@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		var myFirstCurry = function(word) {
+			 return function(user) {
+					return [word , ", " , user].join("");
+			 };
+		};
+
+		var HelloUser = myFirstCurry("Hello");
+		console.info(HelloUser("Rahul")); // Output: "Hello, Rahul" 
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

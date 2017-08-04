@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		var user = {
+			 greet: "Hello!",
+			 greetUser: function(userName) {
+				console.log(this.greet + " " + userName);
+			 }
+		};
+		
+		var greetHola = user.greetUser.bind({greet: "Hola"});
+		var greetBonjour = user.greetUser.bind({greet: "Bonjour"});
+
+		greetHola("Rahul") // 输出"Hola Rahul"
+		greetBonjour("Rahul") // 输出"Bonjour Rahul"
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

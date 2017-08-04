@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		function Product() {
+			var name;
+			this.setName = function(value) {
+				name = value;
+			};
+
+			this.getName = function() {
+				return name;
+			};
+		}
+
+		var p = new Product();
+		p.setName("Fundebug");
+
+		console.log(p.name); // 输出undefined
+		console.log(p.getName()); // 输出Fundebug
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

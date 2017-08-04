@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		function f1()
+		{
+			var N = 0; // N是f1函数的局部变量
+			
+			function f2() // f2是f1函数的内部函数，是闭包
+			{
+				N += 1; // 内部函数f2中使用了外部函数f1中的变量N
+				console.log(N);
+			}
+
+			return f2;
+		}
+
+		var result = f1();
+
+		result(); // 输出1
+		result(); // 输出2
+		result(); // 输出3
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

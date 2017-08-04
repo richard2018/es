@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		var module = (function() {
+			var N = 5;
+
+			function print(x) {
+				console.log("The result is: " + x);
+			}
+
+			function add(a) {
+				var x = a + N;
+				print(x);
+			}
+
+			return {
+				description: "This is description",
+				add: add
+			};
+		})();
+
+
+		console.log(module.description); // 输出"this is description" 
+
+		module.add(5); // 输出“The result is: 10”
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

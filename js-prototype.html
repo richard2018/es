@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		/**
+		*  var Person = function(){};
+		*  var p = new Person();
+		*  new 的过程:
+		*  new的过程拆分成以下三步：
+		*  (1) var p={}; 也就是说，初始化一个对象p
+		*  (2) p.__proto__ = Person.prototype;
+		*  (3) Person.call(p); 也就是说构造p，也可以称之为初始化p
+		*/
+		var Person = function(){};
+		Person.prototype.sayName = function() {
+			console.info("My Name is Jacky");
+		};
+
+		Person.prototype.age = 27;
+		var p = new Person();
+		p.sayName();
+		
+		var p2 = {};
+		console.info(p2.__proto__);
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
