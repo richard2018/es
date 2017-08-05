@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.js"></script>
+		<script type="text/javascript">
+		// 3.不显示创建dtd对象,通过$.Deferred隐式创建、传递dtd对象
+		var wait = function(dtd){
+	　　　　var tasks = function(){
+	　　　　　　alert("执行完毕！");
+	　　　　　　dtd.resolve(); // 改变Deferred对象的执行状态
+	　　　　};
+	　　　　setTimeout(tasks,5000);
+	　　　　return dtd.promise();
+　　	};
+	　　$.Deferred(wait)
+	　　.done(function(){ alert("哈哈，成功了！"); })
+	　　.fail(function(){ alert("出错啦！"); });	
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

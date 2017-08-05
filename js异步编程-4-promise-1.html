@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.js"></script>
+		<script type="text/javascript">
+		// promise
+		// 在外部创建dtd对象
+		　　var dtd = $.Deferred(); // 新建一个Deferred对象
+		　　var wait = function(dtd){
+		　　　　var tasks = function(){
+		　　　　　　alert("执行完毕！");
+		　　　　　　dtd.resolve(); // 改变Deferred对象的执行状态
+		　　　　};
+
+		　　　　setTimeout(tasks,5000);
+		　　　　return dtd.promise(); // 返回promise对象
+		　　};
+		　　var d = wait(dtd); // 新建一个d对象，改为对这个对象进行操作
+		　　$.when(d)
+		　　.done(function(){ alert("哈哈，成功了！"); })
+		　　.fail(function(){ alert("出错啦！"); });
+		　　//d.resolve(); // 此时，这个语句是无效的
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

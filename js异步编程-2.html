@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		function f2() {
+			console.info("f2...");
+		}
+		function f1(){
+	　　　　setTimeout(function () {
+	　　　　　　// f1的任务代码
+	　　　　　　f1.trigger('done');
+	　　　　}, 1000);
+　　	}
+		f1.on('done', f2);
+		f1();
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

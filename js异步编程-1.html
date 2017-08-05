@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		function f2(){
+			console.info("f2 ....");
+		}
+		　function f1(callback){
+	　　　　setTimeout(function () {
+	　　　　　　// f1的任务代码
+				for(var i = 0; i< 1000000000000; i++)
+				;
+				console.info("f1 ....");
+				
+	　　　　　　callback();
+	　　　　}, 1000);
+	　　  }
+	
+		f1(f2);
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
