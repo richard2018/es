@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Function Demo</title>
+	<script type="text/javascript">
+		function reverse(string) {
+	　　　　if(string.length == 0) {
+	　　　　　　return string;
+	　　　　} else {
+	　　　　　　return reverse(string.substring(1, string.length)) + string.substring(0, 1);
+	　　　　}
+　　	}
+		var s1 = "te";
+		console.info(reverse(s1));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
