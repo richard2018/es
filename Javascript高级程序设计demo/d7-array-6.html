@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>title</title>
+		<script type="text/javascript">
+			// 缩小方法
+			// 1.reduce
+			var values = [1, 2, 3, 4, 5];
+			var sum = values.reduce(function(prev, cur, index, array) {
+				console.info("prev : " + prev + " , cur : " + cur + " , index : " + index);
+				return prev + cur;
+			});
+			console.info("sum : " + sum);
+			// 2.reduceRight
+			var sumR = values.reduceRight(function(prev, cur, index, array) {
+				console.info("prev : " + prev + " , cur : " + cur + " , index : " + index);
+				return prev + cur;
+			});
+			console.info("sumR : " + sumR)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

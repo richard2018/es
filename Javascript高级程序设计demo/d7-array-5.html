@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title>title</title>
+		<script type=text/javascript>
+			// 迭代方法
+			// 1.every,每次都返回true,才会返回true
+			let l1 = [3, 2, 4, 1, 5];
+			let le = l1.every((item) => {
+				return item < 6;
+			});
+			console.info(le)
+			
+			// 2.forEach,类似于for
+			l1.forEach((item, index, array) => {
+				array[index] = 10 + array[index];
+			});
+			console.info(l1)// forEach不影响数组本身
+			
+			// 3.map,会影响原数组
+			let lm = [3, 4, 2];
+			lm = lm.map((item, index, lm) => {
+				return item * 2;
+			});
+			console.info(lm)
+			
+			// 4.some,任一项返回true,即返回true
+			let ls = l1.some((data) => {
+				return data < 13;
+			})
+			
+			// 5.filter
+			
+			console.info(ls)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

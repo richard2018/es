@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>title</title>
+		<script type="text/javascript">
+			"use strict"
+			let a1 = Array("dog", "pig");
+			console.info(a1.reverse());
+			console.info(a1)
+			
+			let a2 = [0,1,10,5,15];
+			console.info(a2.sort((d1, d2) => {
+				if (d1 < d2) {
+					return -1;
+				} else if (d1 > d2) {
+					return 1;
+				} else {
+					return 0;
+				}
+			}));
+			console.info(a2)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
