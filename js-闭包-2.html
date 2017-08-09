@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.js"></script>
+	
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 期望的结果
+			document.body.innerHTML = "<div id=div1>aaa</div>" + "<div id=div2>bbb</div>" + "<div id=div3>ccc</div>";  
+			for (var i = 1; i < 4; i++) {
+			  (function(i){ //②再用这个参数i，到getElementById()中引用     
+			    document.getElementById('div' + i).       
+			      addEventListener('click', function() {         
+			      alert(i); // 1,2,3
+			     });  
+			  })(i);  //①把遍历的1，2，3的值传到匿名函数里面
+			}
+		</script>
+	</body>
+</html>
