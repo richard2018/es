@@ -1,0 +1,288 @@
+# language: JSVM2
+
+/**
+ * @fileoverview js.io.Serializer class {@link http://jsvm.org/}
+ * @file		Serializer.jsc
+ * @author	Wan Changhua
+ * @version	2.01, 10/23/05
+ * @since		JSVM1.0
+ */
+
+package js.io;
+
+import js.lang.JObject;
+import js.io.IOException;
+import js.net.XmlDom;
+import js.util.HashMap;
+
+/**
+ * Create a new Serializer instance.
+ * Inherit from JObject
+ * @author	Wan Changhua
+ * @version	2.01, 10/23/05
+ * @extends js.lang.JObject
+ * @class js.io.Serializer is a utility class for serialize
+ * @constructor
+ * @final
+ * @deprecated
+ */
+class Serializer()
+{
+
+	var objectMap = new js.util.HashMap();
+	var sequence = 0;
+	var __this = this;
+	
+	/**
+	 * a tool object for transform
+	 * @private
+	 * @type Object
+	 */
+	var trsfmer = new function ()
+	{
+	
+		var xmldom = js.net.XmlDom.create();
+		xmldom.setAsync(false);
+		xmldom.loadXML("<ROOT/>");
+	
+		this.createElement = function(name, text)
+		{
+			var node = xmldom.createElement(name);
+			if (typeof(text) != "undefined")
+			{
+				node.appendChild(xmldom.createTextNode(String(text)));
+			}
+			return node;
+		}
+		
+		this.createTextNode = function(text)
+		{
+			return xmldom.createTextNode(String(text));
+		}
+	
+		this.transformXMLToElement = function(xml)
+		{
+			return xmldom.utility.parseNode(xml);
+		}
+		
+		this.getText = function (node)
+		{
+			return xmldom.utility.getText(node);
+		}
+		this.getXML = function (node)
+		{
+			return xmldom.utility.getXML(node);
+		}
+		
+		this.destroy = function ()
+		{
+			xmldom.destroy();
+			xmldom = null;
+		}
+	
+	}
+
+	var serializeToNode = function (obj)
+	{
+		var node = null;
+		var type = typeof(obj);
+		switch (type)
+		{
+			case "undefined"	:	node = trsfmer.createElement("void"); break;
+			case "number"	: node = trsfmer.createElement("number", obj); break;
+			case "string"	: node = trsfmer.createElement("string", obj); break;
+			case "boolean"	: node = trsfmer.createElement("boolean", String(obj).toLowerCase()); break;
+			case "function"	: node = trsfmer.createElement("function", obj.toString()); break;
+			case "object"	:
+				if (obj == null) {
+					node = trsfmer.createElement("null");
+				} else if (obj instanceof Array) {
+					node = trsfmer.createElement("array");
+					for (var i = 0; i < obj.length; i++) {
+						var _cnode = serializeToNode(obj[i]);
+						node.appendChild(_cnode);
+					}
+				} else {
+					node = trsfmer.createElement("object");
+					if (obj instanceof Date) {
+						node.setAttribute("type", "Date");
+						node.appendChild(trsfmer.createTextNode(obj.getTime()));
+					} else if (obj instanceof Error) {
+						node.setAttribute("type", "Error");
+						node.appendChild(trsfmer.createElement("number", obj.number));
+						node.appendChild(trsfmer.createElement("description", obj.description));
+					} else if (obj instanceof String) {
+						node.setAttribute("type", "String");
+						node.appendChild(trsfmer.createTextNode(obj.toString()));
+					} else if (obj instanceof Boolean) {
+						node.setAttribute("type", "Boolean");
+						node.appendChild(trsfmer.createTextNode(obj.valueOf()));
+					} else if (obj instanceof Number) {
+						node.setAttribute("type", "Number");
+						node.appendChild(trsfmer.createTextNode(obj.valueOf()));
+					} else if (obj instanceof RegExp) {
+						node.setAttribute("type", "RegExp");
+						node.appendChild(trsfmer.createTextNode(obj.source));
+					} else if (obj instanceof Object) {
+						var isJO = (obj instanceof JObject);
+						node.setAttribute("type", 
+							(isJO ? obj.getClass().getName() : "Object"));
+						var oid = objectMap.get(obj);
+						if (oid != null) {
+							node.setAttribute("ref", oid);
+							break;
+						} else {
+							oid = sequence++ ;
+							objectMap.put(obj, oid);
+							node.setAttribute("oid", oid);
+						}
+						for (var p in obj) {
+							var v = obj[p];
+							if ((isJO && p == "window") ||
+								typeof(v) == "function") continue;
+							var pnode = trsfmer.createElement("member",
+								__this._serialize(v));
+							pnode.setAttribute("name", p);
+							node.appendChild(pnode);
+						}
+					} else {
+						node.setAttribute("type", "unknow");
+					}
+				}
+				break;
+			case "unknow"	:
+			default		: node = trsfmer.createElement("unknow");
+		}
+		return node;
+	}
+
+	var unserializeFromNode = function(node)
+	{
+		var type = node.tagName;
+		switch (type) {
+			case "void"	: return void(0);
+			case "null"	: return null;
+			case "number"	: return isNaN(trsfmer.getText(node)) ? Number.NaN : eval(trsfmer.getText(node));
+			case "string"	: return trsfmer.getText(node);
+			case "boolean"	: return (trsfmer.getText(node) == "true");
+			case "function"	: return new Function(trsfmer.getText(node));
+			case "array"	:
+				var nodes = node.childNodes, l = nodes.length, arr = [];
+				for (var i = 0; i < l; i++) {
+					arr[i] = unserializeFromNode(nodes[i]);
+				}
+				return arr;
+			case "object"	:
+				var otype = node.getAttribute("type");
+				if (otype == "Date") {
+					return new Date(parseInt(trsfmer.getText(node), 10));
+				} else if (otype == "Error") {
+					return new Exception(
+						parseInt(trsfmer.getText(node.selectSingleNode("number"))),
+						trsfmer.getText(node.selectSingleNode("description"))
+					);
+				} else if (otype == "String") {
+					return new String(trsfmer.getText(node));
+				} else if (otype == "Boolean") {
+					return new Boolean(trsfmer.getText(node) == "true");
+				} else if (otype == "Number") {
+					return new Number(trsfmer.getText(node));
+				} else if (otype == "RegExp") {
+					return new RegExp(trsfmer.getText(node));
+				} else if (otype == "unknow") {
+					return null; //TODO
+				} else {
+					var ref = node.getAttribute("ref");
+					if (ref != null && ref != "") {
+						return objectMap.get(ref);
+					}
+					var obj = (otype == "Object") ? {}
+						: Class.forName(otype).newInstance();
+					var oid = node.getAttribute("oid");
+					objectMap.put(oid, obj);
+					var cnodes = node.selectNodes("member");
+					for (var i = 0; i < cnodes.length; i++) {
+						var cnode = cnodes[i];
+						var name = cnode.getAttribute("name");
+						var value = __this._unserialize(trsfmer.getText(cnode));
+						if (typeof(value) != "undefined")	{
+							obj[name] = value;
+						}
+					}
+					return obj;
+				}
+			case "unknow"	:
+			default		:
+				throw new IOException(Serializer.getName()
+					+ ".unserializeFromNode() error: "
+						+ "unknow data type [" + type + "]");
+		}
+	}
+
+	/**
+	 * serialize an object to string
+	 * @private
+	 * @param {Object} obj an object to be serialized.
+	 * @return a string
+	 * @type String
+	 */
+	this._serialize = function(obj)
+	{
+		var node;
+		return (null == (node = serializeToNode(obj))) ?
+			null : XmlDom.utility.getXML(node);
+	}
+
+	/**
+	 * unserialize a string to object
+	 * @private
+	 * @param {String} str a string to be unserialized.
+	 * @return an object
+	 * @type Object
+	 */
+	this._unserialize = function(str)
+	{
+		var node = trsfmer.transformXMLToElement(str);
+		if (node != null)
+		{
+				return unserializeFromNode(node);
+		}
+		throw new IOException(Serializer.getName()
+			+ ": _unserialize() error; dataformat error.");
+	}
+	
+	this.destroy = function()
+	{
+		trsfmer.destroy();
+	}
+
+}
+
+
+/**
+ * serialize an object to string
+ * @param {Object} obj an object to be serialized.
+ * @return the result of serialized object
+ * @type String
+ */
+Serializer.serialize = function(obj)
+{
+	var serializer = new Serializer();
+	var str = serializer._serialize(obj);
+	serializer.destroy();
+	return str;
+}
+
+/**
+ * unserialize a string to object
+ * @param {String} str a string
+ * @return an object
+ * @type Object
+ */
+Serializer.unserialize = function(str)
+{
+	var serializer = new Serializer();
+	var obj = serializer._unserialize(str);
+	serializer.destroy();
+	return obj;
+}

@@ -1,0 +1,34 @@
+<script>
+Object.prototype.equal = function(o)
+{
+	if(o == this) return true; //对象自身与自身相等
+	//如果是同一类型的对象
+	if(this.constructor && o instanceof this.constructor)
+	{
+		//比较它们的每一个属性
+		for(var each in this)
+		{
+			//如果这个属性在o中也存在
+			if(each in o)
+			{
+				//如果属性本身带有equal方法，调用这个方法进行深度比较
+				if(typeof(o[each].equal) == "function" && !o[each].equal(this[each]))
+					return false;
+				//否则直接用!=进行判断
+				else if(o[each] != this[each])
+					return false;
+			}
+		}
+		//只有当前对象的每一个属性在o中都存在，并且都同o中的同名属性判定相等时
+		//才返回true，这里没有考虑o中属性在当前对象中不存在的情况，我有意忽略了它
+		//留给读者思考
+		return true;
+	}
+	//如果不是同类型的对象，返回false1
+	return false;
+}
+var a = {x:1, y:2};
+var b = {x:1, y:2};
+alert(a == b);
+alert(a.equal(b));
+</script>

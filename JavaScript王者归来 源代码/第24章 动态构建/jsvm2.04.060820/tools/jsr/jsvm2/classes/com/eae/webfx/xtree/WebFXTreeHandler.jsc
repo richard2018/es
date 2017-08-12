@@ -1,0 +1,108 @@
+# language: JSVM2
+
+/**
+ * @fileoverview com.eae.webfx.xtree.WebFXTreeHandler class {@link http://jsvm.homolo.com/}
+ * @file		WebFXTreeHandler.jsc
+ * @author	Emil A Eklund
+ * @Modifier: Changhua Wan
+ * @version	1.1, 07/01/05
+ */
+
+
+package com.eae.webfx.xtree;
+
+import js.lang.System;
+import js.io.Cookie;
+
+class WebFXTreeHandler ()
+{
+}
+
+
+WebFXTreeHandler.idCounter = 0;
+WebFXTreeHandler.idPrefix  = "webfx-tree-object-";
+WebFXTreeHandler.all       = {};
+WebFXTreeHandler.behavior  = null;
+WebFXTreeHandler.selected  = null;
+WebFXTreeHandler.onSelect  = null; /* should be part of tree, not handler */
+
+/**
+ *
+ */
+WebFXTreeHandler.getId     = function()
+{
+	return this.idPrefix + this.idCounter++;
+}
+
+WebFXTreeHandler.toggle    = function (oItem)
+{
+	this.all[oItem.id.replace('-plus','')].toggle();
+}
+WebFXTreeHandler.select    = function (oItem)
+{
+	this.all[oItem.id.replace('-icon','')].select();
+}
+WebFXTreeHandler.focus     = function (oItem)
+{
+	this.all[oItem.id.replace('-anchor','')].focus();
+}
+WebFXTreeHandler.blur      = function (oItem)
+{
+	this.all[oItem.id.replace('-anchor','')].blur();
+}
+WebFXTreeHandler.keydown   = function (oItem, e)
+{
+	return this.all[oItem.id].keydown(e.keyCode);
+}
+
+WebFXTreeHandler.cookies   = new js.io.Cookie();
+
+WebFXTreeHandler.insertHTMLBeforeEnd	=	function (oElement, sHTML)
+{
+		if (oElement.insertAdjacentHTML != null)
+		{
+			oElement.insertAdjacentHTML("BeforeEnd", sHTML);
+			return;
+		}
+		var df;	// DocumentFragment
+		var r = oElement.ownerDocument.createRange();
+		r.selectNodeContents(oElement);
+		r.collapse(false);
+		df = r.createContextualFragment(sHTML);
+		oElement.appendChild(df);
+}
+
+/**
+ * adds by Wan Changhua (2005-11-04)
+ */
+WebFXTreeHandler.getObjectById   = function (sId)
+{
+	return this.all[sId];
+}
+
+/**
+ * event handle
+ * adds by Wan Changhua (2005-11-04)
+ */
+WebFXTreeHandler.check   = function (e)
+{
+	var evt = e || event;
+	var elm = System.isIeBrowser() ? evt.srcElement : evt.currentTarget;
+	var node = WebFXTreeHandler.getObjectById(elm.getAttribute("oid"));
+	var tree = node.getRootNode();
+	var hdle = tree.onCheck;
+	if (typeof(hdle) == "function")
+	{
+		if (hdle(node, tree) == false)
+		{
+			if (System.isIeBrowser())
+			{
+				event.returnValue = false;
+			}
+			else
+			{
+				evt.preventDefault();
+			}
+		}			
+	}
+}

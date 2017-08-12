@@ -1,0 +1,58 @@
+<html>
+<head>
+	<title>Example-21.25 实现多态</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//定义一个Animal类型
+	function Animal()
+	{
+		this.bite = function()
+		{
+			dwn("animal bite!");
+		}
+	}
+
+	//定义一个Cat类型，继承Animal类型
+	function Cat()
+	{
+		this.bite = function()
+		{
+			dwn("cat bite!");
+		}
+	}
+	Cat.prototype = new Animal();
+
+	//定义一个Dog类型，继承Animal类型
+	function Dog()
+	{
+		this.bite = function()
+		{
+			dwn("dog bite!");
+		}
+	}
+	Dog.prototype = new Animal();
+	
+	//定义一个AnimalBite多态方法
+	function AnimalBite(animal)
+	{
+		if(animal instanceof Animal)
+			animal.bite();	//Cat bite or dog bite
+	}
+	
+	//构造一个Cat对象
+	var cat = new Cat();
+	//构造一个Dog对象
+	var dog = new Dog();
+		//Cat和Dog都是Animal，AnimalBite是一个多态函数
+	AnimalBite(cat);
+	AnimalBite(dog);
+-->
+</script>
+</body>
+</html>

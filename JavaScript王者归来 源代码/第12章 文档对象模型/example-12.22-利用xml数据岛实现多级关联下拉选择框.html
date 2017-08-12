@@ -1,0 +1,79 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 12.22 利用xml数据岛实现多级关联下拉选择框</title>
+</head>
+<script type="text/JavaScript">
+var arrSel=["year","month","date","clock"];//arrSel定义了要修改的下拉框和xml数据的节点名称
+</script>
+<body>
+<select name="year"></select>
+<select name="month"></select>
+<select name="date"></select>
+<select name="clock"></select>
+<input name="result">
+<xml id="xmldata">
+ <xmldata>
+  <year value="2000">
+   <month value="4">
+    <date value="14">
+     <clock value="一点" />
+     <clock value="三点" />
+    </date>
+    <date value="17">
+     <clock value="一点" />
+    </date>
+   </month>
+   <month value="5">
+    <date value="15">
+     <clock value="一点" />
+     <clock value="四点" />
+     <clock value="七点" />
+    </date>
+   </month>
+  </year>
+  <year value="2001">
+   <month value="7">
+    <date value="16">
+     <clock value="一点" />
+     <clock value="五点" />
+     <clock value="九点" />
+    </date>
+   </month>
+  </year>
+ </xmldata>
+</xml>
+<script type="text/JavaScript">
+<!--
+function qswhXml(num){
+/******* by qiushuiwuhen(2002-5-17) ********/
+	var i,j,arrTemp=[];
+	//遍历级联的下拉框，将其中的文字保存在arrTemp数组中
+	for(var i=0;i<num;i++)
+		arrTemp[i]=document.all(arrSel[i]).options[document.all(arrSel[i]).selectedIndex].text;
+	if(num==arrSel.length)
+	{//这里处理最后的数据。
+		document.all("result").value="选中了("+arrTemp+")";
+		return;
+	}
+	with(document.all(arrSel[num]))
+	{
+		length=0;
+		//xmldata的XMLDocument是XML数据导的文档对象
+		//它的childNodes[0]是XML数据岛的根元素
+		var obj=document.all.xmldata.XMLDocument.childNodes[0];
+		for(var i=0;i<num;i++)
+			obj=obj.selectSingleNode(arrSel[i]+'[@value="'+arrTemp[i]+'"]');
+			//XMLDOM的大多数属性和HTMLDOM一样，但是也有一些特殊的属性。
+			//selectSingleNode查询符合指定匹配的节点
+		for(var i=0;i<obj.childNodes.length;i++)
+			options[length++].text=obj.childNodes[i].getAttribute("value");
+		onchange=new Function("qswhXml("+(num+1)+")");
+		onchange();
+	}
+}
+qswhXml(0);
+-->
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<html>
+<head>
+	<title>Example-21.15 原型继承法</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//定义一个Point类型
+	function Point(dimension)
+	{
+
+		this.dimension = dimension;
+	}
+
+	//定义一个Point2D类型，"继承"Point类型
+	function Point2D(x, y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+	Point2D.prototype.distance = function()
+	{
+		return Math.sqrt(this.x * this.x + this.y * this.y);
+	}
+	Point2D.prototype = new Point(2);		//Point2D继承了Point
+
+	//定义一个Point3D类型，也继承Point类型
+	function Point3D(x, y, z)
+	{
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+	Point3D.prototype = new Point(3);		//Point3D也继承了Point
+	
+	//构造一个Point2D对象
+	var p1 = new Point2D(0,0);
+	//构造一个Point3D对象
+	var p2 = new Point3D(0,1,2);
+
+	dwn(p1.dimension);
+	dwn(p2.dimension);
+	dwn(p1 instanceof Point2D);	//p1 是一个 Point2D
+	dwn(p1 instanceof Point);	//p1 也是一个 Point
+	dwn(p2 instanceof Point);	//p2 是一个Point
+-->
+</script>
+</body>
+</html>

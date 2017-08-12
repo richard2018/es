@@ -1,0 +1,22 @@
+<html>
+<head>
+	<title>Example-10.3 从身份证号码中获取出生年月日</title>
+</head>
+<body>
+<script type="text/JavaScript">
+<!--
+//从身份证号码中获取出生年月日
+str="420105198203091614"; 
+var re=/\d{6}([12]\d{3})([01]\d)([0123]\d)\d{4}/;
+var id=re.exec(str); 
+//exec用字符串参数去匹配模式，得到一个数组，第一个元素是匹配的表达式本身
+//第二个元素开始是正则表达式中对应的括号（分组）中的匹配项
+//即id[1]匹配([12]\d{3})
+//id[2]匹配([01]\d)
+//id[3]匹配([0123]\d)
+document.write("ID为："+id[0]+"<br/>"); 
+document.write("出生年月为日为："+id[1]+"-"+id[2]+"-"+id[3]); 
+-->
+</script>
+</body>
+</html>

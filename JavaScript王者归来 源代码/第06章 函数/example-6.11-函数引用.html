@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>Example-6.11 函数引用</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	function f()
+	{
+		dwn(this);
+	}
+	var a = new String("a");
+	var b = new String("b");
+	a.f = f;	//a.f引用f
+	b.f = f;	//b.f引用f
+	a.f();      //得到a
+	b.f();      //得到b
+-->
+</script>
+</body>
+</html>
+

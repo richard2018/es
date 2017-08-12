@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css"> td,body{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="GridTable"></script>
+</head>
+<body>
+<h2>游戏人GridTable类</h2>
+<hr>
+
+<div id="box"></div>
+
+<script type="text/javascript">
+	var gt = new DronFw.Class.GridTable;
+	gt.Widths = [50, 50, 90, 50, 50, 80, 50];
+	gt.Titles = ["标题1", "标题2", "标题3", "标题4", "标题5", "标题6", "标题7"];
+	gt.Aligns = ["left", "center", "center", "left", "right", "center", "center"];
+	gt.AddItem(["aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa"]);
+	gt.AddItem(["bbb", "bbb", "bbb", "bbb", "bbb", "bbb", "bbb"]);
+	gt.AddItem(["ccc", "ccc", "ccc", "ccc", "ccc", "ccc", "ccc"], "alert('test')");
+	gt.AddItem(["ddd", "ddd", "ddd", "ddd", "ddd", "ddd", "ddd"]);
+
+	$("box").innerHTML = gt.CreateTable();
+
+/*
+	GridTable 类的属性方法如下：
+	属性
+		Widths   :   表头各列的宽度，数组
+		Titles   :   表头各列的标题，数组
+		Aligns   :   各列单元格的对齐方式，数组
+	方法
+		AddItem(ar, fun)   :  添加一行数据，ar为数组型，fun为单击行产生的事件响应
+		GreateTable() :  生成 Html 代码
+*/
+</script>
+</body>
+</html>

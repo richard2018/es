@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css"> td,body{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="CodeHighlight"></script>
+</head>
+<body>
+<h2>代码高亮类</h2>
+<hr>
+
+<textarea id="cod" style="width:400px;height:150px;">//这是一个测试
+function aa()
+{
+    alert("\\as//ldfjl;asdk/*sdfsdf*/sdf,sdfs");
+}</textarea><br>
+
+<select id="sty">
+	<option value="js">js</option>
+	<option value="c#">c#</option>
+	<option value="java">java</option>
+	<option value="vbs">vbs</option>
+	<option value="sql">sql</option>
+	<option value="xml">xml</option>
+	<option value="html">html</option>
+</select>
+
+<input type="button" value="go!" onclick="go()">
+
+<div id="display"></div>
+
+<script type="text/javascript">
+	function go()
+	{
+		var code = $("cod").value;
+		var st = $("sty").value;
+		var xx = new DronFw.Class.CodeHighlight(code, st);
+		$("display").innerHTML = xx.highlight();
+	}
+</script>
+
+</body>
+</html>

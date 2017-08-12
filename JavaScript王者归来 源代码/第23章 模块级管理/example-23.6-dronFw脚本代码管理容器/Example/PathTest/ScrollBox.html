@@ -1,0 +1,82 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css">
+	*
+	{
+		font-size:12px;
+	}
+	#scrollBox
+	{
+		width:250px;
+		height:20px;
+		line-height:20px;
+		overflow:hidden;
+		background-color:#eee;
+	}
+	#scrollBox2
+	{
+		width:280px;
+		height:60px;
+		line-height:20px;
+		overflow:hidden;
+		background-color:#eee;
+	}
+</style>
+<script type="text/javascript" src="../../DronFw/boot.js" loadClass="ScrollBox"></script>
+</head>
+<body>
+
+<h2>游戏人滚屏类</h2>
+<hr>
+
+单行例子：（每屏一行）<br><br>
+<div id="scrollBox">
+中国去年进口原油 11%来自上合成员<br />
+美：中国对台湾立场 似转趋和缓<br />
+美制裁四家中国公司 中方表示强烈不满<br />
+中伊关系加温 大陆波斯餐厅开幕
+</div>
+
+<br>多行例子：（每屏三行）<br><br>
+<div id="scrollBox2">
+为何暂停UN登记武器转让 中方做解释<br>
+追悼空军运输机遇难者 胡锦涛送花圈<br>
+中国控制互联网？外交部发言人驳斥<br>
+美国移民局逮2179人 包括1华人蛇头<br>
+奇男子能嚼咽双刃刀片 用鼻子喝茶<br>
+男子持塑料玩具枪 劫走四十多吨铜(图)<br>
+餐馆当街宰小猫做肉丸 场面血腥(图)<br>
+男子软禁妻子近5年 称是替其驱妖魔<br>
+男子杀死同居女友 与腐尸共宿八天<br>
+年轻妻子欲卖肾救夫 88篇日记感人<br>
+曾志伟父亲节双喜临门 获美荣誉博士
+</div>
+
+<!--
+
+	这仍然是 DronFw 滚屏类的例子
+
+	这个文件放在 PathTest 目录中证实了 DronFw 是与路径无关的，不管你的路径有多复杂，
+
+	<script type="text/javascript" src="../../DronFw/boot.js" loadClass="ScrollBox"></script>
+
+	只要这里的 src 指向是对的（可以是跨域的绝对路径），DronFw 都能正常工作，当然，前提是你不能改变 
+
+	DronFw 文件夹下的内容。
+
+	一般的作法是把 DronFw 文件夹拷放到网站的根目录下，这样网站的任何一个页面都可以使用 DronFw 。
+
+-->
+
+<script type="text/javascript">
+new DronFw.Class.ScrollBox("scrollBox");
+new DronFw.Class.ScrollBox("scrollBox2");
+</script>
+
+
+
+</body>
+</html>

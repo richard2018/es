@@ -1,0 +1,132 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<link rel="stylesheet" href="css.css" type="text/css" media="all">
+<title>DronFw 说明文档</title>
+<script type="text/javascript" src="../../DronFw/boot.js" loadClass="DataVess;GridTable"></script>
+<script type="text/javascript" src="data.js"></script>
+</head>
+<body>
+
+	<div id="title">DronFw （迷你型类加载器）简要说明文档</div>
+
+	<div id="ver">作者：Dron 日期：2006-07-23</div>
+
+	<div class="line"></div>
+
+	<div class="b">·DronFw 是什么？</div>
+	<div class="c">
+		&nbsp; &nbsp; DronFw，全称Dron Framework，她负责管理一个站点中客户端的脚本类库，使用 DronFw 的网页不需要关心所引用类的具体位置，只要传递相应的类名给 DronFw 便可以引用该类了，一个站点只需在根目录下放一个 DronFw，站点内无论路径多么复杂的网页都可以使用 DronFw。
+	</div>
+
+	<div class="b">·DronFw 文件夹构造</div>
+	<div class="c">
+		&nbsp; &nbsp; boot.js 是引导文件，用来 DronFw 初始化和管理类库。<br>
+		&nbsp; &nbsp; classes 是类的文件夹，也称类库。<br>
+		&nbsp; &nbsp; prototypes 是对象的原型扩展文件夹。<br>
+		&nbsp; &nbsp; readme.txt 是版本说明。
+	</div>
+
+	<div class="b">·DronFw 用法</div>
+	<div class="c">
+		<div>
+			&nbsp; <b><font color="red">1、</font><a href="#" onclick="$('l1').style.display=($('l1').style.display=='block')?'none':'block';return false;">类和原型扩展方法的预载入：loadClass 和 loadPrototype</a></b>
+		</div>
+		<div id="l1">
+			&nbsp; &nbsp; 建议将 DronFw 文件夹拷贝到网站的根目录，网站内需要用到 DronFw 的页面，只需用 script 标签引入 DronFw 文件夹下的 boot.js 即可。如下：<br><br>
+			<div class="code">
+			&nbsp; &nbsp; <span class="b">&lt;script</span> <span class="r">type</span><span class="b">=</span><span class="p">"text/javascript"</span> <span class="r">src</span><span class="b">=</span><span class="p">"../../../DronFw/boot.js"</span> <span class="r">loadClass</span><span class="b">=</span><span class="p">""</span> <span class="r">loadPrototype</span><span class="b">=</span><span class="p">""</span><span class="b">&gt;&lt/script&gt;</span></div><br>
+			&nbsp; &nbsp; 这里的 loadClass 属性指定需要加载的类的名称，多个类使用半角分号隔开，比如，loadClass="City;Calendar" 指明了同时加载 City 类和 Calendar 类。loadPrototype 属性指定加载某对象的扩展方法，多个对象使用半角分号隔开，比如，loadPrototype="Array;String" 指明了同时加载 Array 对象和 String 对象的扩展方法，具体使用方法见后面说明。<br><br>
+			&nbsp; &nbsp; 同个页面中，boot.js 允许多次加载，详情请见后面例子。<a href="../Composite.html" target="_blank">其它例子</a>
+		</div>
+		<div>
+			&nbsp; <b><font color="red">2、</font><a href="#" onclick="$('l2').style.display=($('l2').style.display=='block')?'none':'block';return false;">类的后期加载：Import</a></b>
+		</div>
+		<div id="l2">
+			&nbsp; &nbsp; DronFw 允许用户后期加载类，用法示例：<br><br>
+			<div class="code">
+			&nbsp; &nbsp; DronFw.Import(<span class="p">"Window"</span>);<span class="g">//加载 Window 类</span>
+			</div><br>
+			&nbsp; &nbsp; <a href="../Import.html" target="_blank">其它例子</a>
+			<br>
+		</div>
+		<div>
+			&nbsp; <b><font color="red">3、</font><a href="#" onclick="$('l3').style.display=($('l3').style.display=='block')?'none':'block';return false;">后期加载脚本：Call</a></b>
+		</div>
+		<div id="l3">
+			&nbsp; &nbsp; DronFw 自带还有一个后期载入脚本文件的功能Call，用法举例如下：<br><br>
+			<div class="code">
+			&nbsp; &nbsp; <span class="b">if</span> (<span class="r">screen</span>.<span class="g">width</span>==1024) DronFw.Call(<span class="p">"js1"</span>);<br>
+			&nbsp; &nbsp; <span class="b">else</span> DronFw.Call(<span class="p">"js2"</span>);</div><br><br>
+			&nbsp; &nbsp; 这一段的意思是显示器的分辩率若为 1024*768 ，则加载脚本 js1.js 否则加载 js2.js，需要注意的是：这里的 js1.js 和 js2.js 要放在与页面同一目录下的 jsfiles 文件夹中，默认的是这个文件夹，你可以通过改变 DronFw.JsPath 的值来改变脚本存放目录。<a href="../Call.html" target="_blank">其它例子</a>
+		</div>
+		<div>
+			&nbsp; <b><font color="red">4、</font><a href="#" onclick="$('l4').style.display=($('l4').style.display=='block')?'none':'block';return false;">命令等待：Wait</a></b>
+		</div>
+		<div id="l4">
+			&nbsp; &nbsp; 等待条件成立后执行指定 function 并停止等待，用法如下：<br><br>
+			<div class="code">
+			&nbsp; &nbsp; DronFw.Wait(<br>
+			&nbsp; &nbsp; &nbsp; &nbsp; <span class="b">function</span> ()<br>
+			&nbsp; &nbsp; &nbsp; &nbsp; {<br>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="b">return</span> DronFw.Class.Window;<br>
+			&nbsp; &nbsp; &nbsp; &nbsp; },<br>
+			&nbsp; &nbsp; &nbsp; &nbsp; <span class="b">function</span> ()<br>
+			&nbsp; &nbsp; &nbsp; &nbsp; {<br>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alert(<span class="p">"Window 类载入完毕！"</span>);<br>
+			&nbsp; &nbsp; &nbsp; &nbsp; }<br>
+			&nbsp; &nbsp; )<br>
+			</div><br>
+			&nbsp; &nbsp; 这一段的意思是当 Window 类已载入完成，则弹出提示。第一个 function 作为条件,第二个 function 是等待条件成立所要执行的函数。<a href="../Wait.html" target="_blank">其它例子</a>
+		</div>
+		<div>
+			&nbsp; <b><font color="red">5、</font><a href="#" onclick="$('l5').style.display=($('l5').style.display=='block')?'none':'block';return false;">得到对象：$</a></b>
+		</div>
+		<div id="l5">
+			&nbsp; &nbsp; $ 相当于 document.getElementById<br>
+			&nbsp; &nbsp; 比如：$("test") 相当于 document.getElementById("test")
+		</div>
+	</div>
+
+	<div class="b" style="color:#f00;">·DronFw 库（DronFw系统最重要的资源）</div>
+	<div class="c">
+		当前版本的 DronFw 库中已包括如下的类（使用 <span class="g">loadClass="类名称"</span> 加载）：
+		<br>&nbsp;
+		<div id="showClassList"></div>
+
+		&nbsp;<br>
+		当前版本的 DronFw 库中已包括如下的对象扩展方法（使用 <span class="g">loadPrototype="对象名称"</span> 加载）：
+		<br>&nbsp;
+		<div id="showPrototypeList"></div>
+
+		&nbsp;<br>
+		其它测试例子：<br><br>
+		<a href="../Composite.html" target="_blank">多个类同时载入测试（方式一）</a><br>
+		<a href="../Composite3.html" target="_blank">多个类同时载入测试（方式二，此法不支持firefox）</a><br>
+		<a href="../Composite2.html" target="_blank">两个同时具有拖动效果的类的测试</a><br>
+		<a href="../PathTest/ScrollBox.html" target="_blank">滚屏类在其它路径下的测试</a><br>
+		<a href="../Import.html" target="_blank">Import 指令测试</a><br>
+		<a href="../Call.html" target="_blank">Call 指令测试</a><br>
+		<a href="../Wait.html" target="_blank">Wait 指令测试</a><br>
+		<a href="../CoolMove.html" target="_blank">结合拖动类和移位类做的一个小特效</a><br>
+		&nbsp;<br>
+		以上各类的用法，这里就不一一说明，请参见例子页的源代码中的注释，都很详细，一目了然。
+	</div>
+	
+	<div class="b">·下载DronFw</div>
+	<div class="c">
+		<a href="../../down.rar" target="_blank">本地下载1</a>
+	</div>
+
+	<div class="line"></div>
+
+	<div>
+		2006-2009&copy; Copyright <a href="http://ucren.com">Ucren.com</a> All rights reversed.
+	</div>
+<script type="text/javascript">
+DronFw.JsPath = "./";
+DronFw.Call("main");
+</script>
+</body>
+</html>

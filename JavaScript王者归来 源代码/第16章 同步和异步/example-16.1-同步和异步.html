@@ -1,0 +1,18 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 16.1 同步和异步</title>
+</head>
+<body>   
+<script language="javascript" type="text/javascript">  
+<!--
+	var i = 0;
+	i++;
+	alert(i); //同步，立即执行，得到1
+	setTimeout(function(){alert(i)}, 100); //异步，100毫秒后执行，得到3
+	i++;
+	i++;
+-->
+</script>  
+</body>   
+</html>

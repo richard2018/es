@@ -1,0 +1,55 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css">
+	body,td{font-size:12px;}
+	a {color:#009;}
+</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="Pager"></script>
+</head>
+<body>
+<h2>游戏人分页导航类</h2>
+<hr>
+
+<div id="test"></div>
+
+<script type="text/javascript">
+	//用户自定义“上一下”“下一页”“转到页”方法
+	DronFw.Class.Pager.prototype.goPrePage = function()
+	{
+		this.CurrentPage--;
+		$("test").innerHTML = this.ShowPagerBar();
+	}
+	DronFw.Class.Pager.prototype.goPage = function(n)
+	{
+		this.CurrentPage = n;
+		$("test").innerHTML = this.ShowPagerBar();
+	}
+	DronFw.Class.Pager.prototype.goNexPage = function()
+	{
+		this.CurrentPage++;
+		$("test").innerHTML = this.ShowPagerBar();
+	}
+
+	var pg = new DronFw.Class.Pager("pg");
+	pg.Total = 123;//总记录数
+	pg.PageSize = 20;//每页显示记录数
+	pg.PageButtonNumber = 10;//分页导航器显示分页按钮数
+	$("test").innerHTML = pg.ShowPagerBar();//生成代码
+/*
+	Pager 类有四个属性一个方法：
+	属性：
+	Total : 总记录数
+	PageSize : 每页显示记录数
+	PageButtonNumber : 分页导航器显示分页按钮数
+	CurrentPage : 当前页
+	PageCount : 分页数（只读属性）
+	方法：
+	ShowPagerBar : 返回分页导航代码
+*/
+</script>
+
+</body>
+</html>

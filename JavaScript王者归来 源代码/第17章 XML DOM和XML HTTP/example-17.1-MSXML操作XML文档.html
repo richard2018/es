@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 17.1 MSXML操作XML文档</title>
+</head>
+<script language="JavaScript">
+<!--
+//////////////////////////////////////////////////
+//      XML Data Traversal                //
+//      (c) 2003 Premshree Pillai            //
+//      http://www.qiksearch.com           //
+//      http://premshree.resource-locator.com  //
+//      Email : qiksearch@rediffmail.com     //
+//////////////////////////////////////////////////
+
+var xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+//从文件中读取xml文档
+function loadXML(xmlFile) {
+		//设置读取方式为同步
+        xmlDoc.async="false";	
+		//注册onreadystatechange事件
+        xmlDoc.onreadystatechange=verify;
+		//从文件中读取
+        xmlDoc.load(xmlFile);
+}
+//检查文档的状态是否为完全载入
+function verify() { 
+		//虽然是同步方式，其实这个事件仍然会被触发
+        if(xmlDoc.readyState!=4)
+                return false; 
+}
+//开始遍历文档结构树
+function traverse(tree) {
+		//如果有子节点，遍历
+        if(tree.hasChildNodes()) {
+				//生成以HTML显示的节点信息
+                frames[0].document.write('<ul><li>');
+                frames[0].document.write('<b>'+tree.tagName+' : </b>');
+                var nodes=tree.childNodes.length;
+				//对子节点递归
+                for(var i=0; i<tree.childNodes.length; i++)
+                        traverse(tree.childNodes(i));
+                frames[0].document.write('</li></ul>');
+        }
+        else
+                frames[0].document.write(tree.text);
+}
+//根据文件名初始化xml文档并进行遍历
+function initTraverse(file) {
+        loadXML(file);	//载入文件
+        var doc=xmlDoc.documentElement;
+        traverse(doc);	//对文档结构树进行遍历
+}
+-->
+</script>
+<body>
+	<input id="_xmlFile" type="file" style="width:360px"></input>
+	<button onclick="initTraverse(_xmlFile.value)">载入</button></br>
+	<iframe width="400px" height="450px"></iframe>
+</body>
+</html>

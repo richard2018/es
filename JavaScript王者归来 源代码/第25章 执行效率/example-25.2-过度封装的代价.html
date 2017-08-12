@@ -1,0 +1,63 @@
+<html>
+<head>
+	<title>Example-25.2 过度封装的代价</title>
+</head>
+<script>
+<!--
+function DrawPoint(x, y, color)
+{
+	var img = new Image(1, 1);
+	img.style.backgroundColor = color;
+	img.style.position = "absolute";
+	img.style.left = x;
+	img.style.top = y;
+	document.body.appendChild(img);
+}
+
+function P(N,A,color)
+{
+	var H = document.body.clientHeight-10;
+	color=color||"black"
+
+	for(var i = 0; i <  N; i++)
+	{
+		var sTime = new Date;
+        A(i);
+		var eTime = new Date;
+		DrawPoint(i, H - (eTime - sTime), color);
+	}
+}
+-->
+</script>
+<body>
+<script>
+<!--
+window.onload = function()
+{
+	P(300,fa,"blue");
+	P(300,fb,"red");
+}
+function cls(){
+	this.a=10;
+	this.b=10;
+	this.c=10;
+	this.d=10;
+	this.e=10;
+	this.f=10;
+	this.g=10;
+	this.h=10;
+	this.i=10;
+	this.j=10;
+};
+function fa(i){
+	var p = 50 * i;
+	while(p--)var t=new cls;
+};
+function fb(i){
+	var p = 50 * i;
+	while(p--);
+};
+-->
+</script>
+</body>
+</html>

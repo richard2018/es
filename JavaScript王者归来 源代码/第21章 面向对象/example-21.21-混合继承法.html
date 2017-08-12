@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>Example-21.21 混合继承法</title>
+</head>
+<body>
+<script>
+<!--
+function Point2D(x, y)
+{
+	this.x = x;
+	this.y = y;
+}
+function ColorPoint2D(x, y, c)
+{
+	Point2D.call(this, x, y);
+//这里是构造继承，调用了父类的构造函数
+	this.color = c;
+}
+ColorPoint2D.prototype = new Point2D();	
+//这里用了原型继承，让ColorPoint2D以Point2D对象为原型
+-->
+</script>
+</body>
+</html>

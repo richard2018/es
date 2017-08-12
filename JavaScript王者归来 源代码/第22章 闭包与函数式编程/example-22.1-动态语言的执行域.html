@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>Example-22.1 动态语言的执行域</title>
+</head>
+<body>
+<script>
+<!-
+//产生随机数的函数
+function RandomAlert()
+{
+	var x = Math.random()
+	return function()
+	{
+		alert(x);
+	}
+}
+var a = RandomAlert(); 
+//闭包的执行域随函数调用而创建
+var b = RandomAlert();
+a();	//调用a，打印出产生的随机数
+b();	//调用b，打印出产生的随机数
+//一般情况下，a和b得到的数值不同
+-->
+</script>
+</body>
+</html>

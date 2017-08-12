@@ -1,0 +1,247 @@
+<html>
+<head>
+<hta:application id=jsvm2JsrApp
+	applicationname="JSR 1.0"
+	border="dialog" [thick/dialog window/none/thin]
+	borderStyle="raised" [normal/complex/raised/static/sunken]
+	caption="yes"
+	icon="res/logo.ico"
+	maximizebutton="no"
+	minimizebutton="yes"
+	showintaskbar="yes"
+	singleinstance="yes"
+	sysmenu="yes"
+	version="1.0"
+	windowstate="normal"
+/>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=gb2312">
+<title>JSR</title>
+	<script>
+		window.resizeTo(420,560);
+	</script>
+	<script	src="jsvm2/jsre.js" debug="false" extmodules="javascript2" mode="auto"></script>
+	<script>
+		window.onload = function ()
+		{
+			_import("js.lang.System");
+			initTree();
+		}
+		document.attachEvent("onkeydown", function ()
+			{
+				if (event.keyCode == 116)
+				{
+					//reloadClasses();
+					// for ie5
+					try { event.keyCode = 0; } catch (ex) {}
+					event.returnValue = false;
+				}
+			});
+		var resTree = null;
+		function initTree()
+		{
+			try
+			{
+				_import("com.eae.webfx.xtree.WebFXTree");
+				_import("com.eae.webfx.xtree.WebFXTreeItem");
+				_import("com.eae.webfx.xtree.WebFXTreeConfig");
+				
+				WebFXTreeConfig.defaultAction = "#";
+				
+				resTree = new WebFXTree('Classes');
+				resTree.setBehavior('classic');
+				
+				resTree.onCheck = function (node, tree)
+				{
+					var b = node.isChecked();
+					var nodes = getAllChildNodes(node);
+					for (var i = 0; i < nodes.length; i++)
+					{
+						nodes[i].check(b);
+					}
+				}
+				setTimeout("loadClasses();", 1);
+			
+			}
+		 	catch (ex)
+		 	{
+		 		ex.printStackTrace();
+		 	}
+		}
+		
+		function getAllChildNodes(oNode)
+		{
+			var rNodes = oNode.childNodes;
+			var nodes = rNodes.concat([]);
+			for (var i = 0; i < nodes.length; i++)
+			{
+				var node = nodes[i];
+				rNodes = rNodes.concat(getAllChildNodes(node));
+			}
+			return rNodes;
+		}
+		
+		function reloadClasses ()
+		{
+			var cns = resTree.childNodes;
+			for (var i = 0; i < cns.length; i++)
+			{
+				cns[i].remove();
+			}
+			loadClasses();
+		}
+		
+		var classHomeDir = "";
+		function loadClasses ()
+		{
+			fso = new ActiveXObject("Scripting.FileSystemObject");
+			var folder = fso.getFolder(System.getClassHome());
+			classHomeDir = folder.path;	
+			resTree.value = classHomeDir;
+			finishResNode(resTree);
+			resTree.build(treeContainer);
+		}
+		
+		var fso = null;
+		
+		function finishResNode (node)
+		{
+			var folder = fso.getFolder(node.value);
+			var files = new Enumerator(folder.Files);
+  		for(;!files.atEnd(); files.moveNext())
+  		{
+  			var file = files.item();
+  			var classNode = new WebFXTreeItem(file.name);
+  			classNode.value = file.path;
+  			classNode.checkbox = "true";
+  			node.add(classNode);
+  		}
+  		var folders = new Enumerator(folder.SubFolders);
+  		for(; !folders.atEnd(); folders.moveNext())
+  		{
+  			var subfolder = folders.item();
+  			if (subfolder.name == "CVS")
+  			{
+  				continue;
+  			}
+				var packageNode = new WebFXTreeItem(subfolder.name);
+  			packageNode.value = subfolder.path;
+  			packageNode.checkbox = "true";
+  			node.add(packageNode);
+  			finishResNode(packageNode);
+     	}
+		}
+		
+		function buildJsr()
+		{
+			try
+			{
+			_import("com.homolo.ide.tools.CodeUtil");
+
+			var sPath = jsrPath.value;
+			var sName = jsrName.value;
+			var sVer = jsrVer.value;
+			var sAuthor = jsrAuthor.value;
+			
+			if (sPath == "" || sName == "" 
+				|| sVer == "" || sAuthor == "")
+			{
+				alert("请填写完整导出信息！");
+				return;
+			}
+			
+			if (fso.fileExists(sPath) &&
+				!confirm("文件: "
+					+ sPath
+					+ " 已经存在，是否覆盖？"))
+			{
+				return;
+			}
+
+			var nodes = resTree.getSelectedChildNodes();
+			var sb = Class.forName("js.lang.StringBuffer").newInstance();
+			
+			var sNowTime = new Date().toString()
+			
+			sb.append("/**\r\n");
+			sb.append("* Created by ");
+			sb.append(sNowTime);
+			sb.append("\r\n");
+			sb.append("*/");
+			sb.append("\r\n");
+			sb.append("_JSVM_Namespace.runtimeEnvironment");
+			sb.append("\r\n");
+			sb.append("	.JSVM.getClassloader().loadLib(new function()");
+			sb.append("\r\n");
+			sb.append("{");
+			sb.append("\r\n");
+			sb.append("this.manifest =");
+			sb.append("\r\n");
+			sb.append("{");
+			sb.append("\r\n");
+			sb.append("'name' : '" 
+				+ CodeUtil.toStrContent(sName)
+				+ "',");
+			sb.append("\r\n");
+			sb.append("'uri' : '"
+				+ CodeUtil.toStrContent(sPath.replace(/.*\\/, ""))
+				+ "',");sb.append("\r\n");
+			sb.append("'version' : '"
+				+ CodeUtil.toStrContent(sVer)
+				+ "',");sb.append("\r\n");
+			sb.append("'lastModified' : '" + sNowTime + "',");sb.append("\r\n");
+			sb.append("'author' : '"
+				+ CodeUtil.toStrContent(sAuthor)
+				+ "',");sb.append("\r\n");
+			sb.append("'remark' : ''");sb.append("\r\n");
+			sb.append("};");sb.append("\r\n");
+			
+			sb.append("this.entity =");sb.append("\r\n");
+			sb.append("{");sb.append("\r\n");
+			for (var i = 0; i < nodes.length; i++)
+			{
+				var path = nodes[i].value;
+				if (/\.jsc$/.test(path))
+				{
+					var className = path.replace(classHomeDir, "")
+						.replace(".jsc", "")
+						.replace(/^\\/, "")
+						.replace(/\\/g, ".");
+					Class.forName(className);
+					sb.append(" ");
+					sb.append("'");
+					sb.append(className);
+					sb.append("' : ");
+					sb.append(CodeUtil.toStrExpression(CodeUtil.compress(
+						System.VM.getContainer().getClassCode(className)), "'"));
+					sb.append(" ,\r\n");
+				}
+			}
+			sb.append(" 'null' : null");sb.append("\r\n");
+			sb.append("};");sb.append("\r\n");
+			sb.append("});");sb.append("\r\n");
+			var ef = fso.createTextFile(sPath, true)
+			ef.writeline(sb);
+			ef.close();
+			alert("导出成功！");
+			}
+			catch (ex)
+			{
+				ex.printStackTrace();
+			}
+		}
+
+	</script>
+</head>
+<body style="border:0;" bgcolor=buttonface scroll=no>
+<table width=100% height=100% style="font-size:9pt">
+<tr>
+	<td width=100%>
+<div id=treeContainer style="width:100%;height:100%;border:2 inset;background-color:white;padding:5px;overflow:auto;">loading...</div>
+	</td>
+</tr>
+<tr><td width=100% height=20>名称：<input type=text id=jsrName style="width:200">&nbsp;版本：<input type=text id=jsrVer value="1.0" style="width:50"></td></tr>
+<tr><td width=100% height=20>路径：<input type=file id=jsrPath style="width:293"></td></tr>
+<tr><td width=100% height=20>作者：<input type=text id=jsrAuthor style="width:99">&nbsp;&nbsp;<input name=jsrType checked disabled type=radio>js包&nbsp;<input name=jsrType disabled type=radio>xml包&nbsp;&nbsp;<input type=button style="width:70" onclick="buildJsr()" value="导出"></td></tr>
+</table>
+</body>
+</html>

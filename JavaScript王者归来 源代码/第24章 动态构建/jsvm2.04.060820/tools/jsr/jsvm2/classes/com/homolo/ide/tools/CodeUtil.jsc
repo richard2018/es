@@ -1,0 +1,140 @@
+# language: JSVM2
+
+package com.homolo.ide.tools;
+
+import js.lang.NotSupportException;
+
+class CodeUtil ()
+{
+	/* Don't let anyone instantiate this class 
+	 */
+	throw new NotSupportException(CodeUtil.getName()
+		+ ' cannot be instantiated.');
+}
+
+CodeUtil.compress = function (src)
+{
+	var ss, ds = src.replace(/\r\n/g, '\n');
+
+	var regExps_strings = [/("(\\"|[^"\n]|(\\\n))*")/g, /('(\\'|[^'\n]|(\\\n))*')/g];
+	var strings_tmpPrefix = '${COMPILE_CONST_S_' + new Date().getTime() + "_" + Math.round(Math.random() * 1000);
+	var strings_tmpSuffix = '}';
+
+	var constStrs = [];
+	var tmpStrs = ds.match(regExps_strings[0]);
+	if (tmpStrs != null)
+	{
+		constStrs = constStrs.concat(tmpStrs);
+	}
+	var tmpStrs = ds.match(regExps_strings[1]);
+	if (tmpStrs != null)
+	{
+		constStrs = constStrs.concat(tmpStrs);
+	}
+	for (var i = 0; i < constStrs.length; i++)
+	{
+		ds = ds.replace(constStrs[i],
+			(strings_tmpPrefix + i + strings_tmpSuffix));
+	}
+
+	ds = ds.replace(/([^\\]|^)\/\/([^\n])*/g, '$1')
+		.replace(/(\/\*)\/?(([^\*]\/)|[^\/])*(\*\/)/g, '');
+
+	var regExps_regexps = /(\/(\\\/|[^\/\n])*\/)/g;
+	var regexps_tmpPrefix = "${COMPILE_CONST_R_" + new Date().getTime();
+	var regexps_tmpSuffix = "}";
+
+	var constRegExps = ds.match(regExps_regexps);
+	if (constRegExps != null)
+	{
+		for (var i = 0; i < constRegExps.length; i++)
+		{
+			ds = ds.replace(constRegExps[i],
+				(regexps_tmpPrefix + i + regexps_tmpSuffix));
+		}
+	}
+
+	while(ds != ss)
+	{
+		ss = ds;
+		ds = ss.replace(/(\ |\t)(=|>|<|\{|\}|\(|\)|\+|\-|\*|\?|\:|\;|\,)/g, '$2')
+		.replace(/(=|>|<|\{|\}|\(|\)|\+|\-|\*|\?|\:|\;|\,)(\ |\t)/g, '$1')
+		.replace(/(\ |\t)==/g, '==')
+		.replace(/==(\ |\t)/g, '==')
+		.replace(/(\ |\t)!=/g, '!=')
+		.replace(/!=(\ |\t)/g, '!=')
+		.replace(/(\ |\t)<=/g, '<=')
+		.replace(/<=(\ |\t)/g, '<=')
+		.replace(/(\ |\t)>=/g, '>=')
+		.replace(/>=(\ |\t)/g, '>=')
+		.replace(/(\ |\t)&&/g, '&&')
+		.replace(/&&(\ |\t)/g, '&&')
+		.replace(/(\ |\t)\|\|/g, '||')
+		.replace(/\|\|(\ |\t)/g, '||');
+	}
+
+	ss = "";
+	while(ds != ss)
+	{
+		ss = ds;
+		ds = ss.replace(/\n\n/g, '\n')
+		.replace(/\n(\s)+/g, '\n')
+		.replace(/(\s)+\n/g, '\n')
+		.replace(/(\n)*\{(\n)*/g, '{')
+		.replace(/(\n)*\}/g, '}')
+		.replace(/(\n)*\((\n)*/g, '(')
+		.replace(/(\n)*\)/g, ')')
+		.replace(/\{\n\{/g, '{{')
+		.replace(/\}\n\}/g, '}}')
+		.replace(/\)\n\)/g, '))')
+		.replace(/\(\n\(/g, '((')
+		.replace(/(\n)else/g, 'else')
+		.replace(/(\n)catch/g, 'catch')
+		.replace(/(\n)finally/g, 'finally')
+		.replace(/\n(\+|\-|\*|\&|\||=|\.|\?|:|\,|;|>|<)/g, '$1')
+		.replace(/(\+|\-|\*|\&|\||=|\.|\?|:|\,|;|>|<)\n/g, '$1')
+		.replace(/\n&&/g, '&&')
+		.replace(/&&\n/g, '&&')
+		.replace(/\n\|\|/g, '||')
+		.replace(/\|\|\n/g, '||')
+		.replace(/\n>=/g, '>=')
+		.replace(/>=\n/g, '>=')
+		.replace(/\n<=/g, '<=')
+		.replace(/<=\n/g, '<=')
+		.replace(/\n\!=/g, '!=')
+		.replace(/\!=\n/g, '!=')
+		.replace(/(;|\{)(\}+)(\n)+/g, '$1$2;');
+	}
+
+	if (constRegExps != null)
+	{
+		for (var i = 0; i < constRegExps.length; i++)
+		{
+			ds = ds.replace((regexps_tmpPrefix + i
+			+ regexps_tmpSuffix),	constRegExps[i]);
+		}
+	}
+	for (var i = 0; i < constStrs.length; i++)
+	{
+		ds = ds.replace((strings_tmpPrefix + i
+		+ strings_tmpSuffix),	constStrs[i]);
+	}
+	return ds;
+}
+
+
+CodeUtil.toStrContent = function (s, c)
+{
+	s = String(s).replace(/\\/g, "\\\\");
+	s = (c == "'") ? s.replace(/'/g, "\\'") 
+		: s.replace(/"/g, "\\\"");
+	return s.replace(/\t/g, "\\t")
+		.replace(/\r/g, "\\r")
+		.replace(/\n/g, "\\n");
+}
+
+CodeUtil.toStrExpression = function (s, c)
+{
+	var bc = (c == "'") ? "'" : "\"";
+	return bc + CodeUtil.toStrContent(s, c) + bc;
+}

@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Example-22.2 闭包的本质</title>
+</head>
+<body>
+<script>
+<!-
+//A是一个普通的函数
+function A(a)
+{
+	return a;
+}
+//B是一个带函数返回值的函数
+function B(b)
+{
+	return function (){
+		return b;
+	}
+}
+var x = A(10); 
+//因为A除了返回a外什么也没做，执行A()函数后，调用堆栈被销毁
+//没有产生闭包，或者说在调用"瞬间"产生了闭包，然后马上被销毁
+var y = B(20);
+	//因为B返回了一个匿名函数引用，它访问到B()被调用时产生的环境
+	//因此这里产生了一个"闭包结构"(closure或者function instance)
+	//在它的环境中，b = 20，因此y()的返回结果是20
+var z = B(30);
+	//同样，这里产生了第二个"闭包结构"
+	//在它的环境中，b = 30，因此z()的返回结果是30
+alert(x);	//得到10
+alert(y()); //得到20
+alert(z()); //得到30
+-->
+</script>
+</body>
+</html>

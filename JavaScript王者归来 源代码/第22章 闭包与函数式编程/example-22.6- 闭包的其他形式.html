@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>Example-22.6 闭包的其他形式</title>
+</head>
+<body>
+<script>
+<!-
+//测试函数，异步计数
+function test()
+{
+    for (var i = 0; i < 5; i++)
+    {
+		//如果没有这个闭包，不能正确得到0,1,2,3,4的结果
+		//因为setTimeout是在循环结束后才被"异步"调用的
+        (function(j){
+            setTimeout(function(){alert(j)}, 100);
+        })(i);
+    }
+}
+test();
+-->
+</script>
+</body>
+</html>

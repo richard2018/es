@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<title>Example 15.1 Cookie示例</title>
+	</head>
+	<body>
+		<h1>
+			<script type = "text/javascript">
+			<!--
+				function getCookie(name){
+					//前面说过，cookie是以name1=value1;name2=value2;name3=value3……
+					//这样的字符串形式被读取的，因此在这里通过字符串操作进行拆分，匹配出
+					//指定name的相应的值
+					var cookies=document.cookie.split("; ");
+
+					for(var i=0;i<cookies.length;i++)
+					{
+						//拆分name和value
+						var s=cookies[i].split("=");
+						if(s[0]==name)return s[1];
+					}
+				}
+				function setCookie(name,value,expireTime){
+					//在这个方法里则将name、value和expireTime拼装成格式正确的字符串
+					//设置到浏览器的cookie中
+						var expireTimeStr = expireTime ? "expire="+expireTime.toGMTString() : "";
+						document.cookie=name+"="+value+";"+expireTimeStr;
+				}
+				//获取前一次访问的name
+				var lastPerson = getCookie("$name$") || "";
+
+				//从输入中得到此次访问的name，并且将前次访问的name设置为默认值
+				var name = prompt("What's your name?",lastPerson);
+
+				//获得当前访问的name曾经的访问次数
+				var times = getCookie(name) || 0;
+
+				//将访问次数+1，写入cookie
+				setCookie(name, times - 0 + 1);
+
+				//将此次访问的名字写入cookie
+				setCookie("$name$", name);
+
+				if(times > 0)	//如果访问次数大于0，说明是老朋友
+					//对老朋友显示更加友好的问候信息
+					document.write("Hello "+name+", nice to meet you again!");
+				else	//否则是新朋友
+					document.write("Hello " + name + "!");
+			-->
+			</script>
+		</h1>
+	</body>
+</html>

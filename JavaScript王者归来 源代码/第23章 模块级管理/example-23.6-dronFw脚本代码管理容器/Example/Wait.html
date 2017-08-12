@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<script type="text/javascript" src="../DronFw/boot.js"></script>
+</head>
+<body>
+
+<h2>Wait</h2>
+<hr>
+
+
+<!--
+
+	这是 DronFw 测试 Wait 指令的一个例子
+
+-->
+
+<input id="t1" type="button" value="弹出提示" onclick="test()">
+
+<script type="text/javascript">
+	var testvar = "Hello";
+	function testFun()
+	{
+		window.alert("Hello DronFw!");
+		$("t1").disabled = true;
+	}
+	function co()
+	{
+		return testvar=="DronFw";
+	}
+	function test()
+	{
+		testvar="DronFw";
+	}
+	DronFw.Wait(co, testFun);//等待 co 返回 true 后执行 testFun 且停止等待
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<html>
+<head>
+	<title>Example-22.12 友元</title>
+</head>
+<body>
+<script>
+<!--
+//定义一个ClassA类型
+function ClassA()
+{
+	//两个私有成员
+	var a = 100;
+	var b = 200;
+	
+	//声明"友元"的函数
+	this.declareFriend = function(friend)
+	{
+		friend.getPrivateProperty = function(privateName)
+		{
+			return eval(privateName);
+		}
+	}
+}
+
+//创建一个ClassA类型的对象objA
+var objA = new ClassA();
+
+//创建一个Object类型的对象objB
+var objB = new Object();
+
+//将objB声明为objA的"友元"
+objA.declareFriend(objB);	
+
+//声明后，objB可以访问objA中的私有属性
+alert(objB.getPrivateProperty("a"));
+alert(objB.getPrivateProperty("b"));
+-->
+</script>
+</body>
+</html>

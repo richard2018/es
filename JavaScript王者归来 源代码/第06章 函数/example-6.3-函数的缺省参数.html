@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Example-6.3 函数的缺省参数</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	function add(a,b){
+		if(!b) b=30;  
+		//给了参数b默认值30，事实上函数默认值一个我更加推崇形式是写成b = b || 30;
+		//关于代码风格问题，在本书的第五部分会有更加详细的讨论
+		return a+b;
+	}
+	dwn(add(10));  //得到40
+	dwn(add(10,15)); //得到25
+-->
+</script>
+</body>
+</html>

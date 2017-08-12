@@ -1,0 +1,33 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 12.18 改变颜色和大小</title>
+<style>
+c1{
+	background-color:red;
+}
+</style>
+</head>
+<body> 
+<div id="text">
+无忧脚本
+</div>
+<script>
+<!--
+function fun(){
+	text.style.fontSize=16+Math.floor(Math.random()*24); //改变字大小
+	text.style.lineHeight=1.2; //行高取文字的1.2倍
+
+	//生成三个随机数来表示R、G、B三元色
+	var c1=Math.floor(Math.random()*256);
+	var c2=Math.floor(Math.random()*256);
+	var c3=Math.floor(Math.random()*256);
+
+	text.style.color="rgb("+c1+","+c2+","+c3+")"; //随机改变文字的颜色。
+	var timer=setTimeout(fun,1000); //每1秒刷新一次。
+}
+fun();
+-->
+</script>
+</body>
+</html>

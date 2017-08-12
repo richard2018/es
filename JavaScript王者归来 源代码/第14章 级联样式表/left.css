@@ -1,0 +1,13 @@
+body img#Photo{
+	display:block;
+	width:200px;
+	height:150px;
+	background-color:#E0E0E0;
+	border:solid 1px #3377cc;
+	float:left;
+	margin-right:12px;
+	margin-bottom:2px;
+}
+body p#Content{
+	font-size:14px;
+}

@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 12.17 显示和隐藏</title>
+<style>
+c1{
+	background-color:red;
+}
+</style>
+</head>
+<body> 
+<div id="line1">line-1</div>
+<div id="line2">line-2</div>
+<div id="line3">line-3</div>
+<button onclick="hideByVisibility()">hide line-2 by visibility</button>
+<button onclick="hideByDisplay()">hide line-2 by display</button>
+<script>
+<!--
+	function hideByVisibility()
+	{
+		line2.style.visibility = "hidden";
+			//visibility属性会使元素依然占据页面上原有的位置
+	}
+	function hideByDisplay()
+	{
+		line2.style.display = "none";
+			//display属性则会让元素在页面上看起来完全“消失”
+	}
+-->
+</script>
+</body>
+</html>

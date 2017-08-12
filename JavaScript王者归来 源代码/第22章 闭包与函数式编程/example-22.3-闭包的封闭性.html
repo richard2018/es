@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>Example-22.3 闭包的封闭性</title>
+</head>
+<body>
+<script>
+<!--
+function dwn(s)
+{
+	document.write(s + "<br/>");
+}
+//我们说匿名函数调用产生一个"瞬时"的闭包
+//因此当调用结束后，私有变量无法访问，并且如果没有外部引用存在
+//内部对象就会被销毁
+//而如果返回了函数，或者被全局引用，则"闭包"被保留了下来
+//闭包中的内容被"有选择"地开放出来
+(function(){
+	//封闭的私有域
+	var innerX = 10, innerY = 20;
+
+	//开放的公共域
+	outerObj = {x : innerX, y : innerY} ;
+})();
+
+try{
+	dwn(innerX); //内部数据无法访问
+}
+catch(ex){
+	dwn("内部数据无法访问");
+}
+dwn(outerObj.x); //通过外部接口访问
+-->
+</script>
+</body>
+</html>

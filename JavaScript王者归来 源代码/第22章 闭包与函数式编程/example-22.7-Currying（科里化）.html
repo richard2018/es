@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Example-22.7 Currying</title>
+</head>
+<body>
+<script>
+<!-
+//这是一个计算x+y的函数，但是它和常规函数的不同之处在于
+//它是被Currying的
+function add(x, y)
+{
+	//当x,y都有值得时候，计算并返回x+y的值
+	if(x!=null && y!=null) return x + y;
+	//否则，若x有值y没有值
+else if(x!=null && y==null) return function(y)
+{
+	//返回一个等待y参数进行后续计算的闭包
+	return x + y;
+}
+//若x没有值y有值
+else if(x==null && y!=null) return function(x)
+{
+	//返回一个等待x参数进行后续计算的闭包
+    return x + y;
+}
+}
+//计算add(3,4)的值，得到3+4的结果7
+var a = add(3, 4);
+//计算add(2)的值，得到一个相当于求2+y的函数
+var b = add(2);
+//继续传入y的值10，得到2+10的结果12
+var c = b(10);
+-->
+</script>
+</body>
+</html>

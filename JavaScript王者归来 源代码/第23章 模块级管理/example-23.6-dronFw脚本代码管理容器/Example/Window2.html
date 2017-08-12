@@ -1,0 +1,73 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css"> td,body{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="Window2"></script>
+</head>
+<body>
+<h2>游戏人Window2类</h2><br />
+原游戏人 Window 类的升级版，由于属性方法有改动，故保留Window类
+<hr>
+最小化功能还没实现，请先测试其它功能
+
+<div id="test_div">这里一个层，将要被appendChild到示例3</div>
+
+<script type="text/javascript">
+var win = new DronFw.Class.Window2;
+win.Left = 100;
+win.Top = 80;
+win.Width = 400;
+win.Height = 200;
+win.Icon = "";
+win.Title = "示例窗体";
+win.Show();
+win.Content.innerHTML = "示例数据";
+
+var win2 = new DronFw.Class.Window2;
+win2.Left = 150;
+win2.Top = 100;
+win2.Width = 300;
+win2.Height = 200;
+win2.Icon = "images/window_ico.gif";
+win2.Title = "示例窗体2";
+win2.MaxButton = false;
+win2.Show();
+win2.Content.innerHTML = "示例数据2，我没有最大化";
+
+var win2 = new DronFw.Class.Window2;
+win2.Left = 190;
+win2.Top = 200;
+win2.Width = 300;
+win2.Height = 300;
+win2.Icon = "images/window_ico.gif";
+win2.Title = "示例窗体3";
+win2.Show();
+win2.Content.appendChild($("test_div"));//注意这种用法 :)
+
+/*
+	Window2 类的对象属性方法如下：
+	对象
+		Content: 窗体的内容层，只有Show之后才存在，这是一个层的引用，注意跟原Window类的Content属性区别开来
+	属性
+		Left   : 窗体距左边的距离，缺省为0
+		Top    : 窗体距上边的距离，缺省为0
+		Width  : 窗体宽，缺省300
+		Height : 窗体高，缺省200
+		Icon   : 窗体的图标，缺省为无图标，注意这里跟原Window类的区别
+		Title  : 窗体的标题，缺省为“新窗体”，注意这里跟原Window类的区别
+		MinButton : 是否显示最小化按钮
+		MaxButton : 是否显示最大化按钮
+		CloButton : 是否显示关闭按钮
+		MinStatus : 当前是否已最小化，只读属性，布尔值（最小化的功能尚未实现）
+		MaxStatus : 当前是否已最大化，只读属性，布尔值
+	方法
+		Show   : 显示窗体
+		ChangeMin : 改变最小化状态（最小化的功能尚未实现）
+		ChangeMax : 改变最大化状态
+		Close  : 关闭窗体
+*/
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<html>
+<head>
+	<title>Example-11.20 检测屏幕分辨率</title>
+</head>
+<body>
+<script type="text/JavaScript">
+<!--
+　//检测屏幕分辨率
+　　var s=800; //确定最佳显示效果，即浏览屏幕分辨率的宽度，根据实际情况而定。 
+　　var c, cv=24; //cv设定最佳色彩度，请根据您的实际情况设
+　　if(screen.width!=s){
+	　　 document.write("您的屏幕分辨率是 "+screen.width+" × "+screen.height); 
+	　　 document.write("，并非最佳分辨率，请您将屏幕分辨率调整为800×600浏览本页并刷新页面，以达到最佳显示效果。"); 
+　　}
+
+　　//--> 
+　　//检测色彩度
+　　<!--
+
+　　if(cv!="Netscape")c=screen.colorDepth; 
+　　else c=screen.pixelDepth; 
+    var cs=c; 
+　　if(c < cv){
+	　　 if(c==4)cs="4 位 16 色"; 
+	　　 if(c==8)cs="8 位 256 色"; 
+	　　 if(c==16)cs="16 位增强色"; 
+	　　 if(c >16)cs=cs+" 位真彩色"; 
+	　　 document.write("您的屏幕色彩度是 "+cs); 
+	　　 document.write("，请将色彩度调整为24位增强色浏览本页，显示效果更佳。"); 
+　	}
+-->
+</script>
+</body>
+</html>

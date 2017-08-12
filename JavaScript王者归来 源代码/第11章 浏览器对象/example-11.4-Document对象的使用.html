@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>Example-11.4 Document对象的使用</title>
+</head>
+<body>
+Input your name: <input type="text" id="name" value=""/>
+<button onclick="Greeting()">Greeting</button>
+<script type="text/JavaScript">
+<!--
+function Greeting()
+{
+	//打开一个新窗口，将句柄赋给newWin
+	var newWin = window.open();
+	//获得id为"name"的DOM元素，这里是指上面的那个input框
+	var name = document.getElementById("name");
+	with(newWin.document)
+	{
+		open();  
+//通常这里的open()可以省略，在执行write前浏览器会自动执行document.open()的动作
+			//开始向新窗口的文挡写入信息
+		write("Hello,");
+		write(name.value);
+		write("<br/>");
+		write("Nice to see you!");
+		write("<br/>");
+		write("Some notes for you:<br/><textarea style='width:280;height:100'>");
+		writeln("Here is some message..."); 
+//writeln与write的不同之处在于writeln在字符串的末尾多输出一个\n
+		writeln("Here is another...");
+		write("</textarea></br>");
+		write("<button onclick='self.close()'>Good bye!</button>");
+		close(); //close() 关闭文档，通常它也可以被省略，浏览器会自动执行
+	}
+}
+-->
+</script>
+</body>
+</html>

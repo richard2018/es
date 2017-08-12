@@ -1,0 +1,47 @@
+<html>
+<head>
+	<title>Example-21.40 值和引用</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+
+	//va是数值类型，vb是布尔类型
+	var va = 10, vb = true;
+	//ra是数组，rb是对象
+	var ra = [1,2,3], rb = {x:1, y:2};
+
+	//参数为值类型的函数例子
+	function ValueTypes(x, y)
+	{
+		x++;
+		y = false;
+		dwn(x);
+		dwn(y);
+	}
+
+	//参数为引用类型的函数例子
+	function ReferTypes(x, y)
+	{
+		x.push(4);
+		delete y.x;
+		dwn(x);
+		dwn(y.x);
+	}
+
+	ValueTypes(va, vb);
+	dwn(va);	//10 -值类型不会在函数调用的过程中被改变
+//因为是传值，函数形参得到的是副本
+	dwn(vb);	//true
+	ReferTypes(ra, rb);
+	dwn(ra);	//[1,2,3,4]-引用类型的值会在调用中被改变
+//因为无论是形参还是实参操作的都是同一个地址
+	dwn(rb.x); //undefined
+-->
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 13.18 观察者模式</title>
+</head>
+<body> 
+<script>
+<!--
+function dwn(s)
+{
+	document.write(s + "<br/>");
+}
+function dispatchEvent(owner, eventType, eventArgs)
+{
+	if(owner && owner["on"+eventType])
+		setTimeout(function(){owner["on"+eventType](eventArgs)}, 1);
+}
+
+function randomSerials(len)
+{
+	function randomSignal()
+	{
+		return Math.random() > 0.5 ? 1 : 0;
+	}
+	var ret = [];
+	for(var i = 0; i < len; i++)
+	{
+		ret.push(randomSignal());
+	}
+	return ret;
+}
+
+function DifferObserver(differ)
+{
+	this.differ = differ;
+	differ.setObserver(this);
+}
+
+function Differ(obl)
+{
+	var buffer = new Array(obl);
+	var time = 0;
+	var observer = null;
+
+	this.input = function(serials)
+	{
+		for(var i = 1; i < serials.length; i++)
+		{
+				var signal = Math.abs(serials[i] - serials[i - 1]);
+				buffer[time++ % obl] = signal;
+				if(signal) 
+					dispatchEvent(observer, "signalchange", {sender:this, input:serials, time:time, buffer:buffer.slice(0)});
+		}
+	}
+
+	this.setObserver = function(obs)
+	{
+		observer = obs;
+		observer.readBuffer = function()
+		{
+			var buf = buffer;
+			
+			buffer = new Array(obl);
+			time = 0;
+
+			return buf;
+		}
+		observer.bufferSize = function()
+		{
+			return obl;
+		}
+	}
+}
+
+var inputSerials = randomSerials(20);
+dwn(inputSerials);
+var diff10 = new Differ(20);
+diff10.input(inputSerials);
+var diffObs = new DifferObserver(diff10);
+dwn(diffObs.readBuffer());
+
+diffObs.onsignalchange = function(eventArgs)
+{
+	if(diff10 == eventArgs.sender){
+		alert(eventArgs.time);
+	}
+}
+
+diff10.input(inputSerials);
+-->
+</script>
+</body>
+</html>

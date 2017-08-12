@@ -1,0 +1,34 @@
+<html>
+<head>
+	<title>Example-22.4 闭包改变外部环境</title>
+</head>
+<body>
+<script>
+<!-
+//定义一个计数器生成函数，生成某种类型的计数器
+function counter(iden, addi)
+{
+	//闭包"外部"，函数counter"内部"的参数iden的值在闭包被调用的时候会被改变
+	return function(){
+		//改变iden的值
+		iden = iden+addi;
+		return iden;
+	}
+}
+//产程一个从0开始计数，每次计数值加1的计数器
+var c1 = counter(0, 1);	
+//产生一个从10开始计数，每次计数值减1的计数器
+var c2 = counter(10, -1);
+for(var i = 0; i < 10; i++){
+	//循环计数
+	c1();
+}
+for(var i = 0; i < 10; i++){
+	//循环计数
+	c2();
+}
+
+-->
+</script>
+</body>
+</html>

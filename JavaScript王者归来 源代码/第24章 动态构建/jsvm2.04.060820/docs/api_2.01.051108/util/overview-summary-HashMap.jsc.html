@@ -1,0 +1,458 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+ Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="HashMap.jsc Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>HashMap.jsc</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		js.util.HashMap class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ <BR/><BR/><B>Version: </B>2.01, 10/23/05
+ <BR/><BR/><B>Author:</B> Wan Changhua
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="HashMap.html">js.util.HashMap</a></b></td>
+    <td>This is the map class.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"># language: jsvm2
+
+<span class="comment">/**
+ * <span class="attrib">@fileoverview</span> js.util.HashMap class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ * <span class="attrib">@file</span>		HashMap.jsc
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@since</span>		JSVM1.0
+ */</span>
+
+package js.util;
+
+import js.lang.JObject;
+import js.lang.Cloneable;
+import js.util.Iterator;
+
+
+<span class="comment">/**
+ * Create a new HashMap instance.
+ * Inherit from Cloneable
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@extends</span> Cloneable
+ * <span class="attrib">@class</span> This is the map class.
+ * <span class="attrib">@constructor</span>
+ */</span><span class="reserved">function</span> HashMap ()
+{
+	<span class="comment">/**
+	 * <span class="attrib">@private</span>
+	 */</span>
+	<span class="reserved">this</span>.vos = {};
+}
+
+
+
+<span class="comment">/**
+ * Returns an iterator of the values in this hashmap.
+ * Use the Iterator methods on the returned object to fetch the elements
+ * sequentially.
+ *
+ * <span class="attrib">@return</span>  an iterator of the values in this hashmap.
+ * <span class="attrib">@type</span> Iterator
+ */</span>
+HashMap.<span class="reserved">prototype</span>.elements = <span class="reserved">function</span>()
+{
+	var a = [], i = 0;
+	<span class="reserved">for</span>(var key in <span class="reserved">this</span>.vos)
+	{
+		a[i++] = <span class="reserved">this</span>.vos[key];
+	}
+	<span class="reserved">return</span> new Iterator(a);
+}
+
+
+
+<span class="comment">/**
+ * Returns the value to which the specified key is mapped in this idEntry
+ * hash map, or &lt;tt&gt;null&lt;/tt&gt; if the map contains no mapping for this key.
+ * A return value of &lt;tt&gt;null&lt;/tt&gt; does not &lt;i&gt;necessarily&lt;/i&gt; indicate
+ * that the map contains no mapping for the key; it is also possible that
+ * the map explicitly maps the key to &lt;tt&gt;null&lt;/tt&gt;. The
+ * &lt;tt&gt;containsKey&lt;/tt&gt; method may be used to distinguish these two cases.
+ *
+ * <span class="attrib">@param</span>   key the key whose associated value is to be returned.
+ * <span class="attrib">@return</span>  the value to which this map maps the specified key, or
+ *          &lt;tt&gt;null&lt;/tt&gt; if the map contains no mapping for this key.
+ * <span class="attrib">@type</span> Object
+ */</span>
+HashMap.<span class="reserved">prototype</span>.get = <span class="reserved">function</span>(key)
+{
+	<span class="reserved">return</span> <span class="reserved">this</span>.vos[key];
+}
+
+
+<span class="comment">/**
+ * Returns &lt;tt&gt;true&lt;/tt&gt; if this map contains no key-value mappings.
+ *
+ * <span class="attrib">@return</span> &lt;tt&gt;true&lt;/tt&gt; if this map contains no key-value mappings.
+ * <span class="attrib">@type</span> boolean
+ */</span>
+HashMap.<span class="reserved">prototype</span>.isEmpty = <span class="reserved">function</span>()
+{
+	<span class="reserved">return</span>(<span class="reserved">this</span>.size() == 0);
+}
+
+
+<span class="comment">/**
+ * Returns an iterator of the keys in this hashmap.
+ *
+ * <span class="attrib">@return</span>  an iterator of the keys in this hashmap.
+ * <span class="attrib">@type</span> js.util.Iterator
+ */</span>
+HashMap.<span class="reserved">prototype</span>.keys = <span class="reserved">function</span>()
+{
+	var a = [], i = 0;
+	<span class="reserved">for</span>(var key in <span class="reserved">this</span>.vos)
+	{
+		a[i++] = key;
+	}
+	<span class="reserved">return</span> new Iterator(a);
+}
+
+
+<span class="comment">/**
+ * Associates the specified value with the specified key in this map.
+ * If the map previously contained a mapping for this key, the old
+ * value is replaced.
+ * <span class="attrib">@param</span> key key with which the specified value is to be associated.
+ * <span class="attrib">@param</span> value value to be associated with the specified key.
+ * <span class="attrib">@return</span> previous value associated with specified key, or &lt;tt&gt;null&lt;/tt&gt;
+ *	       if there was no mapping for key.  A &lt;tt&gt;null&lt;/tt&gt; return can
+ *	       also indicate that the HashMap previously associated
+ *	       &lt;tt&gt;null&lt;/tt&gt; with the specified key.
+ */</span>
+HashMap.<span class="reserved">prototype</span>.put = <span class="reserved">function</span>(key, value)
+{
+	var oldValue = <span class="reserved">this</span>.vos[key];
+	<span class="reserved">this</span>.vos[key] = value;
+	<span class="reserved">return</span> oldValue;
+}
+
+
+ <span class="comment">/**
+  * Removes the mapping for this key from this map if present.
+  *
+  * <span class="attrib">@param</span>  key key whose mapping is to be removed from the map.
+  * <span class="attrib">@return</span> previous value associated with specified key, or &lt;tt&gt;null&lt;/tt&gt;
+  *	       if there was no mapping for key.  A &lt;tt&gt;null&lt;/tt&gt; return can
+  *	       also indicate that the map previously associated &lt;tt&gt;null&lt;/tt&gt;
+  *	       with the specified key.
+  */</span>
+HashMap.<span class="reserved">prototype</span>.remove = <span class="reserved">function</span>(key)
+{
+	var value = <span class="reserved">this</span>.vos[key];
+	delete <span class="reserved">this</span>.vos[key];
+	<span class="reserved">return</span> value;
+}
+
+
+<span class="comment">/**
+ * Returns the number of key-value mappings in this map.
+ *
+ * <span class="attrib">@return</span> the number of key-value mappings in this map.
+ * <span class="attrib">@type</span> int
+ */</span>
+HashMap.<span class="reserved">prototype</span>.size = <span class="reserved">function</span>()
+{
+	var l = 0;
+	<span class="reserved">for</span>(var key in <span class="reserved">this</span>.vos)
+	{
+		l++;
+	}
+	<span class="reserved">return</span> l;
+}
+
+<span class="comment">/**
+ * Removes all mappings from this map.
+ */</span>
+HashMap.<span class="reserved">prototype</span>.clear = <span class="reserved">function</span>()
+{
+	<span class="reserved">this</span>.vos = {};
+}
+
+
+<span class="comment">/**
+ * Returns &lt;tt&gt;true&lt;/tt&gt; if this map maps one or more keys to the
+ * specified value.
+ *
+ * <span class="attrib">@param</span> value value whose presence in this map is to be tested.
+ * <span class="attrib">@return</span> &lt;tt&gt;true&lt;/tt&gt; if this map maps one or more keys to the
+ *         specified value.
+ * <span class="attrib">@type</span> boolean
+ */</span>
+HashMap.<span class="reserved">prototype</span>.containsValue = <span class="reserved">function</span>(value)
+{
+	<span class="reserved">for</span>(var key in <span class="reserved">this</span>.vos)
+	{
+		<span class="reserved">if</span> (<span class="reserved">this</span>.vos[key] == value)
+		{
+			<span class="reserved">return</span> true;
+		}
+	}
+	<span class="reserved">return</span> false;
+}
+
+<span class="comment">/**
+ * Returns &lt;tt&gt;true&lt;/tt&gt; if this map contains a mapping for the
+ * specified key.
+ *
+ * <span class="attrib">@param</span>   key   The key whose presence in this map is to be tested
+ * <span class="attrib">@return</span> &lt;tt&gt;true&lt;/tt&gt; if this map contains a mapping for the specified key.
+ * <span class="attrib">@type</span> boolean
+ */</span>
+HashMap.<span class="reserved">prototype</span>.containsKey = <span class="reserved">function</span>(key)
+{
+	<span class="reserved">for</span>(var k in <span class="reserved">this</span>.vos)
+	{
+		<span class="reserved">if</span> (k == key)
+		{
+			<span class="reserved">return</span> true;
+		}
+	}
+	<span class="reserved">return</span> false;
+}
+
+<span class="comment">/**
+ * Returns an array containing all of the elements in this list
+ * in the correct order.
+ *
+ * <span class="attrib">@return</span> an array containing all of the elements in this list
+ * 	       in the correct order.
+ * <span class="attrib">@type</span> Array
+ */</span>
+HashMap.<span class="reserved">prototype</span>.toArray = <span class="reserved">function</span> ()
+{
+	var entities = [];
+	<span class="reserved">for</span>(var key in <span class="reserved">this</span>.vos)
+	{
+		entities[i] = new Entry(key, <span class="reserved">this</span>.vos[key]);
+	}
+	<span class="reserved">return</span> entities;
+}
+
+<span class="comment">/**
+ * Returns a shallow copy of this &lt;tt&gt;HashMap&lt;/tt&gt; instance: the keys and
+ * values themselves are not cloned.
+ *
+ * <span class="attrib">@return</span> a shallow copy of this map.
+ * <span class="attrib">@type</span> HashMap
+ */</span>
+HashMap.<span class="reserved">prototype</span>.clone = <span class="reserved">function</span> ()
+{
+	var map = new HashMap();
+	map.vos = Cloneable.cloneObject(<span class="reserved">this</span>.vos);
+	<span class="reserved">return</span> map;
+}
+
+
+<span class="comment">/**
+  * A map entry (key-value pair). 
+  * <span class="attrib">@since</span> 1.2
+  * <span class="attrib">@member</span> HashMap
+  * <span class="attrib">@ignore</span>
+  */</span>
+var Entry = js.util.HashMap.Entry 
+	= <span class="reserved">function</span> (k, v)
+{
+	<span class="reserved">this</span>.key = k;
+	<span class="reserved">this</span>.value = v;
+}
+
+<span class="comment">/**
+ * <span class="attrib">@ignore</span>
+ */</span>
+Entry.$extends(js.lang.JObject);
+Entry.<span class="reserved">prototype</span>.$class = Entry;
+Entry.$name = <span class="literal">"js.util.HashMap.Entry"</span>;
+
+
+<span class="comment">/**
+ * Returns the key corresponding to this entry.
+ * <span class="attrib">@type</span> Object
+ */</span>
+Entry.<span class="reserved">prototype</span>.getKey = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> <span class="reserved">this</span>.key;
+}
+
+<span class="comment">/**
+ * Replaces the value corresponding to this entry with the specified value
+ * <span class="attrib">@param</span> v &lt;Object&gt;
+ */</span>
+Entry.<span class="reserved">prototype</span>.setValue = <span class="reserved">function</span> (v)
+{
+	<span class="reserved">this</span>.value = v;
+}
+
+<span class="comment">/**
+ * Returns the value corresponding to this entry.
+ * <span class="attrib">@type</span> Object
+ */</span>
+Entry.<span class="reserved">prototype</span>.getValue = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> <span class="reserved">this</span>.value;
+}</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu Nov 17 20:10:21 2005</div>
+</body>
+</html>

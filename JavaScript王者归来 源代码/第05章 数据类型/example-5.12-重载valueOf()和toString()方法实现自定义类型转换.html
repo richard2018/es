@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Example-5.12</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//自定义了一个Double类型用来表示双精度浮点数
+	function Double(value)
+	{
+		this.valueOf = function()  //重新定义valueOf()方法
+		{
+			return value;  		
+}
+		this.doubleValue = this.valueOf;
+		this.toString = function()  //重新定义toString()方法
+		{
+			return "jsDouble:" + this.valueOf(); 
+		}
+	}
+	var d = new Double(10.11);
+	dwn(d);
+	dwn(String(d));
+	dwn(d + 10);
+	dwn(d + "abc");
+-->
+</script>
+</body>
+</html> 

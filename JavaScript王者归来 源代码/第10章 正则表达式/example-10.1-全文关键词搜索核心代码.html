@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title>Example-10.1 全文关键词搜索核心代码</title>
+</head>
+<body>
+<div id="content">
+  		www.51js.com<br/>
+		bbs.51js.com<br/>
+</div>
+<script>
+<!--
+	//innerHTML得到的是id="content"标签里面的内容，关于这个属性的详细讨论
+	//在本书的第12章进行
+	var str = content.innerHTML;
+	//字符串的replace方法支持正则表达式作为参数，下面的方法将包含"51js"的内容中
+	//"51js"的部分替换成红色字体
+	content.innerHTML = str.replace(/(51js)/g,"<font color='red'>$1</font>");
+-->
+</script>
+</body>
+</html> 

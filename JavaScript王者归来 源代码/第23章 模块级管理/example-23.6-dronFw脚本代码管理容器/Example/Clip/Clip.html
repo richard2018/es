@@ -1,0 +1,68 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css"> td,body{font-size:12px;}</style>
+<script type="text/javascript" src="../../DronFw/boot.js" loadClass="Clip"></script>
+
+<style type="text/css">
+	.aBox
+	{
+		width:176px;
+		height:61px;
+		border:1px solid #000;
+		background-color:#d8d0c8;
+	}
+	.aBox img
+	{
+		width:174px;
+		height:59px;
+	}
+</style>
+
+</head>
+<body>
+<h2>游戏人Clip类</h2>
+<hr>
+
+<b>以下是效果图：</b>
+
+<br><br>
+
+从上切掉20px，不移位
+<div class="aBox"><img id="test1" src="img.gif" /></div><br>
+
+从上切掉20px，移位
+<div class="aBox"><img id="test2" src="img.gif" /></div><br>
+
+从左切掉20px，不移位
+<div class="aBox"><img id="test3" src="img.gif" /></div><br>
+
+从右切掉20px，移位
+<div class="aBox"><img id="test4" src="img.gif" /></div><br>
+
+
+<script type="text/javascript">
+	var test3 = $("test3");
+	var Cliper = new DronFw.Class.Clip;
+	Cliper.Cut("test1", "top", 20);
+	Cliper.Cut("test2", "top", 20, true);
+	Cliper.Cut(test3, "left", 20, false);
+	Cliper.Cut("test4", "right", 20, true);
+
+/*
+
+	Clip 类只有一个方法：
+
+	Cut(obj, dir, pi, mo)     切割对象obj
+	参数说明：
+	obj         对象句柄或ID
+	dir         切割方向，可选 top, right, bottom, left，如果四个都不是，则认为是 top
+	pi          切割量，单位(px)
+	mo          指定是否切割后对象向切割方向移动 pi 个象素
+*/
+</script>
+
+</body>
+</html>

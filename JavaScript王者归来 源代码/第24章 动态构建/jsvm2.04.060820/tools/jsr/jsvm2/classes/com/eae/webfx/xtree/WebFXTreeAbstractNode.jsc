@@ -1,0 +1,335 @@
+# language: JSVM2
+
+/**
+ * @fileoverview com.eae.webfx.xtree.WebFXTreeAbstractNode class {@link http://jsvm.homolo.com/}
+ * @file		WebFXTreeAbstractNode.jsc
+ * @author	Emil A Eklund
+ * @Modifier: Changhua Wan
+ * @version	1.1, 07/01/05
+ */
+
+package com.eae.webfx.xtree;
+
+import js.lang.BObject;
+
+import js.util.ArrayList;
+
+import com.eae.webfx.xtree.WebFXTreeConfig;
+import com.eae.webfx.xtree.WebFXTreeHandler;
+
+/**
+ * WebFXTreeAbstractNode is an abstract treenode class.
+ * Inherit from BObject
+ * @author	Emil A Eklund (Modified by Wan Changhua)
+ * @version	1.1, 07/01/05
+ * @extends BObject
+ * @class This is an abstract treenode class.
+ * @constructor
+ * @param {String} sText
+ * @param {String} sAction
+ * @deprecated
+ */
+
+class WebFXTreeAbstractNode extends BObject (sText, sAction)
+{
+	this.parentNode = null;
+	this.childNodes  = [];
+	this.id     = WebFXTreeHandler.getId();
+	this.text   = sText || WebFXTreeConfig.defaultText;
+	this.action = sAction || WebFXTreeConfig.defaultAction;
+	this._last  = false;
+	WebFXTreeHandler.all[this.id] = this;
+}
+
+/*
+ * To speed thing up if you're adding multiple nodes at once (after load)
+ * use the bNoIdent parameter to prevent automatic re-indentation and call
+ * the obj.indent() method manually once all nodes has been added.
+ * @param {WebFXTreeAbstractNode} node
+ * @param {boolean} bNoIdent
+ * @returns the node object that has been added.
+ * @type WebFXTreeAbstractNode
+ */
+WebFXTreeAbstractNode.prototype.add = function (node, bNoIdent)
+{
+	node.parentNode = this;
+	this.childNodes[this.childNodes.length] = node;
+	var root = this;
+	if (this.childNodes.length >= 2)
+	{
+		this.childNodes[this.childNodes.length - 2]._last = false;
+	}
+	while (root.parentNode) { root = root.parentNode; }
+
+	if (root.rendered)
+	{
+		if (this.childNodes.length >= 2) {
+			document.getElementById(this.childNodes[this.childNodes.length - 2].id + '-plus').src = ((this.childNodes[this.childNodes.length -2].folder)?((this.childNodes[this.childNodes.length -2].open)?WebFXTreeConfig.tMinusIcon:WebFXTreeConfig.tPlusIcon):WebFXTreeConfig.tIcon);
+			this.childNodes[this.childNodes.length - 2].plusIcon = WebFXTreeConfig.tPlusIcon;
+			this.childNodes[this.childNodes.length - 2].minusIcon = WebFXTreeConfig.tMinusIcon;
+			this.childNodes[this.childNodes.length - 2]._last = false;
+		}
+		this._last = true;
+		var foo = this;
+		while (foo.parentNode) {
+			for (var i = 0; i < foo.parentNode.childNodes.length; i++) {
+				if (foo.id == foo.parentNode.childNodes[i].id) { break; }
+			}
+			if (i == foo.parentNode.childNodes.length - 1) { foo.parentNode._last = true; }
+			else { foo.parentNode._last = false; }
+			foo = foo.parentNode;
+		}
+		WebFXTreeHandler.insertHTMLBeforeEnd(document.getElementById(this.id + '-cont'), node.toString());
+		if ((!this.folder) && (!this.openIcon)) {
+			this.icon = WebFXTreeConfig.folderIcon;
+			this.openIcon = WebFXTreeConfig.openFolderIcon;
+		}
+		if (!this.folder) { this.folder = true; this.collapse(true); }
+		if (!bNoIdent) { this.indent(); }
+	}
+	return node;
+}
+
+/**
+ * Toggles state between collapsed and expanded
+ */
+WebFXTreeAbstractNode.prototype.toggle = function()
+{
+	if (this.folder)
+	{
+		if (this.open)
+		{
+			this.collapse();
+		}
+		else
+		{
+			this.expand();
+		}
+	}
+}
+
+/**
+ * Selects self.
+ */
+WebFXTreeAbstractNode.prototype.select = function()
+{
+	document.getElementById(this.id + '-anchor').focus();
+}
+
+/**
+ * Deselects self.
+ */
+WebFXTreeAbstractNode.prototype.deSelect = function()
+{
+	document.getElementById(this.id + '-anchor').className = '';
+	WebFXTreeHandler.selected = null;
+}
+
+/**
+ * Foruses self.
+ */
+WebFXTreeAbstractNode.prototype.focus = function()
+{
+	if ((WebFXTreeHandler.selected) && (WebFXTreeHandler.selected != this)) { WebFXTreeHandler.selected.deSelect(); }
+	WebFXTreeHandler.selected = this;
+	if ((this.openIcon) && (WebFXTreeHandler.behavior != 'classic')) { document.getElementById(this.id + '-icon').src = this.openIcon; }
+	document.getElementById(this.id + '-anchor').className = 'selected';
+	document.getElementById(this.id + '-anchor').focus();
+	if (WebFXTreeHandler.onSelect) { WebFXTreeHandler.onSelect(this); }
+}
+
+/**
+ * Blurs self.
+ */
+WebFXTreeAbstractNode.prototype.blur = function()
+{
+	if ((this.openIcon) && (WebFXTreeHandler.behavior != 'classic'))
+	{
+		document.getElementById(this.id + '-icon').src = this.icon;
+	}
+	document.getElementById(this.id + '-anchor').className = 'selected-inactive';
+}
+
+/**
+ * Executes expand operate
+ */
+WebFXTreeAbstractNode.prototype.doExpand = function()
+{
+	if (WebFXTreeHandler.behavior == 'classic')
+	{
+		document.getElementById(this.id + '-icon').src = this.openIcon;
+	}
+	if (this.childNodes.length) {  document.getElementById(this.id + '-cont').style.display = 'block'; }
+	this.open = true;
+	if (WebFXTreeConfig.usePersistence)
+	{
+		WebFXTreeHandler.cookies.setValue(this.id.substr(18,this.id.length - 18), '1');
+	}
+}
+
+/**
+ * Executes collapse operate
+ */
+WebFXTreeAbstractNode.prototype.doCollapse = function()
+{
+	if (WebFXTreeHandler.behavior == 'classic') { document.getElementById(this.id + '-icon').src = this.icon; }
+	if (this.childNodes.length) { document.getElementById(this.id + '-cont').style.display = 'none'; }
+	this.open = false;
+	if (WebFXTreeConfig.usePersistence) {
+		WebFXTreeHandler.cookies.setValue(this.id.substr(18,this.id.length - 18), '0');
+	}
+}
+
+/**
+ * Expands all child nodes and self.
+ */
+WebFXTreeAbstractNode.prototype.expandAll = function()
+{
+	this.expandChildren();
+	if ((this.folder) && (!this.open)) { this.expand(); }
+}
+
+/**
+ * Expands all child nodes.
+ */
+WebFXTreeAbstractNode.prototype.expandChildren = function()
+{
+	for (var i = 0; i < this.childNodes.length; i++) {
+		this.childNodes[i].expandAll();
+	}
+}
+
+/**
+ * Collapses all child nodes and self.
+ */
+WebFXTreeAbstractNode.prototype.collapseAll = function()
+{
+	this.collapseChildren();
+	if ((this.folder) && (this.open))
+	{
+		this.collapse(true);
+	}
+}
+
+/**
+ * Collapses all child nodes.
+ */
+WebFXTreeAbstractNode.prototype.collapseChildren = function()
+{
+	for (var i = 0; i < this.childNodes.length; i++)
+	{
+		this.childNodes[i].collapseAll();
+	}
+}
+
+/**
+ * Collapses all child nodes.
+ */
+WebFXTreeAbstractNode.prototype.indent = function(lvl, del, last, level, nodesLeft)
+{
+	/*
+	 * Since we only want to modify items one level below ourself,
+	 * and since the rightmost indentation position is occupied by
+	 * the plus icon we set this to -2
+	 */
+	if (lvl == null) { lvl = -2; }
+	var state = 0;
+	for (var i = this.childNodes.length - 1; i >= 0 ; i--) {
+		state = this.childNodes[i].indent(lvl + 1, del, last, level);
+		if (state) { return; }
+	}
+	if (del) {
+		if ((level >= this._level) && (document.getElementById(this.id + '-plus'))) {
+			if (this.folder) {
+				document.getElementById(this.id + '-plus').src = (this.open)?WebFXTreeConfig.lMinusIcon:WebFXTreeConfig.lPlusIcon;
+				this.plusIcon = WebFXTreeConfig.lPlusIcon;
+				this.minusIcon = WebFXTreeConfig.lMinusIcon;
+			}
+			else if (nodesLeft) { document.getElementById(this.id + '-plus').src = WebFXTreeConfig.lIcon; }
+			return 1;
+	}	}
+	var foo = document.getElementById(this.id + '-indent-' + lvl);
+	//window.status+=" "+(foo.tagName);
+	if (foo) {
+		if ((foo._last) || ((del) && (last))) { foo.src =  WebFXTreeConfig.blankIcon; }
+		else { foo.src =  WebFXTreeConfig.iIcon;}
+	}
+	return 0;
+}
+
+/**
+ * Updates the text to display element. (Add by Wan Changhua [2005-07-01])
+ */
+WebFXTreeAbstractNode.prototype.update = function()
+{
+	document.getElementById(this.id + '-anchor').innerHTML = this.text;
+	//TODO
+}
+
+/**
+ * Returns the root node of self. (Add by Wan Changhua [2005-11-04])
+ * @returns the root node of self.
+ * @type WebFXTreeAbstractNode
+ */
+WebFXTreeAbstractNode.prototype.getRootNode = function()
+{
+	var pNode = this.parentNode;
+	if (pNode == null)
+	{
+		return this;
+	}
+	while (pNode.parentNode != null)
+	{
+		pNode = pNode.parentNode;
+	}
+	return pNode;
+}
+
+/**
+ * Returns the child nodes that have been selected. (Add by Wan Changhua [2005-11-04])
+ * @returns the child nodes that have been selected.
+ * @type Array
+ */
+WebFXTreeAbstractNode.prototype.getSelectedChildNodes = function()
+{
+	try
+	{
+		var radioObjName = WebFXTreeConfig.elementPrefix + "selRadioObj";
+		var checkObjName = WebFXTreeConfig.elementPrefix + "selCheckObj";
+		var list = new ArrayList();
+		var sels = document.getElementsByName(radioObjName);
+		var l =  sels.length;
+		for(var i = 0; i < l; i++)
+		{
+			if (sels[i].checked)
+			{
+				var sId = sels[i].getAttribute("oid");
+				var node = WebFXTreeHandler.getObjectById(sId);
+				if (node.getRootNode() == this)
+				{
+					list.add(node);
+				}
+			}
+		}
+		sels = document.getElementsByName(checkObjName);
+		l =  sels.length;
+		for(var i = 0; i < l; i++)
+		{
+			if (sels[i].checked)
+			{
+				var sId = sels[i].getAttribute("oid");
+				var node = WebFXTreeHandler.getObjectById(sId);
+				if (node.getRootNode() == this)
+				{
+					list.add(node);
+				}
+			}
+		}
+		return list.toArray();
+	}
+	catch (ex)
+	{
+		ex.printStackTrace();
+		return [];
+	}
+}

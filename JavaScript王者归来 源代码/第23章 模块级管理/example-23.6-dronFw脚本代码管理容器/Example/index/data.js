@@ -1,0 +1,48 @@
+var cls = new DronFw.Class.DataVess(["Name","Worker","Description","Navigator","Example"]);
+cls.load([
+	["Ajax","Dron","游戏人Ajax类","IE5.0+、Firefox1.0+","../Ajax/Ajax.html"],
+	["AutoComplete","Dron","游戏人自动完成类","IE5.0+、Firefox1.0+","../AutoComplete.html"],
+	["Base64","佚名","Base64算法类","IE5.0+、Firefox1.0+","../Base64.html"],
+	["BigNum","佚名","大数类","IE5.0+、Firefox1.0+","../BigNum.html"],
+	["Calendar","Dron+Sman","游戏人日历类（小男参与修改）","IE5.0+、Firefox1.0+","../Calendar.html"],
+	["CheckForm","佚名","通用表单验证类","IE5.0+","../CheckForm.html"],
+	["City","Dron","游戏人省市联动类","IE5.0+、Firefox1.0+","../City.html"],
+	["Clip","Dron","游戏人Clip类","IE5.0+、Firefox1.0+","../Clip/Clip.html"],
+	["CodeFormat","ttyp","代码格式化类","IE5.0+、Firefox1.0+","../CodeFormat.html"],
+	["CodeHighlight","ttyp","语法高亮类","IE5.0+、Firefox1.0+","../CodeHighlight.html"],
+	["ColorCalcer","Dron","游戏人颜色值操作类","IE5.0+、Firefox1.0+","../ColorCalcer.html"],
+	["Cookie","Dron","游戏人Cookie操作类","IE5.0+、Firefox1.0+","../Cookie.html"],
+	["CSS","Dron","游戏人样式表操作类","IE5.0+、Firefox1.0+","../CSS.html"],
+	["DataVess","Dron","游戏人数据操作类","IE5.0+、Firefox1.0+","../DataVess/Pager/index.html"],
+	["DragDrop","JoeCom","可拖动类","IE5.0+、Firefox1.0+","../DragDrop.html"],
+	["Ec62","Dron","游戏人Ec62加密算法","IE5.0+、Firefox1.0+","../Ec62.html"],
+	["FlyingDiv","Dron","游戏人FlyingDiv类","IE5.0+、Firefox1.0+","../FlyingDiv.html"],
+	["FrameAction","Dron","游戏人帧动作类","IE5.0+、Firefox1.0+","../FrameAction.html"],
+	["GridTable","Dron","游戏人GridTable类","IE5.0+、Firefox1.0+","../GridTable.html"],
+	["IdentCode","Dron","游戏人伪验证码类","IE5.0+、Firefox1.0+","../IdentCode.html"],
+	["MarqueeBar","佚名","滚动MarqueeBar类","IE5.0+、Firefox1.0+","../MarqueeBar.html"],
+	["MD5","佚名","MD5算法类","IE5.0+、Firefox1.0+","../MD5.html"],
+	["MsnMsg","ttyp","Msn消息提示类","IE5.5+","../MsnMsg.html"],
+	["Pager","Dron","游戏人分页导航类","IE5.0+、Firefox1.0+","../Pager.html"],
+	["PicturePlayer","Dron","游戏人图片轮播类","IE5.0+、Firefox1.0+","../PicturePlayer.html"],
+	["Pinyin","Dron","游戏人拚音类","IE5.0+","../Pinyin.html"],
+	["PopWindow","Dron","游戏人Popup窗口类","IE5.5+","../PopWindow/PopWindow.html"],
+	["RightEdge","Dron","游戏人对联广告类","IE5.0+、Firefox1.0+","../RightEdge.html"],
+	["RightMenu","Dron","游戏人右键菜单类","IE5.0+、Firefox1.0+","../RightMenu.html"],
+	["ScrollBox","Dron","游戏人滚屏类","IE5.0+、Firefox1.0+","../ScrollBox.html"],
+	["Shift","Dron","游戏人移位类","IE5.0+、Firefox1.0+","../Shift.html"],
+	["TradSimp","Dron","游戏人繁简类","IE5.0+、Firefox1.0+","../TradSimp.html"],
+	["TreeView","Dron","游戏人无限树类","IE5.0+、Firefox1.0+","../TreeView.html"],
+	["vBorder","Dron","游戏人选框类","IE5.0+、Firefox1.0+","../vBorder.html"],
+	["VmlDiagram","幻宇","Vml图表类","IE5.0+","../VmlDiagram.html"],
+	["Window","Dron","游戏人窗体类","IE5.0+、Firefox1.0+","../Window.html"],
+	["Window2","Dron","Window类的升级版","IE5.0+、Firefox1.0+","../Window2.html"]
+]);
+
+var pros = new DronFw.Class.DataVess(["Name","Worker","Description","Navigator","Example"]);
+pros.load([
+	["Array","Dron","Array对象的扩展方法","IE5.0+、Firefox1.0+","../Array.html"],
+	["Number","Dron","Number对象的扩展方法","IE5.0+、Firefox1.0+","../Number.html"],
+	["String","zmm","String对象的扩展方法","IE5.0+、Firefox1.0+","../String.html"],
+	["Function","Dron","Function对象的扩展方法","IE5.0+、Firefox1.0+",""]
+]);

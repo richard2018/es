@@ -1,0 +1,125 @@
+<html>
+<head>
+	<title>Example-22.14 完整的Array扩展</title>
+</head>
+<body>
+<script>
+<!--
+function dwn(s)
+{
+	document.write(s + "<br/>");
+}
+//any是一个集合迭代函数，它接受一个闭包作为参数
+//当集合中的任何一个元素调用闭包的结果返回非false时，any()返回计算结果，否则返回false
+Array.prototype.any = function(closure, _set){	
+	//第二个参数是一个处理计算结果的集合
+	//这么设计的目的是为了在each方法中重用any
+	_set = _set || false;
+
+	//如果closure参数未定义
+	if(typeof closure == 'undefined')
+	//规定为返回数组元素自身的值的函数
+		closure = function(x){return x};
+	
+	//如果closure参数不是函数
+	if(typeof closure != 'function')
+	{
+		//那么它应该被转换成返回这个值的一个函数
+		var c = closure;
+		closure = function(x){return x == c}
+	}
+	
+	//将第3个开始的参数转换为数组，因为这些值也将作为迭代调用时的参数
+	var args = Array.apply(this, arguments).slice(2);
+	
+	//循环遍历数组的每一个元素
+	for(var i = 0; i < this.length; i++)
+	{
+		//以自定义的参数和数组的下标i为参数调用closure参数引用的闭包
+		var rval = closure.apply(this, [this[i]].concat(args).concat(i))
+		//如果返回值转换为boolean时为"真"并且不是数值0
+		if(rval || rval === 0)
+		{
+			//如果_set存在，将计算结果放入_set集合
+			if(_set && _set.put)
+				_set.put(rval);
+			//否则，将第一个满足条件的结果作为函数的返回值返回
+			else
+				return rval;
+		}
+	}
+	//返回结果集
+	return _set;
+}
+//each是一个集合迭代函数，它接受一个闭包作为参数和一组可选的参数
+//这个迭代函数依次将集合的每一个元素和可选参数用闭包进行计算，并将计算得的结果集返回
+Array.prototype.each = function(closure){
+    closure = closure || undefined;
+	var _set = [];
+	_set.put = _set.push;
+	return this.any.apply(this, [closure, _set].concat(Array.apply(this, arguments).slice(1)));
+}
+//all是一个集合迭代函数，它接受一个闭包作为参数
+//当且仅当集合中的每一个元素调用闭包的返回结果为true时，它才返回true
+Array.prototype.all = function(closure){
+	return this.each.apply(this, arguments).length == this.length;
+}
+
+//除去数组中的null、false元素
+Array.prototype.trim = function(){
+    return this.each();
+}
+
+//判断数组中是否包含某个元素
+Array.prototype.contains = function(el){
+	return this.any(function(x){return x == el});
+}
+
+//获得数组中值等于el的第一个索引，若不存在返回-1
+Array.prototype.indexOf = function(el){
+	return this.any(function(x, i){return el == x?i:-1});
+}
+//获得从start到end的子数组
+Array.prototype.subarr = function(start, end){
+	end = end || Math.Infinity;
+	return this.each(function(x, i){return i >= start && i < end ? x : null});
+}
+//这是一个集合迭代函数，它接受一个list和一个闭包
+//返回这个闭包对于集合和list元素的一组匹配
+Array.prototype.map = function(list, closure){
+	if (typeof list == 'function' && typeof closure != 'function')
+	{
+		var li = closure;
+		closure = list;
+		list = li;
+	}
+	closure = closure || Array;
+
+	return this.each(function(x, i){return closure(x, list[i])});
+};
+var a = [1,2,3];
+dwn(a.length);
+dwn(a);
+dwn(a instanceof Array);
+
+dwn(a.each(function(x){return x+x}));	//得到[2,4,6]，把每个元素值加倍
+dwn(a.all(function(x){return x>0}));	//得到true，因为所有的元素都大于0
+dwn(a.all(function(x){return x<2}));	//得到false，因为2、3不小于2
+dwn(a.any(function(x){return x == 2})); //得到true，因为其中有元素满足x==2
+
+dwn(a.contains(2));		//true，包含值为2的元素
+dwn(a.contains(-1));	//false，不包含-1
+
+var b = a.map([3,2], function(x, y){return x+y}); //4,4，因为map后的结果是1+3,2+2
+dwn(b);
+dwn(a.map([2,3,4])); //1,2,2,3,3,4默认的map方式是一一对应
+
+dwn(a.indexOf(2));	//1，因为2是集合的第2个元素（下标从0开始）
+dwn(a.indexOf(-1)); //-1，因为集合里没有1
+
+dwn(a.subarr(1,3));  //2,3，因为得到的是从下标为1的元素到下标为3的元素组成的子数组
+dwn(a.toString());
+-->
+</script>
+</body>
+</html>

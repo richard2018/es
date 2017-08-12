@@ -1,0 +1,19 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Netscape中使用event对象</title>
+</head>
+<body onclick="javascript:Foo();">
+在空白处点击鼠标
+<script type="text/javascript" language="javascript">
+<!--
+function Foo(event)
+{
+	event = event||window.event;
+	//这一句消除了Internet Explorer和Mozilla之间在事件参数方面的一部分差异
+    alert("当前鼠标指针的横坐标是：" + event.clientX);
+}
+-->
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Example-4.11</title>
+</head>
+<body>
+<script>
+<!--
+	function convert(x)
+	{
+		//根据x的类型做不同的转换
+		switch(typeof x)
+		{
+			case 'number':	//如果x是数值
+				return x.toString(16);  //把数字转换成十六进制的整数
+			case 'string':	//如果x是字符串
+				return '"' + x + '"';  //返回引号包围的字符串
+			case 'boolean':	//如果x是布尔值
+				return x.toString().toUpperCase(); //转换成大写的TRUE或FALSE
+			default:	//如果不是以上三种情况
+				return x.toString(); //直接调用x的toString()方法进行转换
+		}
+	}
+	document.write(convert(110)+"<br/>");		//转换数值
+	document.write(convert("ab")+"<br/>");	//转换字符串
+	document.write(convert(true)+"<br/>");	//转换布尔值
+	document.write(convert(new Object())+"<br/>");	//转换对象
+-->
+</script>
+</body>
+</html>

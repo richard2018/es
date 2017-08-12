@@ -1,0 +1,43 @@
+<html>
+<head>
+	<title>Example-6.10 用call和apply调用函数</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//定义一个Point类型
+	function Point(x,y)
+	{
+		this.x = x;
+		this.y = y;
+		this.toString = function(){
+			return "(" + [x,y] + ")";
+		}
+	}
+	//定义一个Vector类型
+	function Vector(x,y)
+	{
+		this.x = x;
+		this.y = y;
+		this.toString = function(){
+			return "[" + [x,y] + "]";
+		}
+	}
+	//这个函数将传入的参数累加到对象的x、y属性上
+	function add(x, y){
+		return new this.constructor(this.x + x, this.y + y);
+	}
+	var p = new Point(1, 2);
+	var v = new Vector(-1, 2);
+	var p1 = add.call(p, 3, 4);  //把add函数作为p的方法调用
+	var v1 = add.apply(v, [3,4]); //把add函数作为v的方法调用
+	dwn(p1);
+	dwn(v1);
+-->
+</script>
+</body>
+</html>

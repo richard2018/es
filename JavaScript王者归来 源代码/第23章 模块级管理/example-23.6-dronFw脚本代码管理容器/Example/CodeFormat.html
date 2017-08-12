@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css">
+	td,body{font-size:12px;}
+	#codebar,#result{font-family:fixedSys;width:500px;height:200px;}
+</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="CodeFormat"></script>
+</head>
+<body>
+<h2>代码格式化类</h2>
+<hr>
+
+<textarea id="codebar">/*
+这个是一个类
+*/
+
+
+function    xx   (num,str){//说明
+var a = num;this.aa = a;
+this.bb = function(){alert(str);}
+this.cc = function(){for(var i=0;i<10;i++){document.title=i;}}};
+
+xx.prototype.dd= function(){alert("d  d        kd");}
+
+var a = new xx(100,"hello"),b=new xx(0,"ttyp");
+if(1>2)  {   alert();
+ }
+ else {
+ alert(" hell ");
+ }
+
+a.bb();
+b.dd();
+alert(a.aa);
+</textarea><br><br>
+格式化代码：
+<select id="sty">
+	<option value="0">经典风格</option>
+	<option value="1">微软风格</option>
+</select>
+<input type="button" value="格式化" onclick="test1()"><br>
+压缩代码：<input type="button" value="压缩代码" onclick="test2()"><br><br>
+<textarea id="result" readonly="readonly"></textarea>
+
+<script type="text/javascript">
+function test1()
+{
+	var c = $("codebar").value;
+	var x = new DronFw.Class.CodeFormat(c);
+	x.style = parseInt($("sty").value,10);
+	$("result").value = x.format();
+}
+function test2()
+{
+	var c = $("codebar").value;
+	var x = new DronFw.Class.CodeFormat(c);
+	x.isCompress = true;
+	$("result").value = x.format();
+}
+/*
+	CodeFormat 类有两个属性一个方法：
+	属性：
+	isCompress  布尔值，提定是否压缩代码
+	style  指定格式化代码的样式，0 为经典样式，1 为微软样式。isCompress 为 false 有效。
+	方法：
+	format()  返回处理（压缩或格式代）后的代码。
+*/
+</script>
+
+</body>
+</html>

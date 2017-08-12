@@ -1,0 +1,30 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="Http"></script>
+</head>
+<body>
+
+<h2>游戏人Http类例子</h2>
+<hr>
+
+<script type="text/javascript">
+	var Http = new DronFw.Class.Http();
+
+	if(document.all)
+	{
+		window.alert(Http.get("http://www.baidu.com","gb2312"));//ie返回的结果，你将看到 Http 类已对乱码进行处理
+		window.alert(Http.get("http://www.google.cn","utf-8"));//ie返回的结果，你将看到 Http 类已对乱码进行处理
+	}
+
+	window.alert(Http.get("../DronFw/readme.txt"));
+	/*
+		Http 类有一个方法：
+		get(url,l,s)  返回指定 url 的文件的内容 l 指定语种，当前可选 gb2312 和 utf-8，缺省为 utf-8，s 为 boolean 值，指定是否为异步，如果是异步，则返回整个 xmlhttp 对象，缺省为同步。
+	*/
+</script>
+
+</body>
+</html>

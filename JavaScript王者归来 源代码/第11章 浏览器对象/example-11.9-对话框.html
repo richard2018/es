@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title>Example-11.9 对话框</title>
+</head>
+<body>
+<button onclick="opennew()">打开</button>
+<script type="text/JavaScript">
+<!—
+//下面这个方法用open()打开一个新窗口的方法来模拟“对话框”
+//open()方法在前面的例子中我们已经多次见过
+function opennew(){
+    var w=window.open("","main","z-look=yes,alwaysRaised=yes,height=200,width=400,status=no");
+    w.document.write("<center>I&nbsp;&nbsp;D&nbsp;&nbsp;: <input><br>密码: <input><br></center>");
+w.focus(); 
+//这个第一次见到的focus()函数用来让对象获得焦点
+//在第13章中会有针对focus()的更详细的讨论
+}
+-->
+</script>
+</body>
+</html>

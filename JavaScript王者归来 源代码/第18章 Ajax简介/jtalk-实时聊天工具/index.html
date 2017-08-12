@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>JavaScript Talk</title>
+<link href="style/css/jtalk.css" type="text/css" rel="stylesheet"/>
+<script src="files/script/silverna-packs.js"></script>
+<script src="files/script/silverna-ajax.js"></script>
+<script src="files/script/jstalk.js"></script>
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li class="on"><div><span>Contacts</span></div></li>
+	</ul>
+</div>
+<div id="contacts">
+	<div id="my">
+
+		<div id="userName" class="status online" ></div>
+		
+		<div id="twitter"><input type="text" id="twitterStatus"/><input id="twitterSelect" type="image" src="style/images/select.gif" /></div>
+		<!--<div id="twitterList"><ul>
+				<li><span  class="status">w什么跟什么</span></li>
+				<li><span class="status busy" >什么跟什么</span></li>
+				<li><span class="status busy" >什么跟什么</span></li>
+			</ul></div>-->
+	<a id="myface" class="face" href="#"><img width="32" height="32"/></a>
+	</div>
+	
+	<div id="select">
+		<input type="text" id="selectInput"/>
+	
+	</div>
+	</div>	
+	<ul id="userList">
+	</ul>
+</div>
+<div id="footer">
+<a href="#">+<span>Add</span></a> | <a href="#"><span>All Contacts</span></a> <a href="#"><span>Help</span></a>
+</div>
+<div id="chatWin" class="chatWin" style="display:none">
+	<div class="menu">
+		<a class="Email" href="#">Email</a> | <a class="Call" href="#">Call</a>
+	</div>
+	<div class="vcard">
+		<img class="photo" src="files/face/fish.bmp" width="48" height="48" id="panelFace"/>
+		<span class="fn" id="panelName">akira</span>	
+		<a class="email" href="mailto:" id="panelEmail">akira@gmail.com</a>
+		<span class="description" id="panelIntro">这个人很LAN，什么也没有留下</span>
+	</div>
+	<div class="chatContent" style="height:94px;">
+	<iframe src="chat.html" frameborder="0" width="100%" height="100%"></iframe>
+	</div>
+	<div class="input"><input type="text" /><!--<textarea></textarea>--></div>
+</div>
+<script type="text/javascript">frames[0].location="chat.html"</script>
+</body>
+</html>

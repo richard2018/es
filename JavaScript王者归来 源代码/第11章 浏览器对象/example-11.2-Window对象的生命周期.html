@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Example-11.2 Window对象的生命周期</title>
+</head>
+<body>
+<script type="text/JavaScript">
+<!--
+var w = {};
+//按下按钮后，利用下面定义的createWin()方法打开一个新窗口，然后向新窗口输出
+//一段文档，这段文挡中包括一个将新窗口自身关闭的按钮
+function createWin()
+{
+//open() 打开一个新的浏览器窗口，关于这个方法，在第12章有更详细的讨论
+	w=window.open();	
+	//document.write() 向窗口写入一段文档
+	w.document.write("<button onclick='window.close()'>关闭这个窗口</button>");
+}
+-->
+</script>
+<button onclick='createWin()'>点击创建一个新窗口</button>
+<button onclick='alert(w.closed)'>（即使创建的窗口关闭，这个Window句柄依然存在）</button>
+</body>
+</html>

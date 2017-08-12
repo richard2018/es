@@ -1,0 +1,21 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 12.11 Element接口的getElementsByTagName方法</title>
+</head>
+<body>
+<div id="d1"><div></div></div>
+<p id="output1">document:</p>
+<p id="output2">d1:</p>
+<script>
+<!--
+for(var i=0;i<document.getElementsByTagName("div").length;i++)
+	//遍历整个document下所有的div节点
+    output1.innerText+=document.getElementsByTagName("div")[i].outerHTML;
+for(var i=0;i<d1.getElementsByTagName("div").length;i++)
+	//仅遍历d1下的div节点
+    output2.innerText+=d1.getElementsByTagName("div")[i].outerHTML;
+-->
+</script>
+</body>
+</html>

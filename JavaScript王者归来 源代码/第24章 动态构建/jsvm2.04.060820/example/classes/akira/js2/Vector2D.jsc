@@ -1,0 +1,63 @@
+# language: javascript2
+
+package akira.js2{
+
+	import js.lang.JObject;
+	import js.lang.System;
+
+	//Vector is an internal class, it can be visited in this jsc_doc only.
+	internal class Vector extends JObject
+	{
+		function Vector()
+		{
+			
+		}
+	}
+
+	public class Vector2D extends Vector
+	{
+		private var x = 0;
+		private var y = 0;
+		const ZERO = 0;
+
+		function Vector2D(x, y)
+		{
+			this.x = x != null ? x : Vector2D.ZERO;
+			this.y = y != null ? y : Vector2D.ZERO;
+		}
+
+		public function toString()
+		{
+			return "[" + this.x + "," + this.y + "]<vector>";
+		}
+
+		public get X()
+		{
+			return this.x;
+		}
+
+		public get Y()
+		{
+			return this.y;
+		}
+
+		public function add(v:Vector2D)
+		{
+			//v.x is not supported now, the private members only can be visited by 'this' 
+			var ret = new Vector2D(v.getX() + this.x, v.getY() + this.y);
+
+			return ret;
+		}
+
+		//Overload functons
+		public function mul(n:Number)
+		{
+			return new Vector2D(this.x * n , this.y * n);
+		}
+
+		public function mul(v:Vector2D)
+		{
+			return this.x * v.getX() + this.y * v.getY();
+		}
+	}
+}

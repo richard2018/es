@@ -1,0 +1,18 @@
+<html>
+<head>
+	<title>Action attack</title>
+</head>
+<body>
+	<center>
+		<form name="myForm" action="a.action">
+			<input name="data" type="text" value="a"/><input type="submit"/>
+		</form>
+	</center>
+	<p>在浏览器中访问该页面，点击提交表单按钮，input框中的内容将被作为data提交到a.action处理域。但是如果在提交表单之前，先在浏览器栏中输入JavaScript:document.myForm.action="b.action"，那么提交表单时，数据实际上被提交到了b.action处理域中。</p>
+</body>
+<script>
+document.forms[0].onsubmit=function(){
+	return !!alert(this.action);
+}
+</script>
+</html>

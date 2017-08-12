@@ -1,0 +1,66 @@
+<html>
+<head>
+	<title>Example-25.1 代码的执行效率</title>
+</head>
+<body>
+<script>
+<!--
+var start=new Date();
+for(var i=0;i<1000000;i++)
+{}
+var end=new Date();
+document.write("空循环:"+(end-start)+"<br/>");
+
+var start=new Date();
+for(var i=0;i<1000000;i++)
+{
+    var x=new Object();
+}
+var end=new Date();
+document.write("构造对象:"+(end-start)+"<br/>");
+
+
+var start=new Date();
+for(var i=0;i<1000000;i++)
+{
+    var x=i*20;
+}
+var end=new Date();
+document.write("简单运算:"+(end-start)+"<br/>");
+
+var start=new Date();
+for(var i=0;i<1000000;i++)
+{
+    eval("var x=i*20");
+}
+var end=new Date();
+document.write("动态执行简单运算:"+(end-start)+"<br/>");
+
+
+var start=new Date();
+function f(i)
+{
+    var x=i*20;
+}
+for(var i=0;i<1000000;i++)
+{
+    f(i);
+}
+var end=new Date();
+document.write("简单运算的函数封装:"+(end-start)+"<br/>");
+
+var start=new Date();
+
+for(var i=0;i<1000000;i++)
+{
+    (function()
+    {
+        var x=i*20;
+    })()
+}
+var end=new Date();
+document.write("闭包内简单运算:"+(end-start)+"<br/>");
+-->
+</script>
+</body>
+</html>

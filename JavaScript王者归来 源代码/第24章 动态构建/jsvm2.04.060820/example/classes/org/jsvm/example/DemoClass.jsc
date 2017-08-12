@@ -1,0 +1,23 @@
+
+// Example DemoClass Class
+
+_$package("org.jsvm.example");
+
+_$import("org.jsvm.example.HelloWorld");
+
+
+var DemoClass = 
+	org.jsvm.example.DemoClass = function ()
+{
+	
+	
+}
+
+DemoClass.$extends(org.jsvm.example.HelloWorld);
+
+
+DemoClass.prototype.sayHelloAndNowTime = function (name)
+{
+	org.jsvm.example.HelloWorld.showNow();
+	this.sayHello(name);
+}

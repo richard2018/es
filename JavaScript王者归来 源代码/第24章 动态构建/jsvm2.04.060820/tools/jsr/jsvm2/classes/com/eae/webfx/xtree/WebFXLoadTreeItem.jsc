@@ -1,0 +1,118 @@
+# language: JSVM2
+
+/**
+ * @fileoverview com.eae.webfx.xtree.WebFXLoadTreeItem class {@link http://jsvm.homolo.com/}
+ * @file		WebFXLoadTreeItem.jsc
+ * @author	Emil A Eklund
+ * @Modifier: Changhua Wan
+ * @version	1.1, 07/01/05
+ */
+
+package com.eae.webfx.xtree;
+
+import com.eae.webfx.xtree.WebFXTreeConfig;
+import com.eae.webfx.xtree.WebFXTreeHandler;
+import com.eae.webfx.xtree.WebFXTreeAbstractNode;
+import com.eae.webfx.xtree.WebFXTreeItem;
+import com.eae.webfx.xtree.WebFXUtil;
+import com.eae.webfx.xtree.WebFXLoadTree;
+
+/**
+ * Create a new WebFXLoadTreeItem instance.
+ * Inherit from WebFXTreeItem
+ * @author	Emil A Eklund (Modified by Wan Changhua)
+ * @version	1.1, 07/01/05
+ * @extends WebFXTreeItem
+ * @class This is the webfx tree item class.  
+ * @constructor
+ * @param {String} sText
+ * @param {String} sXmlSrc
+ * @param {String} sAction
+ * @param {String} eParent
+ * @param {String} sIcon
+ * @param {String} sOpenIcon
+ * @param {String} sRadio
+ * @param {String} sCheckBox
+ * @param {String} sValue
+ * @param {String} sChecked
+ * @return A new WebFXLoadTreeItem object
+ */
+
+class WebFXLoadTreeItem extends WebFXTreeItem (sText, sXmlSrc, sAction, eParent, sIcon, sOpenIcon,sRadio,sCheckBox,sValue,sChecked)
+{
+	//call super
+	//this.WebFXTreeItem = WebFXTreeItem;
+	//this.WebFXTreeItem(sText, sAction, eParent, sIcon, sOpenIcon);
+	super.call(this, sText, sAction, eParent, sIcon, sOpenIcon);
+
+	this.radio = sRadio;
+	this.checkbox = sCheckBox;
+	this.value = sValue;
+	this.checked = sChecked;
+
+	// setup default property values
+	this.src = sXmlSrc;
+	this.loading = false;
+	this.loaded = false;
+	this.errorText = "";
+
+	// check start state and load if open
+	if (this.open)
+	{
+		WebFXUtil.startLoadXmlTree(this.src, this);
+	}
+	else
+	{
+		// and create loading item if not
+		this._loadingItem = new WebFXTreeItem(WebFXTreeConfig.loadingText);
+		this.add(this._loadingItem);
+	}
+}
+
+//WebFXLoadTreeItem.prototype = new WebFXTreeItem;
+
+// override the expand method to load the xml file
+//WebFXLoadTreeItem.prototype._WebFXTreeItem_expand = WebFXTreeItem.prototype.expand;
+WebFXLoadTreeItem.prototype.expand = function()
+{
+	if (!this.loaded && !this.loading)
+	{
+		// load
+		WebFXUtil.startLoadXmlTree(this.src, this);
+	}
+	//this._WebFXTreeItem_expand();
+	super.prototype.expand.call(this);
+};
+
+// reloads the src file if already loaded
+WebFXLoadTree.prototype.reload =
+WebFXLoadTreeItem.prototype.reload = function ()
+{
+	// if loading do nothing
+	if (this.loaded)
+	{
+		var open = this.open;
+		// remove
+		try
+		{
+			while (this.childNodes.length > 0)
+			{
+				this.childNodes[this.childNodes.length - 1].remove();
+			}
+		}	catch(ex){}
+		this.loaded = false;
+
+		this._loadingItem = new WebFXTreeItem(WebFXTreeConfig.loadingText);
+		this.add(this._loadingItem);
+
+		if (open)
+		{
+			this.expand();
+		}
+	}
+	else if (this.open && !this.loading)
+	{
+		WebFXUtil.startLoadXmlTree(this.src, this);
+		alert("..");
+	}
+};

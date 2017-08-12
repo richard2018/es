@@ -1,0 +1,26 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 13.9  在Web上屏蔽某些特殊的功能键</title>
+<script language="javascript" type="text/javascript">   
+<!--
+function keyDown(e)   
+{   
+	var keycode = e.which;   
+	if((keycode==8)||(keycode==13)||(keycode==116)||(keycode==122))     
+	{     
+		e.preventDefault();   //阻止默认动作，支持Events2.0的浏览器有效，IE6无效
+		//不过IE6可以用returnValue = false来达到阻止默认动作的效果
+	}   
+}   
+document.captureEvents(Event.KEYDOWN);   
+	//由document捕获键盘被按下事件
+-->
+</script>  
+</head>
+<body>   
+<form>   
+	<input onkeydown="keyDown(event)">   
+</form>   
+</body>   
+</html> 

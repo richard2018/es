@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>Example 2.9 -- 弹出式帮助</title>
+<!--
+/**************************************************************************
+***																		***
+***	作者：wingfancy														***
+***	邮箱：wingfancy@webtsp.net											***
+***	网址：http://www.5meng.com   ☆{吾梦→网络编程技术站}☆				***
+***	OICQ：54810177 （欢迎共同探讨网络编程技术）							***
+***																		***
+***	代码说明：弹出式帮助（for IE Only）。								***
+***																		***
+**************************************************************************/
+-->
+
+<OBJECT
+id=pophelp 
+type="application/x-oleobject" 
+classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11"
+>
+<PARAM name="Command" value="HH Version">
+</OBJECT>
+
+<script language=javascript>
+popstyle= "Verdana,10,,";//弹出式帮助字体设定
+
+function showPophelp(helpstr,w,h,Foreground,Background){
+	if (body.style.cursor=='help')  //如果当前鼠标是"?"形状
+	pophelp.TextPopup(helpstr,popstyle,w,h,Foreground,Background); //显示帮助文本信息
+}
+
+//在现实完帮助信息后页面上任何一个位置点击鼠标时处理resetCursor
+document.onclick=resetCursor; 
+	function resetCursor(){
+	if (!(event.srcElement.innerText=="?"))
+	body.style.cursor='default';	//恢复鼠标样式为默认
+}
+</script>
+</head>
+
+<body id=body style="cursor:default;">
+
+<span onclick="javascript:body.style.cursor='help';" style="cursor:help;"><big><b>?</b></big></span>（说明：先点击前面"？"符号，当鼠标样式变为"求助"时，点击下面文字。）<br>
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="showPophelp('这是弹出式帮助',20,20,0,255)">弹出式帮助</span><br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="showPophelp('我是wingfancy，欢迎大家一起讨论网络编程技术。',20,120,0,0)">wingfancy</span><br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="showPophelp('wingfancy@webtsp.net',20,20,0,0)">电子信箱</span><br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span onclick="showPophelp('http://www.5meng.com',20,20,0,0)">网址</span><br><br>
+</body>
+</html>

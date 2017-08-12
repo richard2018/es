@@ -1,0 +1,29 @@
+<html>
+<head>
+	<title>Example-22.5 闭包和面向对象</title>
+</head>
+<body>
+<script>
+<!--
+function dwn(s)
+{
+	document.write(s + "<br/>");
+}
+//定义一个Foo类型
+function Foo(a)
+{
+	function _pC()  //私有的函数
+	{
+		return a;
+	}
+	//公有的函数，通过它产生的闭包可以访问对象内部的私有方法_pC()
+	this.bar = function(){		
+		dwn("foo" + _pC() + "!");
+	}
+}
+var obj = new Foo("bar");
+obj.bar(); //显示Foo bar!
+-->
+</script>
+</body>
+</html> 

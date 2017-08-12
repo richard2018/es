@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Example-11.5 修改文档的标题</title>
+</head>
+<body>
+<input type="text" id="title" value="无忧脚本"/>
+<button onclick="changeTitle();">更改标题</button>
+<script type="text/JavaScript">
+<!--
+function changeTitle()
+{
+	var title = document.getElementById("title");	
+//document.getElementById()方法根据指定的id得到相应的DOM对象
+//关于这个方法的详细讨论，留待下一章中展开
+	document.title = title.value; 
+//这个语句用来更换文档标题，从这里我们看到
+//对document.title的赋值可以直接改变浏览器窗口的标题
+}
+changeTitle();
+-->
+</script>
+</body>
+</html>

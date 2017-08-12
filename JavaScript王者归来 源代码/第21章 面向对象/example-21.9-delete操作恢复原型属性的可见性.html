@@ -1,0 +1,71 @@
+<html>
+<head>
+	<title>Example-21.9</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//定义一个多边形（Polygon）类型
+	function Polygon()
+	{
+		//存放多边形的顶点
+		var m_points = [];
+		m_points = Array.apply(m_points, arguments);
+
+		//用上面介绍的那种方式定义getter
+		function GETTER(){};
+		GETTER.prototype = m_points[0];
+		this.firstPoint = new GETTER();
+		
+		//公有属性
+		this.length = {
+			valueOf : function(){return m_points.length},
+			toString : function(){return m_points.length}
+		}
+		
+		//添加一个或多个顶点
+		this.add = function(){
+			m_points.push.apply(m_points, arguments);
+		}
+		
+		//取得序号为idx的顶点
+		this.getPoint = function(idx)
+		{
+			return m_points[idx];
+		}
+		
+		//设置特定需要的顶点
+		this.setPoint = function(idx, point)
+		{
+			if(m_points[idx] == null)
+			{
+				m_points[idx] = point;
+			}
+			else
+			{
+				m_points[idx].x = point.x;
+				m_points[idx].y = point.y;
+			}
+		}
+	}
+	//构造一个三角形p
+	var p = new Polygon({x:1, y:2},{x:2, y:4},{x:2, y:6});
+	dwn(p.length);
+	dwn(p.firstPoint.x);
+	dwn(p.firstPoint.y);
+	p.firstPoint.x = 100; //不小心写了它的值
+	dwn(p.getPoint(0).x);  //不会影响到实际的私有成员
+	delete p.firstPoint.x; //恢复
+	dwn(p.firstPoint.x);
+
+	p.setPoint(0, {x:3,y:4}); //通过setter改写了实际的私有成员
+	dwn(p.firstPoint.x);  //getter的值发生了改变
+	dwn(p.getPoint(0).x);
+-->
+</script>
+</body>
+</html>

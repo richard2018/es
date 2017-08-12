@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css">*{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="AutoComplete"></script>
+</head>
+<body>
+<h2>游戏人自动完成类</h2>
+<hr>
+
+<input type="input" id="testid"> 键入 a 或 b 试试<br>
+<input type="input" id="testid2" size="30"> 键入 http 试试<br>
+<input type="input" id="testid3" size="25"> 键入“一”试试（从头匹配）<br>
+<input type="input" id="testid4" size="25"> 键入“阵”试试（全文查找）
+
+<script type="text/javascript">
+	var ac = new DronFw.Class.AutoComplete();
+	ac.Apply("testid",["a","alone","an","b","bbs","blink"]);
+	ac.Apply("testid2",["http://ucren.com","http://www.ucren.com","http://www.baidu.com","http://bbs.51js.com"]);
+	ac.Apply("testid3",["一落千丈","一切从实际出发","一劳永逸","一阵子","一辈子","一成不变","一塌胡涂","一朝一夕","一无是处","一塌糊涂","一块儿","一切","一共","一下子","一阵","一面","一月","一起","一直","一致","一下","一带","一再","一来","一点","一些","一举","一时","一旦"]);
+	ac.Apply("testid4",["一落千丈","一切从实际出发","一劳永逸","一阵子","一辈子","一成不变","一塌胡涂","一朝一夕","一无是处","一塌糊涂","一块儿","一切","一共","一下子","一阵","一面","一月","一起","一直","一致","一下","一带","一再","一来","一点","一些","一举","一时","一旦"],true);
+/*
+	AutoComplete 类有一个方法：
+	方法：
+	Apply(obj,str,al)  :  obj为input的id，str是一个以自定义自动完成的字串数组，al 指定是否全文查找，否则从头查找
+*/
+</script>
+
+</body>
+</html>

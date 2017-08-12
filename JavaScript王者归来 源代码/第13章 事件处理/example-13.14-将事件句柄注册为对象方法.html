@@ -1,0 +1,18 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 13.14 将事件句柄注册为对象方法</title>
+</head>
+<body>   
+<button id="btn1">
+	Push me
+</button>
+<script language="javascript" type="text/javascript">   
+<!—
+	//为btn1注册onclick事件，IE专用
+//将事件句柄注册为对象方法，就可以在函数中使用this引用
+	document.getElementById("btn1").attachEvent("onclick",function(){(function(){alert(this.innerHTML);}).call(btn1)});
+-->
+</script>  
+</body>   
+</html>

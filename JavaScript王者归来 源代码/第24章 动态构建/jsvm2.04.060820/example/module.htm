@@ -1,0 +1,73 @@
+<html>
+<head>
+<script 
+	src="../src/jsre.js"
+	mode="module"
+	></script>
+</head>
+<script>
+	function func001 ()
+	{
+		try
+		{
+			_import("org.jsvm.example.DemoClass");
+			var obj = new DemoClass();
+			obj.sayHelloAndNowTime("jsvmer");
+		}
+		catch (ex)
+		{
+		 alert("err:" + ex);
+		}
+	}
+	
+	
+function printJSVMLogs()
+{
+	var logs = Class.forName("js.lang.System").VM.logger.getLogs();
+	var l = logs.length;
+	var s = "JSVM logs \r\n ---------";
+	for(var i = 0; i < l; i++)
+	{
+		var log = logs[i];
+		s += "\r\n" + log;
+	}
+	js.lang.System.out.println(s);
+}
+
+function printJSVMNSRELogs()
+{
+	var logs = Class.forName("js.lang.System").RE.logs;
+	var l = logs.length;
+	var s = "JSVM-NS.re logs \r\n ---------";
+	for(var i = 0; i < l; i++)
+	{
+		var log = logs[i];
+		s += "\r\n" + log;
+	}
+	js.lang.System.out.println(s);
+}
+function openModulePage()
+{
+	window.open("module.htm");
+}
+function exit ()
+{
+	if (confirm("真的要退出Web应用吗？"))
+	{
+		application.exit();
+	}
+}
+
+</script>
+</head>
+<body>
+	<button onclick="func001()" >say hello and time!</button>
+	<br><br>
+	<button onclick="exit();" >exit application</button>
+<p> 查看系统日志 <br>
+	<a href="#" onclick="printJSVMLogs();return false;" >jsvm logs</a><br>
+	<a href="#" onclick="printJSVMNSRELogs();return false;" >jsvm runtime-environment logs</a><br>
+	<a href="#" onclick="openModulePage();return false;" >open module page</a><br>
+
+</body>
+</Html> 

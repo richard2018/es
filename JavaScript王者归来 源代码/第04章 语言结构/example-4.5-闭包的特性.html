@@ -1,0 +1,22 @@
+<html>
+<head>
+	<title>Example-4.5</title>
+</head>
+<body>
+<script>
+<!--
+function step(a)
+{
+	return function(x)
+	{
+		return x+a;  //内层的闭包可以访问外层的局部参数a
+	}
+}
+var b = step(10);
+	  alert(b(20));  //得到30
+	  var c = step(20);
+	  alert(c(20));  //得到40
+		-->
+	</script>
+	</body>
+	</html>

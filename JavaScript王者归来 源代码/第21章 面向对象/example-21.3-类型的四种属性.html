@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 21.3</title>
+</head>
+<body>   
+<h1 id="output"></h1>
+<script language="javascript" type="text/javascript">  
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	function myClass()
+	{
+		var p = 100;  //private property; 私有属性
+		this.x = 10;  //dynamic public property 动态公有属性
+	}
+	myClass.prototype.y = 20; //static public property or prototype property 原型属性
+	myClass.z = 30;  //static property //静态属性
+
+	var a = new myClass();
+	dwn(a.p);  //undefined 私有属性对象无法访问到
+	dwn(a.x);   //10  公有属性
+	dwn(a.y);   //20  公有属性
+	a.x = 20;
+	a.z = 40;
+	dwn(a.x);    //20  
+	dwn(a.y);    //40  //动态公有属性y覆盖了原型属性y
+	delete(a.x);
+	delete(a.y);
+	dwn(a.x);    //undefined  动态公有属性x被删除后不存在
+	dwn(a.y);    //20  动态公有属性y被删除后还原为原型属性y
+	dwn(a.z);    //undefined 类属性无法通过对象访问
+	dwn(myClass.z);  //30 类属性应该通过类访问
+-->
+</script>  
+</body>   
+</html>

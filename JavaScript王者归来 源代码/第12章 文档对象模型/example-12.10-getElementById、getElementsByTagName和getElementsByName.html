@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 12.10 getElementById、getElementsByTagName和getElementsByName</title>
+</head>
+<body>
+<p id="d1">black sheep wall(id=d1)</p>
+<input name="d2" value="Hello(name=d2)"/>
+<input name="d2" value="World(name=d2)"/>
+<p>JavaScript(tagName=p)</p>
+<textarea id="output" style="width:420px;height:120px;"></textarea><br/><br/>
+<button onclick="getById('d1')">getElementById("d1")</button><br/>
+<button onclick="getByName('d2')">getElementsByName("d2")</button><br/>
+<button onclick="getByTagName('p')">getElementsByTagName("p")</button><br/>
+<script language="javascript">
+<!--
+function getById(id)
+{
+	output.value = '';
+	output.value=document.getElementById(id).outerHTML;
+			//getElementById()获得指定id的DOM元素
+			//如果指定id的元素不存在，getElementById()返回null
+}
+function getByName(name)
+{
+	output.value = '';
+	for(var i=0;i<document.getElementsByName(name).length;i++)
+		//getElementsByName()获得指定名称的DOM元素集合
+		//如果指定name的元素不存在，getElmeentsByName()返回一个空集合
+		//需要注意的是这个方法只对部分元素有效（通常是对表单元素有效）
+		output.innerText+=document.getElementsByName(name)[i].outerHTML;
+}
+function getByTagName(tagName)
+{
+	output.value = '';
+	for(var i=0;i<document.getElementsByTagName(tagName).length;i++)
+		//getElementsByName()获得指定类型的标记集合
+		//如果指定类型的元素不存在，getElmeentsByName()返回一个空集合
+		output.innerText+=document.getElementsByTagName(tagName)[i].outerHTML;
+}
+-->
+</script>
+</body>
+</html>	

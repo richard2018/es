@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title>Example-12.3 title、id、className、style属性</title>
+</head>
+<body>
+<script type="text/JavaScript">
+<!--
+	//构造一个div标记的DOM对象div1
+    var div1=document.createElement("div");
+	//设定div1的title
+	//这个属性的效果要将鼠标放置在文字上一段时间才能看到
+	div1.title=" black sheep wall ";
+	//设定div1的id
+    div1.id="id";
+	//设定div1的className
+	div1.className="div1";
+	//设定div1的style的object属性，这个属性表示该元素的文本的颜色
+	div1.style.color="red";
+	//设定div1的innerHTML，表示该元素内部的HTML文本内容
+	div1.innerHTML="Hello!";
+	//将div1添加到文档的body对象中的子元素列表的尾部
+	document.body.appendChild(div1);
+	//查看此时的div1元素的HTML文本内容
+	if(div1.outerHTML) alert(div1.outerHTML);
+-->
+</script>
+</body>
+</html>	

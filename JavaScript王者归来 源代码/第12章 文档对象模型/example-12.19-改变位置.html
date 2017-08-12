@@ -1,0 +1,37 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 12.19 改变位置</title>
+</head>
+<body> 
+<span id="round" style="position:absolute;left:100px;top:100px">
+无忧脚本
+</span>
+<script>
+<!--
+//r存放圆的半径，单位为像素点
+var r = 50;
+//ins表示圆的弧度
+var ins = 1;
+
+/Circle()用来绘制出圆的轨迹
+function Circle()
+{
+	//用参数方程描述圆的轨迹
+    x = r * Math.cos(ins) + 100;
+	y = r * Math.sin(ins) + 100;
+
+	//每次调用圆的弧度增加0.02
+	ins += 0.02;
+ 
+//用style.left和style.top属性控制元素的位置
+    round.style.left = x;
+    round.style.top = y;
+}
+
+//用计时器让元素的位置沿着圆周1毫秒变化一次，因此看起来像在转圈
+setInterval(Circle, 1);
+-->
+</script>
+</body>
+</html>

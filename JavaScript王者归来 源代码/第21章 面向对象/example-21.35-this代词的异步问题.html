@@ -1,0 +1,29 @@
+<html>
+<head>
+	<title>Example-21.35 this代词的异步问题</title>
+</head>
+<body>
+<script>
+<!-
+//构造一个Object对象
+var obj = {};
+//定义obj对象的foo方法
+obj.foo = function()
+{
+	alert(this == obj);
+	alert(this == btn);
+	alert(this == window);
+}
+btn.onclick = obj.foo; 
+//这个问题还比较好理解，可以认为是btn.onclick()做实际调用
+//而赋值只是将函数引用给了btn.onclick代理
+btn.attachEvent("click", obj.foo);
+	//而这个也不对，而且this的值是window，怎么说也是一种遗憾
+btn.attachEvent("click", function(){obj.foo.call(btn)});
+	//还得做这样的修正
+setTimeout(obj.foo, 100);
+	//setTimeout也是一样的，this的值是window
+-->
+</script>
+</body>
+</html>

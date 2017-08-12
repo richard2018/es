@@ -1,0 +1,100 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<script type="text/javascript" src="../DronFw/boot.js" loadPrototype="String"></script>
+<style type="text/css">
+	td,body{font-size:12px;}
+	.code
+	{
+		font-family:"fixedSys";
+	}
+	button{
+		border:1px solid #888;
+		background-color:#fff;
+		font-family:"fixedSys";
+		text-align:left;
+	}
+</style>
+</head>
+<body>
+<h2>String 扩展方法</h2>
+<hr>
+
+<div class="code">
+var s1 = " &nbsp; &nbsp; Test &nbsp; &nbsp;中文中文 Test 5896 Test 4566687 &nbsp;Test! &nbsp; &nbsp; ";<br>
+var s2 = "ABCDEFG";<br>
+var s3 = "&lt;span&gt;HTML&lt;/span&gt;";
+</div>
+
+<br>
+
+<button onclick="window.alert(s1.resetBlank());">
+window.alert(s1.<font color="red">resetBlank()</font>)
+</button>
+<span class="code">//合并多个空白为一个空格</span><br>
+
+<button onclick="window.alert('>'+s1.LTrim()+'<');">
+window.alert(">"+s1.<font color="red">LTrim()</font>+"<")
+</button>
+<span class="code">//去除左边的空白</span><br>
+
+<button onclick="window.alert('>'+s1.RTrim()+'<');">
+window.alert(">"+s1.<font color="red">RTrim()</font>+"<")
+</button>
+<span class="code">//去除右边的空白</span><br>
+
+<button onclick="window.alert('>'+s1.trim()+'<');">
+window.alert(">"+s1.<font color="red">trim()</font>+"<")
+</button>
+<span class="code">//去除两边的空白</span><br>
+
+<button onclick="window.alert(s1.getNum());">
+window.alert(s1.<font color="red">getNum()</font>)
+</button>
+<span class="code">//保留数字</span><br>
+
+<button onclick="window.alert(s1.getEn());">
+window.alert(s1.<font color="red">getEn()</font>)
+</button>
+<span class="code">//保留字母</span><br>
+
+<button onclick="window.alert(s1.getCn());">
+window.alert(s1.<font color="red">getCn()</font>)
+</button>
+<span class="code">//保留中文</span><br>
+
+<button onclick="window.alert(s1.getRealLength());">
+window.alert(s1.<font color="red">getRealLength()</font>)
+</button>
+<span class="code">//得到字节长度，一个汉字为两个字节</span><br>
+
+<button onclick="window.alert(s2.left(4));">
+window.alert(s2.<font color="red">left(4)</font>)
+</button>
+<span class="code">//从左截取指定长度的字串</span><br>
+
+<button onclick="window.alert(s2.right(4));">
+window.alert(s2.<font color="red">right(4)</font>)
+</button>
+<span class="code">//从右截取指定长度的字串</span><br>
+
+<button onclick="window.alert(s3.HTMLEncode());">
+window.alert(s3.<font color="red">HTMLEncode()</font>)
+</button>
+<span class="code">//HTML编码</span><br>
+
+<button onclick="window.alert(s2.ascW());">
+window.alert(s2.<font color="red">ascW()</font>)
+</button>
+<span class="code">//Unicode转化</span><br>
+
+<script type="text/javascript">
+	var s1 = "     Test    中文中文 Test 5896 Test 4566687  Test!     ";
+	var s2 = "ABCDEFG";
+	var s3 = "<span>HTML</span>";
+</script>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css">*{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="FrameAction"></script>
+</head>
+<body>
+<h2>游戏人帧动作类</h2>
+<hr>
+
+<input type="button" value="移动" onclick="test(this)">
+
+<div id="obj" style="background:green;width:100px;height:100px;position:absolute;left:10px;top:200px;">
+</div>
+
+<script type="text/javascript">
+	var ac = new DronFw.Class.FrameAction(10);//10 是每帧间隔的时间，单位毫秒，缺省为80
+	ac.load([
+		"$(\"obj\").style.left = \"20px\"" ,
+		"$(\"obj\").style.left = \"40px\"" ,
+		"$(\"obj\").style.left = \"60px\"" ,
+		"$(\"obj\").style.left = \"80px\"" ,
+		"$(\"obj\").style.left = \"100px\"" ,
+		"$(\"obj\").style.left = \"120px\"" ,
+		"$(\"obj\").style.left = \"140px\"" ,
+		"$(\"obj\").style.left = \"160px\"" ,
+		"$(\"obj\").style.left = \"180px\"" ,
+		"$(\"obj\").style.left = \"200px\"" ,
+		"$(\"obj\").style.left = \"220px\"" ,
+		"$(\"obj\").style.left = \"240px\""
+	]);
+	function test(bt)
+	{
+		bt.setAttribute("disabled","disabled");
+		ac.start();
+	}
+/*
+	FrameAction 类有一个属性两个方法：
+	属性：
+	Timer:  每帧间隔的时间，这个属性可以在后期指定，也可以在实例化的时候传参，缺省为80 毫秒
+	方法：
+	load:  载入动作脚本，将一帧一帧的动作脚本以字符串的形式写成数组，做为参数（如上例）
+	start(n):  从数组第 n 处开始播放帧动作，缺省为 0
+*/
+</script>
+
+</body>
+</html>

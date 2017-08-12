@@ -1,0 +1,52 @@
+<html>
+<head>
+	<title>Example-5.11 类型强制转换</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//字符串类型的强制转换
+	var str = '100';
+	var num = Number(str);	//强制转换为number
+	dwn(typeof(num) + ': ' + num);
+	var obj = Object(str);	//强制转换为object
+	dwn(typeof(obj) + ': ' + obj);
+	var bool = Boolean(str);		//强制转换为boolean
+	dwn(typeof(bool) + ': ' + bool);
+	var fun = Function(str);		//强制转换为function
+	dwn(typeof(fun) + ': ' + fun);
+
+	//数值类型的强制转换
+	var num = 100;
+	var str = String(num);	//强制转换为string
+	dwn(typeof(str) + ': ' + str);	
+	var bool = Boolean(num);	//强制转换为boolean
+	dwn(typeof(bool) + ': ' + bool);
+	var obj = Object(num);	//强制转换为object
+	dwn(typeof(obj) + ': ' + obj);
+
+	//布尔类型的强制转换
+	var bool = true;
+	var str = String(bool);	//强制转换为string
+	dwn(typeof(str) + ': ' + str);
+	var num = Number(bool);	//强制转换为number
+	dwn(typeof(num) + ': ' + num);
+	var obj = Object(bool);	//强制转换为object
+	dwn(typeof(obj) + ': ' + obj);
+
+	//对象类型的强制转换
+	var obj = {};
+	var str = String(obj);	//强制转换为string
+	dwn(typeof(str) + ': ' + str);
+	var num = Number(obj);		//强制转换为number
+	dwn(typeof(num) + ': ' + num);
+	var bool = Boolean(obj);		//强制转换为boolean
+	dwn(typeof(bool) + ': ' + bool);
+-->
+</script>
+</body>
+</html>

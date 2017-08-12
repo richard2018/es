@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 15.3 userDate文本框标记的应用</title>
+<style>
+	.userData {behavior:url(#default#userdata);}
+</style>
+<script language="javascript" type="text/javascript">  
+<!--
+function fnSaveInput(){
+	var oPersist=oPersistForm.oPersistInput;
+	oPersist.setAttribute("sPersist",oPersist.value); //将oPersist.value存储为sPersist属性
+	oPersist.save("oXMLBranch");  //存储在名为oXMLBranch的UserData存储区
+}
+function fnLoadInput(){
+	var oPersist=oPersistForm.oPersistInput;
+	oPersist.load("oXMLBranch");  //载入在名为oXMLBranch的UserData存储区
+	oPersist.value=oPersist.getAttribute("sPersist"); //将sPersist属性赋值给oPersist.value
+}
+-->
+</script>  
+</head>
+<body>   
+<form id="oPersistForm">
+	<input class="userdata" type="text" id="oPersistInput">
+	<input type="button" value="load" onclick=" fnLoadInput ()">
+	<input type="button" value="save" onclick=" fnSaveInput ()">
+</form>
+</body>   
+</html>
+

@@ -1,0 +1,194 @@
+# language: JSVM2
+
+/**
+ * @fileoverview com.eae.webfx.xtree.WebFXUtil class {@link http://jsvm.homolo.com/}
+ * @file		WebFXUtil.jsc
+ * @author	Emil A Eklund
+ * @Modifier: Changhua Wan
+ * @version	1.1, 07/01/05
+ */
+
+package com.eae.webfx.xtree;
+
+import js.lang.BObject;
+
+import com.eae.webfx.xtree.WebFXTreeConfig;
+import com.eae.webfx.xtree.WebFXTreeHandler;
+
+/**
+ * Create a new WebFXUtil instance.
+ * Inherit from BObject
+ * @author	Emil A Eklund (Modified by Wan Changhua)
+ * @version	1.1, 07/01/05
+ * @extends BObject
+ * @class This is an utility class.  
+ * @constructor
+ * @return A new WebFXUtil object
+ */
+
+class WebFXUtil extends BObject ()
+{
+}
+
+
+/**
+ * start load data from xml
+ * @param {String} sSrc the url of xml
+ * @param {WebFXLoadTreeItem} jsNode
+ */
+WebFXUtil.startLoadXmlTree = function (sSrc, jsNode)
+{
+	if (jsNode.loading || jsNode.loaded)
+	{
+		return;
+	}
+	jsNode.loading = true;
+	var xmlHttp = Class.forName("js.net.XmlHttp").create();
+	xmlHttp.open("GET", sSrc, true);	// async
+	xmlHttp.onreadystatechange = function ()
+	{
+		if (xmlHttp.readyState == 4)
+		{
+			WebFXUtil.xmlFileLoaded(xmlHttp.responseXML, jsNode, sSrc);
+		}
+	};
+	// call in new thread to allow ui to update
+	window.setTimeout(function () {
+		xmlHttp.send(null);
+		}, 10);
+}
+
+/**
+ * parse template string
+ * @param {String} sTemplate
+ * @returns the parse result 
+ * @type String
+ */
+WebFXUtil.parseTemplateString = function (sTemplate)
+{
+	var args = arguments;
+	var s = sTemplate;
+
+	s = s.replace(/\%\%/g, "%");
+
+	for (var i = 1; i < args.length; i++)
+		s = s.replace( new RegExp("\%" + i + "\%", "g"), args[i] )
+
+	return s;
+}
+
+/**
+ * @private
+ */
+WebFXUtil.xmlFileLoaded = function (oXmlDoc, jsParentNode,sSrc)
+{
+	if (jsParentNode.loaded)
+		return;
+
+	var bIndent = false;
+	var bAnyChildren = false;
+	jsParentNode.loaded = true;
+	jsParentNode.loading = false;
+	//if xmlHTTP load faild. use XmlDocument to load it;
+	if(oXmlDoc == null|| oXmlDoc.documentElement == null){
+		try{
+			//oXmlDoc = XmlDocument.create();
+			oXmlDoc = Class.forName("js.net.XmlDom").create();
+			oXmlDoc.load(sSrc);
+		}catch(ex){
+			oXmlDoc = null;
+		}
+	}
+	// check that the load of the xml file went well
+	if( oXmlDoc == null || oXmlDoc.documentElement == null)
+	{
+		jsParentNode.errorText = WebFXUtil.parseTemplateString(WebFXTreeConfig.loadErrorTextTemplate,
+							jsParentNode.src);
+
+	}
+	else {
+		// there is one extra level of tree elements
+		var root = oXmlDoc.documentElement;
+
+		// loop through all tree children
+		var cs = root.childNodes;
+		var l = cs.length;
+		for (var i = 0; i < l; i++)
+		{
+			if (cs[i].tagName == "TreeNode")
+			{
+				bAnyChildren = true;
+				bIndent = true;
+				jsParentNode.add( WebFXUtil.xmlTreeToJsTree(cs[i]), true);
+			}
+		}
+
+		// if no children we got an error
+		if (!bAnyChildren)
+			jsParentNode.errorText = WebFXUtil.parseTemplateString(WebFXTreeConfig.emptyErrorTextTemplate,
+										jsParentNode.src);
+	}
+
+	// remove dummy
+	if (jsParentNode._loadingItem != null) {
+		jsParentNode._loadingItem.remove();
+		bIndent = true;
+	}
+
+	if (bIndent) {
+		// indent now that all items are added
+		//jsParentNode.indent();
+	}
+
+	// show error in status bar
+	if (jsParentNode.errorText != "")
+		window.status = jsParentNode.errorText;
+}
+
+/**
+ * transform a xmltree to a js tree
+ * @param {node} oNode
+ */
+WebFXUtil.xmlTreeToJsTree = function (oNode)
+{
+	// retreive attributes
+	var text = oNode.getAttribute("text");
+	var action = oNode.getAttribute("action");
+	var parent = null;
+	var icon = oNode.getAttribute("icon");
+	var openIcon = oNode.getAttribute("openIcon");
+	var src = oNode.getAttribute("src");
+	var target = oNode.getAttribute("target");
+
+	var sRadio = oNode.getAttribute("radio");
+	var sCheckbox = oNode.getAttribute("checkbox");
+	var sValue = oNode.getAttribute("value");
+	var sChecked = oNode.getAttribute("checked");
+
+	// create jsNode
+	var jsNode;
+	if (src != null && src != "")
+	{
+		jsNode = Class.forName("com.eae.webfx.xtree.WebFXLoadTreeItem").newInstance(
+			text, src, action, parent, icon, openIcon,sRadio,sCheckbox,sValue,sChecked);
+	}
+	else
+	{
+		jsNode = Class.forName("com.eae.webfx.xtree.WebFXTreeItem").newInstance(
+			text, action, parent, icon, openIcon,sRadio,sCheckbox,sValue,sChecked);
+	}
+
+	if (target != "")
+	{
+		jsNode.target = target;
+	}
+	// go through childNOdes
+	var cs = oNode.childNodes;
+	var l = cs.length;
+	for (var i = 0; i < l; i++)
+	{
+		if (cs[i].tagName == "TreeNode")
+			jsNode.add( WebFXUtil.xmlTreeToJsTree(cs[i]), true );
+	}
+	return jsNode;
+}

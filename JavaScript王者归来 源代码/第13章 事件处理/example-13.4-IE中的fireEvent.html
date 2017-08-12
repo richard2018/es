@@ -1,0 +1,19 @@
+<HTML>
+     <HEAD>
+          <SCRIPT>
+			 function fnFireEvents()
+			 {
+				 div.innerText = "The cursor has moved over me!";
+				 btn.fireEvent("onclick");
+			 }
+         </SCRIPT>
+     </HEAD>
+     <BODY>
+         <h1>Using the fireEvent method</h1>
+         By moving the cursor over the DIV below, the button is clicked.
+         <DIV ID="div" onmouseover="fnFireEvents();">
+             Mouse over this!
+         </DIV>
+         <BUTTON ID="btn" ONCLICK="this.innerText='I have been clicked!'">Button</BUTTON>
+     </BODY>
+</HTML>

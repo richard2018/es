@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title>Example-5.4构造函数</title>
+</head>
+<body>
+<script>
+<!--
+	/* 在这里，我们定义了一个名为Point的类型
+	   它具有x、y两个属性和getDistance方法
+	   完成定义之后，JavaScript允许我们通过new运算符
+		构造它的实例，就像C++和Java等面向对象语言一样。*/
+	function Point(x, y){
+		//通过构造函数参数初始化x、y属性的值
+		this.x = x;
+		this.y = y;
+		//定义getDistance()方法
+		this.getDistance = function()
+		{
+			return Math.sqrt(this.x * this.x + this.y * this.y);
+		}
+		//重写toString方法
+		this.toString = function()
+			{
+			return "(" + this.x + "," + this.y + ")";
+		}
+	}
+	//构造Point对象
+	var pointA = new Point(1,2);
+	var pointB = new Point(3,4);
+	var pointC = new Point(-1,-2);
+	//通过重载过的toString()方法显示它们
+	document.write(pointA + "<br/>");
+	document.write(pointB + "<br/>");
+	//调用getDistance()方法
+	document.write(pointC.getDistance());
+-->
+</script>
+</body>
+</html>

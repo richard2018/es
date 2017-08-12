@@ -1,0 +1,50 @@
+<html>
+<head>
+	<title>Example 21.41 装箱和拆箱</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//Number的装箱
+	Number.prototype.foo = function()
+	{
+		dwn(this instanceof Number);	
+		dwn(typeof(this));
+	}
+	//定义一个基本类型的数值变量num
+	var num = 10;
+	//num.foo()执行时自动装箱为Number对象
+	num.foo();
+
+	//Number的拆箱
+	//定义一个包装类型Number的对象
+	var objNum = new Number(10);
+	//调用valueOf可以得到拆箱后的数值
+	dwn(objNum.valueOf() instanceof Number);	 //false
+	dwn(typeof(objNum.valueOf())); //number
+
+	//String的装箱
+	String.prototype.foo = function()
+	{
+		dwn(this instanceof String);
+		dwn(typeof(this));
+	}
+	//定义一个基本字符串变量str
+	var str = "www.51js.com";
+	//str.foo()执行时自动装箱为String对象
+	str.foo();
+
+	//String的拆箱
+	//定义一个包装类型String的对象
+	var objStr = new String("abc");
+	//调用toString()可以得到拆箱后的字符串
+	dwn(objStr.toString() instanceof String); //false
+	dwn(typeof(objStr.toString())); //string
+-->
+</script>
+</body>
+</html>

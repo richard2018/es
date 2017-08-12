@@ -1,0 +1,50 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css">td,body{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="Ec62"></script>
+</head>
+<body>
+<h2>游戏人原创Ec62加密算法类</h2>
+<hr>
+
+文本：<textarea id="cont" style="width:300px;height:100px;"></textarea><br>
+密码：<input id="pass" type="password" style="width:300px"><br>
+操作：<input type="button" value="加密" onclick="enc()"><input type="button" value="解密" onclick="dec()"><br><br>
+说明：安全性请放心，密文是跟据密钥算出来的，且密钥是md5加密的，<br>
+&nbsp; &nbsp; &nbsp; 相信目前无人能破解 Ec62 密文，包括本人。<br><br>
+例子：你可以试着解密字符串：5d41405ln5lkH0q6pf5E46pb6O55zF7jJH1C<br>
+&nbsp; &nbsp; &nbsp; 密码为：hello
+
+
+<script type="text/javascript">
+	var ec62 = new DronFw.Class.Ec62();
+	function enc()
+	{
+		var v = $("cont").value;
+		var p = $("pass").value;
+		if (v==""||p=="") return window.alert("文本和密码均不能为空！");
+		$("cont").value = ec62.Encode(v,p);
+		window.alert("加密完成!");
+	}
+	function dec()
+	{
+		var v = $("cont").value;
+		var p = $("pass").value;
+		if (v==""||p=="") return window.alert("文本和密码均不能为空！");
+		var r = ec62.Decode(v,p);
+		if (r==false) return window.alert("解密失败，密码错误！");
+		$("cont").value = r;
+		window.alert("解密完成!");
+	}
+/*
+	Ec62 类有两个方法：
+	Encode(str,password)  返回 str 的 Ec62 密文，密钥为 password
+	Decode(str,password)  返回 Ec62 密文是 str 的明文，密钥为 password
+*/
+</script>
+
+</body>
+</html>

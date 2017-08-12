@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>Example-11.15 Form和elements</title>
+</head>
+<body>
+<form onsubmit="show(this);return false;">
+姓名：<input name='name' /><br/>
+密码：<input name='password' type='password'/><br/><br/>
+<input name='submit' type="submit" /><input name='reset' type="reset"/>
+</form>
+<script type="text/JavaScript">
+<!--
+	//列举出Form对象的每一个元素
+    function show(form)
+    {
+        var str="";
+        for(var i=0;i<form.elements.length;i++)
+        {
+            str+=form.elements[i].name+"="+form.elements[i].value+"<br/>";
+        }
+        document.write(str);
+    }
+-->
+</script>
+</body>
+</html>

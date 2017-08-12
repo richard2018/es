@@ -1,0 +1,78 @@
+<html>
+<head>
+	<title>Example-8.3简单HashTable类</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//简单HashTable类型
+	function HashTable(){
+		//特殊关键字（specialKey）用来处理特殊的保留字
+		//这些保留字主要是Object对象中的固有属性和方法
+		var specialkey=[
+			"valueOf",
+			"hasOwnProperty",
+			"isPrototypeOf",
+			"propertyIsEnumerable",
+			"prototype",
+			"constructor",
+			"toLocaleString",
+			"toString"
+		]; 
+		//为特殊关键字单独提供存放值的空间
+		var specialvalue=new Array(specialkey.length);
+		//特殊关键字存取标记，true表示该为已经有值，这个时候不能再重复插入
+		var specialflag=new Array(specialkey.length);
+		//存放普通关键字，只需要一个普通的Object
+		var normalHashtable={};
+		
+		//将值插入Hash表
+		this.insert=function(key,value)
+		{
+			//处理特殊关键字
+			for(var i=0;i<specialkey.length;i++)
+			{
+				if(key==specialkey[i]) //如果关键字等于某个特殊关键字
+				{
+					if(!specialflag[i]) //如果该位置没有值
+					{
+						specialvalue[i]=value;  //插入值
+						specialflag[i]=true;  //置特殊标志
+						return true;
+					}
+					else return false;
+				}
+			}
+			//处理普通关键字
+			if(key in normalHashtable)return false;
+			normalHashtable[key]=value;
+			return true;
+		}
+
+		//在Hash表中查找
+		this.find=function(key)
+		{
+			//先处理特殊关键字
+			for(var i=0;i<specialkey.length;i++)
+			{
+				if(key==specialkey[i])
+				{
+					return specialvalue[i];
+				}
+			}
+			//查找普通关键字
+			return normalHashtable[key];
+		}
+	}
+	var t1=new HashTable();
+	dwn(t1.insert("prototype","idea"));
+	dwn(t1.insert("prototype","idea"));
+	dwn(t1.find("prototype"));
+-->
+</script>
+</body>
+</html>

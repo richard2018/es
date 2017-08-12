@@ -1,0 +1,189 @@
+# language: JSVM2
+
+/**
+ * @fileoverview com.eae.webfx.xtree.WebFXTree class {@link http://jsvm.homolo.com/}
+ * @file		WebFXTree.jsc
+ * @author	Emil A Eklund
+ * @Modifier: Changhua Wan
+ * @version	1.1, 07/01/05
+ */
+
+package com.eae.webfx.xtree;
+
+import com.eae.webfx.xtree.WebFXTreeConfig;
+import com.eae.webfx.xtree.WebFXTreeHandler;
+import com.eae.webfx.xtree.WebFXTreeAbstractNode;
+
+/**
+ * Create a new WebFXTree instance.
+ * Inherit from WebFXTreeAbstractNode
+ * @author	Emil A Eklund (Modified by Wan Changhua)
+ * @version	1.1, 07/01/05
+ * @extends WebFXTreeAbstractNode
+ * @class This is the webfx tree class.  
+ * @constructor
+ * @param {String} sText
+ * @param {String} sAction
+ * @param {String} sBehavior
+ * @param {String} sIcon
+ * @param {String} sOpenIcon
+ * @return A new WebFXTree object
+ */
+
+class WebFXTree extends WebFXTreeAbstractNode (sText, sAction, sBehavior, sIcon, sOpenIcon)
+{
+	//this.base = WebFXTreeAbstractNode;
+	//this.base(sText, sAction);
+	super.call(this, sText, sAction);
+
+	this.icon      = sIcon || WebFXTreeConfig.rootIcon;
+	this.openIcon  = sOpenIcon || WebFXTreeConfig.openRootIcon;
+	/* Defaults to open */
+	if (WebFXTreeConfig.usePersistence) {
+		this.open  = (WebFXTreeHandler.cookies.getValue(this.id.substr(18,this.id.length - 18)) == '0')?false:true;
+	} else { this.open  = true; }
+	this.folder    = true;
+	this.rendered  = false;
+	this.onSelect  = null;
+	if (!WebFXTreeHandler.behavior) 
+	{
+		WebFXTreeHandler.behavior = sBehavior || WebFXTreeConfig.defaultBehavior;
+	}
+
+	this.onCheck = null;
+
+}
+
+//WebFXTree.prototype = new WebFXTreeAbstractNode;
+
+
+/**
+ * Sets the behavior property of WebFXTreeHandler
+ * @param {String} sBehavior
+ */
+WebFXTree.prototype.setBehavior = function (sBehavior)
+{
+	WebFXTreeHandler.behavior =  sBehavior;
+};
+
+/**
+ * Returns the behavior property of WebFXTreeHandler
+ * @type String
+ */
+WebFXTree.prototype.getBehavior = function ()
+{
+	return WebFXTreeHandler.behavior;
+};
+
+/**
+ * Returns the selected child node
+ * @type WebFXTreeAbstractNode
+ */
+WebFXTree.prototype.getSelected = function()
+{
+	if (WebFXTreeHandler.selected) { return WebFXTreeHandler.selected; }
+	else { return null; }
+}
+
+/**
+ * Removes self from current page. (not implemented)
+ */
+WebFXTree.prototype.remove = function() { }
+
+/**
+ * Override the expand method.
+ */
+WebFXTree.prototype.expand = function() {
+	this.doExpand();
+}
+
+/**
+ * Override the collapse method.
+ */
+WebFXTree.prototype.collapse = function(b) {
+	if (!b) { this.focus(); }
+	this.doCollapse();
+}
+
+/**
+ * The first child of this node. If there is no such node, this returns 
+ * <code>null</code>.
+ */
+WebFXTree.prototype.getFirst = function() {
+	return null;
+}
+
+/**
+ * The last child of this node. If there is no such node, this returns 
+ * <code>null</code>.
+ */
+WebFXTree.prototype.getLast = function() {
+	return null;
+}
+
+/**
+ * The node immediately following this node. If there is no such node, 
+ * this returns <code>null</code>.
+ */
+WebFXTree.prototype.getNextSibling = function() {
+	return null;
+}
+
+/**
+ * The node immediately preceding this node. If there is no such node, 
+ * this returns <code>null</code>.
+ */
+WebFXTree.prototype.getPreviousSibling = function() {
+	return null;
+}
+
+/**
+ * Disposes the keydown event.
+ * @private
+ */
+WebFXTree.prototype.keydown = function(key) {
+	if (key == 39) {
+		if (!this.open) { this.expand(); }
+		else if (this.childNodes.length) { this.childNodes[0].select(); }
+		return false;
+	}
+	if (key == 37) { this.collapse(); return false; }
+	if ((key == 40) && (this.open) && (this.childNodes.length)) { this.childNodes[0].select(); return false; }
+	return true;
+}
+
+/**
+ * Returns a string representation of the object.
+ * @returns  a html string of the object.
+ * @type String
+ */
+WebFXTree.prototype.toString = function() {
+	var str = "<div id=\"" + this.id + "\" ondblclick=\"com.eae.webfx.xtree.WebFXTreeHandler.toggle(this);\" class=\"webfx-tree-item\" onkeydown=\"return com.eae.webfx.xtree.WebFXTreeHandler.keydown(this, event)\">" +
+		"<img id=\"" + this.id + "-icon\" class=\"webfx-tree-icon\" src=\"" + ((WebFXTreeHandler.behavior == 'classic' && this.open)?this.openIcon:this.icon) + "\" onclick=\"com.eae.webfx.xtree.WebFXTreeHandler.select(this);\">" +
+		"<a href=\"" + this.action + "\" id=\"" + this.id + "-anchor\" onfocus=\"com.eae.webfx.xtree.WebFXTreeHandler.focus(this);\" onblur=\"com.eae.webfx.xtree.WebFXTreeHandler.blur(this);\"" +
+		(this.target ? " target=\"" + this.target + "\"" : "") +
+		">" + this.text + "</a></div>" +
+		"<div id=\"" + this.id + "-cont\" class=\"webfx-tree-container\" style=\"display: " + ((this.open)?'block':'none') + ";\">";
+	var sb = [];
+	for (var i = 0; i < this.childNodes.length; i++) {
+		sb[i] = this.childNodes[i].toString(i, this.childNodes.length);
+	}
+	this.rendered = true;
+	return str + sb.join("") + "</div>";
+};
+
+
+/**
+ * Builds an element of self in the given container
+ * If an container is not provided, the current postion parent node is the container.
+ * Add by Wan Changhua (2005-07-01)
+ * @param {Element} container
+ */
+WebFXTree.prototype.build = function(container)
+{
+	if (container == null) {
+		document.write(this.toString());
+	}	else {
+		container.innerHTML = this.toString();
+	}
+}

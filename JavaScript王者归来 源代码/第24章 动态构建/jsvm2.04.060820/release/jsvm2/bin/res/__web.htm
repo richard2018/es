@@ -1,0 +1,24 @@
+<html>
+<head>
+<script language="JavaScript">
+/**
+ * static resource for web or dialog
+ * @author: Wan Changhua
+ * @date: 2004.04.30.01
+ */
+
+// --- modal dialog (only for ie)---
+if (typeof(dialogArguments) != "undefined" 
+	&& dialogArguments != null)
+{
+	window.opener = dialogArguments.window;
+	window.arguments = dialogArguments.arguments;
+	document.write(dialogArguments.sourceCode);
+}
+else
+{
+	// about:blank
+}
+</script>
+</head>
+</html>

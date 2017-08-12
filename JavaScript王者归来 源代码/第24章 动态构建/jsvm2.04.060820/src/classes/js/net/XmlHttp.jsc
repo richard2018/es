@@ -1,0 +1,94 @@
+# language: JSVM2
+
+/**
+ * @fileoverview js.net.XmlHttp class {@link http://jsvm.org/}
+ * @file		XmlHttp.jsc
+ * @author	Wan Changhua
+ * @version	2.01, 10/23/05
+ * @since		JSVM2.0
+ */
+
+package js.net;
+
+import js.lang.NotSupportException;
+import js.lang.System;
+
+/**
+ * Create a new XmlHttp instance.
+ * Inherit from js.lang.JObject
+ * @author	Wan Changhua
+ * @version	2.01, 10/23/05
+ * @extends JObject
+ * @class This is the xmlhttp class.
+ * @constructor
+ * @throws NotSupportException if current browser does not support XmlHttp/XMLHttpRequest.
+ * @return  a <code>XMLHttpRequest</code> instance if the current browser is moz.
+ *          a <code>Microsoft.XMLHTTP</code> instance otherwise.
+ */
+class XmlHttp()
+{
+	this.init();
+}
+
+/**
+ * @type XMLHttpRequest
+ */
+XmlHttp.prototype.getXMLHttpRequest = function ()
+{
+	return this.__request;
+}
+
+XmlHttp.prototype.init = function ()
+{
+	this.__request = XmlHttp.create();
+}
+
+XmlHttp.prototype.destroy = function ()
+{
+	this.__request = null;
+}
+
+/**
+ * Retrieves a new XmlHttp instance.
+ * @return  a <code>Microsoft.XMLHTTP</code> instance if the current browser is ie.
+ *          a <code>XMLHttpRequest</code> instance otherwise.
+ * @type XmlHttp
+ */
+XmlHttp.create = function ()
+{
+	if (!System.isIeBrowser())
+	{
+		return new XMLHttpRequest();
+	}
+	else
+	{
+		if (progId != null)
+		{
+			return new ActiveXObject(progId);
+		}
+		for (var i = 0; i < progIds.length; i++)
+		{
+			try
+			{
+				var obj = new ActiveXObject(progIds[i]);
+				progId = progIds[i];
+				return obj;
+			}
+			catch (ex) { }
+			finally
+			{
+				obj = null;
+			}
+		}
+	}
+	throw new NotSupportException(XmlHttp.getName()
+		+ ".create() error: can't create xmlhttp object ["
+		+ System.getPlatform() + "].");
+}
+
+/**
+ * @private
+ */
+var progIds = ["MSXML2.XMLHTTP", "Microsoft.XMLHTTP", "MSXML.XMLHTTP", "MSXML3.XMLHTTP"];
+var progId = null;
+

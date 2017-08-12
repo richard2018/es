@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 12.20 编辑控制</title>
+</head>
+<body>
+<form>
+姓名：<input name='name' /><br/>
+密码：<input name='password' type='password'/><br/><br/>
+<input type="submit" /><input type="reset"/>
+<button onclick="readOnly()">只读</button>
+<button onclick="disable()">禁用</button>
+<button onclick="enable()">允许编辑</button>
+</form>
+<script type="text/JavaScript">
+<!--
+function readOnly()
+{
+   document.forms[0].name.readOnly = true;
+		//readOnly属性置为true将使表单元素成为“只读”
+   document.forms[0].password.readOnly = true;
+}
+function disable()
+{
+   document.forms[0].name.disabled = true;
+		//disabled属性置为true将使表单元素被禁用，这样它不仅不可编辑，而且不会随表单提交
+   document.forms[0].password.disabled = true;
+}
+function enable()
+{
+	//启用，将所有表单元素的readOnly和disabled置为false
+   document.forms[0].name.readOnly = false;
+   document.forms[0].password.readOnly = false;
+   document.forms[0].name.disabled = false;
+   document.forms[0].password.disabled = false;
+}
+-->
+</script>
+</body>
+</html>

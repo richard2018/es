@@ -1,0 +1,23 @@
+<html>
+<head>
+	<title>Example-11.8 简单对话框</title>
+</head>
+<body>
+<script type="text/JavaScript">
+<!--
+alert("Good Morning!");	
+//alert只接受一个参数，这个参数是一个字符串，alert所做的全部事情是将这个字符串
+//原封不动地以一个提示框返回给用户，我们在前面已经多次见到了这种用法
+alert("Hello, "+ prompt("What’s your name?")+ "!");
+//prompt是一个询问框，它产生一个询问输入窗口，同时等待用户输入的结果
+//以继续执行下面的程序，当用户输入完成，点击确认后，它会将输入的字符串返回
+//如果用户点了取消按钮，那么它会返回null
+if(confirm("Are you ok?"))
+//confirm是一个确认框，它产生一个Yes|No的确认提示框，如果回答了Yes，它返回true
+//如果回答了No，它返回false
+	alert("Greate! ");
+else
+	alert("Oh, what’s wrong?");
+-->
+</script>
+</body>

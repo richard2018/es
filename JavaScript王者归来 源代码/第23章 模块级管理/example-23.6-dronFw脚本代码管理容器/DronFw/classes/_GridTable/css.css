@@ -1,0 +1,40 @@
+.gridtable
+{
+
+}
+.gridtable table
+{
+	background-color:#808080;
+	font-size:12px; line-height:20px;
+	table-layout:fixed;
+	cursor:default;
+}
+.gridtable table tr td
+{
+	background-color:#fff;
+}
+.gridtable table tr.on td
+{
+	background-color:#808080;
+	color:#fff;
+}
+.gridtable table tr .tit
+{
+	border-left:1px solid #fff;
+	border-top:1px solid #fff;
+	background-color:#d6d3ce;
+	text-align:center;
+	clear:both;
+}
+.gridtable table tr .tit .mover
+{
+	float:right;
+	overflow:hidden;
+	width:5px; height:100%;
+	cursor:col-resize;
+}
+.gridtable table tr .tit .lable
+{
+	float:left;
+	margin-left:2px;
+}

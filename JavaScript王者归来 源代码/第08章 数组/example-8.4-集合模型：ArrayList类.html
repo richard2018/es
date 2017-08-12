@@ -1,0 +1,153 @@
+<html>
+<head>
+	<title>Example-8.2</title>
+</head>
+<body>
+<script>
+<!--
+//ArrayList集合类
+function ArrayList()
+{
+		//这里用一个构造器去构造一个数组，最后将返回这个数组
+		//这实际上可以看作是一种“实例继承”
+		//但是关于继承的概念，直到本书的第五部分才有比较详细的讨论
+         var ins = Array.apply(this, arguments);
+		//将ins的构造函数修正为当前函数，因为它将作为对象返回
+         ins.constructor = arguments.callee;
+		//设置ins的基类为Array，以强调它们之间的继承关系
+         ins.base = Array;
+		 
+		 //迭代器each，迭代处理ArrayList的每一个值
+         ins.each = function(closure)
+         {
+                   if(typeof closure == 'undefined')
+                            closure = function(x){return x}; 
+//给闭包指定一个默认值，这样each方法就可以缺省参数
+                   if(typeof closure != 'function')
+					//允许closure是某个确定的值，这个时候表示将ArrayList中的每一个元素和
+					//这个确定值的比较结果返回
+                   {
+                            var c = closure;
+                            closure = function(x){return x == c} 
+                   }
+
+                   var ret = new ArrayList();
+					//前面已经说过Array.apply(this,arguments)是一种将arguments列表转换为Array
+					//数组的快捷方法
+                   var args = Array.apply(this, arguments).slice(1);
+
+                   for(var i = 0; i < this.length; i++)
+                   {
+							//[this[i]].concat(args).concat(i)这个处理比较复杂，目的是截取each
+							//可能的剩余参数，作为迭代器的扩展参数
+							//例如 a.each(f, 1,2,3) 将1,2,3也作为额外的参数传递给迭代器
+                            var rval = closure.apply(this, [this[i]].concat(args).concat(i))
+                            if(rval || rval === 0)
+                                     ret.push(rval);
+                   }
+
+                   return ret;
+         }
+		 //除去ArrayList中的空元素
+         ins.trim = function()
+         {
+                   return this.each.apply(this);
+         }
+		 //这个方法返回true当且仅当闭包参数调用集合中的每一个元素的结果都为true时
+         ins.all = function(closure)
+         {
+                   return this.each.apply(this, arguments).length == this.length;
+         }
+		 //这个方法返回true当闭包参数调用集合中的任意一个元素的结果为true时
+         ins.any = function(closure)
+         {
+                   return this.each.apply(this, arguments).length > 0;
+         }
+		 //这个方法返回true当el元素出现在集合中时
+         ins.contains = function(el)
+         {
+                   return this.any(function(x){return x == el});
+         }
+         //这个方法返回集合中el元素的位置，如果集合不包含el元素，则返回-1
+         ins.indexOf = function(el)
+         {
+                   var ret = this.each.call(this, function(x, i){return el == x?i:false})[0];
+                   return ret ? ret : -1;
+         }
+		 //获得子数组
+         ins.subarr = function(start, end)
+         {
+                   end = end || Math.Infinity;
+                   return this.each.call(this, function(x, i){return i >= start && i < end ? x : null});
+         }
+         
+		 //重写valueOf和toString方法
+         ins.valueOf = ins.toString;
+
+         ins.toString = function()
+         {
+                   return '['+this.valueOf()+']';
+         }
+		 //根据闭包参数匹配两个集合
+		 //例如[1,2,3].map([4,5,6],function(a,b){return a+b}会得到
+		 //[1+4,2+5,3+6]即[5,7,9]
+         ins.map = function(list, closure)
+         {
+				   //这里的处理是因为允许两个参数的位置交换，为了更方便
+                   if (typeof list == 'function' && typeof closure != 'function')
+                   {
+                            var li = closure;
+                            closure = list;
+                            list = li;
+                   }
+				   //默认部提供closure的话将为每一组匹配建立一个ArrayList数组
+                   closure = closure || ArrayList;
+
+                   return this.each.call(this, function(x, i){return closure.call(this, x, list[i])});
+         };
+		 //ArrayList集合的slice、splice和concat方法，功能和Array的同名方法一样
+         ins.slice = function()
+         {
+                   return this.constructor(ins.base.prototype.slice.apply(this, arguments));
+         }
+         
+         ins.splice = function()
+         {
+                   return this.constructor(ins.base.prototype.splice.apply(this, arguments));
+         }
+         
+         ins.concat = function()
+         {
+                   return this.constructor(ins.base.prototype.concat.apply(this, arguments));
+         }
+
+         return ins;
+}
+
+var a = new ArrayList(1,2,3);
+document.write("length:"+a.length+"<br/>"); //3
+document.write(a+"<br/>");  //[1,2,3]
+document.write(a.each(function(x){return x+x})+"<br/>"); //[2,4,6]
+document.write(a.all(function(x){return x>0})+"<br/>"); //true
+document.write(a.all(function(x){return x<1})+"<br/>");  //false
+document.write(a.any(function(x){return x == 2})+"<br/>"); //true
+
+document.write(a.contains(2)+"<br/>");  //true
+document.write(a.contains(-1)+"<br/>");  //false
+
+var b = a.map([3,2], function(x, y){return x+y});
+document.write(b+"<br/>");  //[4,4]
+document.write(a.map([2,3,4])+"<br/>"); //[1,2,2,3,3,4]
+
+document.write(a.indexOf(2)+"<br/>");  //1
+document.write(a.indexOf(-1)+"<br/>"); //-1
+
+document.write(a.subarr(1,3)+"<br/>");  //2,3
+document.write(a.toString()+"<br/>");  //[1,2,3]
+var b = new ArrayList(a,a);
+document.write(b.toString()+"<br/>"); //[[1,2,3],[1,2,3]]
+document.write(b.slice(1)+"<br/>");  //[1,2,3]
+-->
+</script>
+</body>
+</html>

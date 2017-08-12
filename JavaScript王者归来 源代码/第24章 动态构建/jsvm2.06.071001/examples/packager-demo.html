@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>JSVM Class Packager</title>
+<script src="../src/jsre.js" modules="runtime,tools"></script>
+</head>
+<script>
+
+	function execute() {
+		jsvm.tools.JSArchivePackager.packJSArchive();
+	}
+</script>
+</head>
+<body>
+	<h2>Example: JSVM Class Packager!</h2>
+	　<table border="1" width="800" id="table1" cellspacing="10" bgcolor="#CCCCCC" cellpadding="10">
+		<tr>
+			<td bgcolor="#FFFFFF">
+				
+				<ol>
+						<li>
+							<p style="color:red">声明：该工具需要 FileSystemObject 组件的支持！所以使用改工具的环境必须是 IE. 并且如果访问的不是本地文件而是通过HTTP访问的页面，必须对该url进行信任站点授权操作。</p>
+						</li>
+						<li>
+							<p>在 JSVM 的环境配置中，设置 modules 参数，加入：<b>runtime,tools</b>, （tools依赖于runtime）。例如：
+			<b>&lt;script src="jsvm2/jsre.js" modules="runtime,tools"&gt;&lt;/script&gt;</b></p>
+						</li>
+						<li>
+							<p>使用热键 <b>ctrl+F9</b> 调出 packager 的程序界面！</p>
+						</li>
+						<li>
+							<p>程序提供三种打包方式</p>
+							<p>
+									<ul>
+										<li>列出所有ClassHome下的class.js文件，将选中的文件打包输出到一个指定的路径。</li>
+										<li>列出指定的某个现成的包文件中的所有class.js名称，将选中的文件打包输出到一个指定的路径。</li>
+										<li>列出JSVM所有已经加载过的class.js文件，将选中的文件打包输出到一个指定的路径。</li>
+									</ul>
+								</p>
+						</li>
+						<li>
+						<p>将输出的文件拷贝到&lt;jsvm目录&gt;/lib 目录中，在jsvm的环境变量classpath中配置进去。例如：
+						<b>&lt;script src="jsvm2/jsre.js" classpath="<i>lib文件1;lib文件2</i>"&gt;&lt;/script&gt;</b>&nbsp;（多个lib文件之间;分割）</p>
+						</li>
+
+				</ol></td>
+		</tr>
+	</table><br>
+	<b>ctrl + F9</b> 或者点击按钮&nbsp;<button onclick="execute();" >show</button>
+
+</body>
+</Html>

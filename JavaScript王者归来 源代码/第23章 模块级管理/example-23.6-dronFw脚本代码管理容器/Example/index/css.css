@@ -1,0 +1,75 @@
+body,td
+{
+	font-size:12px;
+	line-height:20px;
+	cursor: default;
+}
+a{text-decoration:none; color:#009;}
+a:hover{text-decoration:underline;}
+#title
+{
+	font-size:16;
+	font-family:"Arial Black";
+}
+.line
+{
+	width:100%;
+	height:1px;
+	overflow:hidden;
+	background-color:#000;
+	margin:10px 0 10px 0;
+}
+.b
+{
+	font-weight:bold;
+	font-size:14px;
+}
+.c
+{
+	margin:5px 5px 20px 5px;
+}
+.c .g
+{
+	color:green;
+}
+#classlist
+{
+	background-color:#000;
+}
+#classlist td
+{
+	background-color:#fff;
+	height:20px;
+}
+#ver
+{
+	line-height:20px;
+}
+.code
+{
+	font-family:"Fixedsys";
+}
+.code .r
+{
+	color:red;
+}
+.code .b
+{
+	color:blue;
+}
+.code .p
+{
+	color:#f0f;
+}
+.code .g
+{
+	color:#008284;
+}
+
+#l1, #l2, #l3, #l4, #l5, #l6, #l7, #l8, #l9, #l0, #l1, #l2
+{
+	display:none;
+	background-color:#eee;
+	border:1px solid #808080;
+	padding:10px;margin:5px;
+}

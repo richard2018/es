@@ -1,0 +1,354 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+ Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="WebPrinter.jsc Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>WebPrinter.jsc</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		js.io.WebPrinter class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ <BR/><BR/><B>Version: </B>2.01, 10/23/05
+ <BR/><BR/><B>Author:</B> Wan Changhua
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="WebPrinter.html">js.io.WebPrinter</a></b></td>
+    <td>js.io.WebPrinter is a class that is a Web Printer
+ </td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"># language: JSVM2
+
+<span class="comment">/**
+ * <span class="attrib">@fileoverview</span> js.io.WebPrinter class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ * <span class="attrib">@file</span>		WebPrinter.jsc
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@since</span>		JSVM2.0
+ */</span>
+
+package js.io;
+
+import js.lang.BObject;
+import js.dom.Window;
+
+<span class="comment">/**
+ * Create a new WebPrinter instance.
+ * Inherit from BObject
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@extends</span> BObject
+ * <span class="attrib">@class</span> js.io.WebPrinter is a class that is a Web Printer
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@requires</span> Window
+ * <span class="attrib">@throws</span> NotSupportException if platform is not a browser
+ * <span class="attrib">@return</span> A new WebPrinter
+ * #see BObject js.lang.BObject is the base class for this
+ */</span><span class="reserved">function</span> WebPrinter ()
+{
+	<span class="comment">/*
+	 * <span class="attrib">@private</span>
+	 */</span>
+	var ds = WebPrinter.defaultStyle;
+
+	<span class="comment">/**
+	 * The Output-Window. 
+	 * <span class="attrib">@private</span>
+	 * <span class="attrib">@type</span> Window
+	 */</span>	
+	<span class="reserved">this</span>.outputWindow = new Window(<span class="literal">'&lt;html&gt;&lt;head&gt;&lt;meta http-equiv="Content-Type" content="text/html; charset=gb2312"&gt;&lt;title&gt;'</span>
+		+ <span class="literal">'Web Printer&lt;/title&gt;'</span>
+		+ <span class="literal">'&lt;script&gt;var owner=null;'</span>
+		+ <span class="literal">'function write(s){document.body.innerHTML+=s;setTimeout('</span>
+		+ <span class="literal">'"document.body.scrollTop=document.body.scrollHeight;",10);}'</span>
+		+ <span class="literal">'function clear(){document.body.innerHTML="";}'</span>
+		+ <span class="literal">'document.onkeydown=function(){if(event.keyCode==116||(event.ctrlKey&amp;&amp;event.keyCode==78))'</span>
+		+ <span class="literal">'{event.keyCode=0;event.returnValue = false;}}'</span>
+		+ <span class="literal">'&lt;/script&gt;'</span>
+		+ <span class="literal">'&lt;/head&gt;&lt;body style="'</span> + ds.style + <span class="literal">'"'</span>
+		+ <span class="literal">' scroll="auto" designMode="on" contentEditable="false"&gt;&lt;/body&gt;&lt;/html&gt;'</span>);
+	<span class="reserved">this</span>.outputWindow.width = ds.width;
+	<span class="reserved">this</span>.outputWindow.height = ds.height;
+	<span class="reserved">this</span>.outputWindow.resizable = ds.resizable;
+	<span class="reserved">this</span>.outputWindow.status = ds.status;
+}
+
+<span class="comment">/**
+ * WebPrinter default-style Object
+ * <span class="attrib">@type</span> Object
+ */</span>
+WebPrinter.defaultStyle = 
+{
+	style : <span class="literal">"background-color:white;color:black;font-family:MS Sans Serif;font-size:12px;"</span>,
+	width : 640,
+	height : 480,
+	resizable : 1,
+	status : 0
+};
+
+<span class="comment">/**
+ * The content of this Output-Window. 
+ * <span class="attrib">@type</span> String
+ */</span>
+WebPrinter.<span class="reserved">prototype</span>.stream = <span class="literal">""</span>;
+
+<span class="comment">/**
+ * Show Output-Window.
+ * #see Window#show
+ */</span>
+WebPrinter.<span class="reserved">prototype</span>.showOutputWindow = <span class="reserved">function</span>()
+{
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.outputWindow.isActive())
+	{
+		<span class="reserved">this</span>.outputWindow.show();
+		<span class="reserved">if</span> (<span class="reserved">this</span>.stream != <span class="literal">""</span>)
+		{
+			<span class="reserved">this</span>.outputWindow.handle.write(<span class="reserved">this</span>.stream);
+		}
+	}
+}
+
+<span class="comment">/**
+ * Close Output-Window.
+ * #see Window#close
+ */</span>
+WebPrinter.<span class="reserved">prototype</span>.closeOutputWindow = <span class="reserved">function</span>()
+{
+	<span class="reserved">this</span>.outputWindow.close();
+}
+
+<span class="comment">/**
+ * Print string in Output-Window.
+ * <span class="attrib">@param</span> {String} s The content to print
+ * #see Window#write
+ */</span>
+WebPrinter.<span class="reserved">prototype</span>.write = <span class="reserved">function</span>(s)
+{
+	<span class="reserved">this</span>.showOutputWindow();
+	<span class="reserved">this</span>.outputWindow.handle.write(String(s));
+	<span class="reserved">this</span>.stream += s;
+}
+
+<span class="comment">/**
+ * Print htmlEncoded-String in Output-Window.
+ * <span class="attrib">@param</span> {String} s The content to print
+ * #see Window#write
+ */</span>
+WebPrinter.<span class="reserved">prototype</span>.print = <span class="reserved">function</span>(s)
+{
+	s = encodeHTML(String(s));
+	<span class="reserved">this</span>.write(s);
+}
+
+<span class="comment">/**
+ * Print htmlEncoded-String as a line in Output-Window.
+ * <span class="attrib">@param</span> {String} s The content to print
+ * #see #print
+ */</span>
+WebPrinter.<span class="reserved">prototype</span>.println = <span class="reserved">function</span>(s)
+{
+	<span class="reserved">this</span>.print(s + <span class="literal">"\r\n"</span>);
+}
+
+<span class="comment">/**
+ * Print an exception in Output-Window.
+ * <span class="attrib">@param</span> {Error} ex The exception to print
+ * #see #write
+ */</span>
+WebPrinter.<span class="reserved">prototype</span>.printError = <span class="reserved">function</span>(ex)
+{
+	<span class="reserved">this</span>.write(<span class="literal">"&lt;XMP style='color:red'&gt;"</span> + ex + <span class="literal">"&lt;/XMP&gt;"</span>);
+}
+
+<span class="comment">/**
+ * Print html in Output-Window.
+ * <span class="attrib">@param</span> {String} s The html to print
+ * #see #write
+ */</span>
+WebPrinter.<span class="reserved">prototype</span>.printHTML = <span class="reserved">function</span>(s)
+{
+	<span class="reserved">this</span>.write(String(s));
+}
+
+<span class="comment">/**
+ * Clear Output-Window content
+ * #see Window#clear
+ */</span>
+WebPrinter.<span class="reserved">prototype</span>.clear = <span class="reserved">function</span>()
+{
+	<span class="reserved">if</span> (<span class="reserved">this</span>.outputWindow.isActive())
+	{
+		<span class="reserved">this</span>.outputWindow.handle.clear();
+		<span class="reserved">this</span>.stream = <span class="literal">""</span>;
+	}
+}
+
+<span class="comment">/** 
+ * Encode as HTML
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@type</span> String
+ */</span>
+var encodeHTML = <span class="reserved">function</span> (s)
+{
+	<span class="reserved">return</span> s.replace(/&amp;/g, <span class="literal">'&amp;amp'</span>)
+		.replace(/"/g, <span class="literal">'&amp;quot;'</span>)
+		.replace(/&lt;/g, <span class="literal">'&amp;lt;'</span>)
+		.replace(/&gt;/g, <span class="literal">'&amp;gt;'</span>)
+		.replace(/\r\n/g, <span class="literal">'&lt;br&gt;'</span>)
+		.replace(/\t/g, <span class="literal">'&amp;nbsp;&amp;nbsp;&amp;nbsp; '</span>);
+}</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu Nov 17 20:10:21 2005</div>
+</body>
+</html>

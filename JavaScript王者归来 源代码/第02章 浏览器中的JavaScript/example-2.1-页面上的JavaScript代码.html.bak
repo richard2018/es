@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>Example 2.1 -- 页面上的JavaScript代码</title>
+	<script type="text/JavaScript">
+		//这里放置函数和闭包
+		function add(x, y)
+		{
+			this.x = 200;
+			this.y = 300;
+			return x + y;
+		}
+	</script>
+</head>
+<script>
+	//这里放置全局变量
+	var a = 200;
+	var b = 200;
+</script>
+<body>
+	<h1>
+	</h1>
+	<script>
+		//这里放置程序实际执行的代码
+		document.getElementsByTagName("h1")[0].innerHTML = add(a,b);
+	</script>
+</body>
+</html>

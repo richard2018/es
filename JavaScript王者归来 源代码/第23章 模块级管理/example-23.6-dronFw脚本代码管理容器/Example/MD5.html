@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="MD5"></script>
+<style>
+	body,td{font-size:12px;}
+</style>
+</head>
+<body>
+
+<h2>载入 MD5 类</h2>
+<hr>
+
+<script type="text/javascript">
+var md5 = new DronFw.Class.MD5();
+var test = md5.calc("123456",32);//计算 123456 的32位md5值，换成16就计算16位md5值。
+var test2 = md5.calc("123456",16);
+window.alert("123456 的 32位 md5 是 " +test)
+window.alert("123456 的 16位 md5 是 " +test2)
+
+/*
+	类 MD5 有一个方法：
+	calc(str,n)  返回 str 的指定 n 位的 md5 值，n 可选 16或32
+*/
+</script>
+
+</body>
+</html>
+

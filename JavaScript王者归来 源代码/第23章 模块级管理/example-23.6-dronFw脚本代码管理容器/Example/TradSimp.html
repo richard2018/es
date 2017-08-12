@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css">*{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="TradSimp"></script>
+</head>
+<body>
+
+<h2>游戏人繁简操作类</h2>
+<hr>
+
+<input type="button" value="繁" onclick="toTrad();" />
+<input type="button" value="简" onclick="toSimp();" /><br />
+<textarea rows="8" cols="50" id="words">请将要转换的文字复制到这里。</textarea>
+
+<script type="text/javascript">
+	function toTrad()
+	{
+		var TradSimp = new DronFw.Class.TradSimp();
+		$("words").value = TradSimp.getTraditional(words.value);
+	}
+	function toSimp()
+	{
+		var TradSimp = new DronFw.Class.TradSimp();
+		$("words").value = TradSimp.getSimplified(words.value);
+	}
+
+/*
+	类 TradSimp 有两个方法：
+	getTraditional(str)  返回 str 的相应繁体字串
+	getSimplified(str)  返回 str 的相应简体字串
+*/
+</script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 15.4 userData Checkbox标记的应用</title>
+<style>
+	.userData {behavior:url(#default#userdata);}
+</style>
+</head>
+<body>   
+<input type="checkbox" id="chkbox1" class="userData">
+<script language="javascript" type="text/javascript">  
+<!--
+	var obj=document.all.chkbox1;
+
+	//为复选框chkbox1注册onclick事件
+	obj.attachEvent('onclick',saveChecked)
+
+	//保存userData
+	function saveChecked(){
+		//将chkbox1的选中状态设置到bCheckedValue属性
+		obj.setAttribute("bCheckedValue",obj.checked);
+		//将obj存入名为oChkValue的userData存储区
+		obj.save("oChkValue");
+	}
+	window.attachEvent('onload',loadChecked);
+	function loadChecked(){
+		//读取名为oChkValue存储区
+		obj.load("oChkValue");
+		//根据存放的bCheckedValue属性值设置obj的选中状态
+		var chk=(obj.getAttribute("bCheckedValue")=="true");
+		obj.checked=chk;
+	}
+-->
+</script>  
+</body>   
+</html>

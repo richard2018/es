@@ -1,0 +1,75 @@
+# language: javascript2
+
+package akira.js2{
+
+	import js.lang.JObject;
+	import js.lang.System;
+	import akira.js2.Vector2D;
+	
+	//Point is an internal class, it can be visited in this jsc_doc only.
+	internal class Point extends JObject
+	{
+		function Point()
+		{
+			
+		}
+	}
+
+	public class Point2D extends Point
+	{
+		private var x = 0;
+		private var y = 0;
+		//constants
+		const ZERO = 0;
+
+		function Point2D(x, y)
+		{
+			this.x = x != null ? x : Point2D.ZERO;
+			this.y = y != null ? y : Point2D.ZERO;
+		}
+
+		public function toString()
+		{
+			return "(" + this.x + "," + this.y + ")<point>";
+		}
+
+		public get X()
+		{
+			return this.x;
+		}
+
+		public get Y()
+		{
+			return this.y;
+		}
+		
+		//class converter, support as statement
+		public function convert(type)
+		{
+			if(type == Vector2D)
+				return new Vector2D(this.x, this.y);
+		}
+
+		public function toVector()
+		{
+			//test as statement
+			var v = this as Vector2D;
+			return v;
+		}
+
+		//pointA + vectorA = moves the point through a path def by vectorA 
+		public function add(v:Vector2D)
+		{
+			return new Point2D(this.x + v.getX(), this.y + v.getY());
+		}
+		public function sub(v:Vector2D)
+		{
+			return new Point2D(this.x - v.getX(), this.y - v.getY());
+		}
+		//pointA - pointB = vector(A, B);
+		public function sub(p:Point2D)
+		{
+			return new Vector2D(this.x - p.getX(), this.y - p.getY());
+		}
+	}
+}

@@ -1,0 +1,339 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+ Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="StringBuffer.jsc Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>StringBuffer.jsc</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		js.lang.StringBuffer class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ <BR/><BR/><B>Version: </B>2.01, 10/23/05
+ <BR/><BR/><B>Author:</B> Wan Changhua
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="StringBuffer.html">js.lang.StringBuffer</a></b></td>
+    <td>this is a StringBuffer class
+ </td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"># language: JSVM2
+
+<span class="comment">/**
+ * <span class="attrib">@fileoverview</span> js.lang.StringBuffer class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ * <span class="attrib">@file</span>		StringBuffer.jsc
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@since</span>		JSVM2.0
+ */</span>
+
+package js.lang;
+
+<span class="comment">/**
+ * Create a new StringBuffer instance.
+ * A string buffer implements a mutable string, it can be modified.
+ * Inherit from JObject
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@extends</span> JObject
+ * <span class="attrib">@class</span> this is a StringBuffer class
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@final</span>
+ * <span class="attrib">@return</span> A new StringBuffer instance
+ * #see JObject js.lang.JObject is the base class for this
+ */</span>
+<span class="reserved">function</span> StringBuffer (s)
+{
+	<span class="comment">/**
+	 * <span class="attrib">@private</span>
+	 */</span>
+	var strs = [];
+	var str = null;
+	var curr = 0;
+
+	<span class="comment">/**
+	 * Appends the string to this string buffer. 
+	 * <span class="attrib">@param</span> {String} s a string
+	 * <span class="attrib">@return</span>  a reference to this &lt;code&gt;StringBuffer&lt;/code&gt;.
+	 * <span class="attrib">@type</span> StringBuffer
+	 */</span>
+	<span class="reserved">this</span>.append = <span class="reserved">function</span>(s)
+	{
+		strs[curr++] = (s == null) ? 
+			<span class="literal">""</span> : s.toString();
+		str = null;
+		<span class="reserved">return</span> <span class="reserved">this</span>;
+	}
+
+	<span class="comment">/**
+	 * Inserts the string representation of a subarray of the &lt;code&gt;str&lt;/code&gt;
+	 * <span class="attrib">@param</span> {int} index position at which to insert subarray.
+	 * <span class="attrib">@param</span> {String} s a string.
+	 * <span class="attrib">@return</span>  This string buffer.
+	 * <span class="attrib">@type</span> StringBuffer
+	 */</span>
+	<span class="reserved">this</span>.insert = <span class="reserved">function</span>(index, s)
+	{
+		var v = <span class="reserved">this</span>.toString();
+		str = v.substring(0, index) 
+			+ s + v.substring(index);
+		strs = [str];
+		curr = 1;
+		<span class="reserved">return</span> <span class="reserved">this</span>;
+	}
+
+	<span class="comment">/**
+	 * Returns the index within this string of the first occurrence of the
+	 * specified substring.
+	 * <span class="attrib">@param</span> {String} s any string.
+	 * <span class="attrib">@return</span>  if the string argument occurs as a substring within this
+	 * 	        object, then the index of the first character of the first
+	 *          such substring is returned;
+	 * <span class="attrib">@type</span> int
+	 */</span>
+	<span class="reserved">this</span>.indexOf = <span class="reserved">function</span> (s)
+	{
+		<span class="reserved">return</span> <span class="reserved">this</span>.toString().indexOf(s);
+	}
+	
+	<span class="comment">/**
+	 * Returns the index within this string of the rightmost occurrence
+	 * of the specified substring.
+	 * <span class="attrib">@param</span> {String} s any string.
+	 * <span class="attrib">@return</span>  if the string argument occurs one or more times as a substring
+	 *          within this object, then the index of the first character of
+	 *          the last such substring is returned. If it does not occur as
+	 *          a substring, &lt;code&gt;-1&lt;/code&gt; is returned.
+	 * <span class="attrib">@type</span> int
+	 */</span>
+	<span class="reserved">this</span>.lastIndexOf = <span class="reserved">function</span> (s)
+	{
+		<span class="reserved">return</span> <span class="reserved">this</span>.toString().lastIndexOf(s);
+	}
+	
+	<span class="comment">/**
+	 * Returns a new String that contains a subsequence of
+	 * characters currently contained in this &lt;code&gt;StringBuffer&lt;/code&gt;.The 
+	 * substring begins at the specified index and extends to the end of the
+	 * &lt;code&gt;StringBuffer&lt;/code&gt;.
+	 * <span class="attrib">@param</span>  start The beginning index, inclusive.
+	 * <span class="attrib">@return</span> The new string.
+	 * <span class="attrib">@type</span> int
+	 */</span>
+	<span class="reserved">this</span>.substring = <span class="reserved">function</span> (st, ed)
+	{
+		<span class="reserved">return</span> (ed) ? <span class="reserved">this</span>.toString().substring(st)
+			: <span class="reserved">this</span>.toString().substring(st, ed);
+	}
+
+	<span class="comment">/**
+	 * Converts to a string representing the data in this string buffer.
+	 * A new String object is allocated and initialized to 
+	 * contain the character sequence currently represented by this 
+	 * string buffer. This String is then returned. Subsequent 
+	 * changes to the string buffer do not affect the contents of the String.
+	 * <span class="attrib">@return</span>  a string representation of the string buffer.
+	 * <span class="attrib">@type</span> String
+	 */</span>
+	<span class="reserved">this</span>.toString = <span class="reserved">function</span>()
+	{
+		<span class="reserved">if</span> (str == null)
+		{
+			str = strs.join(<span class="literal">""</span>);
+			strs = [str];
+			curr = 1;
+		}
+		<span class="reserved">return</span> str;
+	}
+
+	<span class="comment">/**
+	 * Returns the length (character count) of this string buffer.
+	 * <span class="attrib">@return</span>  the length of the sequence of characters currently 
+	 *          represented by this string buffer.
+	 * <span class="attrib">@type</span> int
+	 */</span>
+	<span class="reserved">this</span>.length = <span class="reserved">function</span>()
+	{
+		<span class="reserved">return</span> <span class="reserved">this</span>.toString().length;
+	}
+
+	<span class="comment">/**
+	 * Sets the length of this String buffer.
+	 * <span class="attrib">@param</span> l the new length of the buffer.
+	 * #see #length()
+	 */</span>
+	<span class="reserved">this</span>.setLength = <span class="reserved">function</span>(l)
+	{
+		l = (l &lt; 0) ? 0 : l;
+		l = (l &gt; <span class="reserved">this</span>.length()) ? <span class="reserved">this</span>.length() : l;
+		str = str.substring(0, l);
+		strs = new Array(str);
+		curr = 1;
+	}
+	
+	<span class="comment">/**
+	 * First thing---append the argument
+	 * <span class="attrib">@ignore</span>
+	 */</span>
+	<span class="reserved">if</span> (s != null)
+	{
+		<span class="reserved">this</span>.append(s);
+	}
+
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu Nov 17 20:10:21 2005</div>
+</body>
+</html>

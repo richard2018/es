@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>Example-22.10 私有域</title>
+</head>
+<body>
+<script>
+<!--
+function dwn(s)
+{
+	document.write(s + "<br/>");
+}
+var a,b;
+(function(){
+	//(function(){……})();的写法利用闭包构成了一个私有域
+	//它将私有属性a、b同外界隔离开来
+	//这种用法在高级的JavaScript程序设计中会经常见到
+	
+	//查看闭包内的a、b的值
+	showAB = function()
+	{
+		dwn(a);
+		dwn(b);
+	}
+	var a = 10;
+	var b = 20;
+})();		
+a = -10;
+b = -20;	//外部改写的a、b
+dwn(a);
+dwn(b);
+showAB();	//不会破坏showAB()得到的内部的a、b的值
+-->
+</script>
+</body>
+</html>

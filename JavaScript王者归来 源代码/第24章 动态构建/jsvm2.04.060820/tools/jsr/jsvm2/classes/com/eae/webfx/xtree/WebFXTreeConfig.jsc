@@ -1,0 +1,190 @@
+# language: JSVM2
+
+/**
+ * @fileoverview com.eae.webfx.xtree.WebFXTreeConfig class {@link http://jsvm.homolo.com/}
+ * @file		WebFXTreeConfig.jsc
+ * @author	Emil A Eklund
+ * @Modifier: Changhua Wan
+ * @version	1.1, 07/01/05
+ */
+
+package com.eae.webfx.xtree;
+
+import js.lang.System;
+import js.dom.StyleSheet;
+
+/**
+ * Create a new WebFXUtil instance.
+ * Inherit from JObject
+ * @author	Emil A Eklund (Modified by Wan Changhua)
+ * @version	1.1, 07/01/05
+ * @extends JObject
+ * @class This is a config class.  
+ * @constructor
+ * @return A new WebFXUtil object
+ */
+
+class WebFXTreeConfig ()
+{
+}
+
+/**
+ * static
+ * @private
+ */
+var resroot = System.getClassHome() + "/com/eae/webfx/xtree/__res";
+
+/**
+ * Sets or retrieves the URL of the root-node icon
+ * @type String
+ */
+WebFXTreeConfig.rootIcon        = resroot + '/images/foldericon.png';
+
+/**
+ * Sets or retrieves the URL of the opened root-node icon
+ * @type String
+ */
+WebFXTreeConfig.openRootIcon    = resroot + '/images/openfoldericon.png';
+
+/**
+ * Sets or retrieves the URL of the foloder-node icon
+ * @type String
+ */
+WebFXTreeConfig.folderIcon      = resroot + '/images/foldericon.png';
+
+/**
+ * Sets or retrieves the URL of the opened foloder-node icon
+ * @type String
+ */
+WebFXTreeConfig.openFolderIcon  = resroot + '/images/openfoldericon.png';
+
+/**
+ * Sets or retrieves the URL of the file-node icon
+ * @type String
+ */
+WebFXTreeConfig.fileIcon        = resroot + '/images/file.png';
+
+/**
+ * @private
+ * @type String
+ */
+WebFXTreeConfig.iIcon           = resroot + '/images/I.png';
+
+/**
+ * @private
+ * @type String
+ */
+WebFXTreeConfig.lIcon           = resroot + '/images/L.png';
+
+/**
+ * @private
+ * @type String
+ */
+WebFXTreeConfig.lMinusIcon      = resroot + '/images/Lminus.png';
+
+/**
+ * @private
+ * @type String
+ */
+WebFXTreeConfig.lPlusIcon       = resroot + '/images/Lplus.png';
+
+/**
+ * @private
+ * @type String
+ */
+WebFXTreeConfig.tIcon           = resroot + '/images/T.png';
+
+/**
+ * @private
+ * @type String
+ */
+WebFXTreeConfig.tMinusIcon      = resroot + '/images/Tminus.png';
+
+/**
+ * @private
+ * @type String
+ */
+WebFXTreeConfig.tPlusIcon       = resroot + '/images/Tplus.png';
+
+/**
+ * @private
+ * @type String
+ */
+WebFXTreeConfig.blankIcon       = resroot + '/images/blank.png';
+
+/**
+ * Sets or retrieves the default text of the node
+ * @type String
+ */
+WebFXTreeConfig.defaultText     = 'Tree Item';
+
+/**
+ * Sets or retrieves the default action of the node
+ * @type String
+ */
+WebFXTreeConfig.defaultAction   = 'javascript:void(0);';
+
+/**
+ * Sets or retrieves the default behavior of the tree
+ * @type String
+ */
+WebFXTreeConfig.defaultBehavior = 'classic';
+
+/**
+ * Sets or retrieves whether the current tree should use persistence.
+ * @type String
+ */
+WebFXTreeConfig.usePersistence	= true;
+
+/**
+ * Sets or retrieves the text when tree is loading.
+ * @type String
+ */
+WebFXTreeConfig.loadingText = "loading...";
+
+/**
+ * Sets or retrieves the text when tree has load fail.
+ * @type String
+ */
+WebFXTreeConfig.loadErrorTextTemplate = "load fail \"%1%\"";
+
+/**
+ * Sets or retrieves the text when tree has not found.
+ * @type String
+ */
+WebFXTreeConfig.emptyErrorTextTemplate = "Error \"%1%\" NotFound TreeNode! ";
+
+/**
+ * Sets or retrieves the URL of the css file.
+ * @type String
+ */
+WebFXTreeConfig.defaultCssUrl	      	= resroot + '/css/xtree.css';
+
+/**
+ * Sets or retrieves the prefix of the element attributes.
+ * @type String
+ */
+WebFXTreeConfig.elementPrefix = "webfx-";
+
+/**
+ * load css file or create StyleSheet
+ *
+var css = js.dom.StyleSheet.create();
+css.addRule(".webfx-tree-container", "margin: 0px; padding: 0px;	font: icon;	white-space: nowrap;");
+css.addRule(".webfx-tree-item", "padding: 0px; margin: 0px; font: icon; color: WindowText; white-space: nowrap; height: 16px;");
+css.addRule(".webfx-tree-item input", "height:13px; margin-top:0px; margin-bottom:0px;");
+css.addRule(".webfx-tree-item a", "margin-left: 3px; padding: 0px 2px 1px 2px;");
+css.addRule(".webfx-tree-item a:active", "margin-left: 3px; padding: 0px 2px 1px 2px;");
+css.addRule(".webfx-tree-item a:hover", "margin-left: 3px; padding: 0px 2px 1px 2px;");
+css.addRule(".webfx-tree-item a", "color: black; text-decoration: none;");
+css.addRule(".webfx-tree-item a:hover", "color: blue; text-decoration: none; background:#AAefEF;");
+css.addRule(".webfx-tree-item a:active", "background: highlight;	color: highlighttext;	text-decoration: none;");
+css.addRule(".webfx-tree-item img", "vertical-align: middle;	border: 0px;");
+css.addRule(".webfx-tree-icon", "width: 16px; height: 16px;");
+css.addRule(".selected-inactive", "background: highlight;	color:highlighttext;");
+ */
+ 
+/**
+ * static zone, auto execute on class has beed loaded.
+ */
+js.dom.StyleSheet.addCssLink(WebFXTreeConfig.defaultCssUrl);

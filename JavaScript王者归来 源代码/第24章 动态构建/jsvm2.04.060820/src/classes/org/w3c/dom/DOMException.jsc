@@ -1,0 +1,31 @@
+# language: JSVM2
+
+/**
+ * Copyright (c) 2000 World Wide Web Consortium,
+ * (Massachusetts Institute of Technology, Institut National de
+ * Recherche en Informatique et en Automatique, Keio University). All
+ * Rights Reserved. This program is distributed under the W3C's Software
+ * Intellectual Property License. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ * PURPOSE.
+ * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+ */
+ 
+package org.w3c.dom;
+
+import js.lang.RuntimeException;
+
+/**
+ * DOM operations only raise exceptions in "exceptional" circumstances, i.e., 
+ * when an operation is impossible to perform (either for logical reasons, 
+ * because data is lost, or because the implementation has become unstable). 
+ */
+class DOMException extends RuntimeException (msg)
+{
+	if (msg == null)
+	{
+		arguments = ["dom exception."];
+	}
+	super.apply(this, arguments);
+}

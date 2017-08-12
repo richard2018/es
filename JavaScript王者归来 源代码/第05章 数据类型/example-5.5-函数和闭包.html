@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Example-5.5函数和闭包</title>
+</head>
+<body>
+<script>
+<!--
+	/*JavaScript允许在函数体中定义并返回另一个函数，
+这个嵌套定义在函数体内的函数被称为“闭包”
+	由于JavaScript拥有闭包，因此它具有明显的functional（函数式）的特征*/
+	function parabola(a, b, c) //构造抛物线方程
+	{
+		var ret = function(x)
+		{
+			return a * x * x + b * x + c;
+		}
+		ret.toString = function()
+		{
+			return a + "x^2+" + b + "x+" + c;
+		}
+		return ret;
+	}
+	var p1 = parabola(2,3,4);
+	//p1是一条抛物线y = 2*x*x + 3*x + c，p1(15)求出这一条抛物线在x=15处的值 
+	document.write(p1+ " ->" +p1(15) + "<br/>");
+	var p2 = parabola(2,-3,14);
+	document.write(p2+ " ->" +p2(15));
+-->
+</script>
+</body>
+</html>

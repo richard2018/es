@@ -1,0 +1,85 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>JSVM2指南</title>
+</head>
+<body style="font-size:11pt">
+<h1>JSVM2简介</h1>
+&nbsp;&nbsp;&nbsp; <b>JSVM </b>(JavaScript Virtual Machine的缩写)，一个JavaScript基础框架，sourceforge开源项目，由万常华（wch3116）于2003年底发起, 目前最新版本是2.05,采用的是 BSD License 授权协议。<br><br>
+&nbsp;&nbsp;&nbsp; JavaScript 一直以来扮演着Web端“脚本”的角色，开发者用它来在web上制作一些动态特效，或者在表单提交前对数据的预校验等等。随着客户端处理能力日益提升，DHTML在表示层的动态特征和丰富表现力，以及XMLHttpRequest,XmlDom等HTTP控件的出现, 另外一种应用模式开始引起人们的关注 — Ajax。关于Ajax的概念以及优缺点不再作冗余复述。<br></br>&nbsp;&nbsp;&nbsp;
+如今Ajax Framework像雨后春笋，其中有很多优秀作品，在此也不多作介绍。JSVM 的定位和他们不同：JSVM并不是一个JavaScript 
+Library，而是一个更底层的框架，基于这个框架，可以更好的实现JavaScript的模块化设计，以提高JavaScript代码的重用性。下面简单介绍一下JSVM的使用方法。
+<ul>
+	<li><b>在web页面上加载JSVM 环境<br>
+	</b><br>在web页面中加入代码：<font color="#000080">&lt;script src=&quot;&lt;jsvm2目录&gt;/jsre.js&quot;&gt;&lt;/script&gt;</font> 即可实现该页面的JSVM2环境加载。<br>
+　</li>
+	<li><b>基于JSVM 的JavaScript开发<br>
+	<br></b>首先必须声明的是：JSVM2 的加载并不对web页面中原来的JavaScript环境产生任何破坏影响，而只是多了一些其它功能的支持。<br>
+	<br>
+	在JSVM2 下，JavaScript代码的基本模块单元是“对象”，“对象”的类型可以是一个Function或者是一个Object。
+	<br>“对象”的命名方式：<font color="#000080"><b>&lt;包名&gt; + &quot;.&quot; + &lt;类名&gt;</b></font>，且必须以一个单独的文件形式保存。
+	<br>保存路径是：<b><font color="#000080">&lt;jsvm2目录&gt;/classes [/&lt;包名&gt; …] /&lt;类名&gt;.class.js</font></b>。<br><br>
+	例如，设计对象：example.HelloWorld&nbsp;&nbsp;文件路径：<a href="../src/classes/example/" target="_blank">jsvm2/classes/example/</a>HelloWorld.class.js&nbsp;代码如下：<br>
+	<br>
+	<table border="1" width="640" id="table1" cellspacing="10" bgcolor="#CCCCCC" cellpadding="10">
+		<tr>
+			<td bgcolor="#FFFFFF">/**<br>
+&nbsp;* 调用jsvm2提供的$package函数定义包名<br>
+&nbsp;* 作用相当于：if (!window.example) {window.example = {};}<br>
+&nbsp;*/<br>
+			<b>$package</b>(&quot;example&quot;);<br>
+			<br>
+			/**<br>
+&nbsp;* 对example.HelloWorld进行定义<br>
+&nbsp;*/<br>
+			<b>example.HelloWorld</b> = function (name) {<br>
+			<br>
+&nbsp;&nbsp; this.name = name;<br>
+			<br>
+&nbsp;&nbsp; this.say = function () {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert(this.name + &quot; say: hello world!&quot;);<br>
+&nbsp;&nbsp; }<br>
+			<br>
+			}</td>
+		</tr>
+	</table>
+	<p>当需要使用 example.HelloWorld 对象时，客户代码例如：
+	
+	<br>
+　<table border="1" width="640" id="table1" cellspacing="10" bgcolor="#CCCCCC" cellpadding="10">
+		<tr>
+			<td bgcolor="#FFFFFF"><b>$import</b>(&quot;example.HelloWorld&quot;);//调用jsvm2提供的$import函数加载“类”<br>
+			<br>
+			var obj = new <b>example.HelloWorld</b>(&quot;Mike&quot;);<br>
+			obj.say();</td>
+		</tr>
+	</table><br/>
+	一切OK，其实就这么简单，理解上面这个例子，就可以说基本上掌握JSVM2的使用了。至于接下来的JSVM2进阶指南，我本人认为并不是很重要，初学者不必着急学习，可以以后慢慢了解。
+	</ul>
+	<p>&nbsp;</p>
+
+<h1>JSVM2进阶</h1>
+&nbsp;&nbsp;&nbsp; 接下来介绍一些如何使用JSVM提供的其它功能来优化您的系统。
+	<ul>
+		<li>
+			<p><b>JSVM JavaScript Archive 的使用</b><br><br>
+		在使用JSVM2一段时间之后，很快会发现JSVM的工作模式是按需动态加载代码的。于是出现一个矛盾：当我们为了满足设计上的合理粒度将代码分散到多个对应的class.js文件中，造成代码的加载动作次数过于多，从而影响到一定的整体性能。<br>
+		为了解决这个矛盾，JSVM2 提供了一个集中批量加载代码的解决方案。可以通过JSVM2自身提供的工具，将所需的多个class.js文件打包在一个js文件中，然后配置到classpath的环境变量中即可。
+		当程序执行到需要这个“类”或者“对象”的时候，JSVM会从缓存中直接获得对应的代码，从来避免了进行多次的XMLHttpRequest交互。
+		
+			<a href="../examples/packager-demo.html" target="_blank">例子</a>
+			</p>
+		</li>
+		<li>
+			<p><b>JSVM Module 的使用与开发 </b><br><br>
+			JSVM2 的核心模块在 bin/kernel.js 中实现，除此之外，我们还可以使用JSVM2自带的（或者第三方提供的）其它模块。
+			<br>模块文件也必须以 .js 作为扩展名，放置在 &lt;jsvm目录&gt;/bin 目录下。
+			<br>加载模块的方式：<b>&lt;script src="jsvm2/jsre.js" modules="模块名称1,模块名称2"&gt;&lt;/script&gt;</b>
+			</p>
+		</li>	
+		... ... 未完待续...
+	</ul>
+
+</body>
+
+</html>

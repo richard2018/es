@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>Example-7.2</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//双精度浮点数包装类
+	function Double(value)
+	{
+		value = parseFloat(value);
+		if(!isNaN(value) && this && this.constructor == arguments.callee)
+		{   //如果是作为构造函数执行，那么满足this.constructor == arguments.callee
+		    //这个时候构造一个Double对象，给出doubleValue()和valueOf()方法
+			this.doubleValue = function(){
+				return value;
+			}
+			this.valueOf = function(){
+				return value;
+			}
+			this.toString = function(){
+				return value.toString();
+			}
+		}
+		//否则直接返回数值
+		else
+		{
+			return value;
+		}
+	}
+	var d_boxing = new Double(123.34);       //d_boxing是一个包装对象
+	var d_unboxing = Double("123.34");      //d_unboxing是一个普通数值
+	dwn(d_boxing.doubleValue());
+	dwn(typeof d_boxing);                  //得到object
+	dwn(d_unboxing);
+	dwn(typeof d_unboxing);                //得到number
+-->
+</script>
+</body>
+</html>

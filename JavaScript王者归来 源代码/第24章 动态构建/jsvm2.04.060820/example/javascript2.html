@@ -1,0 +1,99 @@
+<html>
+<head>
+<script 
+	src="../src/jsre.js"
+	extmodules="javascript2"
+	classpath="./classes"
+	debug="true"
+	mode=auto
+	></script>
+<script>
+	function func001 ()
+	{
+		try
+		{
+			_import("js.lang.System");
+			_import("akira.js2.HelloWorld");
+
+			var obj = new HelloWorld("akira");
+
+			System.out.println("-------------------------test hello world-----------------------------");
+
+			obj.name == null  //right, name is a private member
+				|| System.out.println("test private member error");
+
+			obj.getName() == "akira"
+				|| System.out.println("test getter error");
+
+			obj.sayHello();
+
+			obj.setName("fred");
+
+			obj.getName() == "fred"
+				|| System.out.println("test setter error");
+
+			obj.sayHello();
+		}
+		catch (ex)
+		{
+		 System.out.println("err:" + ex);
+		}
+	}
+	
+	function func002 ()
+	{
+		try
+		{
+			_import("js.lang.System");
+			_import("akira.js2.Vector2D");
+			var v1 = new Vector2D(1, 2);
+			var v2 = new Vector2D(3, 4);
+			var v3 = v1.add(v2);
+			System.out.println("-------------------------test vector-----------------------------");
+			System.out.println("v1 = "+v1);
+			System.out.println("v2 = "+v2);
+			System.out.println("v3 = (v1+v2) = "+v3);
+			System.out.println("v2 * 3 = "+v1.mul(3));
+			System.out.println("v1 * v2 = "+v1.mul(v2));
+		}
+		catch (ex)
+		{
+		 System.out.println("err:" + ex);
+		}
+	}
+	
+	function func003 ()
+	{
+		try
+		{
+			_import("js.lang.System");
+			_import("akira.js2.Point2D");
+			_import("akira.js2.Vector2D");
+			var p1 = new Point2D(1,3);
+			var p2 = new Point2D(10,10);
+			var v1 = new Vector2D(2,4);
+			System.out.println("-------------------------test point & vector-----------------------------");
+			System.out.println("p1 = "+p1);
+			System.out.println("p2 = "+p2);
+			System.out.println("v1 = "+v1);
+			System.out.println("p1 to vector: "+p1.toVector());
+			System.out.println("p1 + v1 = " + p1.add(v1));
+			System.out.println("p1 - v1 = " + p1.sub(v1));
+			System.out.println("p2 - p1 = " + p2.sub(p1));
+		}
+		catch (ex)
+		{
+		 ex.printStackTrace();
+		}
+	}
+
+</script>
+</head>
+<body>
+
+	<button onclick="func001()" >say hello!</button>
+	<button onclick="func002()" >vector</button>
+	<button onclick="func003()" >vector & point</button>
+	
+</body>
+</Html> 

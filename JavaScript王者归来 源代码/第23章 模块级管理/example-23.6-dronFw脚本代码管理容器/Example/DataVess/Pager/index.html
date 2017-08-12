@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>游戏人客户端分页-DataVess经典应用例子</title>
+<script type="text/javascript" src="../../../DronFw/boot.js" loadClass="DataVess"></script>
+<style type="text/css">
+body
+{
+	font-size:12px;
+}
+#pbody table
+{
+	background-color:#888;
+}
+#pbody td
+{
+	background-color:#fff;
+	font-size:12px;
+	height:20px;
+}
+#pagebar
+{
+	font-size:12px;
+}
+</style>
+</head>
+<body>
+
+<h1>客户端分页-DataVess经典应用例子</h1>
+
+<div id="pbody">
+</div>
+
+<div id="pagebar">
+</div>
+
+<script type="text/javascript">
+	DronFw.Call("data");
+	DronFw.Call("pager");
+</script>
+
+<!--
+	这是类 DataVess 在 DronFw 环境下应用的一个例子，
+	DataVess 是一个操作数组的类，
+	本例是客户端分页的例子
+	当然 DataVess 类还有许多方法本例没有用到，
+	比如，数据的添加、删除、修改等等
+	以后将会在其它例子中更详细地说明 DataVess 类
+-->
+
+</body>
+</html>

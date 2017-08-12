@@ -1,0 +1,172 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+	<title>Example 26.2 Silverna的事件模型</title>
+</head>
+<script src="Silverna V2.0_src/silverna-packs.js" type="text/javascript"></script>
+<body>
+<script type="text/javascript">
+function dwn(s)
+{
+	frames[0].document.write(s + "<br/>");
+}
+
+var EventManager = core.events.EventManager;
+function Test()
+{
+	function TypeA()
+	{
+		EventManager.call(this);  //注册事件模型
+
+		this.a = 0;
+
+		this.setA = function(x){
+			this.dispatchEvent("change", {oldValue:this.a, newValue:x});
+			this.a = x;
+		}
+	}
+	var a = new TypeA();
+
+	a.onchange = function(evt)   //基本的事件注册方式
+	{
+		dwn("oldValue:"+evt.oldValue);
+		dwn("newValue:"+evt.newValue);
+	}
+
+	a.setA(100);  
+}
+
+function Test2()
+{
+	function TypeA()
+	{
+		EventManager.call(this);  //注册事件模型
+
+		this.a = 0;
+
+		this.setA = function(x){
+			this.dispatchEvent("change", {oldValue:this.a, newValue:x});
+			this.a = x;
+		}
+	}
+	var a = new TypeA();
+
+	a.addEventListener("change",function(evt)   //高级的事件注册方式
+	{
+		dwn("oldValue:"+evt.oldValue);
+		dwn("newValue:"+evt.newValue);
+	});
+	a.addEventListener("change",function(evt)   //高级的事件注册方式
+	{
+		dwn("done");
+	});
+
+	a.setA(200); 
+}
+
+function Test3()
+{
+	function TypeA()
+	{
+		EventManager.call(this);  //注册事件模型
+
+		this.a = 0;
+
+		this.setA = function(x){
+			this.dispatchEvent("change", {oldValue:this.a, newValue:x});
+			this.a = x;
+		}
+	}
+	function TypeB()
+	{
+		EventManager.call(this);  //注册事件模型
+	}
+	var a = new TypeA();
+    var b = new TypeB();
+	
+	b.captureEvents(a,"change",null, function(evt){
+		dwn("a.a has changed from " + evt.oldValue + " to " + evt.newValue);
+	});
+	
+	a.setA(200); 
+}
+
+function Test4()
+{
+	function TypeA()
+	{
+		EventManager.call(this);  //注册事件模型
+
+		this.a = 0;
+
+		this.setA = function(x){
+			this.dispatchEvent("change", {oldValue:this.a, newValue:x});
+			this.a = x;
+		}
+	}
+	function TypeB()
+	{
+		EventManager.call(this);  //注册事件模型
+	}
+	var a = new TypeA();
+    var b = new TypeB();
+	
+	a.onchange = function(evt){
+		evt.stopPropagation();              //阻止事件被捕获
+		dwn("event capturing stopped!");
+	}
+
+	b.captureEvents(a,"change",null, function(evt){
+		dwn("a.a has changed from " + evt.oldValue + " to " + evt.newValue);
+	});
+	
+	a.setA(200); 
+}
+
+function Test5()
+{
+	function TypeA()
+	{
+		EventManager.call(this);  //注册事件模型
+
+		this.a = 0;
+
+		this.setA = function(x){
+			this.dispatchEvent("change", {oldValue:this.a, newValue:x,
+				defaultOp:function(){
+					dwn("default information");   //定义默认动作
+				}
+			});
+			this.a = x;
+		}
+	}
+	function TypeB()
+	{
+		EventManager.call(this);  //注册事件模型
+	}
+	var a1 = new TypeA();
+	var a2 = new TypeA();
+    var b = new TypeB();
+	
+	a1.onchange = function(evt){
+		dwn("a1.a has changed from " + evt.oldValue + " to " + evt.newValue);
+	}
+
+	a2.onchange = function(evt){
+		dwn("a2.a has changed from " + evt.oldValue + " to " + evt.newValue);
+		evt.preventDefault();  //阻止默认动作发生
+	}
+
+	a1.setA(100); 	
+	a2.setA(200); 
+}
+</script>
+<button  onclick="Test()">基本事件注册演示</button>
+<button  onclick="Test2()">高级事件注册演示</button>
+<button  onclick="Test3()">事件的捕获演示-基础</button>
+<button  onclick="Test4()">事件的捕获演示-强制阻止捕获</button>
+<button  onclick="Test5()">事件的默认行为和阻止默认操作</button>
+<br/>
+<iframe width="400px" height="300px"></iframe>
+</body>
+</html>

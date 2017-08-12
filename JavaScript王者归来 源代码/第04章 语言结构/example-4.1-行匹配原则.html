@@ -1,0 +1,16 @@
+<script>
+function T(a , b)
+{
+	return 
+		a || b;
+}
+alert(T(1,0));
+</script>
+<textarea style="width:240px;height:120px;">
+function T(a , b)
+{
+	return 
+		a || b; 
+}
+</textarea>
+<p>书写这个函数的本意或许应该是return a || b; 然而这种排版格式却让解析器将代码解析成了return; a || b; 结果返回值“不见了”。</p>
