@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Example-10.5</title>
+</head>
+<body>
+<div id="content">
+  	www.51js.com<br/>
+	bbs.51js.com<br/>
+	JavaScript is not Java. <br/>
+	JavaScript is fun and I love JavaScript.
+</div>
+<br/>
+<input type="text" id="keyword"/>
+<button onclick="match()">search</button>
+<script type="text/JavaScript">
+<!--
+var str = content.innerHTML;
+function match()
+//在例10.1中我们已经实现了全文检索的核心代码，它其实只是一个普通的replace()方法的运用
+//但这已经够了，在这里，我们要做的事情只是允许用户自己输入要查询的模式，把这个模式
+//交给replace()方法去完成检索
+{
+	//如果没有输入关键词，不作处理
+	if(keyword.value == '') return false;
+	//否则根据关键词构造正则表达式对象
+	var regexp = new RegExp("("+keyword.value+")", "g");
+	//根据动态构造的正则表达式对象进行全文检索和匹配
+	content.innerHTML = str.replace(regexp,"<font color='red'>$1</font>");
+}
+-->
+</script>
+</body>
+</html>

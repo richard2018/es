@@ -1,0 +1,41 @@
+/* ========================================================================= *
+ *                                                                           *
+ *                 The JSVM Software License,  Version 2.0                   *
+ *                                                                           *
+ *                Copyright (c) 2004, 2005  The JSVM Team.                   *
+ *                           All rights reserved.                            *
+ *                                                                           *
+ * ========================================================================= *
+ *                                                                           *
+ * JSVM2 is provided as open-source software, licensed under BSD License.    *
+ *                                                                           *
+ * Permission is hereby granted, free of charge, to any person obtaining a   *
+ * copy of this software and associated documentation files (the "Software"),*
+ * to deal in the Software without restriction, including without limitation *
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,  *
+ * and/or sell copies of the Software, and to permit persons to whom the     *
+ * Software is furnished to do so, subject to the following conditions:      *
+ *                                                                           *
+ * The above copyright notice and this permission notice shall be included   *
+ * in all copies or substantial portions of the Software.                    *
+ *                                                                           *
+ * the software is provided "as is", without warranty of any kind, express   *
+ * or implied, including but not limited to the warranties of merchantabili- *
+ * ty, fitness for a particular purpose and noninfringement. in no event     *
+ * shall the authors or copyright holders be liable for any claim, damages   *
+ * or other liability, whether in an action of contract, tort or otherwise,  *
+ * arising from, out of or in connection with the software or the use or     *
+ * other dealings in the software.                                           *
+ *                                                                           *
+ * ========================================================================= *
+ *                                                                           *
+ * This software  consists of voluntary contributions made  by many individ- *
+ * uals on behalf of the JSVM Team, For more information on the JSVM Team,   *
+ * please see <http://jsvm.org/>.                                            *
+ *                                                                           *
+ * ========================================================================= */
+
+/* CVS information: $Revision: 1.5 $ $Date: 2005/06/16 16:43:34 $
+ * $Source: E:/CVSSEW/JSVM/jsvm2.0/src/LICENSE,v $
+ * $Author: administrator $
+ */

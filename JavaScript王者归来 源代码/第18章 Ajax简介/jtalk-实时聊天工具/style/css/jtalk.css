@@ -1,0 +1,84 @@
+/* CSS Document by aoao*/
+*{ margin:0; padding:0}
+body,input,textarea{ font-size:12px; font-family: Arial, Helvetica, sans-serif; line-height:1.3}
+body{background-color:#C3D9FF;}
+li{list-style-type:none;}
+a{ text-decoration:none}
+a img{ border:0}
+#nav{ height:24px; padding:0 4px; background-image:url(../images/nav_bg.gif); overflow:hidden}
+#nav li{ float:left; display:inline; margin:4px 2px 0 0 ; padding:0 0 0 4px;height:20px; line-height:20px; background:url(../images/tag_bg.gif) no-repeat  0 -20px; }
+#nav li div{
+padding:0 6px 0 0;
+background:url(../images/tag_bg.gif) no-repeat right -20px;
+cursor:pointer;
+}
+#nav li a{display:none; }
+#nav li.on a{display:inline; font-size:11px;font-family:Verdana, Arial, Helvetica, sans-serif; padding:0 2px; margin-right:-3px; color:#fff;}
+
+#nav li.on a:hover{ background-color:#AFC3E6 }
+#nav li.on a img{}
+#nav li.on{ background-position:0 0;}
+#nav li.on div{ background-position:right 0; font-weight:bold; white-space:nowrap}
+#nav li.hasChat{background-position:0 -40px;padding:0 0 0 20px;}
+#nav li.hasChat div{ background-position:right -40px; font-weight:bold}
+#nav li.hasChat div span{background-position:-100px;padding-left:0px; color:#fff}
+#nav li .status{ margin-left:-2px;}
+.status{display:block; background:url(../images/status.gif) no-repeat 0 0; padding-left:16px;}
+.busy{ background-position:0 -20px}
+.away{ background-position:0 -40px}
+.offline{ background-position:0 -60px}
+.chat{ background-position:-0 -80px}
+#contacts{padding:5px 0 0;background-color:#C3D9FF;}
+#my{ float:left; position:relative; width:100%; }
+#userName{ margin-left:9px; padding-left:15px;}
+#myface{ position:absolute;border:1px #C3D9FF solid; top:0px;right:7px}
+#myface:hover{ border:1px red solid}
+#myface img{ display:block}
+#twitter{ padding:0 55px 1px 24px;}
+#twitter input{ height:16px;border:1px #C3D9FF solid;background-color:#C3D9FF; color:#666; padding:1px 2px; vertical-align:top}
+#twitter #twitterStatus{width:100%; margin-left:-6px;}
+* html #twitter #twitterStatus{ margin-top:-1px}
+#twitter #twitterSelect{ position:absolute;right:46px; }
+#twitter:hover input{border:1px #ccc solid; background-color:#fff;}
+#twitterList{ position:absolute; width:60%; border:1px #73A6FF solid;left:20px; background-color:#E0EDFE}
+#twitterList li{ float:left; width:100%;}
+#select{ padding:0 6px;}
+#select #selectInput{width:100%;border:1px #ccc solid; padding:2px; background-color:#fff; margin:0 -3px;}
+#selectList{position:absolute; border:1px #73A6FF solid; background-color:#FFF}
+#selectList li,#twitterList li{ clear:both; line-height:20px;}
+#selectList .status,#twitterList .status{ float:left}
+#twitterList .status{ width:100%}
+#selectList .pager {clear:both; width:96%;padding:2px; background-color:#E5EFFF; line-height:20px;}
+#selectList .pager #pagerNav{ float:right}
+#selectList .pager input{ width:16px; height:16px; margin:2px; line-height:12px; border:1px #ADCBFF solid; background-color:#C7DBFF}
+
+#userList{ background-color:#fff; margin:4px 4px 0;}
+#userList li{ clear:both; height:38px; overflow:hidden; border-bottom:1px #efefef solid}
+#userList a{ display:block; color:#000;padding:0px 4px 0px 6px;height:38px; overflow:hidden;}
+#userList a:hover{ background-color:#E0EDFE}
+#userList span{line-height:20px;}
+#userList .face{ float:right; margin:3px 0px 3px 3px;}
+#userList .status{ padding-left:18px; white-space:nowrap}
+#userList .twitter{ line-height:18px; margin:-2px 0 0 18px; color:#888}
+
+#footer { height:22px; line-height:22px; color:#fff; background-color:#C3D9FF}
+
+#footer a{ color:#fff; }
+#footer a span{ font-weight:bold; color:#14316B;}
+
+.chatWin{padding:5px 0 0;background-color:#C3D9FF;}
+.menu{line-height:20px; margin:0 4px; color:#fff}
+.menu a{color:#000;}
+.vcard{ margin:0 4px; padding:3px 3px 3px 5px; background-color:#fff; border-bottom:1px #efefef solid; overflow: hidden;}
+.fn {font-weight:bold; }
+.vcard .fn{display:block}
+.vcard .email{ display:block}
+.vcard .photo{ float:right}
+.chatContent{margin:0 4px;  padding:5px; background-color:#fff; line-height:2em}
+.input{ padding:0 6px;}
+.input input{width:100%;border:1px #ccc solid; padding:2px; background-color:#fff; margin:0 -3px; float:left}
+
+/*
+#contacts{ position:absolute; top:24px; left:0; right:0; bottom:20px}
+#footer{position:absolute; bottom:0; left:0; right:0;}
+#userList{position:absolute; top:64px; left:0; right:0; bottom:0}*/

@@ -1,0 +1,9 @@
+<script>
+var aSet = new Object();  //定义一个集合
+if("key1 " in aSet)        //如果key1已经存在，删除原有元素
+	delete aSet["key1"];   
+aSet["key1"] = true;		//插入新元素（无论原来是否存在）
+if(delete aSet["key2"])     //如果key2存在
+	aSet["key2"] = true;   //删除原有元素，更新key2
+alert([aSet["key1"],aSet["key2"]]);
+</script>

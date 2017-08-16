@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Example-7.1</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//定义一个名为ClassA的对象
+	function ClassA(){
+		this.a=1;
+	}
+	//再定义一个名为ClassB的对象
+	function ClassB(){
+		this.b=5;
+	}
+	//ClassB原型继承ClassA
+//什么是原型，在第21章才会有系统性的介绍
+	ClassB.prototype=new ClassA();
+	var objB=new ClassB();
+
+	dwn("a" in objB);  //true
+	dwn("b" in objB); //true
+	dwn(objB.hasOwnProperty("a"));
+//false从原型继承来的属性不会被识别
+	dwn(objB.hasOwnProperty("b")); //true非继承的属性可以被识别
+-->
+</script>
+</body>
+</html>

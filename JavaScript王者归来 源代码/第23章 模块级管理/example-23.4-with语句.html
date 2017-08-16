@@ -1,0 +1,52 @@
+<html>
+<head>
+	<title>Example-23.4 with语句</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//定义Point类型
+	function Point(x, y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+	//构造了一个Point类型的对象p
+	var p = new Point(10,20);
+	with(p)
+	{
+		dwn(x);	//得到p.x
+		dwn(y);	//得到p.y
+		x++;		//p.x++
+		y++;		//p.y++
+		var y = 0;		//这里的var不起作用？？相当于p.y = 0
+		y++;		//p.y++
+		dwn(y);	
+		var z = 10;	//这个z是p中不具有的属性，因此它不会被加到p上
+	}
+	dwn(p.x);
+	dwn(p.y);
+	dwn(p.z);
+
+	var a = {x:1, y:2}
+	a.b = {a:3, b:4, y:33}
+	with(a){
+	with(b){	//可以像这样连续地引入多个域
+		x++;
+		y++;		//根据就近原则，这里起作用的是a.b.y
+		a++;
+		b++;	
+	}}
+	dwn(a.x);
+	dwn(a.y);
+	dwn(a.b.a);
+	dwn(a.b.b);
+	dwn(a.b.y);
+-->
+</script>
+</body>
+</html>

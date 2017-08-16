@@ -1,0 +1,27 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 18.1从常规应用开始</title>
+</head>
+<body>
+	<form action="?user=akira" method="get">
+		<div>
+			<textarea style="width:260px;height:160px;float:left">
+			</textarea>
+			<select multiple style="height:160px;">
+				<option>--当前在线用户--</option>
+				<option>akira</option>
+				<option>嗷嗷</option>
+				<option>winter</option>
+			</select>
+		</div>
+		<input name="message" type="text" style="width:220px;"/><input type="submit"/>
+	</form>
+</body>
+<script>
+	setTimeout("document.forms[0].submit()",2000);		
+	//每隔两秒钟自动向服务器发起请求
+	//由于提交表单的时候页面总是会被刷新，所以这里用setTimeout就够了
+	//当然用setInterval也是可以的
+</script>
+</html>

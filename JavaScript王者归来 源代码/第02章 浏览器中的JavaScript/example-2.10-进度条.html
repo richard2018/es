@@ -1,0 +1,26 @@
+<HTML>
+<HEAD>
+<TITLE>Example 2.10 -- Process bar</TITLE>
+<script language="Javascript">
+function exec(){
+	ProgressBar1.value += 1;	//让进度条的值加1
+	if(ProgressBar1.value>=ProgressBar1.Max)
+		clearInterval(intv);	//最大进度后清除计数器
+};
+var intv = setInterval("exec();", 1);	 //利用计数器每隔1ms执行exec();
+</script>
+</HEAD>
+<BODY onload="exec">
+
+<!-同上个例子一样，这里利用了微软提供的ActiveX接口，嵌入一个COM对象到页面中并且由JavaScript来操纵，本书的后续章节并不打算介绍这种应用，但是，这种应用也是JavaScript的一种用法-->
+<OBJECT ID="ProgressBar1" WIDTH=200  HEIGHT=16
+ CLASSID="CLSID:35053A22-8589-11D1-B16A-00C0F0283628">
+    <PARAM NAME="_ExtentX" VALUE="10345">
+    <PARAM NAME="_ExtentY" VALUE="423">
+    <PARAM NAME="_Version" VALUE="393216">
+    <PARAM NAME="Appearance" VALUE="0">
+    <PARAM NAME="Max" VALUE="100">
+    <PARAM NAME="Scrolling" VALUE="1">
+</OBJECT>
+</BODY>
+</HTML>

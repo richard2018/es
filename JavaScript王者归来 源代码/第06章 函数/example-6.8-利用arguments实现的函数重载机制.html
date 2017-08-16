@@ -1,0 +1,123 @@
+<html>
+<head>
+	<title>Example-6.8 利用arguments实现的函数重载机制</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//$overload用来匹配参数类型和参数值，自动调用符合条件的重载函数
+	function $overload(func, argMaps, owner)
+	{
+		//owner是函数的所有者，即调用对象，关于这部分的内容，在下一章中会有进一步的讨论
+		owner = owner || null;
+		var args = [];
+		for(var i = 0; i < argMaps.length; i++)
+		{
+			//判断argMaps中存放的参数类型声明是否同实际的参数类型相匹配
+			if(argMaps[i].type != typeof(argMaps[i].arg) && !(argMaps[i].arg instanceof argMaps[i].type))
+				throw new Error("参数不匹配！");	//不匹配则抛出异常
+			args.push(argMaps[i].arg);	//否则将参数放入args数组准备调用
+		}
+
+		//用apply()实际调用该方法，关于apply()在本章稍后将有较详细的讨论
+		return func.apply(owner, args);	
+	}
+	function Point(x, y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+
+	function Vector(x, y)
+	{
+		//私有方法，简单封装一个argMaps的结构
+		function $t(type, arg)
+		{
+			return {
+				type:type,
+				arg:arg
+			}
+		}
+		//用向量构造向量
+		function vector_vector(v)
+		{
+			this.x = v.x;
+			this.y = v.y;
+		}
+		//用点构造向量
+		function point_vector(p)
+		{
+			this.x = p.x;
+			this.y = p.y;
+		}
+		//用x,y坐标构造向量
+		function number_number_vector(x, y)
+		{
+			this.x = x;
+			this.y = y;
+		}
+		//用两个点所构成的线段构造向量
+		function point_point_vector(p1, p2)
+		{
+			this.x = p2.x - p1.x;
+			this.y = p2.y - p1.y;
+		}
+		//参数类型对应表，根据这个表指派正确的函数进行调用
+		var funcs = [
+			[number_number_vector,[$t("number",x), $t("number",y)]],
+			[point_point_vector,[$t(Point,x), $t(Point, y)]],
+			[vector_vector,[$t(Vector,x)]],
+			[point_vector,[$t(Point,x)]]
+		];
+		
+		//如果不带参数调用，默认调用Vector(0,0);
+		if (arguments.length == 0)
+		{
+			Vector.call(this, 0, 0);
+		}
+
+		for(var i = 0; i < funcs.length; i++)
+		{
+			try
+			{
+				//尝试选择合适的funcs进行调用
+				return $overload(funcs[i][0],funcs[i][1], this); 
+			}
+			catch(ex)
+			{
+			}
+		}
+		//如果参数类型和上面列表中的任何一个都不匹配，则抛出异常
+		throw new Error("参数不匹配！");
+	}
+	//重载toString()方法，便于显示
+	Vector.prototype.toString = function()
+	{
+		return "[" + this.x + "," + this.y + "]";
+	}
+
+	try
+	{
+		var v1 = new Vector(1,2);	//用x,y形式构造Vector
+		dwn(v1);
+		var p1 = new Point(0,3);
+		var p2 = new Point(2,4);
+		var v2 = new Vector(p1);	//用单点形式构造Vector
+		var v3 = new Vector(p1, p2);	//用两点确定的线段的形式构造Vector
+		dwn(v2);
+		dwn(v3);
+		var v4 = new Vector("str");	//用字符串构造，类型都不匹配，抛出异常
+	}
+	catch(ex)
+	{
+		dwn(ex.message);
+	}	
+-->
+</script>
+</body>
+</html>
+

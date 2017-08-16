@@ -1,0 +1,316 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+ Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="BObject.jsc Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>BObject.jsc</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		js.lang.BObject class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ <BR/><BR/><B>Version: </B>2.01, 10/23/05
+ <BR/><BR/><B>Author:</B> Wan Changhua
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="BObject.html">js.lang.BObject</a></b></td>
+    <td>js.lang.BObject is a class that work on browser.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"># language: jsvm2
+
+<span class="comment">/**
+ * <span class="attrib">@fileoverview</span> js.lang.BObject class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ * <span class="attrib">@file</span>		BObject.jsc
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@since</span>		JSVM2.0
+ */</span>
+
+package js.lang;
+
+import js.lang.System;
+import js.lang.NotSupportException;
+
+
+<span class="comment">/**
+ * Create a new BObject instance.
+ * Inherit from JObject
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@extends</span> JObject
+ * <span class="attrib">@class</span> js.lang.BObject is a class that work on browser.
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@throws</span> NotSupportException if platform is not a browser
+ * <span class="attrib">@return</span> A new BObject
+ * #see JObject js.lang.JObject is the base class for this
+ */</span>
+<span class="reserved">function</span> BObject()
+{
+	<span class="comment">/* check platform
+ 	*/</span>
+	<span class="reserved">if</span> (!(System.isIeBrowser()
+		|| System.isMozBrowser()))
+	{
+		throw new NotSupportException(<span class="literal">"BObject only support in Browser (IE5+ or Moz) !"</span>);
+	}
+}
+
+
+<span class="comment">/**
+ * The Unique Id prefix
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@type</span> String
+ */</span>
+var uidPrefix = <span class="literal">"_jbo_"</span> + new Date().getTime() + <span class="literal">"_"</span>;
+
+<span class="comment">/**
+ * The Unique Id sequence
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@type</span> String
+ */</span>
+var sequence = 0;
+
+<span class="comment">/**
+ * Create an unique id (like hashCode in java)
+ * <span class="attrib">@param</span> {Object} obj an object
+ * <span class="attrib">@return</span> a Unique Id
+ * <span class="attrib">@type</span> String
+ */</span>
+BObject.createUniqueId = <span class="reserved">function</span> (obj)
+{
+	<span class="reserved">if</span> (obj != null &amp;&amp; typeof(obj) == <span class="literal">"object"</span>)
+	{
+		<span class="reserved">if</span> (obj.uniqueID != null)
+		{
+			<span class="reserved">return</span> obj.uniqueID;
+		}
+		<span class="reserved">return</span> obj.uniqueID = uidPrefix + (sequence++);
+	}
+	<span class="reserved">return</span> uidPrefix + (sequence++);
+}
+
+<span class="comment">/**
+ * retrieve an unique id, if has not, create it
+ * <span class="attrib">@return</span> a Unique Id
+ * <span class="attrib">@type</span> String
+ */</span>
+BObject.<span class="reserved">prototype</span>.getUniqueId = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> BObject.createUniqueId(<span class="reserved">this</span>);
+}
+
+<span class="comment">/**
+ * the global container
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@type</span> Object
+ */</span>
+var container = {};
+
+<span class="comment">/**
+ * put self into the global container
+ * <span class="attrib">@param</span> {boolean} bool if make self become a globale variable
+ */</span>
+BObject.<span class="reserved">prototype</span>.globalize = <span class="reserved">function</span> (bool)
+{
+	var uid = <span class="reserved">this</span>.getUniqueId();
+	<span class="comment">// put self into the global container</span>
+	container[uid] = <span class="reserved">this</span>;
+	<span class="comment">// whether become a windows's property</span>
+	<span class="reserved">if</span> (bool == true)
+	{
+		eval(<span class="literal">"window."</span> + uid + <span class="literal">" = this;"</span>);
+	}
+}
+
+<span class="comment">/**
+ * un globalize
+ */</span>
+BObject.<span class="reserved">prototype</span>.unglobalize = <span class="reserved">function</span> ()
+{
+	var uid = <span class="reserved">this</span>.getUniqueId();
+	<span class="comment">// remove from the global container</span>
+	delete container[uid];
+	eval(<span class="literal">"delete window."</span> + uid);
+}
+
+<span class="comment">/**
+ * Retrieve an object by the uniqueID
+ * <span class="attrib">@param</span> {String} sId the uniqueID of object
+ * <span class="attrib">@return</span> an object from container by uniqueID
+ * <span class="attrib">@type</span> Object
+ */</span>
+BObject.getGlobalObjectByUniqueId = <span class="reserved">function</span> (sId)
+{
+	<span class="reserved">return</span> container[sId];
+}
+
+<span class="comment">/**
+ * Retrieve all objects from the global container
+ * <span class="attrib">@return</span> all objects in the container
+ * <span class="attrib">@type</span> Array
+ */</span>
+BObject.getAllGlobalObjects = <span class="reserved">function</span> ()
+{
+	var objs = [], i = 0;
+	<span class="reserved">for</span> (var uid in container)
+	{
+		objs[i++] = container[uid];
+	}
+	<span class="reserved">return</span> objs;
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu Nov 17 20:10:21 2005</div>
+</body>
+</html>

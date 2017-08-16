@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Example-6.4</title>
+</head>
+<body>
+<script>
+<!--
+function f(x, y, z)
+{
+	if(f.length != arguments.length)
+	{
+		throw new Error("function f called with " + arguments.length + "arguments, but it expects " + f.length + " arguments.");
+	}
+	else 
+		document.write("f(" + [x,y,z] + ")" + "<br/>");
+}
+
+try{
+	f(1,2,3);
+	f(2,4);	//抛出异常，页面显示“function f called with 2arguments, but it expects 3 arguments.” 
+	//后面的将不再执行
+	f(4);
+	f("a","b","c","d","e");
+}
+catch(ex)
+{
+	document.write(ex.message);
+}
+-->
+</script>
+</body>
+</html>
+

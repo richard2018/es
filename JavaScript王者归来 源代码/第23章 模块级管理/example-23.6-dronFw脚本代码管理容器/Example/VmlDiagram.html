@@ -1,0 +1,39 @@
+<html xmlns:v>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css">
+	v\:*{behavior:url(#default#VML)}
+	td,body{font-size:12px;}
+	#div1,#div2,#div3
+	{
+		position:absolute;
+	}
+	#div1{top:100px;}
+	#div2{top:400px;}
+	#div3{top:700px;}
+</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="VmlDiagram"></script>
+</head>
+<body>
+<h2>幻宇vml图表类</h2>
+<hr>
+
+<div id="div1"></div>
+
+<div id="div2"></div>
+
+<div id="div3"></div>
+
+<script type="text/javascript">
+var ct1 = new DronFw.Class.VmlDiagram;
+//---柱形图
+$("div1").innerHTML=ct1.draw("季度,东部,中部,北部;1季度,20.4,30.6,90;2季度,27.4,38.6,34.6;3季度,45.9,0,0","type:bar;showVal:t;vname:销售额;title:月统计图");
+//---线形图
+$("div2").innerHTML=ct1.draw("季度,东部,中部,北部;1季度,20.4,30.6,90;2季度,27.4,38.6,34.6;3季度,45.9,0,0","type:lines;showVal:t;vname:销售额;title:月统计图");
+//---饼形图
+$("div3").innerHTML=ct1.draw("季度,东部,中部,北部;1季度,20.4,30.6,90;2季度,27.4,38.6,34.6;3季度,45.9,0,0","type:pie;showVal:t;vname:销售额;title:月统计图");
+</script>
+</body>
+</html>

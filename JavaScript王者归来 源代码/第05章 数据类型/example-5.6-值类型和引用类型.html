@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Example-5.6</title>
+</head>
+<body>
+<script>
+<!--
+function swap(a, b)
+	{
+		var temp;
+		temp = a;
+		a = b;
+		b = temp;
+}
+var x = 10;
+var y = 20;
+swap(x, y);  
+//这个函数调用并没有实际交换x,y的值
+//因为它只交换了参数a,b的值，它们对于实际的x,y来说并不起作用
+var Vector = {};
+Vector.reverse = function(vector)
+{
+	vector.x = - vector.x;
+	vector.y = - vector.y;
+}
+var v = {x:1, y:2};
+Vector.reverse(v);  //这个函数调用该改变了v的值，现在的v变成了{x:-1, y:-2}
+-->
+</script>
+</body>
+</html>

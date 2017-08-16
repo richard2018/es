@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css">
+	td,body{font-size:12px;}
+</style>
+</head>
+<body>
+<h2>游戏人拼音类</h2>
+<hr>
+
+<input type="text" id="test1" value="中华人民共和国"><input type="button" onclick="test()" value="测试">
+
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="Pinyin"></script>
+
+<script type="text/javascript">
+	var py = new DronFw.Class.Pinyin();
+	function test()
+	{
+		window.alert(py.Get($("test1").value));
+	}
+/*
+	Pinyin 类只有一个方法：
+	Get(str)  返回 str 的拚音
+*/
+</script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 16.3 setInterval</title>
+</head>
+<body>   
+<h1 id="output"></h1>
+<script language="javascript" type="text/javascript">  
+<!--
+var c = 10;
+document.getElementById("output").innerHTML = c;
+//计数器，每隔1秒调用第一个参数指定的函数
+var timer = setInterval(
+	function(){
+		document.getElementById("output").innerHTML = --c;
+		if(c == 0) clearInterval(timer);	
+//如果不消除计数器，它将继续运行下去
+//你可以把上面这行代码注释掉以观察效果
+	}
+	,1000
+);
+-->
+</script>  
+</body>   
+</html>

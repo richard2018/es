@@ -1,0 +1,27 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 21.5给原型对象添加属性</title>
+</head>
+<body>   
+<h1 id="output"></h1>
+<script language="javascript" type="text/javascript">  
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	function Point(x, y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+	var p1 = new Point(1,2);
+	var p2 = new Point(3,4);
+	Point.prototype.z = 0; //动态为Point的原型添加了属性
+	dwn(p1.z);
+	dwn(p2.z);  //同时作用于Point类型创建的所有对象
+-->
+</script>  
+</body>   
+</html>

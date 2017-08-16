@@ -1,0 +1,40 @@
+# language: javascript2
+
+package akira.js2{
+
+	import js.lang.JObject;
+	import js.lang.System;
+
+	public class HelloWorld extends JObject
+	{
+		private var name = null;
+		private static var message = "Hello ";
+
+		//constructor
+		function HelloWorld(name)
+		{
+			this.name = name;
+		}
+		
+		//getter and setter
+		public get Name()
+		{
+			return this.name;
+		}
+
+		public set Name(name)
+		{
+			this.name = name;
+		}
+
+		public function sayHello()
+		{
+			System.out.println(this.pickName() + HelloWorld.message + this.name);
+		}
+
+		private function pickName()
+		{
+			return (this.name +" ");
+		}
+	}
+}

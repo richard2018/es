@@ -1,0 +1,77 @@
+<html>
+<head>
+	<title>Example-21.14 构造继承法</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//定义一个Collection类型
+	function Collection(size)
+	{
+		this.size = function(){return size};  //公有方法，可以被继承
+	}
+	
+	Collection.prototype.isEmpty = function(){   //静态方法，不能被继承
+		return this.size() == 0;
+	}
+	
+	//定义一个ArrayList类型，它"继承"Collection类型
+	function ArrayList()
+	{
+		var m_elements = []; //私有成员，不能被继承
+		m_elements = Array.apply(m_elements, arguments);
+
+		//ArrayList类型继承Collection
+		this.base = Collection;
+		this.base.call(this, m_elements.length);
+	
+		this.add = function()
+		{
+			return m_elements.push.apply(m_elements, arguments);
+		}	
+		this.toArray = function()
+		{
+			return m_elements;
+		}
+	}
+
+	ArrayList.prototype.toString = function()
+	{
+		return this.toArray().toString();
+	}
+	//定义一个SortedList类型，它继承ArrayList类型
+	function SortedList()
+	{
+		//SortedList类型继承ArrayList
+		this.base = ArrayList;
+		this.base.apply(this, arguments);
+
+		this.sort = function()
+		{
+			var arr = this.toArray();
+			arr.sort.apply(arr, arguments);
+		}
+	}
+
+//构造一个ArrayList
+	var a = new ArrayList(1,2,3);
+	dwn(a);
+	dwn(a.size()); //a从Collection继承了size()方法
+	dwn(a.isEmpty);	//但是a没有继承到isEmpty()方法
+
+	//构造一个SortedList
+	var b = new SortedList(3,1,2);
+	b.add(4,0);	//b 从ArrayList继承了add()方法
+	dwn(b.toArray());	//b 从ArrayList继承了toArray()方法
+	b.sort();		//b 自己实现的sort()方法
+	dwn(b.toArray());
+	dwn(b);
+	dwn(b.size());	//b从Collection继承了size()方法
+-->
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css">
+	td,body{font-size:12px;}
+	#test
+	{
+		background-color:#ddd;
+		width:100px; height:100px;
+		font-size:16px;
+		text-align:center;
+		line-height:100px;
+	}
+	/*
+	input
+	{
+		border:1px solid #000;
+		background:#fff;
+	}*/
+</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="CSS"></script>
+
+<link rel="stylesheet" type="text/css" media="all" href="styles/red.css" title="red" >
+<link rel="alternate stylesheet" type="text/css" media="all" href="styles/blue.css" title="blue" />
+<link rel="alternate stylesheet" type="text/css" media="all" href="styles/green.css" title="green" />
+
+
+</head>
+<body>
+<h2>游戏人样式表操作类</h2>
+<hr>
+
+<div id="test">测试框</div>
+
+<div style="color:red;font-size:16px;">我是红色的16号字体</div>
+
+<input type="button" value="链入css文件" onclick="t1()">
+<input type="button" value="断开新链入的css文件" onclick="t2()">
+<input type="button" value="无样式预览" onclick="t3()"><br><br>
+<input type="button" value="红" onclick="t4('red')">
+<input type="button" value="蓝" onclick="t4('blue')">
+<input type="button" value="绿" onclick="t4('green')">
+
+
+<script type="text/javascript">
+	var CSS = new DronFw.Class.CSS();
+	var newCssFile;
+	function t1()
+	{
+		newCssFile = CSS.Append("styles/style1.css");//链入样式表
+	}
+	function t2()
+	{
+		if (!CSS.Remove(newCssFile)) window.alert("没有载入样式表。");
+	}
+	function t3()
+	{
+		CSS.RemoveAll();
+	}
+	function t4(str)
+	{
+		CSS.ApplySkin(str);
+	}
+/*
+	CSS 类有如下的方法：
+
+	Append(url,tit)  链入网址为 url 的样式表，tit 为指定 title，有返回值，返回 link 标签对象
+	Remove(tag)  移除对象为 tag 的样式表标签
+	RemoveAll()  移除页面上所有样式
+	ApplySkin(str)  应用 title 为 str 的样式表（相当于FF下的页面风格功能）
+*/
+</script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="Cookie"></script>
+<style>
+	body,td{font-size:12px;}
+</style>
+</head>
+<body>
+
+<h2>Cookie 操作</h2>
+<hr>
+
+<input type="input" value="" id="input">
+<input type="button" value="载入值" onclick="loadValue()">
+<input type="button" value="保存值" onclick="saveValue()">
+<input type="button" value="清除记录" onclick="clearValue()">（请在保存完后关闭浏览器再重新打开测试载入）
+
+<script type="text/javascript">
+var Cookie = new DronFw.Class.Cookie();
+function loadValue()
+{
+	$("input").value = Cookie.get("test");
+}
+function saveValue()
+{
+	Cookie.set("test",$("input").value);
+	window.alert("保存成功！");
+}
+function clearValue()
+{
+	Cookie.del("test");
+	window.alert("清除成功！");
+}
+/*
+	Cookie类有三个方法：
+
+	set(name,value)  存储名为 name 的 cookie，值为 value
+	get(name)  读取名为 name 的 cookie 的值
+	del(name)  删除名为 name 的 cookie
+*/
+</script>
+
+
+</body>
+</html>
+

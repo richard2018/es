@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title>Example-10.2 replace()和闭包</title>
+</head>
+<body>
+wHENEVER SANG MY SONG, oN THIS STAGE, oN MY OWN...<BR>
+&COPY;1999 - 2006
+<script>
+<!--
+var matchExp = /([\d])|([a-z])|([A-Z])/g;
+//根据不同分组的匹配分别替换数字、大写字母和小写字母
+function magicCode(s,a,b,c)
+{
+	//这里的参数s是匹配matchExp的完整内容，而a、b、c分别对应三个括号（分组）内的匹配
+	//第一个匹配的[\d]是数字
+	//第二个匹配[a-z]是小写字母
+	//第三个匹配[A-Z]是大写字母
+	//最后返回的时候将数字标记为红色，小写字母转大写，大写字母转小写
+	return a ? "<font color='red'>"+s+"</font>" : 
+		(b ? b.toUpperCase() : 
+		 c.toLowerCase());
+}
+document.body.innerHTML = 
+document.body.innerHTML.replace(matchExp, magicCode);
+-->
+</script>
+</body>
+</html>

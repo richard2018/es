@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>JValidator 通用表单验证类</title>
+<style type="text/css">
+body{
+	font-size:12px;
+}
+label{
+	float:left;
+	width:180px;
+}
+input {
+	border:1px solid #D4D4D4;
+	font-size:12px;
+	width:180px;
+}
+
+fieldset{
+	margin:5px;
+	padding:0 12px 12px 12px;
+	border:1px solid #D4D4D4;
+	background-color:#F9F9F9;
+}
+
+fieldset legend {
+	font-weight:bold;
+}
+button {
+	margin:0 5px;
+	height:20px;
+	padding-left:5px;
+	padding-right:5px;
+	line-height:20px;
+	font-size:12px;
+	border:1px solid #D4D4D4;
+	background-color:#F9F9F9;
+}
+</style>
+<script type="text/javascript">
+//基础函数
+var isIE = /msie/i.test(navigator.userAgent);
+String.prototype.trim=function(){
+	return this.replace(/(^\s*)|(\s*$)/g,"");
+}
+if(!isIE){
+	Event.prototype.__defineGetter__("srcElement",function(){
+		var node=this.target;
+		while(node.nodeType!=1)node=node.parentNode;
+		return node;
+	});
+	HTMLElement.prototype.attachEvent=function(sType,foo){
+		this.addEventListener(sType.slice(2),foo,false);
+	}
+	HTMLElement.prototype.__defineGetter__("innerText",function(){
+		return this.textContent;
+	});
+	HTMLElement.prototype.__defineSetter__("innerText",function(str){
+		this.textContent = str;
+	});
+	HTMLElement.prototype.insertAdjacentElement=function(where,parsedNode){
+		switch(where){
+			case "beforeBegin":
+                this.parentNode.insertBefore(parsedNode,this);
+                break;
+            case "afterBegin":
+                this.insertBefore(parsedNode,this.firstChild);
+                break;
+            case "beforeEnd":
+                this.appendChild(parsedNode);
+                break;
+            case "afterEnd":
+                if(this.nextSibling)
+                    this.parentNode.insertBefore(parsedNode,this.nextSibling);
+                else
+                    this.parentNode.appendChild(parsedNode);
+                break;
+		}
+	}
+    HTMLElement.prototype.insertAdjacentHTML=function(where,htmlStr){
+        var r=this.ownerDocument.createRange();
+        r.setStartBefore(this);
+        var parsedHTML=r.createContextualFragment(htmlStr);
+        this.insertAdjacentElement(where,parsedHTML);
+	}
+
+}
+else document.execCommand("BackgroundImageCache",false,true);
+function $(id){return (typeof id == "string" ? document.getElementById(id) : id);}
+function $N(name){return document.getElementsByName(name);}
+function $TN(name,root){return root ? $(root).getElementsByTagName(name) : document.getElementsByTagName(name);}
+function $F(id){return exist(id) ? $(id).value.trim() : null;}
+function $IH(id,s){$(id).innerHTML = s;}
+function $IT(id,s){$(id).innerText = s;}
+function $iF(id,s){$(id).value = s;}
+function $DC(name){return document.createElement(name);}
+function isEmpty(str){return str.replace(/(?:null)|(?:undefined)/i,"").length == 0;}
+function exist(id){return $(id)!= null;}
+function hide(id){if(exist(id))$(id).style.display="none";}
+function show(id){if(exist(id))$(id).style.display="";}
+function nextSibling(id){return (($(id).nextSibling.nodeName == "#text" && $(id).nextSibling.Value == "") ? $(id).nextSibling.nextSibling : $(id).nextSibling);}
+function removeNode(id){
+	if(exist(id)){
+		$(id).parentNode.removeChild($(id));
+	}
+}
+</script>
+<script type="text/javascript">
+/******************************\
+*@author brull
+*@email [email]brull@163.com[/email]
+*@date 2007-4-24
+\******************************/
+
+/**
+ *@param form 表单 id [可选]
+ */
+JValidator = function (form) {
+	var form = $(form);
+	var elements = form.elements;
+	checkOne = function (obj){//验证单个表单元素
+		var pass = true;
+		var tip = $DC("span");
+		var same = obj.getAttribute("same");
+		var pattern = obj.getAttribute("pattern");
+		var msg = obj.getAttribute("msg") != null ? obj.getAttribute("msg") : " ";//默认为一空格
+		var required = obj.getAttribute("required") != "no";//默认为yes
+		var span = nextSibling(obj);
+		var checked = span != null ? span.nodeName == "SPAN" : false;
+		if(same != null)same = $F(same);
+		obj.value = $F(obj);
+		tip.style.padding = "1px 1px 1px 20px";
+		if(checked) removeNode(span);
+		if(same != null){
+			if(same != obj.value){
+				with (tip.style){
+					border = "1px dashed #D4D4D4";
+					background = "#FFFF99 url(http://www.51js.com/attachments/2007/04/35270_200704250744301.gif) no-repeat 1px -104px";
+				}
+				pass = false;
+			}
+			else {
+				tip.style.background = "url(http://www.51js.com/attachments/2007/04/35270_200704250744301.gif) no-repeat 1px -8px";
+				msg = " ";
+			}
+			$IT(tip,msg);
+			obj.insertAdjacentElement("afterEnd",tip);
+		}
+		else if(pattern != null){
+			pattern = new RegExp(pattern);
+			if(required || obj.value.length > 0){
+				if(!pattern.test(obj.value)){
+					with (tip.style){
+						border = "1px dashed #D4D4D4";
+						background = "#FFFF99 url(http://www.51js.com/attachments/2007/04/35270_200704250744301.gif) no-repeat 1px -104px";
+					}
+					pass = false;
+				}
+				else {
+					tip.style.background = "url(http://www.51js.com/attachments/2007/04/35270_200704250744301.gif) no-repeat 1px -8px";
+					msg = " ";
+				}
+				$IT(tip,msg);
+				obj.insertAdjacentElement("afterEnd",tip);
+			}
+		}
+		return pass;
+	}
+	this.checkScope = function(id){//验证某个元素范围内的表单
+		if(!$(id)) return true;
+		var pass = true;
+		var elements = new Array();
+		elements[0] = $TN("input",$(id));
+		elements[1] = $TN("select",$(id));
+		elements[2] = $TN("textarea",$(id));
+		for(var i = 0; i < elements.length; i++){
+			for(var j = 0; j< elements[i].length; j++) {
+				if(!checkOne(elements[i][j]) && pass) pass = false;
+			}
+		}
+		return pass;
+	}
+	this.check = function(){//验证整个表单
+		var pass = true;
+		for(var i = 0; i < elements.length; i++){
+			if(elements[i].nodeName != "BUTTON" && elements[i].nodeName != "FIELDSET" && !checkOne(elements[i]) && pass) pass = false;
+		}
+		return pass;
+	}
+	//邦定事件
+	for(var i = 0; i < elements.length; i++){
+		if(elements[i].getAttribute("pattern") != null || elements[i].getAttribute("same") != null){
+			elements[i].attachEvent("onchange",function(event){checkOne(event.srcElement);});
+		}
+	}
+}
+</script>
+<script type="text/javascript">
+/**********应用例子**********/
+window.onload = function (){
+	v = new JValidator("form1");
+	$("form1").onsubmit = function(){return v.check();}
+}
+</script>
+</head>
+
+<body>
+<fieldset>
+<legend>使用说明</legend>
+<p>
+<strong>元素定义：</strong><br />&#402;、在需要验证的元素里定义好下面几个属性：<br />
+（1）、pattern：验证该元素的正则表达式，没有“/”分隔符，如果定义了same属性的话，就不再需要定义它<br />
+（2）、msg 可选的属性，在验证不通过时显示的信息<br />
+（3）、required 可选的属性，属性值 yes|no，yes，[默认] 该元素必填，no，该元素非必填，但如果填写内容后，将按pattern的定义来验证填写的内容<br />
+（4）、same 该元素和那个元素的内容必须相同，属性值为另一元素之id值，如果定义了它，验证将拿元素的id为定义的属性值的元素的值来和该元素值比较
+</p>
+<p>
+<strong>程序使用：</strong><br />
+window.onload = function (){<br />
+	v = new JValidator("form1");<br />
+	$("form1").onsubmit = function(){return v.check();}<br />
+}<br />
+<span style="color:#FF0000">使用时请将程序里面的图片地址[img]http://www.51js.com/attachments/2007/04/35270_200704250744301.gif[/img]改为你所需 </span><br />
+同时里面还定义了一个方法checkScope，就是只验证给定范围里的表单元素，这个在表单分多步完成时很有用，这里就不写例子了，又兴趣的可以自己研究
+</p>
+</fieldset>
+<form id="form1" name="form1" method="post" action="">
+	<fieldset>
+	<legend>测试表单</legend>
+<p>
+								<label>昵称：</label>
+								<input type="text" name="nickname" pattern="^[\w\u4e00-\u9fa5\-]{1,20}$" msg="昵称不符合规则" />&#402;~20个中文、字母、下划线或者减号
+		</p>
+							<p>
+								<label>密码：</label>
+								<input type="text" name="password" id="password" pattern="^[\w\u4e00-\u9fa5\-]{1,20}$" required="no" msg="密码不符合规则" />&#402;~20个中文、字母、下划线或者减号
+							</p>
+							<p>
+								<label>确认密码：(same="password")</label>
+								<input type="text" name="password2" same="password" msg="两次密码不一样"/>
+							</p>
+							<p>
+								<label>email：[选填]</label>
+								<input type="text" pattern="^(?:(?:[\w-\.]+)@(?:(?:\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(?:(?:[\w-]+\.)+))(?:[a-zA-Z]{2,4}|[0-9]{1,3})(?:\]?))$" required="no" name="email" msg="ｅｍａｉｌ验证不通过"/>
+(为空不验证，不为空的时候验证)
+							</p>
+							<p>
+								<label>备注(选填，字数不超100个任意字符)</label>
+								<textarea name="memo" cols="80" rows="4" required="no" pattern="^[\w\W]{0,100}$" msg="字数已经超出" ></textarea>
+							</p>
+							<p class="center">
+								<button type="submit">提交</button>
+								<button type="reset">取消</button>
+							</p>	</fieldset>
+</form>
+</body>
+</html>

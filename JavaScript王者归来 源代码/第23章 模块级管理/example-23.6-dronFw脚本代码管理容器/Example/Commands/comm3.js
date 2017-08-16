@@ -1,0 +1,1 @@
+location.href = "Example/index/index.html";

@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Example-5.7运行时类型识别</title>
+</head>
+<body>
+<script>
+<!--
+	/*这个函数扩展了Object原型方法，以支持对对象的类型进行更细粒度的判定。
+	*/
+	Object.prototype.InstanceOf = function(type)
+	{
+		try{
+			//typeof、constructor或者instanceof三个条件之一满足，就返回true，否则返回false
+			return	typeof(this) == type ||  //通过typeof判断
+				this.constructor == type ||   //通过constructor判断
+					this instanceof type;    //通过instanceof判断
+			}
+		catch(ex){
+			return false;
+		}
+	}
+	var a = new Object();
+	document.write(a.InstanceOf(Object)+ "<br/>");  //true
+	var b = "abc";
+	document.write(b.InstanceOf(String) + "<br/>");		//true
+	var c = new String("abc");
+	document.write(c.InstanceOf(String) + "<br/>");	//true
+	var d = new Array();
+	document.write(d.InstanceOf(Array));	//true
+-->
+</script>
+</body>
+</html>

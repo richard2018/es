@@ -1,0 +1,59 @@
+# language: JSVM2
+
+/**
+ * @fileoverview js.util.Iterator class {@link http://jsvm.org/}
+ * @file		Iterator.jsc
+ * @author	Wan Changhua
+ * @version	2.01, 10/23/05
+ * @since		JSVM1.0
+ */
+
+package js.util;
+
+
+/**
+ * Create a new Iterator instance.
+ * Inherit from JObject
+ * @author	Wan Changhua
+ * @version	2.01, 10/23/05
+ * @extends JObject
+ * @class This is the iterator class.
+ * @constructor
+ */
+
+class Iterator (aArray) {
+
+	/**
+	 * @private
+	 */
+	var array = aArray;
+	var index = 0;
+
+	/**
+	 * Returns <tt>true</tt> if the iteration has more elements.
+	 * @return  <code>true</code>  if it has next;
+	 *          <code>false</code> otherwise.
+	 * @type boolean
+	 */
+	this.hasNext = function() {
+		return (array.length > index);
+	}
+	
+	/**
+	 * Returns the next element in the iteration.
+	 * @return  the next element in the iteration.
+	 * @type Object
+	 */
+	this.next = function() {
+		return array[index++];
+	}
+	
+    /**
+     * Returns an array containing all of the elements in this iterator
+     * @type Array
+     */
+	this.toArray = function () {
+		return array.concat([]);
+	}
+
+}

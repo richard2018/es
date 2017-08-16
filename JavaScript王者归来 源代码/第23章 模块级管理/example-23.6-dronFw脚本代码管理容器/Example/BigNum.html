@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css"> td,body{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="BigNum"></script>
+</head>
+<body>
+<h2>大数类</h2>
+<hr>
+
+<script type="text/javascript">
+/*
+  以下是该类的原作者的注释：
+
+  BigNum -- 大数类
+
+  私有成员：
+			data -- 119 位数字，放在长度为 17 的数组里，每个数组元素存放 7 位数字。
+			decimal_place -- 小数点的位置，从最左位开始算。
+			positive -- 是否是正数。
+			recalc() -- 为了尽可能存放最多的有效数位，去除前缀的 0，并重新计算小数点位置。
+			init() -- 部分初始化工作。
+
+  公有成员：
+			BigNum( String str, INT n, BOOL b) --
+					构造函数。参数：str -- 字符串，各个有效数位；n -- 整数，小数点位置，从最左位开始算，比如 BigNum("123", 2) = 12.3; BigNum("123", 0) = 0.123; BigNum("123", -2) = 0.00123；b -- 布尔值，是否是正数。
+			Add( BigNum num ) -- 加法。
+			Subtract( BigNum num ) -- 减法。
+			Multiply( BigNum num ) -- 乘法。
+			Divide( BigNum num ) -- 除法。
+			SquareRoot() -- 平方根。
+			toString() -- 转换为字符串（包括小数点），以便以文本形式输出计算结果。
+			Clone() -- 复制。
+*/
+
+
+var BigNum = DronFw.Class.BigNum;
+
+var a = new BigNum("1234567890123456789", 16, true);
+var b = new BigNum("9876543210987654321", 15, true);
+var c = a.Multiply(b); // c = a * b
+
+document.write("使用 BigNum 计算的结果：<br >");
+document.write(a + " * " + b + " = " + c);
+
+document.write("<br /><br />JavaScript 直接计算的结果：<br >");
+document.write("1234567890123456.789 * 987654321098765.4321 = " + (1234567890123456.789 * 987654321098765.4321));
+
+/*
+	以上只是举了大数相乘的例子，其方的如加法、减法、除法、平方根等等的使用方法与上相同
+*/
+</script>
+
+</body>
+</html>

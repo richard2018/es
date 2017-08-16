@@ -1,0 +1,58 @@
+
+Version JSVM 2.03.060517
+-------------------------
+
+1.重构了 core module 的加载方式 （并对原先的方式保持兼容）
+2.新增了 akira 的 javascript2 的语法解析器
+3.新增了 w3c dom level2 lib
+
+
+Version JSVM 2.03.060525
+-------------------------
+
+1.修改了 classloader for ie 的实现，解决了dict内存不能释放的问题
+2.修正了 firefox 下 application 不能加载 extmodules 的问题
+3.将 javascript2 parser 升级到 v1.03 (by akira)
+
+
+Version JSVM 2.03.060531
+-------------------------
+1.修正了 V 2.03.060525 中 org.w3c.dom.events.EventTarget 的一处严重 bug.
+
+
+Version JSVM 2.03.060624
+-------------------------
+该版本在 jsvm2.03.060531 基础上
+1. 修正了 kernel 中 native parser 在 ff1.5 之前版本上的兼容问题
+2. 增加了 opera - classloader 对 304 status 的处理
+3. 调整了 applicatoin 模式下，通过URL给main-class传递的参数形式为：从 ?参数 改为: #参数
+3. 从自带的api中移除了 js.io.File 类的设计
+4. 修正了 js.io.Serializer 的一处bug
+5. 修正了 js.lang.BObject 对 uniqueID bug
+6. 修正了 org.w3c.dom.html.HTMLElement.hide 方法命名错误 （原先方法名是：hidden）
+7. 修正了打包工具jsr的一处bug.
+
+Version JSVM 2.03.060701
+-------------------------
+1. 修正了 jsre.js 中，当在ie下，被window.open()方式打开的 module 页面中 extendModules的属性错误。
+2. 为 js.util.HashMap 中 Entry 对象增加 getKey(), getValue() 方法
+
+
+Version JSVM 2.04.060801
+-------------------------
+该版本在 jsvm2.03.060701 基础上
+
+1.简化并合并了 ie.js,moz.js,opera.js 中的classloader到kernel.js中
+2.移除了所有 userdata 的缓存机制
+3.优化了核心类的几处设计
+4.修正了js.net.XmlDom的内存泄露问题
+5.优化了 dom 2 模型
+
+
+Version JSVM 2.04.060820
+-------------------------
+该版本在 jsvm2.04.060801 基础上
+
+1.解决了jsre的内存泄露点
+
+...

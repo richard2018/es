@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>Example-6.12函数参数和函数返回值</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//集合变换操作，闭包作为参数
+	function trans(list, op)
+	{
+		for(var i = 0; i < list.length; i++)
+		{
+			//根据闭包op计算每一个list[i]执行op后的结果，并用这个结果更新list[i]
+			list[i] = op(list[i]);
+		}
+	}
+	var list = [1,2,3,4];
+	trans(list, function(x){return x+1});  //得到2,3,4,5
+	dwn(list);
+	trans(list, function(x){return x*2});
+	dwn(list);
+
+	//累加器：闭包作为返回值
+	function add(a, b)
+	{
+		b = b || 0;
+		var s = a + b;
+		
+		//返回一个供进一步累加的闭包
+		var ret = function(a){
+			return add(a, s);
+		}
+		ret.valueOf = ret.toString = function(){
+			return s;
+		}
+		return ret;
+	}
+	dwn(add(5)); //5
+	dwn(add(5)(10)); //15
+	dwn(add(5)(10)(20)); //35
+-->
+</script>
+</body>
+</html>

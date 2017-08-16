@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>Example-21.7 delete操作将对象属性恢复为默认值</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	function ClassA()
+	{
+		this.a = 100;
+		this.b = 200;
+		this.c = 300;
+	}
+	ClassA.prototype = new ClassA(); //将a、b、c同时设为ClassA的默认值
+
+	//这个方法可将自身的非原型属性删除，达到reset的效果
+	ClassA.prototype.reset = function()
+	{
+		for(var each in this)
+		{
+			delete this[each];
+		}
+	}
+
+	//构造一个ClassA对象
+	var a = new ClassA();
+	dwn(a.a);
+	//改变a、b、c属性的值
+	a.a *= 2;
+	a.b *= 2;
+	a.c *= 2;
+	//显示改变后的值
+	dwn(a.a);
+	dwn(a.b);
+	dwn(a.c);
+	//调用reset方法将对象的值恢复为默认值
+	a.reset();   	
+	//显示恢复后的默认值
+dwn(a.a);
+	dwn(a.b);
+	dwn(a.c);
+-->
+</script>
+</body>
+</html>

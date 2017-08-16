@@ -1,0 +1,207 @@
+# language: JSVM2
+
+/**
+ * Copyright (c) 2000 World Wide Web Consortium,
+ * (Massachusetts Institute of Technology, Institut National de
+ * Recherche en Informatique et en Automatique, Keio University). All
+ * Rights Reserved. This program is distributed under the W3C's Software
+ * Intellectual Property License. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ * PURPOSE.
+ * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+ */
+
+package org.w3c.dom.html;
+
+import js.util.HashMap;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.events.EventTarget;
+
+class HTMLDocument extends Document (oDoc)
+{
+	EventTarget.call(this);
+	this.__document = oDoc || document;
+	this.__elements = new HashMap();
+}
+
+/**
+ * The title of a document as specified by the <code>TITLE</code> element 
+ * in the head of the document. 
+ */
+HTMLDocument.prototype.getTitle = function ()
+{
+	return this.__document.title;
+}
+
+HTMLDocument.prototype.setTitle = function (sTitle)
+{
+	this.__document.title = sTitle;
+}
+
+/**
+ *  Returns the URI  of the page that linked to this page. The value is an 
+ * empty string if the user navigated to the page directly (not through a 
+ * link, but, for example, via a bookmark). 
+ */
+HTMLDocument.prototype.getReferrer = function ()
+{
+	return this.__document.referrer;
+}
+
+/**
+ *  The domain name of the server that served the document, or 
+ * <code>null</code> if the server cannot be identified by a domain name. 
+ */
+HTMLDocument.prototype.getDomain = function ()
+{
+	return this.__document.domain;
+}
+
+/**
+ *  The complete URI  of the document. 
+ */
+HTMLDocument.prototype.getURL= function ()
+{
+	return this.__document.URL;
+}
+
+/**
+ *  The element that contains the content for the document. In documents 
+ * with <code>BODY</code> contents, returns the <code>BODY</code> 
+ * element. In frameset documents, this returns the outermost
+ * <code>FRAMESET</code> element. 
+ */
+HTMLDocument.prototype.getBody = function ()
+{
+	return this.__document.body;
+}
+
+/**
+ *  The cookies associated with this document. If there are none, the 
+ * value is an empty string. Otherwise, the value is a string: a 
+ * semicolon-delimited list of "name, value" pairs for all the cookies 
+ * associated with the page. For example, 
+ * <code>name=value;expires=date</code> . 
+ */
+HTMLDocument.prototype.getCookie = function ()
+{
+	return this.__document.cookie;
+}
+HTMLDocument.prototype.setCookie = function (sValue)
+{
+	this.__document.cookie = sValue;
+}
+
+/**
+ *  Note. This method and the ones following  allow a user to add to or 
+ * replace the structure model of a document using strings of unparsed 
+ * HTML. At the time of  writing alternate methods for providing similar 
+ * functionality for  both HTML and XML documents were being considered. 
+ * The following methods may be deprecated at some point in the future in 
+ * favor of a more general-purpose mechanism.
+ * <br> Open a document stream for writing. If a document exists in the 
+ * target, this method clears it.
+ */
+HTMLDocument.prototype.open = function ()
+{
+	this.__document.open();
+}
+
+/**
+ *  Closes a document stream opened by <code>open()</code> and forces 
+ * rendering.
+ */
+HTMLDocument.prototype.close = function ()
+{
+	this.__document.close();
+}
+
+/**
+ *  Write a string of text to a document stream opened by
+ * <code>open()</code> . The text is parsed into the document's structure 
+ * model.
+ * @param text  The string to be parsed into some structure in the 
+ *   document structure model.
+ */
+HTMLDocument.prototype.write = function (sText)
+{
+	this.__document.write(sText);
+}
+
+/**
+ *  Write a string of text followed by a newline character to a document 
+ * stream opened by <code>open()</code> . The text is parsed into the 
+ * document's structure model.
+ * @param text  The string to be parsed into some structure in the 
+ *   document structure model.
+ */
+HTMLDocument.prototype.writeln = function (sText)
+{
+	this.__document.writeln(sText);
+}
+
+/**
+ * Returns the (possibly empty) collection of elements whose
+ * <code>name</code> value is given by <code>elementName</code> .
+ * @param elementName  The <code>name</code> attribute value for an 
+ *   element.
+ * @return  The matching elements.
+ */
+HTMLDocument.prototype.getElementsByName = function (sName)
+{
+	return this.__document.getElementsByName(sName);
+}
+
+/**
+ * Returns a <code>NodeList</code> of all the <code>Elements</code> with a 
+ * given tag name in the order in which they are encountered in a 
+ * preorder traversal of the <code>Document</code> tree.
+ * @param tagname The name of the tag to match on. The special value "*" 
+ *   matches all tags.
+ * @return A new <code>NodeList</code> object containing all the matched 
+ *   <code>Elements</code>.
+ */
+HTMLDocument.prototype.getElementsByTagName = function (sTagname)
+{
+	return this.__document.getElementsByTagName(sTagname);
+}
+
+/**
+ * Returns the <code>Element</code> whose <code>ID</code> is given by 
+ * <code>elementId</code>. If no such element exists, returns 
+ * <code>null</code>. Behavior is not defined if more than one element 
+ * has this <code>ID</code>. The DOM implementation must have 
+ * information that says which attributes are of type ID. Attributes 
+ * with the name "ID" are not of type ID unless so defined. 
+ * Implementations that do not know whether attributes are of type ID or 
+ * not are expected to return <code>null</code>. 
+ * @param elementId The unique <code>id</code> value for an element.
+ * @return The matching element.
+ * @since DOM Level 2
+ */
+HTMLDocument.prototype.getElementById = function (sId)
+{
+	return this.__document.getElementById(sId);
+}
+
+HTMLDocument.prototype.appendChild = function (oElement)
+{
+	return this.__document.appendChild(oElement);
+}
+
+
+//HTMLDocument.insertHTMLBeforeEnd	=	function (oElement, sHTML)
+//{
+//		if (oElement.insertAdjacentHTML != null)
+//		{
+//			oElement.insertAdjacentHTML("BeforeEnd", sHTML);
+//			return;
+//		}
+//		var r = oElement.ownerHTMLDocument.createRange();
+//		r.selectNodeContents(oElement);
+//		r.collapse(false);
+//		var df = r.createContextualFragment(sHTML);
+//		oElement.appendChild(df);
+//}

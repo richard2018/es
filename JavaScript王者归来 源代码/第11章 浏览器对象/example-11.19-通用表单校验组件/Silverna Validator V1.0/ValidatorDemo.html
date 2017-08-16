@@ -1,0 +1,190 @@
+﻿<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style type="text/css">
+			span.Label
+			{
+				width:300px;
+			}
+			body
+			{
+				font:14/18px 宋体;
+			}
+			.systemMsg
+			{
+				font:12/18px 宋体;
+				color:#ff0000;
+				height:0px;
+			}
+		</style>
+	</head>
+	<script language="javascript" src="attribute.js"></script>
+	<script language="javascript" src="validator.js"></script>
+	<body>
+		测试表单 A：<br/>
+		<form name="testForm1" onsubmit="return Validator.createInstance().check(this)">
+		<span class="Label">测试字段1（非空）</span>
+		<input id="test" name="test" ValidatePatterns="Empty:false" tag="测试字段1"/><br/>
+		<span class="Label">测试字段2（数量，非空）</span>
+		<input id="test2" name="test2" ValidatePatterns="Empty:false;Integer;Negative:false" tag="测试字段2"/><br/>
+		<span class="Label">测试字段3（金额）</span>
+		<input id="test3" name="test3" ValidatePatterns="Money" tag="测试字段3"/><br/>
+		<input type="submit"/>
+		</form>
+		<hr/>
+			在需要使用客户端校验的时候，我们只需要为需要校验的表单提交（onsubmit）事件声明Validator，具体的做法是：<br/>
+			<font color="red">onsubmit="return Validator.createInstance().check(this)"</font><br/>这里，我们通过Validator原型的构造器方法createInstance()直接获得Validator的实例。<br/>（注意，要使用Validator除了按如上方法声明Validator之外，别忘了在页面文档中包含<font color="red">core/attribute/attribute.js</font>和<font color="red">validator.js</font>脚本）
+		<hr/>
+		测试表单 B：<br/>
+		<form name="testForm2" onsubmit="return Validator.createInstance().check(this)">
+		<span class="Label">测试字段4（电话号码，非空）</span>
+		<input id="test" name="test" ValidatePatterns="Empty:false;Phone" tag="测试字段4"/><br/>
+		<span class="Label">测试字段5（Email）</span>
+		<input id="test2" name="test2" ValidatePatterns="Email" tag="测试字段5"/><br/>
+		<span class="Label">测试字段6（日期）</span>
+		<input id="test3" name="test3" ValidatePatterns="Date" tag="测试字段6"/><br/>
+		<input type="submit"/>
+		</form>
+		<hr/>
+			通常情况下我们声明了Validator给特定表单之后，需要给表单中需要提交验证的元素指定“规则描述”，当表单被提交的时候，脚本会自动提取包含规则描述的元素进行校验。“规则描述”被作为Dom Element的属性ValidatePatterns的字符串值，具体格式为：<br/>
+			<font color="red">ValidatePatterns="rule1:checkValue1;rule2:checkValue2......"</font><br/>
+			其中rule1,rule2...表示规则的名称，checkValue1,checkValue2表示规则的校验值，一个规则由名称:校验值对构成，进行校验的过程实际上就是判断名称为ruleX的规则当前的值是否同校验值checkValueX相匹配。一个Dom元素的ValidatePatterns属性中可以包含任意多个规则，通常情况下Validator会逐一提取出各个规则进行判断，直到所有规则都通过检验或者某个规则无法通过检验为止。<br/>
+			除了ValidatePattern属性之外，我们可能还需要指定tag属性来输出简单的提示信息。
+		<hr/>
+		测试表单 C：<br/>
+		<form name="testForm3" onsubmit="return Validator.createInstance().check(this)">
+		<!--校验失败信息-->
+		<span formName="testForm3" class="systemMsg"></span>
+		<span class="Label">测试字段7（字符串最大长度10）</span>
+		<input id="test" name="test" ValidatePatterns="MaxLength:10" tag="测试字段7"/><br/>
+		<span class="Label">测试字段8（字符串最小长度3）</span>
+		<input id="test2" name="test2" ValidatePatterns="Empty:false;MinLength:3" tag="测试字段8"/><br/>
+		<span class="Label">测试字段9（字符串2~7字符）</span>
+		<input id="test3" name="test3" ValidatePatterns="Empty:false;MaxLength:7;MinLength:2" tag="测试字段9"/><br/>
+		<input type="submit"/>
+		</form>
+		<hr/>
+			Validator原型中内置了常用的规则，它们分别是：Empty(空),Integer(整数),Number(数值),Positive(大于0),Negative(小于0),Money(货币金额),CellPhone(手机号码),Phone(电话号码),Email(Emial),URL(网页地址),Date(日期),MaxLength(最大长度),MinLength(最小长度)，我们只需要将它们加到ValidatePatterns的描述字符串上就能应用这些内置规则进行校验。<br/>
+			通常我们会用到它们之间的组合来表达一个完整的校验，例如：<br/>
+			<font color="red">ValidatePatterns="Integer;Positive"</font> 表示一个正整数，而<font color="red">ValidatePatterns="Number;Negative:false"</font> 则表示一个非负实数</font><br/>
+			（在规则描述中如果一个规则的校验值为true,那么我们可以省略它，因此Integer:true;与Integer;等价）<br/><br/>
+			通常情况下默认的校验失败信息被以警告框的形式展现，但是如果在表单之下定义了显示失败信息的内嵌容器（一个包含formName字段的空的DOM Element）那么校验失败的信息就会被发送到页面上显示，而不是弹出警告框。一个内嵌容器的HTML代码如下：<br/>
+			<font color="red">&ltspan formName="testForm3" class="systemMsg"&gt&ltspan&gt</font>
+		<hr/>
+		测试表单 D：<br/>
+		<form name="testForm4" onsubmit="return (new ExtendValidator()).check(this)">
+		<span class="Label">测试字段10（自定义规则整数1~9）</span>
+		<input id="test" name="test" ValidatePatterns="Empty:false;Integer;ValueBetween:[1,9]" tag="测试字段10"/><br/>
+		<input type="submit"/>
+		</form>
+		<hr/>
+			除了采用系统内置的规则之外，我们也可以根据需要自定义规则。要自定义规则，我们可以扩展Validator原型（通过继承），派生出各种特殊的Validator原型。如表单D的例子中我们派生出了ExtendValidator原型，并且在其中添加了ValueBetween校验规则，用来检验数值范围。<br/>
+			<font color="red">ValidatePatterns="Empty:false;Integer;ValueBetween:[1,9]"</font>
+			<br/><br/><code style="color:blue">
+			//表单D 采用扩展的Validator类<br/>
+			function ExtendValidator()<br/>
+			{<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;//自定义规则——数值范围<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;[Validate("ValueBetween","必须在规定数值范围之内")]<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;ExtendValidator.prototype.isBetween = function(attribute,checkValue)<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var valueRange = eval(checkValue);<br/>
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Validator.RegEmpty.test(attribute.value) <br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|| (this.isNumber(attribute,true) <br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&& valueRange[0] <= parseFloat(attribute.value)<br/>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&& valueRange[1] >= parseFloat(attribute.value));<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;};<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;Attribute.useAttributes(ExtendValidator);<br/>
+			}ExtendValidator.prototype = new Validator();</code>	
+			<br/><br/>
+			表单D的Validate声明：<font color="red">&lt;form name="testForm4" onsubmit="return (new ExtendValidator()).check(this)"&gt;</font>
+
+		<hr/>
+		测试表单 E：<br/>
+		<form name="testForm5" onsubmit="return (new ExtendValidator()).check(this)" onCheckPassed="Form5_CheckPassed(event)" onCheckFailed="Form5_CheckFailed(event)">
+		<span class="Label">测试字段11（自定义规则整数1~99）</span>
+		<input id="test" name="test" ValidatePatterns="Empty:false;Integer;ValueBetween:[1,99]" tag="测试字段11" labelID="Label_test"/><span class="systemMsg" id="Label_test"></span><br/>
+		<span class="Label">测试字段12（字符串最小长度3）</span>
+		<input id="test2" name="test2" ValidatePatterns="Empty:false;MinLength:3" tag="测试字段12" labelID="Label_test2"/><span class="systemMsg" id="Label_test2"></span><br/>
+		<span class="Label">测试字段13（字符串2~7字符）</span>
+		<input id="test3" name="test3" ValidatePatterns="Empty:false;MaxLength:7;MinLength:2" tag="测试字段13" labelID="Label_test3"/><span class="systemMsg" id="Label_test3"></span><br/>
+		<input type="submit"/>
+		</form>
+		<hr/>
+			通常情况下校验失败时生成的提示信息被脚本内置的默认规则以警告框（或者内嵌容器）的方式显示出来并阻止表单提交。但是我们也可以自定义脚本失败时的动作。首先根据内定的规则，校验失败时所有被检验的表单项被包装成ValidateEventArgs参数发送到CheckFailedEvent事件中处理，校验成功时所有被校验的表单项被以同样的方式发送到CheckPassedEvent事件中处理。不论是CheckFailedEvent事件还是CheckPassedEvent事件都提供了允许我们重载事件的接口。<br/><br/>
+			事实上要重载校验动作，我们只需要简单地指定form的<font color="red">onCheckPassed</font>和<font color="red">onCheckFailed</font>事件即可。<br/>
+			<br/>
+			我们在自定义动作中仍然可以操作被发送的ValidateEventArgs对象，但是前提是我们必须在form的onCheckPassed和onCheckFaile声明中显式声明事件参数event，例如：onCheckFailed = "Form5_CheckFailed(event)"。<br/>
+			一个类型为ValidateEventArgs的event对象包括两个列表，它们分别是<font color="red">checkedObjects</font>和<font color="red">results</font>，其中checkedObjects存放所有被校验的对象，而results中存放着所有未被通过的对象<font color="red">(results[i].target)</font>以及相应的校验值<font color="red">(results[i].checkValue)</font>和规则信息<font color="red">(results[i].validate)</font>，从<font color="red">results[i].getMessage()</font>方法还可以获得系统依照默认规则生成的错误信息。<br/><br/>
+			<code style="color:blue">
+			//表单E 自定义校验处理动作<br/>
+
+			//自定义校验成功动作<br/>
+			function Form5_CheckPassed(e)<br/>
+			{<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;//在自定义校验动作函数中我们仍然可以接收event参数<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;alert('自定义动作：校验通过！'); <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;return true;<br/>
+			}<br/>
+			//自定义校验失败动作<br/>
+			function Form5_CheckFailed(e)<br/>
+			{<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;//在自定义校验动作函数中我们仍然可以接收event参数<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;//alert('自定义动作：校验失败！'); <br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;for (var i = 0; i < e.checkedObjects.length; i++)<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	document.getElementById(e.checkedObjects[i].labelID).innerText = "";<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;for (var i = 0; i < e.results.length; i++)<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;document.getElementById(e.results[i].target.labelID).innerText="("+e.results[i].getMessage()+")";<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+				&nbsp;&nbsp;&nbsp;&nbsp;return false;<br/>
+			}
+			</code>
+			<br/><br/>
+			表单E的Validate声明：<font color="red">&lt;form name="testForm5" onsubmit="return (new ExtendValidator()).check(this)" onCheckPassed="Form5_CheckPassed(event)" onCheckFailed="Form5_CheckFailed(event)"&gt;</font>
+		<script language="javascript">
+			//要自定义规则，必须自己扩展Validator类
+			function ExtendValidator()
+			{
+				//自定义规则——数值范围
+				[Validate("ValueBetween","必须在规定数值范围之内")]
+				ExtendValidator.prototype.isBetween = function(attribute,checkValue)
+				{
+					var valueRange = eval(checkValue);
+
+					return Validator.RegEmpty.test(attribute.value) 
+						|| (this.isNumber(attribute,true) 
+						&& valueRange[0] <= parseFloat(attribute.value)
+						&& valueRange[1] >= parseFloat(attribute.value));
+				};
+				Attribute.useAttributes(ExtendValidator);
+			}ExtendValidator.prototype = new Validator();
+			
+			//自定义校验成功动作
+			function Form5_CheckPassed(e)
+			{
+				//在自定义校验动作函数中我们仍然可以接收event参数
+				alert('自定义动作：校验通过！'); 
+				return true;
+			}
+			//自定义校验失败动作
+			function Form5_CheckFailed(e)
+			{
+				//在自定义校验动作函数中我们仍然可以接收event参数
+				//alert('自定义动作：校验失败！'); 
+				for (var i = 0; i < e.checkedObjects.length; i++)
+				{
+					document.getElementById(e.checkedObjects[i].labelID).innerText = "";
+				}
+				for (var i = 0; i < e.results.length; i++)
+				{
+					document.getElementById(e.results[i].target.labelID).innerText="("+e.results[i].getMessage()+")";
+				}
+				return false;
+			}
+		</script>
+	</body>
+</html>

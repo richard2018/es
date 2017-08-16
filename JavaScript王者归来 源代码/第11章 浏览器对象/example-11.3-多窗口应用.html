@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title>Example-11.3 多窗口应用</title>
+</head>
+<body>
+<script type="text/JavaScript">
+<!--
+function createWin()
+{
+	var w = window.open();
+	//用窗口句柄w调用新窗口的document.write()方法，innerText和textContent是为了兼容
+	//Internet Explorer和Firefox两种浏览器
+	w.document.write(document.getElementsByTagName("textarea")[0].innerText 
+|| document.getElementsByTagName("textarea")[0].textContent);
+}
+-->
+</script>
+<textarea style="width:400px;height:150px;"></textarea><br/>
+<button onclick='createWin()'>创建窗口</button>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<title>Example-12.13</title>
+	</head>
+	<body>
+		<div id = "list">
+		<li>
+			a-1
+		</li>
+		<li>
+			b-1
+		</li>
+		</div>	<br/>
+		<input type="text" id="liVal"/>
+		<button onclick="_insertNode()">插入</button>
+		<button onclick="_removeNode()">移除</button>
+		<button onclick="_replaceNode()">替换第一行</button>
+	</body>
+	<script type="text/javascript">
+	<!--
+		function _insertNode()
+		{
+			if(liVal.value != '')
+			{
+				//创建一个li元素
+				var newNode = document.createElement("li");
+
+				//设置这个元素的innerText
+				newNode.innerText = liVal.value;
+
+				//将这个新的节点作为list元素的子节点插入
+				list.appendChild(newNode);
+			}
+		}
+		function _removeNode()
+		{
+			if(liVal.value != '')
+			{
+				for(var i = 0; i < list.childNodes.length; i++)
+				{
+					//将指定内容的节点从list元素中移除
+					if(list.childNodes[i].innerText == liVal.value)
+						list.removeChild(list.childNodes[i]);
+				}
+			}
+		}
+		function _replaceNode()
+		{
+			if(liVal.value != '' && list.childNodes.length > 0)
+			{
+				var newNode = document.createElement("li");
+				newNode.innerText = liVal.value;
+
+				//将指定节点在list中替换成新的节点
+				list.replaceChild(newNode,list.childNodes[0]);
+			}
+		}
+	-->
+	</script>
+</html>

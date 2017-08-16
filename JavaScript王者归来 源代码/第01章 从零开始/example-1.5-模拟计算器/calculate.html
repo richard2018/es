@@ -1,0 +1,66 @@
+<HTML>
+<HEAD>
+	<TITLE>JavaScript¼ÆËãÆ÷</TITLE>
+		<style type="text/css">
+		p {font-size: 12pt}
+		.red {color: red;width:34}
+		.redl{color:red;width:51}
+		.blue {color: blue;width:34}
+		</style>
+	<SCRIPT LANGUAGE="JavaScript" src="calculate.js"></script>
+</HEAD>
+<BODY>
+	<center>
+		<form name="calculator">
+		<table bgcolor="#aaaaaa" width="230">
+			<tr><td>
+				<table bgcolor="#cccccc" border="1">
+				<tr><td>
+					<table border=0 cellpadding="0">
+					<tr><td bgcolor="#000080"></td></tr>
+					<tr><td>
+						<table width="100%" border="0">
+						<tr><td colspan="6"><input type="text" readOnly name="answer" style="text-align:right" size="30" maxlength="30" value="0."></td></tr>
+						<tr><td colspan="6">
+							<table border="0" cellpadding="0">
+							<tr><td>
+							<input type="text" name="mem" size="3" maxlength="3" style="text-align:center" readOnly style="background:menu"> <input type="button" name="backspace" class="redl" value="ÍË¸ñ" tok="\b" onClick="this.form.answer.value = oController.addNumber(this.tok);"> <input type="button" name="CE" class="redl" tok="CE" value="CE" onClick="oController.cleanError();this.form.answer.value = oController.doFun(this.tok)"> <input type="button" name="C" class="redl" tok="CE" value="C" onClick="this.form.answer.value = oController.doFun(this.tok)">
+							</td></tr>
+							</table>
+						</td></tr>
+						<tr><td><input type="button" name="MC" class="red" value=" MC " tok="MC" onClick="this.form.answer.value = oController.doFun(this.tok);this.form.mem.value='';"></td>
+						<td><input type="button" name="calc7" class="blue" value=" 7 " tok="7" onClick="this.form.answer.value = oController.addNumber(this.tok)"></td>
+						<td><input type="button" name="calc8" class="blue" value=" 8 " tok="8" onClick="this.form.answer.value = oController.addNumber(this.tok)"></td>
+						<td><input type="button" name="calc9" class="blue" value=" 9 " tok="9" onClick="this.form.answer.value = oController.addNumber(this.tok)"></td>
+						<td><input type="button" name="divide" class="red" value=" / " tok="/" onClick="this.form.answer.value = oController.addOper(this.tok)"></td>
+						<td><input type="button" name="sqrt" class="blue" value="sqrt" tok="sqrt" onClick="this.form.answer.value = oController.doFun(this.tok)"></td></tr>
+						<tr><td><input type="button" name="MR" class="red" value=" MR " tok="MR" onClick="this.form.answer.value = oController.doFun(this.tok);"></td>
+						<td><input type="button" name="calc4" class="blue" value=" 4 " tok="4" onClick="this.form.answer.value = oController.addNumber(this.tok)"></td>
+						<td><input type="button" name="calc5" class="blue" value=" 5 " tok="5" onClick="this.form.answer.value = oController.addNumber(this.tok)"></td>
+						<td><input type="button" name="calc6" class="blue" value=" 6 " tok="6" onClick="this.form.answer.value = oController.addNumber(this.tok)"></td>
+						<td><input type="button" name="multiply" class="red" value=" * " tok="*" onClick="this.form.answer.value = oController.addOper(this.tok)"></td>
+						<td><input type="button" name="percent" class="blue" value=" % " tok="%" onClick="this.form.answer.value = oController.doFun(this.tok)"></td></tr>
+						<tr><td><input type="button" name="MS" class="red" value=" MS " tok="MS" onClick="this.form.answer.value = oController.doFun(this.tok);this.form.mem.value='M';"></td>
+						<td><input type="button" name="calc1" class="blue" value=" 1 " tok="1" onClick="this.form.answer.value = oController.addNumber(this.tok)"></td>
+						<td><input type="button" name="calc2" class="blue" value=" 2 " tok="2" onClick="this.form.answer.value = oController.addNumber(this.tok)"></td>
+						<td><input type="button" name="calc3" class="blue" value=" 3 " tok="3" onClick="this.form.answer.value = oController.addNumber(this.tok)"></td>
+						<td><input type="button" name="minus" class="red" value=" - " tok="-" onClick="this.form.answer.value = oController.addOper(this.tok)"></td>
+						<td><input type="button" name="recip" class="blue" value="1/x " tok="1/x" onClick="this.form.answer.value = oController.doFun(this.tok)"></td></tr>
+						<tr><td><input type="button" name="Mplus" class="red" value=" M+ " tok="M+" onClick="this.form.answer.value = oController.doFun(this.tok);this.form.mem.value='M';"></td>
+						<td><input type="button" name="calc0" class="blue" value=" 0 " tok="0" onClick="this.form.answer.value = oController.addNumber(this.tok)"></td>
+						<td><input type="button" name="negate" class="blue" value="+/- " tok="+/-" onClick="this.form.answer.value = oController.doFun(this.tok)"></td>
+						<td><input type="button" name="dot" class="blue" value=" . " tok="." onClick="this.form.answer.value = oController.addNumber(this.tok)"></td>
+						<td><input type="button" name="plus" class="red" value=" + " tok="+" onClick="this.form.answer.value = oController.addOper(this.tok)"></td>
+						<td><input type="button" name="equal" class="red" value=" = " tok="=" onClick="this.form.answer.value = oController.addOper(this.tok)"></td>
+						</tr>
+						</table>
+					</td></tr>
+					</table>
+				</td></tr>
+				</table>
+			</td></tr>
+			</table>
+		</form>
+	</center>
+</BODY>
+</HTML>

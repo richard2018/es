@@ -1,0 +1,451 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+ Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="System.jsc Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>System.jsc</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		js.lang.System class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ <BR/><BR/><B>Version: </B>2.01, 10/23/05
+ <BR/><BR/><B>Author:</B> Wan Changhua
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="System.html">js.lang.System</a></b></td>
+    <td>this is an important Object
+ </td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"># language : JSVM2
+
+<span class="comment">/**
+ * <span class="attrib">@fileoverview</span> js.lang.System class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ * <span class="attrib">@file</span>		System.jsc
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@since</span>		JSVM1.0
+ */</span>
+
+package js.lang;
+
+import js.lang.NotSupportException;
+
+<span class="comment">/**
+ * The &lt;code&gt;System&lt;/code&gt; class contains several useful class fields
+ * and methods. Inherit from JObject and cannot be instantiated. 
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@extends</span> JObject
+ * <span class="attrib">@class</span> this is an important Object
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@final</span>
+ * <span class="attrib">@throws</span> NotSupportException then anyone try instantiate it.
+ */</span><span class="reserved">function</span> System () 
+{
+	<span class="comment">/* Don't let anyone instantiate this class 
+	 */</span>
+	throw NotSupportException(System.getName()
+		+ <span class="literal">" cannot be instantiated."</span>);
+}
+
+<span class="comment">/**
+ * The link of _JSVM_Namespace;
+ * <span class="attrib">@type</span> _JSVM_Namespace
+ */</span>
+System.NS = _JSVM_Namespace;
+
+<span class="comment">/**
+ * The link of _JSVM_Namespace.runtimeEnvironment.JSVM
+ * <span class="attrib">@type</span> JSVM
+ */</span>
+System.VM = _JSVM_Namespace.runtimeEnvironment.JSVM;
+
+<span class="comment">/**
+ * retrieve JSVM Runtime Environment handle
+ * <span class="attrib">@returns</span> _JSVM_Namespace.runtimeEnvironment
+ * <span class="attrib">@type</span> Object
+ */</span>
+System.getRuntimeEnvironment = <span class="reserved">function</span>()
+{
+	<span class="reserved">return</span> _JSVM_Namespace.runtimeEnvironment;
+}
+
+<span class="comment">/**
+ * The current platform type
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@type</span> String
+ */</span>
+var _platform = null;
+
+<span class="comment">/**
+ * Retrieve flatform type
+ * <span class="attrib">@returns</span> flatform type
+ * <span class="attrib">@type</span> String
+ */</span>
+System.getPlatform = <span class="reserved">function</span>()
+{
+	<span class="reserved">if</span> (_platform != null)
+	{
+		<span class="reserved">return</span> _platform;
+	}
+	<span class="reserved">if</span> (typeof(navigator) == <span class="literal">"undefined"</span>)
+	{
+		<span class="reserved">return</span> <span class="literal">"not-browser"</span>;
+	}
+	var ua = navigator.userAgent.toLowerCase();
+	<span class="reserved">if</span> (/msie/i.test(ua))
+	{
+		<span class="reserved">if</span> (/msie 6/i.test(ua))
+		{
+			_platform = <span class="literal">"ie6"</span>;
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (/msie 5\.5/i.test(ua))
+		{
+			_platform = <span class="literal">"ie5.5"</span>;
+		}
+		<span class="reserved">else</span> <span class="reserved">if</span> (/msie 5\.[^5]/i.test(ua))
+		{
+			_platform = <span class="literal">"ie5"</span>;
+		}
+		<span class="reserved">else</span>
+		{
+			_platform = <span class="literal">"ie"</span>;
+		}
+	}
+	<span class="reserved">else</span> <span class="reserved">if</span> (/gecko/i.test(ua))
+	{
+		_platform = <span class="literal">"moz"</span>;
+	}
+	<span class="reserved">else</span> <span class="reserved">if</span> (/opera/i.test(ua))
+	{
+		_platform = <span class="literal">"opera"</span>;
+	}
+	<span class="reserved">else</span>
+	{
+		_platform = <span class="literal">"other"</span>;
+	}
+	<span class="reserved">return</span> _platform;
+}
+
+<span class="comment">/**
+ * Determines if the current browser is IE.
+ * <span class="attrib">@return</span>  &lt;code&gt;true&lt;/code&gt; if the current browser is IE;
+ *          &lt;code&gt;false&lt;/code&gt; otherwise.
+ * <span class="attrib">@type</span>	boolean
+ */</span>
+System.isIeBrowser = <span class="reserved">function</span>()
+{
+	<span class="reserved">return</span> (System.getPlatform().indexOf(<span class="literal">"ie"</span>) != -1);
+}
+
+<span class="comment">/**
+ * Determines if the current browser is MOZ.
+ * <span class="attrib">@return</span>  &lt;code&gt;true&lt;/code&gt; if the current browser is MOZ;
+ *          &lt;code&gt;false&lt;/code&gt; otherwise.
+ * <span class="attrib">@type</span>	boolean
+ */</span>
+System.isMozBrowser = <span class="reserved">function</span>()
+{
+	<span class="reserved">return</span> System.getPlatform() == <span class="literal">"moz"</span>;
+}
+
+<span class="comment">/**
+ * Determines if the current debug switch is on.
+ * <span class="attrib">@return</span>  &lt;code&gt;true&lt;/code&gt; if the current debug switch is on.
+ *          &lt;code&gt;false&lt;/code&gt; off.
+ * <span class="attrib">@type</span>	boolean
+ */</span>
+System.isDebug = <span class="reserved">function</span>()
+{
+	<span class="reserved">return</span> System.getRuntimeEnvironment().debug;
+}
+
+<span class="comment">/**
+ * Close current JSVM Window ,if the current mode is 'application', 
+ * then close all module-Windows;
+ */</span>
+System.exit = <span class="reserved">function</span> ()
+{
+	<span class="reserved">if</span> (!(System.isMozBrowser() ||
+		System.isIeBrowser()))
+	{
+		throw new NotSupportException(<span class="literal">"The Platform Must be IE5+ or Moz Browser!"</span>);
+	}
+	<span class="reserved">else</span> <span class="reserved">if</span> (System.getPlatform() &lt; <span class="literal">"ie6"</span>)
+	{
+		var str = <span class="literal">"&lt;object id='noTipClose' "</span>
+			+ <span class="literal">"classid='clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11'&gt;"</span>
+			+ <span class="literal">"&lt;param name='Command' value='close'&gt;&lt;/object&gt;"</span>;
+		document.body.insertAdjacentHTML(<span class="literal">"beforeEnd"</span>, str);
+		document.all.noTipClose.Click();
+	}
+	<span class="reserved">else</span>
+	{
+		window.opener = null;
+		window.close();
+	}
+}
+
+<span class="comment">/**
+ * Rretrieve the JSVM-classloader
+ * <span class="attrib">@returns</span> the class loader for the JSVM
+ * <span class="attrib">@type</span> Classloader
+ */</span>
+System.getClassloader = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> System.VM.getClassloader();
+}
+
+<span class="comment">/**
+ * Rretrieve jsvm home path
+ * <span class="attrib">@returns</span> jsvm home path
+ * <span class="attrib">@type</span> String
+ */</span>
+System.getBaseHome = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> System.getRuntimeEnvironment().jsvmHome;
+}
+
+<span class="comment">/**
+ * Rretrieve system home path, default: %jsvmHome%/bin
+ * <span class="attrib">@returns</span> system home path
+ * <span class="attrib">@type</span> String
+ */</span>
+System.getSystemHome = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> System.getRuntimeEnvironment().jsvmHome + <span class="literal">"/bin"</span>;
+}
+
+<span class="comment">/**
+ * Rretrieve class home path, default: %jsvmHome%/classes
+ * <span class="attrib">@returns</span> class home path
+ * <span class="attrib">@type</span> String
+ */</span>
+System.getClassHome = <span class="reserved">function</span> ()
+{
+	var jsre = System.getRuntimeEnvironment();
+	<span class="reserved">return</span> ((tmp = jsre.config.getParameter(<span class="literal">"class_home"</span>))
+		== null) ? (jsre.jsvmHome + <span class="literal">"/classes"</span>)
+		: tmp.replace(<span class="literal">"${jsvmHome}"</span>, jsre.jsvmHome);
+}
+
+
+<span class="comment">/**
+ * Rretrieve class library path, default: %jsvmHome%/lib
+ * <span class="attrib">@returns</span> class library path
+ * <span class="attrib">@type</span> String
+ */</span>
+System.getLibHome = <span class="reserved">function</span> ()
+{
+	var jsre = System.getRuntimeEnvironment();
+	<span class="reserved">return</span> ((tmp = jsre.config.getParameter(<span class="literal">"lib_home"</span>))
+		== null) ? (jsre.jsvmHome + <span class="literal">"/lib"</span>)
+		: tmp.replace(<span class="literal">"${jsvmHome}"</span>, jsre.jsvmHome);
+}
+
+<span class="comment">/**
+ * Rretrieve class resource path, default: %jsvmHome%/res
+ * <span class="attrib">@returns</span> class resource path
+ * <span class="attrib">@type</span> String
+ */</span>
+System.getResourceHome = <span class="reserved">function</span> ()
+{
+	var jsre = System.getRuntimeEnvironment();
+	<span class="reserved">return</span> ((tmp = jsre.config.getParameter(<span class="literal">"res_home"</span>))
+		== null) ? (jsre.jsvmHome + <span class="literal">"/res"</span>)
+		: tmp.replace(<span class="literal">"${jsvmHome}"</span>, jsre.jsvmHome);
+}
+
+<span class="comment">/**
+ * Rretrieve system variable with the specified name
+ * <span class="attrib">@returns</span> a system variable
+ * <span class="attrib">@type</span> String
+ */</span>
+System.getSystemVariable = <span class="reserved">function</span> (name)
+{
+	<span class="reserved">return</span> System.getRuntimeEnvironment()
+		.config.getParameter(name);
+}
+
+<span class="comment">/**
+ * retrieve a plug-in with the specified name
+ * <span class="attrib">@returns</span> a plug-in component
+ * <span class="attrib">@type</span> String
+ */</span>
+System.getPlugIn = <span class="reserved">function</span> (name)
+{
+	<span class="reserved">return</span> _JSVM_Namespace.plugIn[name];
+}
+
+<span class="comment">/**
+ * The output console
+ */</span>
+System.out = {
+
+	print : <span class="reserved">function</span> (s)
+	{
+		System.VM.console.output(s);
+	}
+	,
+	println : <span class="reserved">function</span> (s)
+	{
+		System.VM.console.output(s + <span class="literal">"\r\n"</span>);
+	}
+
+}</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu Nov 17 20:10:21 2005</div>
+</body>
+</html>

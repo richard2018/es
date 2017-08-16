@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.js"></script>
+	
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 错误的结果,我们期望的是点击aaa:弹出111,点击bbb：弹出222
+			document.body.innerHTML = "<div id=div1>aaa</div>" + "<div id=div2>bbb</div><div id=div3>ccc</div>";  
+			for (var i = 1; i < 4; i++) {      
+			  document.getElementById('div' + i).         
+			    addEventListener('click', function() {         
+			    alert(i); // all are 4! 
+			    });  
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Example 2.2 ArrayList</title>
+<script>
+	//定义一个ArrayList类型，关于类型和对象，在第7章中有更为详细的介绍
+	function ArrayList(array)
+	{
+		this.__arr = typeof(array) == "string" ? array.split(",") : array;
+	}
+	//定义一个$each跌代函数，这个函数接受一个闭包作为参数
+	ArrayList.prototype.$each = function(closure)
+	{
+		var ret = [ ];
+
+		for (var i = 0; i < this.__arr.length; i++)
+		{
+			//将调用闭包的计算结果推入堆栈中保存
+			ret.push(closure.call(this, this.__arr[i]));
+		}
+		//将保存着结果的堆栈返回
+		return ret;
+	}
+	//在ArrayList中添加一个元素
+	ArrayList.prototype.add = function(num)
+	{
+		return this.$each(function(a){return parseFloat(a)+parseFloat(num)});
+	}
+	//将ArrayList的每一个元素倍乘
+	ArrayList.prototype.multiply = function(factor)
+	{
+		return this.$each(function(a){return parseFloat(a)*parseFloat(factor)});
+	}
+</script>
+</head>
+<body>
+	<input id="list" type="text" value="1,2,3,4"/><input id="num" type="text" value="2"/>
+	<input type="button" value="Add" onClick="result.value = (new ArrayList(list.value)).add(num.value)"/>
+	<input type="button" value="Multiply" onClick="result.value = (new ArrayList(list.value)).multiply(num.value)"/>
+	<br/><input type="text" id="result"/>
+</body>
+</html>

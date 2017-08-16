@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>Example 21.42 元类</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//定义一个SingletonException异常
+	//早在第3章已经讨论过这种扩展异常的方式
+	function SingletonException(type){
+			type = type || "";
+			this.message = "单例类型"+type+"不能实例化！";
+	}
+	SingletonException. prototype = new Error();
+
+	var defaultTimeout = 300;
+
+	function Singleton(type, name)
+	{
+			//利用闭包构造一个"Singleton类型"返回
+			//该类型遵循"单例"模式，不能创建新的实例
+			name = name || "SingleClass";
+			var ins = new type();
+			//SingletonClass不能执行构造，否则抛出异常
+			var SingletonClass = function()
+			{
+				throw new SingletonException(name);
+			}
+			//single方法返回SingletonClass类型的单一实例
+			SingletonClass.single = function()
+			{
+				return ins;
+			}
+			SingletonClass.name = name;
+			return SingletonClass;
+	}
+	//创建一个叫做SessionFactory的单例类型
+	var SessionFactory = new Singleton(
+		function(){
+			this.timeout = defaultTimeout;
+			this.startTransation = function(){
+				//...
+			};
+			this.closeTransation = function(){
+				//...
+			};
+		}, "SessionFactory"
+	);
+	//通过single()方法获得唯一实例
+	var mySession = SessionFactory.single();
+
+	dwn(mySession);
+
+	try{
+		var test = new SessionFactory(); //出错，单例模式不能创建新的实例
+	}
+	catch(ex)
+	{
+		dwn(ex.message);
+	}
+-->
+</script>
+</body>
+</html>

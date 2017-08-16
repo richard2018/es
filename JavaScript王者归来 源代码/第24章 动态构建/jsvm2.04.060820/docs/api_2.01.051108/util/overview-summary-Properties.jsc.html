@@ -1,0 +1,382 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+ Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="Properties.jsc Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>Properties.jsc</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		js.util.Properties class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ <BR/><BR/><B>Version: </B>2.01, 10/23/05
+ <BR/><BR/><B>Author:</B> Wan Changhua
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Properties.html">js.util.Properties</a></b></td>
+    <td>This is the properties class.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"># language: JSVM2
+
+<span class="comment">/**
+ * <span class="attrib">@fileoverview</span> js.util.Properties class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ * <span class="attrib">@file</span>		Properties.jsc
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@since</span>		JSVM2.0
+ */</span>
+ 
+package js.util;
+
+import js.lang.Cloneable;
+import js.io.IOException;
+import js.net.XmlHttp;
+import js.net.XmlDom;
+import js.util.HashMap;
+
+
+<span class="comment">/**
+ * Creates an empty property list with no default values.
+ * Inherit from Cloneable
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@extends</span> Cloneable
+ * <span class="attrib">@class</span> This is the properties class.
+ * <span class="attrib">@constructor</span>
+ */</span><span class="reserved">function</span> Properties ()
+{
+	<span class="comment">/**
+	 * <span class="attrib">@private</span>
+	 */</span>
+	<span class="reserved">this</span>.context = new HashMap();
+}
+
+
+
+ <span class="comment">/**
+  * Searches for the property with the specified key in this property list.
+  * If the key is not found in this property list, the default property list,
+  * and its defaults, recursively, are then checked. The method returns the
+  * default value argument if the property is not found.
+  *
+  * <span class="attrib">@param</span>   key            the hashtable key.
+  * <span class="attrib">@param</span>   defaultValue   a default value.
+  *
+  * <span class="attrib">@return</span>  the value in this property list with the specified key value.
+  * <span class="attrib">@type</span> String
+  */</span>
+Properties.<span class="reserved">prototype</span>.getProperty = <span class="reserved">function</span> (key, defaultValue)
+{
+	var value = <span class="reserved">this</span>.context.get(key);
+	<span class="reserved">return</span> (value || defaultValue);
+}
+
+
+<span class="comment">/**
+ * Calls the &lt;tt&gt;HashMap&lt;/tt&gt; method &lt;code&gt;put&lt;/code&gt;. Provided for
+ * parallelism with the &lt;tt&gt;getProperty&lt;/tt&gt; method. Enforces use of
+ * strings for property keys and values. The value returned is the
+ * result of the &lt;tt&gt;HashMap&lt;/tt&gt; call to &lt;code&gt;put&lt;/code&gt;.
+ *
+ * <span class="attrib">@param</span> key the key to be placed into this property list.
+ * <span class="attrib">@param</span> value the value corresponding to &lt;tt&gt;key&lt;/tt&gt;.
+ */</span>
+Properties.<span class="reserved">prototype</span>.setProperty = <span class="reserved">function</span> (key, value)
+{
+	<span class="reserved">this</span>.context.put(key, String(value));
+}
+
+
+<span class="comment">/**
+ * Removes all property from this property list.
+ */</span>
+Properties.<span class="reserved">prototype</span>.clear = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> <span class="reserved">this</span>.context.clear();
+}
+
+
+<span class="comment">/**
+ * Returns an iterator of all the keys in this property list,
+ * including distinct keys in the default property list if a key
+ * of the same name has not already been found from the main
+ * properties list.
+ *
+ * <span class="attrib">@return</span>  an iterator of all the keys in this property list, including
+ *          the keys in the default property list.
+ * <span class="attrib">@type</span> Iterator
+ */</span>
+Properties.<span class="reserved">prototype</span>.propertyNames = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> <span class="reserved">this</span>.context.keys();
+}
+
+
+<span class="comment">/**
+ * Reads a property list (key and element pairs) from the input
+ * stream.  
+ *
+ * <span class="attrib">@param</span>      sUrl   the input stream url.
+ * <span class="attrib">@exception</span>  IOException  if an error occurred when reading from the
+ *               input stream.
+ */</span>
+Properties.<span class="reserved">prototype</span>.load = <span class="reserved">function</span> (sUrl)
+{
+	var xmlHttp = XmlHttp.create();
+	try
+	{
+		xmlHttp.open(<span class="literal">"GET"</span>, sUrl, false);
+		xmlHttp.send(null);
+	}
+	catch (ex)
+	{
+		throw new IOException(<span class="reserved">this</span>.getClass().getName()
+			+ <span class="literal">".load() Fail. Cound not access the resource [url:"</span>
+			+ sUrl + <span class="literal">"]."</span>, ex);
+	}
+	<span class="reserved">if</span> (xmlHttp.status != 200 &amp;&amp;
+		xmlHttp.status != 0)
+	{
+		throw new IOException(<span class="reserved">this</span>.getClass().getName()
+			+ <span class="literal">".load() Fail. Cound not access the resource [url:"</span>
+			+ sUrl + <span class="literal">", HTTP-STATUS: "</span>
+			+ xmlHttp.status + <span class="literal">"]."</span>, ex);
+	}
+	var rootNode = null, text = xmlHttp.responseText;
+	<span class="reserved">if</span> (xmlHttp.responseXML &amp;&amp;
+		xmlHttp.responseXML.documentElement)
+	{
+		rootNode = xmlHttp.responseXML.documentElement;
+	}
+	<span class="reserved">else</span> <span class="reserved">if</span>(
+		text.replace(/(^\s)/g, <span class="literal">""</span>).indexOf(<span class="literal">"&lt;?xml"</span>) != -1)
+	{
+		var xmldoc = XmlDom.create();
+		xmldoc.async = false;
+		<span class="reserved">if</span> (xmldoc.loadXML(text))
+		{
+			rootNode = xmldoc.documentElement;
+		}
+		<span class="reserved">else</span>
+		{
+			throw new IOException(<span class="reserved">this</span>.getClass().getName()
+				+ <span class="literal">".load() Fail. stream content format error."</span>, ex);
+		}
+	}
+	<span class="reserved">if</span> (rootNode != null)
+	{
+		var ptNodes = rootNode.selectNodes(<span class="literal">"entity"</span>);
+		var l = ptNodes.length;
+		<span class="reserved">for</span> (var i = 0; i &lt; l; i++)
+		{
+			var node = ptNodes[i];
+			<span class="reserved">this</span>.setProperty(node.getAttribute(<span class="literal">"key"</span>), node.text);
+		}
+	}
+	<span class="reserved">else</span>
+	{
+		var ps = text.replace(/#([^<span class="literal">"\n\r]*)((\r\n)|$)/g, "</span><span class="literal">")
+			.replace(/\[([^"</span>\n\r]*)\]/g, <span class="literal">""</span>)
+			.replace(/\r\n(\s)*\r\n/g, <span class="literal">"\r\n"</span>)
+			.split(<span class="literal">"\r\n"</span>);
+		<span class="reserved">for</span> (var i = 0; i &lt; ps.length; i++)
+		{
+			var p = ps[i];
+			var x = p.indexOf(<span class="literal">"="</span>);
+			<span class="reserved">if</span> (x != -1)
+			{
+				var n = p.substring(0, x).replace(/(^\s+)|\s+$/g, <span class="literal">""</span>);
+				var v = p.substring(x + 1).replace(/(^\s+)|\s+$/g, <span class="literal">""</span>);
+				<span class="reserved">this</span>.setProperty(n, v);
+			}
+		}
+	}
+}
+
+
+<span class="comment">/**
+ * Prints this property list out to the specified output stream.
+ * This method is useful for debugging.
+ *
+ * <span class="attrib">@param</span>   out   an output stream.
+ */</span>
+Properties.<span class="reserved">prototype</span>.list = <span class="reserved">function</span> (out)
+{
+	out = out || System.out;
+	var iterator = <span class="reserved">this</span>.propertyNames();
+	<span class="reserved">while</span>(iterator.hasNext())
+	{
+		var pn = iterator.next();
+		out.println(pn + <span class="literal">"="</span> + <span class="reserved">this</span>.getProperty(pn));
+	}
+}
+
+<span class="comment">/**
+ * Returns a shallow copy of this &lt;tt&gt;Properties&lt;/tt&gt; instance: the keys and
+ * values themselves are not cloned.
+ *
+ * <span class="attrib">@return</span> a shallow copy of this properties.
+ * <span class="attrib">@type</span> Properties
+ */</span>
+Properties.<span class="reserved">prototype</span>.clone = <span class="reserved">function</span> ()
+{
+	var ps = new Properties();
+	ps.context = <span class="reserved">this</span>.context.clone();
+	<span class="reserved">return</span> ps;
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu Nov 17 20:10:21 2005</div>
+</body>
+</html>

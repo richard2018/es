@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>Example-9.1</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//检查一段字符串是否全由数字组成
+	function checkNum(str)
+	{
+	//Match是常用的字符串匹配方法，它的参数是模式，这里是用正则表达式/\D/来描述
+	//模式非数值，关于正则表达式，将在下一章详细讨论
+		return str.match(/\D/)==null; 
+	}
+	dwn(checkNum("1232142141"));  //true
+	dwn(checkNum("123214214a1")); //false
+
+	//查询包含Script的脚本
+	function searchScript(str)
+	{
+		//search是另一种模式匹配方法，它检索字符串中的子串，返回符合模式的子串位置
+		//如果没有子串和模式相匹配，它返回-1
+		if (str.search(/Script/i) == -1) 
+				dwn("String not found");  
+		else  dwn("String found."); 
+	}
+	searchScript("javascript");  //String found
+	searchScript("51js");  //String not found
+
+	//匹配包含Script的脚本
+	function matchScript(str)
+	{
+		var matchArray = str.match(/Script/gi); 
+		for (var i=0; i<matchArray.length;i++) { 
+			dwn("Match found: " + matchArray[i]); 
+		}
+	}
+	matchScript("JavaScript & VBScript");  
+//这个字符串被匹配到了两个/Script/gi
+	matchScript("51js");
+		//这个字符串没有匹配到/Script/gi
+-->
+</script>
+</body>
+</html> 

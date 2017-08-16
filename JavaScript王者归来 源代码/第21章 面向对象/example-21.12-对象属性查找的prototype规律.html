@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>Example-21.12</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+
+	//定义Point2D对象
+	function Point2D(x, y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+	Point2D.prototype.x = 0;
+	Point2D.prototype.y = 0;
+
+	//定义ColorPoint2D对象
+	function ColorPoint2D(x, y, c)
+	{
+		this.x = x;
+		this.y = y;
+	}
+
+	//ColorPoint2D以Point2D对象为原型
+	ColorPoint2D.prototype = new Point2D();
+	ColorPoint2D.prototype.x = 1;
+	ColorPoint2D.prototype.y = 1;
+
+	//构造一个ColorPoint2D对象
+	var cp = new ColorPoint2D(10,20,"red");
+	dwn(cp.x);  //10-先查找cp本身的属性
+	delete cp.x;  
+	dwn(cp.x);  //1-删除后查找上层原型链上的属性
+	delete ColorPoint2D.prototype.x;
+	dwn(cp.x);  //0-删除后继续查找更上层原型链上的属性
+-->
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 15.5 userData Select标记的应用</title>
+<style>
+	.userData {behavior:url(#default#userdata);}
+</style>
+</head>
+<body>   
+<select id="select1"  class="userData">
+	<option>option1</option>
+	<option>option2</option>
+	<option>option3</option>
+	<option>option4</option>
+</select>
+<script language="javascript" type="text/javascript">  
+<!--
+	var obj=document.all.select1;
+	obj.attachEvent('onchange',saveSelectedIndex);
+
+	function saveSelectedIndex(){
+		//将select框选种项的索引记录到sSelectValue属性
+		obj.setAttribute("sSelectValue",obj.selectedIndex);
+		//obj存入名为oSltIndex的存储区
+		obj.save("oSltIndex");
+	}
+	window.attachEvent('onload',loadSelectedIndex)
+	function loadSelectedIndex(){
+		//读取oSltIndex存储区
+		obj.load("oSltIndex");
+		//从中读取之前选种的索引记录，写回到obj的selectedIndex属性
+		obj.selectedIndex=obj.getAttribute("sSelectValue");
+	}
+-->
+</script>  
+</body>   
+</html>

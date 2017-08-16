@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="City;Calendar;DragDrop"></script>
+<style type="text/css"> * {font-size:12px;} </style>
+</head>
+<body>
+
+<span style="font-size:15px;font-weight:bold;">DronFw 加载多个类</span>
+<hr>
+
+省市联动类：<select id="id1"></select>
+<select id="id2"></select>
+
+<br>
+
+选择日期类：<input type="text" id="id3">
+
+<br><br>
+
+可拖动类：<div id="id4" style="position:absolute;width:100px;height:100px;background:#eee;">请拖动我！</div>
+
+<!--
+
+	这是 DronFw 同时载入多个类的例子
+
+	<script type="text/javascript" src="../DronFw/boot.js" loadClass="City;Calendar;DragDrop"></script>
+
+	loadClass="City;Calendar;DragDrop" 指明了载入 City、Calendar 和 DragDrop 类。
+
+	同时载入多个类的时候，loadClass 属性中的类名应用“;”号隔开。
+
+-->
+
+<script type="text/javascript">
+new DronFw.Class.City("id1","id2");//省市联动类
+new DronFw.Class.Calendar("id3");//日期输入类
+new DronFw.Class.DragDrop("id4");//可拖动类
+</script>
+
+</body>
+</html>

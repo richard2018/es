@@ -1,0 +1,419 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+ Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="../stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="Window.jsc Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>Window.jsc</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		js.dom.Window class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ <BR/><BR/><B>Version: </B>2.01, 10/23/05
+ <BR/><BR/><B>Author:</B> Wan Changhua
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Window.html">js.dom.Window</a></b></td>
+    <td>This is the basic web window class.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"># language: JSVM2
+
+<span class="comment">/**
+ * <span class="attrib">@fileoverview</span> js.dom.Window class http://jsvm.homolo.com/jsvm2.0/docs/api/
+ * <span class="attrib">@file</span>		Window.jsc
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@since</span>		JSVM2.0
+ */</span>
+ 
+package js.dom;
+
+import js.lang.System;
+import js.lang.BObject;
+
+<span class="comment">/**
+ * Create a new js.dom.Window instance.
+ * Inherit from BObject
+ * <span class="attrib">@author</span>	Wan Changhua
+ * <span class="attrib">@version</span>	2.01, 10/23/05
+ * <span class="attrib">@extends</span> BObject
+ * <span class="attrib">@class</span> This is the basic web window class.  
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@param</span> &lt;String&gt; src
+ * <span class="attrib">@return</span> A new Window object
+ */</span><span class="reserved">function</span> Window (src)
+{
+	super.call(<span class="reserved">this</span>);
+	
+	<span class="comment">/**
+	 * Sets or retrieves the source code of the Window
+	 * <span class="attrib">@type</span> String
+	 */</span>
+	<span class="reserved">this</span>.sourceCode = src;
+	
+	<span class="comment">/**
+	 * Sets or retrieves the width of the Window
+	 * <span class="attrib">@type</span> int
+	 */</span>
+	<span class="reserved">this</span>.width = null;
+	
+	<span class="comment">/**
+	 * Sets or retrieves the height of the Window
+	 * <span class="attrib">@type</span> int
+	 */</span>
+	<span class="reserved">this</span>.height = null;
+	
+	<span class="comment">/**
+	 * Sets or retrieves the top of the Window
+	 * <span class="attrib">@type</span> int
+	 */</span>
+	<span class="reserved">this</span>.top = null;
+	
+	<span class="comment">/**
+	 * Sets or retrieves the left of the Window
+	 * <span class="attrib">@type</span> int
+	 */</span>
+	<span class="reserved">this</span>.left = null;
+	
+	<span class="comment">/**
+	 * Specifies whether to display resize handles at the corners of the window. 
+	 * The default is yes. [ yes | no | 1 | 0 ]
+	 * <span class="attrib">@type</span> String
+	 */</span>
+	<span class="reserved">this</span>.toolbar = null;
+	
+	<span class="comment">/**
+	 * Specifies whether to display the input field for entering URLs directly into the browser.
+	 * The default is yes. [ yes | no | 1 | 0 ]
+	 * <span class="attrib">@type</span> String
+	 */</span>
+	<span class="reserved">this</span>.location = null;
+	
+	<span class="comment">/**
+	 * Specifies whether to add directory buttons.
+	 * The default is yes. [ yes | no | 1 | 0 ]
+	 * <span class="attrib">@type</span> String
+	 */</span>
+	<span class="reserved">this</span>.directories = null;
+	
+	<span class="comment">/**
+	 * Specifies whether to display the menu bar.
+	 * The default is yes. [ yes | no | 1 | 0 ]
+	 * <span class="attrib">@type</span> String
+	 */</span>
+	<span class="reserved">this</span>.menubar = null;
+	
+	<span class="comment">/**
+	 * Specifies whether to display horizontal and vertical scroll bars.
+	 * The default is yes. [ yes | no | 1 | 0 ]
+	 * <span class="attrib">@type</span> String
+	 */</span>
+	<span class="reserved">this</span>.scrollbars = null;
+	
+	<span class="comment">/**
+	 * Specifies whether to display resize handles at the corners of the window. 
+	 * The default is yes. [ yes | no | 1 | 0 ]
+	 * <span class="attrib">@type</span> String
+	 */</span>
+	<span class="reserved">this</span>.resizable = null;
+	
+	<span class="comment">/**
+	 * Specifies whether to display status at the corners of the window. 
+	 * The default is yes. [ yes | no | 1 | 0 ]
+	 * <span class="attrib">@type</span> String
+	 */</span>
+	<span class="reserved">this</span>.status = <span class="literal">"yes"</span>;
+	
+	<span class="comment">/**
+	 * Window name
+	 * <span class="attrib">@private</span>
+	 * <span class="attrib">@type</span> String
+	 */</span>
+	<span class="reserved">this</span>.name = <span class="literal">"window_"</span> + new Date().getTime();
+	
+	<span class="comment">/**
+	 * The reference to the opened window object
+	 * The default is yes. [ yes | no | 1 | 0 ]
+	 * <span class="attrib">@type</span> oNewWindow
+	 */</span>
+	<span class="reserved">this</span>.handle = null;
+}
+
+<span class="comment">/**
+ * Retrieve window style
+ * <span class="attrib">@return</span> window style string
+ * <span class="attrib">@type</span> String
+ */</span>
+Window.<span class="reserved">prototype</span>.getWindowStyle = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> (((<span class="reserved">this</span>.width != null) ?	(<span class="literal">"width="</span> + <span class="reserved">this</span>.width + <span class="literal">","</span>) : <span class="literal">""</span>)
+		+ ((<span class="reserved">this</span>.height != null) ? (<span class="literal">"height="</span> + <span class="reserved">this</span>.height + <span class="literal">","</span>) : <span class="literal">""</span>)
+		+ ((<span class="reserved">this</span>.top != null) ?	(<span class="literal">"top="</span> + <span class="reserved">this</span>.top + <span class="literal">","</span>) : <span class="literal">""</span>)
+		+ ((<span class="reserved">this</span>.left != null) ? (<span class="literal">"left="</span> + <span class="reserved">this</span>.left + <span class="literal">","</span>) : <span class="literal">""</span>)
+		+ ((<span class="reserved">this</span>.toolbar != null) ?	(<span class="literal">"toolbar="</span> + <span class="reserved">this</span>.toolbar + <span class="literal">","</span>) : <span class="literal">""</span>)
+		+ ((<span class="reserved">this</span>.location != null) ? (<span class="literal">"location="</span> + <span class="reserved">this</span>.location + <span class="literal">","</span>) : <span class="literal">""</span>)
+		+ ((<span class="reserved">this</span>.directories != null) ?	(<span class="literal">"directories="</span> + <span class="reserved">this</span>.directories + <span class="literal">","</span>) : <span class="literal">""</span>)
+		+ ((<span class="reserved">this</span>.menubar != null) ?	(<span class="literal">"menubar="</span> + <span class="reserved">this</span>.menubar + <span class="literal">","</span>) : <span class="literal">""</span>)
+		+ ((<span class="reserved">this</span>.scrollbars != null) ? (<span class="literal">"scrollbars="</span> + <span class="reserved">this</span>.scrollbars + <span class="literal">","</span>) : <span class="literal">""</span>)
+		+ ((<span class="reserved">this</span>.resizable != null) ?	(<span class="literal">"resizable="</span> + <span class="reserved">this</span>.resizable + <span class="literal">","</span>) : <span class="literal">""</span>)
+		+ ((<span class="reserved">this</span>.status != null) ? (<span class="literal">"status="</span> + <span class="reserved">this</span>.status + <span class="literal">","</span>) : <span class="literal">""</span>)
+		).replace(/,$/, <span class="literal">""</span>);
+}
+
+<span class="comment">/**
+ * Shows current web window width argument
+ * <span class="attrib">@param</span> {Variable} arg a argument
+ * <span class="attrib">@return</span> a window handle
+ * <span class="attrib">@type</span> Object
+ * #see #open
+ */</span>
+Window.<span class="reserved">prototype</span>.show = <span class="reserved">function</span>(arg)
+{
+	var args = {};
+	args.arguments = arg;
+	args.window = window;
+	var handle = <span class="reserved">this</span>.open(args);
+	handle.document.open();
+	handle.document.write(<span class="reserved">this</span>.sourceCode);
+	handle.window.windowArguments = args;
+	handle.window.owner = <span class="reserved">this</span>;
+	handle.window.setInterval(<span class="literal">"try{if(!owner.live())window.close();}"</span>
+		+ <span class="literal">"catch(e){window.close();}"</span>, 3250);
+	handle.document.close();
+	<span class="reserved">return</span> (<span class="reserved">this</span>.handle = handle);
+}
+
+<span class="comment">/**
+ * Opens a new window and loads the document specified by the given URL (Window.getCommonWebURL()), 
+ * or opens a blank document if a source is not provided.
+ * <span class="attrib">@return</span> an window handle
+ * <span class="attrib">@type</span> Object
+ */</span>
+Window.<span class="reserved">prototype</span>.open = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> window.open(
+		((document.URL.toLowerCase().indexOf(<span class="literal">"https"</span>) == 0) ?
+		Window.getCommonWebURL() : <span class="literal">"about:blank"</span>)
+		, <span class="reserved">this</span>.name
+		, <span class="reserved">this</span>.getWindowStyle());
+}
+
+<span class="comment">/**
+ * Closes the current browser Window 
+ * <span class="attrib">@return</span> an object
+ * <span class="attrib">@type</span> void
+ */</span>
+Window.<span class="reserved">prototype</span>.close = <span class="reserved">function</span>()
+{
+	<span class="reserved">if</span> (<span class="reserved">this</span>.isActive())
+	{
+		<span class="reserved">this</span>.handle.close();
+	}
+}
+<span class="comment">/**
+ * Focuses the current browser Window 
+ * <span class="attrib">@type</span> void
+ */</span>
+Window.<span class="reserved">prototype</span>.focus = <span class="reserved">function</span> ()
+{
+	<span class="reserved">if</span> (<span class="reserved">this</span>.isActive())
+	{
+		<span class="reserved">this</span>.handle.focus();
+	}
+}
+
+<span class="comment">/**
+ * Determines if the current window is active.
+ * <span class="attrib">@return</span>  &lt;code&gt;true&lt;/code&gt; if the current window is active.
+ *          &lt;code&gt;false&lt;/code&gt; otherwise.
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Window.<span class="reserved">prototype</span>.isActive = <span class="reserved">function</span>()
+{
+	try
+	{
+		<span class="reserved">return</span> (<span class="reserved">this</span>.handle != null
+			&amp;&amp; !<span class="reserved">this</span>.handle.closed);
+	}
+	catch (ex)
+	{
+		<span class="reserved">return</span> false;
+	}	
+}
+
+<span class="comment">/**
+ * Returns the value of Window
+  * <span class="attrib">@return</span> an window handle
+ * <span class="attrib">@type</span> Object
+ */</span>
+Window.<span class="reserved">prototype</span>.valueOf = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> <span class="reserved">this</span>.handle;
+}
+
+<span class="comment">/**
+ * Retrieves the common web url
+ * <span class="attrib">@return</span> an url string
+ * <span class="attrib">@type</span> String
+ */</span>
+Window.getCommonWebURL = <span class="reserved">function</span> ()
+{
+	<span class="reserved">return</span> (System.getSystemHome()
+		+ <span class="literal">"/res/__web.htm"</span>);
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="../help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b></b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="../index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="../overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="../allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu Nov 17 20:10:21 2005</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+该版本在 jsvm2.05 基础上
+
+1. 修改了 JavaScript "类/对象" 的扩展名，由此前的 .jsc 修改为 .class.js ，例如： HelloWorld.jsc -> HelloWorld.class.js
+2. 增加了 $import,$package 函数的支持，同时保留的此前版本中 _import 和 "类/对象" 内部函数: _$import,_$package。
+3. 修改了 JSVM 的缓存共享机制，此后缓存不在受限于此前的 application + module 的模式。
+4. 废弃了 module 模式.
+5. runtime 将不被默认加载，需要使用到runtime中jsvm2语法的支持或者js.*等类时，需要显示地在 modules参数中声明，例如：<script src="jsvm2/jsre.js" modules="runtime"></script>
+6. JSVM自带的tools模块中支持提供了打包工具的支持。加载 tools 模块后，通过热键：ctrl + F9 随时可以进入程序界面。

@@ -1,0 +1,30 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 12.21 改变样式</title>
+<style type="text/css">
+.out  { display:none; }       
+.over   {list-style:none;
+         position:absolute;
+              left:10px;
+              top:33px;
+              border-bottom:3px #036 solid;
+              display:block;
+                 }
+</style>
+</head>
+<body>
+<!--当鼠标移动到“公司产品”文字上后，显示出下面的分类菜单-->
+<ul class="navul">
+     <li onmouseover="id1.className='over'" onmouseout="id1.className='out'">公司产品</li>
+          <ul id="id1" class="out">
+              <li><a href="#">办公设备</a></li>
+              <li><a href="#">会议设备</a></li>
+              <li><a href="#">文仪设备</a></li>
+              <li><a href="#">门禁考勤</a></li>
+              <li><a href="#">集团电话</a></li>
+              <li><a href="#">消耗用品</a></li>
+           </ul>
+</ul>
+</body>
+</html>

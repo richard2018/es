@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css"> td,body{font-size:12px;}</style>
+<script type="text/javascript" src="../../DronFw/boot.js" loadClass="PopWindow"></script>
+</head>
+<body>
+<h2>游戏人Popup窗体类</h2>
+<hr>
+
+<input type="button" value="金属风格" onclick="popwin.SetStyle('metal');">
+<input type="button" value="水晶风格" onclick="popwin.SetStyle('crystal');">
+
+<script type="text/javascript">
+
+var popwin = new DronFw.Class.PopWindow();
+popwin.StyleName = "metal";
+popwin.Left = 100;
+popwin.Top = 40;
+popwin.Width = 400;
+popwin.Height = 300;
+popwin.Ico = "../images/window_ico.gif";
+popwin.Title = "游戏人Popup窗口例子";
+popwin.OnTop = true;
+popwin.MinButton = true;
+popwin.MaxButton = true;
+popwin.CloButton = true;
+popwin.Open("test.html");
+popwin.Show("popwin");//注意，这里需要把实例名称传进去
+
+
+/*
+	Window 类的属性方法如下：
+	属性
+		StyleName : 风格名称，可选 metal|crystal  默认 metal 
+		Left   : 窗体距左边的距离，缺省为0
+		Top    : 窗体距上边的距离，缺省为0
+		Width  : 窗体宽，缺省300
+		Height : 窗体高，缺省200
+		Ico    : 窗体的图标，缺省为ie图标
+		Title  : 窗体的标题，缺省为“未命名标题”
+		OnTop  : 窗体是否永远在最顶层，默认为是（本地有效）
+		MinButton : 是否显示最小化按钮，默认显示
+		MaxButton : 是否显示最大化按钮，默认显示
+		CloButton : 是否显示关闭按钮，默认显示
+	方法
+		Open(url) : 指定打开的网址
+		Show(me)  : 显示窗体，注意，要把实例的名称me传进去
+		SetStyle(name) : 切换风格，name 为风格名称，可选 metal|crystal
+
+	另外说明：
+		如果哪位设计师能多开发出几套风格，还希望能与我分享
+*/
+</script>
+
+</body>
+</html>

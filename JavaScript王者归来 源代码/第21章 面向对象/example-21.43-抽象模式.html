@@ -1,0 +1,86 @@
+<script>
+<!--
+function Template_Group(Class)
+{
+	//这个类型直接对类型进行操作，它的参数是一个类型
+	//所以根据前面的定义，它是一个“元类”，从另一个角度理解，它是根据一个类构造其聚合类的模板
+    if(!Class)Class=Object;
+	//构造一个原型，以抄写它的属性名（跟prototype继承无关，只是用了这个名字）
+    var prototype=new Class();
+    return function()
+    {
+        var g=new Array();
+		//add方法用来向集合中添加元素
+        this.add=function(newElement)
+        {
+            if(newElement.constructor==Class)
+            {
+                for(var i=0;i<g.length;i++)
+                {
+                    if(g[i]==newElement)return;
+                }
+                g.push(newElement);
+            }
+        }
+		//remove方法用来将集合元素移除
+        this.remove=function(theElement)
+        {
+            for(var i=0;i<g.length;i++)
+            {
+                for(var i=0;i<g.length;i++)
+                {
+                    if(g[i]==newElement)g.slice(i,1);
+                }
+            }
+        }
+		//下面的这个循环很复杂，它大致的意思是将单个对象的方法抽象成同名的集合方法
+		//调用集合对象的某个方法，将对集合中每一个对象的同名方法生效！
+		//并且，以一个数组形式返回对象集合中每一个对象调用方法的结果
+        for(var p in prototype)
+        {
+			//判断prototype[p]是否是一个函数，为了便于自定义可聚合的属性范围
+			//只判断属性是否有apply方法，这样，可以自定义带有apply方法的属性，它也能被TGroup识别
+            if(prototype[p].apply)
+            {
+        		//为生成的Group类定义方法，每个方法都调用所有组员的同一方法，为了保存方法名
+				//需要构造一个独立的作用域,为此使用了this[p]=一个立即执行的函数
+                this[p]=function()
+                {
+                    var m=p;
+                    return function()
+                    {
+						 //Group的方法即依次执行每个成员的方法
+                        if(g.length)
+                        {
+                            //首先执行一个成员方法 判断其返回值类型 
+                            var o=g[0][m].apply(g[0],arguments);
+                            //当返回非对象时 Group的方法只返回一个数组
+                            if(!(o instanceof Object))
+                            {
+                                var r=new Array();
+                                for(var i=1;i<g.length;i++)
+                                {
+                                    r.push(g[i][m].apply(g[i],arguments));
+                                }
+                                return r;
+                            }
+                            //当返回对象时 Group的方法返回一个由所有组员对应方法返回值组成的Group。
+                            else
+                            {
+                                var r=new (new Template_Group(g[0][m].apply(g[0][m],arguments).constructor));
+                                r.add(o);
+                                for(var i=1;i<g.length;i++)
+                                {
+                                    r.add(g[i][m].apply(g[i],arguments));
+                                }
+                                return r;
+                            }//end if
+                        }
+                    }//return function
+                }()
+            }//if(prototype[p].apply)
+        }//for(var p in prototype)
+    }
+}
+-->
+</script> 

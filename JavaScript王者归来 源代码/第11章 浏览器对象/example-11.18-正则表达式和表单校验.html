@@ -1,0 +1,42 @@
+<html>
+<head>
+	<title>Example-11.18正则表达式和表单校验</title>
+</head>
+<body>
+<form onsubmit="return check(this)">
+		<input type = "text" name="a" pattern="^[\s\n\r\t]*$"/><!--非空-->
+		<input type = "text" name="b" pattern="^([+-])?(0|([1-9][0-9]*))$"/><!--整数-->
+		<input type = "text" name="c" pattern="^[0-9]{11}$"/><!--11位手机号码-->
+		<input type = "text" name="d" 
+pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"/><!--电子邮件地址-->
+		<br/><br/>
+		<input type = "submit"/>
+</form>
+<script type="text/JavaScript">
+<!--
+function check(form)
+{
+	for(var i = 0; i < form.elements.length; i++)
+	{
+		var element = form.elements[i];
+		//通过改进，我们在element本身的pattern属性中描述正则表达式
+		//然后通过读取它来作为匹配标准
+		//这样我们就可以对输入进行多种格式的匹配了
+		if(element.pattern)
+		{
+			var pattern = new RegExp(element.pattern);
+
+			if(pattern && pattern.test(element.value))
+			{
+				alert(element.name + "输入格式不正确!");
+				element.focus();
+				return false;
+			}
+		}
+	}
+	return true;
+}
+-->
+</script>
+</body>
+</html>

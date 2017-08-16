@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>Example-6.16</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	function ListTemplete(type) //一个集合模板，可以用来构造任何一种类型的"集合"
+	{
+		var members = [];
+		var list = function()  //定义一个list构造函数
+		{
+			this.append.apply(this,arguments);
+		}  
+		list.prototype.append = function()  //list.append()方法，这个方法的作用是往集合中添加元素
+		{
+			for(var i = 0; i < arguments.length; i++)
+			{  
+				if(typeof(arguments[i]) == type ||
+			(typeof(type)=='function' && arguments[i] instanceof type)) 
+					members.push(arguments[i]);
+			
+			else throw new TypeError("元素类型与集合声明不符合");  
+//当添加的元素与集合声明的类型不匹配时，将会抛出TypeError异常
+		}
+		}
+		list.prototype.toArray = function() //toArray方法将集合转换为数组
+		{
+			return members.slice(0);	
+		}
+		return list;
+	}
+
+	NumberList = new ListTemplete("number");  
+//构建一个数值集合，要求集合中的每一个元素都必须是数值
+	var a = new NumberList(1,2,3);  
+	dwn(a.toArray());
+	a.append(4,5,6);
+	dwn(a.toArray());
+
+	ObjectList = new ListTemplete(Object);  
+//构建一个Object集合，要求集合中的每一个元素都必须是Object对象
+	var b = new ObjectList({x:1, y:2}, {x:3, y:4});
+	dwn(b.toArray());
+
+	function Point(x,y)
+	{
+		this.x = x;
+		this.y = y;	
+	}
+	Point.prototype.toString = function()
+	{
+		return "(" + this.x + "," + this.y + ")";
+	}
+
+	PointList = new ListTemplete(Point);  
+//构建一个集合，要求集合中的每一个元素都是一个Object
+	var c = new PointList();
+	c.append(new Point(1,3), new Point(2,4));
+	dwn(c.toArray());
+-->
+</script>
+</body>
+</html>

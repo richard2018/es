@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<script type="text/javascript" src="../DronFw/boot.js" loadPrototype="Array"></script>
+<style type="text/css">
+	td,body{font-size:12px;}
+	.code
+	{
+		font-family:"fixedSys";
+	}
+	button{
+		border:1px solid #888;
+		background-color:#fff;
+		font-family:"fixedSys";
+		text-align:left;
+	}
+</style>
+</head>
+<body>
+<h2>Array 扩展方法</h2>
+<hr>
+
+<div class="code">
+var arr1 = [0,1,2,3,4,5,6,7,8];<br>
+var arr2 = [6,4,5,2,7,1,0,8,3];<br>
+var arr3 = ["Hello","JavaScript","Array"];
+</div>
+
+<br>
+
+<button onclick="window.alert(arr1.del(5));">
+window.alert(arr1.<font color="red">del(5)</font>)
+</button>
+<span class="code">//自定义删除数组指定索引的元素</span><br>
+
+<button onclick="window.alert(arr1.random());">
+window.alert(arr1.<font color="red">random()</font>)
+</button>
+<span class="code">//数组洗牌</span><br>
+
+<button onclick="window.alert(arr2.sortNum(0));">
+window.alert(arr1.<font color="red">sortNum(0)</font>)
+</button><br>
+<button onclick="window.alert(arr2.sortNum(1));">
+window.alert(arr1.<font color="red">sortNum(1)</font>)
+</button>
+<span class="code">//数字数组排序，参数为1时，从大到小排序，否则从小到大排序</span><br>
+
+<button onclick="window.alert(arr2.getMax());">
+window.alert(arr2.<font color="red">getMax()</font>)
+</button>
+<span class="code">//获得数字数组的最大项</span><br>
+
+<button onclick="window.alert(arr2.getMin());">
+window.alert(arr2.<font color="red">getMin()</font>)
+</button>
+<span class="code">//获得数字数组的最小项</span><br>
+
+<button onclick="window.alert(arr3.indexOf('JavaScript'));">
+window.alert(arr3.<font color="red">indexOf("JavaScript")</font>)
+</button>
+<span class="code">//数组第一次出现指定元素值的位置，如无匹配，返回 -1</span><br>
+
+
+<script type="text/javascript">
+var arr1 = [0,1,2,3,4,5,6,7,8];
+var arr2 = [6,4,5,2,7,1,0,8,3];
+var arr3 = ["Hello","JavaScript","Array"];
+</script>
+
+</body>
+</html>

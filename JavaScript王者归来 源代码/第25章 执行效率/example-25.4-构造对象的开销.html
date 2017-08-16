@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>Example-25.4 构造对象的开销</title>
+</head>
+<script>
+<!--
+function DrawPoint(x, y, color)
+{
+	var img = new Image(1, 1);
+	img.style.backgroundColor = color;
+	img.style.position = "absolute";
+	img.style.left = x;
+	img.style.top = y;
+	document.body.appendChild(img);
+}
+
+function P(N,A,color)
+{
+	var H = document.body.clientHeight-10;
+	color=color||"black"
+
+	for(var i = 0; i <  N; i++)
+	{
+		var sTime = new Date;
+        A(i);
+		var eTime = new Date;
+		DrawPoint(i, H - (eTime - sTime), color);
+	}
+}
+-->
+</script>
+<body>
+<script>
+<!--
+window.onload = function()
+{
+	P(300,fa,"blue");
+	P(300,fb,"red");
+}
+
+function foo(obj){
+	obj.a=10;
+};
+
+function cls(){
+	this.foo=function(){
+		this.a=10;
+	}
+}
+
+function fa(i){
+	var p = 20 * i;
+	while(p--){
+		var t=new Object;
+		foo(t);
+	}
+};
+function fb(i){
+	var p = 20 * i;
+	while(p--){
+		var t=new cls;
+		t.foo();
+	}
+};
+-->
+</script>
+</body>
+</html>

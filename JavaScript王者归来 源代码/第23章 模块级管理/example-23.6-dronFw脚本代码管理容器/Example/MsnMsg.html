@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css"> td,body{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="MsnMsg"></script>
+</head>
+<body>
+<h2>MSN消息提示类</h2>
+<hr>
+
+<script type="text/javascript">
+/*
+ *    作者：ttyp  
+ *    邮件：ttyp@21cn.com  
+ *    日期：2005-3-18 
+ */
+
+var MSG1 = new DronFw.Class.MsnMsg("aa",200,120,"短消息提示：","您有1封消息","今天请我吃饭哈");  
+    MSG1.rect(null,null,null,screen.height-27); 
+    MSG1.speed    = 10; 
+    MSG1.step    = 5;
+    MSG1.timeout = 1000;
+    MSG1.show();
+
+/*
+	使用说明待写
+*/
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 13.5 fireEvent的真正作用</title>
+</head>
+<body>
+<table border="1" onclick="alert(event.srcElement.innerText);">
+    <tr>
+        <td id="abc">abc</td>
+        <td id="def">def</td>
+    </tr>
+</table>
+<button onclick="abc.fireEvent('onclick')">
+    abc</button>
+<button onclick="def.fireEvent('onclick')">
+    def
+</button>
+</body>
+</html>

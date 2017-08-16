@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 12.12 cloneNode复制表格</title>
+<style>
+td{
+border-style:solid;border-width:1;border-color:green;width:300px;
+}
+tr{
+border-style:solid;border-width:1;border-color:green;width:300px;
+}
+</style>
+</head>
+<body>
+<table id="thetable" >
+	<tr><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+	<tr><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+	<tr><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+	<tr><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+</table>
+<button onclick='clone()'>复制行</button>
+<script type="text/javascript">
+<!--
+function clone(){
+	var tbody=thetable.lastChild
+	newrow=tbody.lastChild.cloneNode(true);
+		//cloneNode(true)将连同<tr>标记内的<td>一起复制，所以表格上看起来就多了一行
+		//注意前面说过的lastChild是当前节点的最后一个节点，对于tbody来说它的
+		//lastChild就是表格的最后一行
+	tbody.appendChild(newrow);
+	var newTR = tbody.lastChild.cloneNode();
+		//如果不带参数，它指复制<tr>，不会其中的<td>的内容
+	alert(newTR.outerHTML); //所以newTR.outerHTML的内容只有<TR></TR>
+}
+-->
+</script>
+</body>
+</html>

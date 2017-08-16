@@ -1,0 +1,73 @@
+<html>
+<head>
+	<title>Example-25.3 信息隐藏的利弊</title>
+</head>
+<script>
+<!--
+function DrawPoint(x, y, color)
+{
+	var img = new Image(1, 1);
+	img.style.backgroundColor = color;
+	img.style.position = "absolute";
+	img.style.left = x;
+	img.style.top = y;
+	document.body.appendChild(img);
+}
+
+function P(N,A,color)
+{
+	var H = document.body.clientHeight-10;
+	color=color||"black"
+
+	for(var i = 0; i <  N; i++)
+	{
+		var sTime = new Date;
+        A(i);
+		var eTime = new Date;
+		DrawPoint(i, H - (eTime - sTime), color);
+	}
+}
+-->
+</script>
+<body>
+<script>
+<!--
+window.onload = function()
+{
+	P(300,fa,"blue");
+	P(300,fb,"red");
+}
+
+function foo(a,b){
+	//不隐藏a、b的信息
+	this.a = a;
+	this.b = b;
+};
+function foo2(){
+	//隐藏了a、b的信息，使用时不得不通过getter来获取，增加了时间开销
+	var a;
+var b;
+this.getA = function(){
+	return a;
+}
+this.getB = function(){
+	return b;
+}
+}
+
+function fa(i){
+	var f = new foo(1,2);
+	var p = 50 * i;
+	while(p--)
+var t = f.a + f.b;  //不隐藏信息访问速度比较快
+};
+function fb(i){
+	var f = new foo2(1,2);
+	var p = 50 * i;
+	while(p--)
+var t = f.getA() + f.getB();  //这样就比较慢了
+};
+-->
+</script>
+</body>
+</html>

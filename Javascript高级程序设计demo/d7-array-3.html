@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title>title</title>
+		<script type="text/javascript">
+			"use strict"
+			// 1.concat
+			let c1 = ["red", "green", "blue"];
+			let c2 = c1.concat(["black", "yellow","blue"]);
+			console.info(c1);
+			console.info(c2);
+			
+			// 2.slice,不影响数组本身
+			console.info("=========slice=========");
+			console.info(c1.slice(1))
+			console.info("c1 : " + c1)
+			console.info(c1.slice(1, 2));
+			console.info(c1)
+			console.info(c1.slice(0, -1))
+			
+			// 3.splice,修改数组本身
+			console.info("===========splice==============");
+			// 3.1 删除元素
+			console.info(c1.splice(0, 2))  // 删除元素: 0:索引位置, 2: 删除元素个数
+			console.info(c1);
+			
+			// 3.2 插入元素
+			let c3 = ["green", "blue", "yellow"];
+			console.info(c3.splice(1, 0, "black"));
+			console.info(c3)
+			
+			// 3.3 替换
+			let c4 = ["green", "blue", "yellow"];
+			console.info(c4.splice(2, 1, "red"))
+			console.info(c4)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

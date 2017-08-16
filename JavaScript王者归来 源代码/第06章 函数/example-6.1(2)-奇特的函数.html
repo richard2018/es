@@ -1,0 +1,59 @@
+<html>
+<head>
+	<title>Example-6.1（2）奇特的函数</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//"无穷"的菲波纳契数据结构
+	function Fib(n, x, y)
+	{
+		//这里借参数x,y来保留前面的计算结果，即菲波数当前数列到n的最后两个数值
+		//在实际调用中通常并不用到x、y这两个参数
+		var a = x || 1;
+		var b = y || 1;
+		if(n == 0) b = a;
+
+		var t;
+
+		//计算菲波数的算法
+		for(var i = 2; i <= n + 1; i++)
+		{
+			t = b;
+			b = a + b;
+			a = t;
+		}
+
+		var ret = function(n, x, y){  
+			//构造一个闭包，这个闭包本身包含一个以新起点计算Fib值的函数
+			x = x || a;
+			y = y || b;
+			return Fib(n, x, y);
+		}
+
+		//重写valueOf和toString，这样在表达式中可以直接对返回的菲波函数自动求值
+		//在第五部分我们还会详细讨论到这种用法
+		ret.valueOf = ret.toString = function()
+		{
+			return a;
+		}
+		return ret;
+	}
+	var f6 = Fib(6);  //奥妙在这里，f6是一个新起点的菲波数列函数
+	dwn(f6);
+	dwn(f6(2));
+
+	//递归返回自身的函数闭包
+	function f()
+	{
+			return f;
+	}
+	dwn(f()()()()()()()()()()()()()()()()()()()()());
+-->
+</script>
+</body>
+</html>

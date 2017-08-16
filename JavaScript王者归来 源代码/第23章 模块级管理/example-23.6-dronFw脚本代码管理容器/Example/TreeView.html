@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css"> td,body{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="TreeView"></script>
+</head>
+<body>
+<h2>游戏人 TreeView 类</h2>
+<hr>
+
+<div id="MyTree"></div>
+
+<script type="text/javascript">
+var tv = new DronFw.Class.TreeView;
+tv.CreateTreeInto("MyTree");
+tv.AddItem("我是一颗小小小小树", "root", "", "", true);//建立一个根节点，默认展开
+	tv.AddItem("节点1", "node1", "root", "", true);//这个节点也是展开的
+		tv.AddItem("节点1-1", "node1-1", "node1", "", true);//这个节点也是展开的
+			tv.AddItem("节点1-1-1", "node1-1-1", "node1-1", "alert('这是节点1-1-1')");
+			tv.AddItem("节点1-1-2", "node1-1-2", "node1-1", "alert('这是节点1-1-2')");
+		tv.AddItem("节点1-2", "node1-2", "node1", "");
+			tv.AddItem("节点1-2-1", "node1-2-1", "node1-2", "");
+				tv.AddItem("节点1-2-1-1", "node1-2-1-1", "node1-2-1", "alert('这是节点1-2-1-1')");
+				tv.AddItem("节点1-2-1-2", "node1-2-1-2", "node1-2-1", "alert('这是节点1-2-1-2')");
+	tv.AddItem("节点2", "node2", "root", "");
+		tv.AddItem("节点2-1", "node2-1", "node2", "alert('这是节点2-1')");
+	tv.AddItem("节点3", "node3", "root", "");
+		tv.AddItem("节点3-1", "node3-1", "node3", "alert('这是节点3-1')");
+	tv.AddItem("节点4", "node4", "root", "alert('这是节点4')");
+	tv.AddItem("节点5", "node5", "root", "alert('这是节点5')");
+/*
+	TreeView 类的属性方法如下：
+	属性（无）
+
+	方法
+		CreateTreeInto(sId)              在 id 为 sId 的层里创建一颗树
+		AddItem(Name, uId, IntoId, fun, op)   添加一个节点，节点名称为 Name，节点Id为uId, 节点隶属于父级IntoId节点，执行fun, op 指明该节点是否展开，默认不展开
+
+*/
+</script>
+</body>
+</html>

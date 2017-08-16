@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Example-6.1（1） 声明式函数定义与函数表达式</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	function t1()  //声明式函数
+{
+		dwn("t1");
+	}
+	t1();
+	function t1()  //重新声明了一个新的t1
+	{
+		dwn("new t1");
+	}
+	t1();
+	t1=function()  //用函数表达式给t1重新赋值
+{
+		dwn("new new t1");
+	}
+	t1();
+-->
+</script>
+</body>
+</html>

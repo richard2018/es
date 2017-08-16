@@ -1,0 +1,24 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 16.2 setTimeout </title>
+</head>
+<body>   
+<h1 id="output"></h1>
+<script language="javascript" type="text/javascript">  
+<!--
+var c = 10;
+(function(){
+	if(c){
+		//定时器，延迟1秒再次调用这个函数本身
+		setTimeout(arguments.callee,1000); 
+		//还记得么，arguments.callee引用调用者本身
+	}
+	//定时器每次调用时把c的值减1，然后更新output的innerHTML
+	document.getElementById("output").innerHTML = c;
+	c--;
+})();
+-->
+</script>  
+</body>   
+</html>

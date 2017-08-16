@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>JSVM JavaScript Executor</title>
+<style>
+	.f9z {font-size:9pt;}
+	body {
+		border:0;
+		font-family:verdana,tahoma,helvetica;
+		font-size:13px;
+		background-color:#fff !important;}
+</style>
+<script	src="../jsre.js" modules="runtime,tools,debugger"></script>
+<script>
+
+	window.onload = function () {
+		try {
+			$import("js.lang.System");
+			focusCmd();
+		} catch (ex) {
+			alert(ex);
+		}
+	}
+
+	function execCmd() {
+		executor.exec(document.getElementById("cmdTxt").value);
+	}
+	
+	var executor = new function () {
+		this.exec = function (code) {
+			try {
+				eval(code);
+			}catch(ex){
+				if (ex.printStackTrace) {
+					ex.printStackTrace();
+				} else {
+					alert(ex.message || ex);	
+				}
+			}
+		}	
+	};
+
+	function focusCmd() {
+		document.getElementById('cmdTxt').focus();
+	}
+	
+	function resetCmd(){
+		document.getElementById('cmdTxt').value='';
+	}
+	
+	function closeCmd() {
+		window.close();
+	}
+	
+	document.onkeydown = function () {
+		var evt = window.event || arguments[0];
+		if (evt.keyCode == 88 && evt.altKey) {
+			execCmd();
+		} else if (evt.keyCode == 82 && evt.altKey) {
+			resetCmd();
+		} else if (evt.keyCode == 67 && evt.altKey) {
+			closeCmd();
+		}
+	}
+</script>
+</head>
+<body style="" topmargin="10" leftmargin="10" scroll="auto">
+<textarea id="cmdTxt" rows="20" cols="80"></textarea><br/>
+<button onclick='execCmd()'>Execute(<u>X</u>)</button>
+<button onclick='resetCmd()'>Reset(<u>R</u>)</button>
+<button onclick='closeCmd()'>Close(<u>C</u>)</button>
+&nbsp;&nbsp;<span>show jsvm logs: alt+ctrl+L</span>
+</body>
+</html>

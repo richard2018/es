@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css"> td,body{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="Window"></script>
+</head>
+<body>
+<h2>游戏人窗体类</h2>
+<hr>
+
+<script type="text/javascript">
+//只要你内存允许，可以无限个窗口
+	var Win1 = new DronFw.Class.Window();//得到 Window 的实例 Win1
+	Win1.Width = 460;//宽
+	Win1.Height = 300;//高
+	Win1.Left = 150;//左
+	Win1.Top = 150;//上
+	Win1.Ico = "images/window_ico.gif";//标题图标
+	Win1.Title = "窗口1";//标题内容
+	Win1.Content = "内容1";//窗口内容，可以是html
+	Win1.Show();//显示窗体
+
+	var Win2 = new DronFw.Class.Window();
+	Win2.Left = 100;
+	Win2.Top = 100;
+	Win2.Title = "窗口2";
+	Win2.Content = "内容2";
+	Win2.Show();
+
+	var Win3 = new DronFw.Class.Window();
+	Win3.Top = 190;
+	Win3.Left = 250;
+	Win3.Show();
+
+	var Win4 = new DronFw.Class.Window();
+	Win4.Top = 290;
+	Win4.Title = "我没有最小化";
+	Win4.MinButton = false;//禁用最小化按钮
+	Win4.Left = 280;
+	Win4.Show();
+/*
+	Window 类的属性方法如下：
+	属性
+		Left   : 窗体距左边的距离，缺省为0
+		Top    : 窗体距上边的距离，缺省为0
+		Width  : 窗体宽，缺省300
+		Height : 窗体高，缺省200
+		Ico    : 窗体的图标，缺省为ie图标
+		Title  : 窗体的标题，缺省为“未命名标题”
+		Content: 窗体内容，缺省为空
+		MinButton : 是否显示最小化按钮
+		MaxButton : 是否显示最大化按钮
+		CloButton : 是否显示关闭按钮
+	方法
+		Show   : 显示窗体
+*/
+</script>
+</body>
+</html>

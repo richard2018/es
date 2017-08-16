@@ -1,0 +1,22 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 13.3 简单事件模型</title>
+</head>
+<body> 
+<button id="btn1">btn1</button>
+<button id="btn2" onclick="alert(this.innerText)">btn2</button>
+<script>
+<!--
+document.getElementById("btn1").onclick = function(event)
+{
+	event = event || window.event;
+	var target = event.srcElement || event.target;
+		//在IE中,srcElement代表事件的触发者，而Mozilla的浏览器中相应的属性是target
+		//这是我们见到的第二个差异性，在后面我们还会见到两种模型的更多差异
+	alert(target.innerHTML);
+}
+-->
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<friends xmlns="www.51js.com">
+	<friend name="月影" status="busy" intro="传说中不知道说什么好" face="frog 1.bmp" email="yuer@gmail.com"></friend>
+	<friend name="aoao" status="away" intro="传说中不传说中不知道做什么好传说中不知道做什么好传说中不知道做什么好知道做什么好" face="leaf.bmp" email="aoao@gmail.com"></friend>
+	<friend name="kaka" status="offline" intro="传说中不知道说什么好" face="Frog 2.bmp" email="kaka@gmail.com"></friend>
+	<friend name="十年踪迹" status="online" intro="传说中不传说中不知道做什么好传说中不知道做什么好传说中不知道做什么好知道做什么好" face="bear.bmp" email="year10@gmail.com"></friend>
+	<friend name="simpler" status="online" intro="传说中不知道做什么好" face="monkey 1.bmp" email="simpler@gmail.com"></friend>
+	<friend name="米籽籽" status="online" intro="传说中不知道说什么好" face="monkey 2.bmp" email="mizizi@gmail.com"></friend>
+</friends>

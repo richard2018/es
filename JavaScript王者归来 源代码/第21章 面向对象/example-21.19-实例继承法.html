@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>Example-21.19 实例继承法</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	function MyDate()
+	{
+		var instance = new Date();	//instance是一个新创建的日期对象
+		instance.printDate = function(){
+			document.write("<p> "+instance.toLocaleString()+"</p> ");
+		} //对instance扩展printDate()方法
+		return instance;  //将instance作为构造函数的返回值返回
+	}
+	var myDate = new MyDate();
+	dwn(myDate.toGMTString());
+	myDate.printDate();
+-->
+</script>
+</body>
+</html>

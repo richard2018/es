@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Example-6.9 为函数指定所有者</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//定义一个Point类型
+	function Point(x,y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+	//定义一个Vector类型
+	function Vector(x,y)
+	{
+		this.x = x;
+		this.y = y;
+	}
+	function f(){
+		dwn(this.constructor);
+	}
+	var p = new Point(1, 2);
+	var v = new Vector(-1, 2);
+	p.f=f;  //把f()当作p的方法来用
+	p.f();  //调用时，f中的this指向p，因此this.constructor得到p的构造函数Point
+	v.f=f;  //把f()当作v的方法来用
+	v.f();  //调用时，f中的this指向v，因此this.constructor得到v的构造函数Vector
+-->
+</script>
+</body>
+</html>

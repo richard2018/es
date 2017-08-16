@@ -1,0 +1,32 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass=""></script>
+</head>
+<body>
+
+<h2>Call</h2>
+<hr>
+
+
+<!--
+
+	这是 DronFw 测试 Call 指令的一个例子
+
+-->
+
+<input type="button" value="DronFw.Call('comm2')" onclick="test()">
+
+<script type="text/javascript">
+	DronFw.JsPath = "./Commands/";//指定脚本文件存放路径
+	DronFw.Call("comm1");//加载 com1.js，注意，这里不包含扩展名，下同
+	function test()
+	{
+		DronFw.Call("comm2");
+	}
+</script>
+
+</body>
+</html>

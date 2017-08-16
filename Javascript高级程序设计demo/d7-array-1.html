@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>title</title>
+		<script type="text/javascript">
+			"use strict"
+			let a1 = Array("dog", "pig");
+			// 1.队列演示1：首部插,尾部取
+			a1.unshift("child");
+			console.info(a1) // child,dog,pig
+			console.info(a1.pop()) // pig
+			console.info(a1) //child,dog
+			
+			// 2.队列演示2,尾部查，首部取
+			a1.push("pig");
+			console.info(a1)// child,dog,pig
+			a1.shift();
+			console.info(a1)//dog,pig
+			
+			
+			// 3.栈演示
+			a1.push("child");
+			console.info(a1);// dog,pig,child
+			a1.pop();
+			console.info(a1)//dog,pig
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>Example-4.6</title>
+</head>
+<body>
+<script>
+<!-
+//count定义骰子的数量，side定义每个骰子的面数
+function dice(count, side) 
+{
+	var ench = Math.floor(Math.random() * 6); //+0~+5的骰子随机变数修正 
+	return function()
+	{	
+		var score = 0;
+		for(var i = 0; i < count; i++)
+		{
+			score += Math.ceil(Math.random() * side) ; 
+//用随机数生成骰子点数
+//Math.random的到一个(0,1]的随机数，Math.ceil用来取整整
+//在第7章会有关于Math对象的介绍
+		}
+		return score + ench;
+	}
+}
+var d1 = dice(2,6);  //生成一组2d6+n的骰子，其中的n为0~5的随机数
+var d2 = dice(1,20);  //生成一颗20面的骰子，带有0~5的随机点数修正
+for(var i = 0; i < 20; i++){
+	document.write(d1());
+	document.write(","+d2());
+	document.write("<br/>");
+}
+-->
+</script>
+</body>
+</html>

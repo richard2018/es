@@ -1,0 +1,35 @@
+<script>
+function searchSales()
+{
+	var empID = $F('lstEmployees');
+	var y = $F('lstYears');
+	var url = 'http://yoursever/app/get_sales';
+	var pars = 'empID=' + empID + '&year=' + y;
+
+	var myAjax = new Ajax.Request(
+		url,
+		{
+			method: 'get',
+			parameters: pars,
+			onComplete: showResponse
+		});
+
+}
+function showResponse(originalRequest)
+{
+	//put returned XML in the textarea
+	$('result').value = originalRequest.responseText;
+}
+</script>
+	<select id="lstEmployees" size="10" onchange="searchSales()">
+		<option value="5">Buchanan, Steven</option>
+		<option value="8">Callahan, Laura</option>
+		<option value="1">Davolio, Nancy</option>
+	</select>
+	<select id="lstYears" size="3" onchange="searchSales()">
+		<option selected="selected" value="1996">1996</option>
+		<option value="1997">1997</option>
+		<option value="1998">1998</option>
+	</select>
+<br><textarea id=result cols=60 rows=10 ></textarea>
+

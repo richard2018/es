@@ -1,0 +1,160 @@
+# language: JSVM2
+
+/**
+ * Copyright (c) 2000 World Wide Web Consortium,
+ * (Massachusetts Institute of Technology, Institut National de
+ * Recherche en Informatique et en Automatique, Keio University). All
+ * Rights Reserved. This program is distributed under the W3C's Software
+ * Intellectual Property License. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+ * the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ * PURPOSE.
+ * See W3C License http://www.w3.org/Consortium/Legal/ for more details.
+ */
+
+package org.w3c.dom.events;
+
+import js.lang.JObject;
+import js.lang.ArgumentException;
+import js.util.HashMap;
+
+
+import org.w3c.dom.events.Event;
+import org.w3c.dom.events.EventListener;
+import org.w3c.dom.events.EventException;
+
+/**
+ * The EventListener interface is the primary method for handling events. 
+ * Users implement the EventListener interface and register their listener 
+ * on an EventTarget using the AddEventListener method. The users should also 
+ * remove their EventListener from its EventTarget after they have completed 
+ * using the listener. 
+ * @class
+ */
+class EventTarget ()
+{
+
+	this.parent = null;
+	var listeners = new HashMap();
+
+	/**
+	 * This method allows the registration of event listeners on the event 
+	 * target. If an <code>EventListener</code> is added to an 
+	 * <code>EventTarget</code> while it is processing an event, it will not 
+	 * be triggered by the current actions but may be triggered during a 
+	 * later stage of event flow, such as the bubbling phase. 
+	 * <br> If multiple identical <code>EventListener</code>s are registered 
+	 * on the same <code>EventTarget</code> with the same parameters the 
+	 * duplicate instances are discarded. They do not cause the 
+	 * <code>EventListener</code> to be called twice and since they are 
+	 * discarded they do not need to be removed with the 
+	 * <code>removeEventListener</code> method. 
+	 * @param {String} sType The event type for which the user is registering
+	 * @param {EventListener} oListener parameter takes an interface 
+	 *   implemented by the user which contains the methods to be called 
+	 *   when the event occurs.
+	 * @param {boolean} bUseCapture If true, <code>useCapture</code> indicates that the 
+	 *   user wishes to initiate capture. After initiating capture, all 
+	 *   events of the specified type will be dispatched to the registered 
+	 *   <code>EventListener</code> before being dispatched to any 
+	 *   <code>EventTargets</code> beneath them in the tree. Events which 
+	 *   are bubbling upward through the tree will not trigger an 
+	 *   <code>EventListener</code> designated to use capture.
+	 */
+	this.addEventListener = function (sType, oListener, bUseCapture)
+	{
+		// check the type of oListener
+		if (!(oListener instanceof EventListener))
+		{
+			throw new ArgumentException(this.getClass().getName()
+				+ ".addEventListener(sType, oListener, bUseCapture) error: "
+				+ "argument oListener is not an instance of EventListener.");
+		}
+		bUseCapture = (bUseCapture == true);
+		var listenerMap = listeners.get(sType);
+		if (listenerMap == null)
+		{
+			listeners.put(sType,
+				(listenerMap = new HashMap()));
+		}
+		listenerMap.put(oListener, oListener);
+	}
+	
+	
+	/**
+	 * This method allows the removal of event listeners from the event 
+	 * target. If an <code>EventListener</code> is removed from an 
+	 * <code>EventTarget</code> while it is processing an event, it will not 
+	 * be triggered by the current actions. <code>EventListener</code>s can 
+	 * never be invoked after being removed.
+	 * <br>Calling <code>removeEventListener</code> with arguments which do 
+	 * not identify any currently registered <code>EventListener</code> on 
+	 * the <code>EventTarget</code> has no effect.
+	 * @param {String} stype Specifies the event type of the <code>EventListener</code> 
+	 *   being removed. 
+	 * @param {EventListener} oListener The <code>EventListener</code> parameter indicates the 
+	 *   <code>EventListener </code> to be removed. 
+	 * @param {boolean} bUseCapture Specifies whether the <code>EventListener</code> 
+	 *   being removed was registered as a capturing listener or not. If a 
+	 *   listener was registered twice, one with capture and one without, 
+	 *   each must be removed separately. Removal of a capturing listener 
+	 *   does not affect a non-capturing version of the same listener, and 
+	 *   vice versa. 
+	 */
+	this.removeEventListener = function (sType, oListener, bUseCapture)
+	{
+		bUseCapture = (bUseCapture == true);
+		var listenerMap = listeners.get(sType);
+		if (listenerMap != null)
+		{
+			listenerMap.remove(oListener);
+		}
+	}
+	
+	/**
+	 * This method allows the dispatch of events into the implementations 
+	 * event model. Events dispatched in this manner will have the same 
+	 * capturing and bubbling behavior as events dispatched directly by the 
+	 * implementation. The target of the event is the 
+	 * <code> EventTarget</code> on which <code>dispatchEvent</code> is 
+	 * called. 
+	 * @param {Event} evt Specifies the event type, behavior, and contextual 
+	 *   information to be used in processing the event.
+	 * @return The return value of <code>dispatchEvent</code> indicates 
+	 *   whether any of the listeners which handled the event called 
+	 *   <code>preventDefault</code>. If <code>preventDefault</code> was 
+	 *   called the value is false, else the value is true. 
+	 * @exception EventException
+	 *   UNSPECIFIED_EVENT_TYPE_ERR: Raised if the <code>Event</code>'s type 
+	 *   was not specified by initializing the event before 
+	 *   <code>dispatchEvent</code> was called. Specification of the 
+	 *   <code>Event</code>'s type as <code>null</code> or an empty string 
+	 *   will also trigger this exception.
+	 * @type boolean
+	 */
+	this.dispatchEvent = function (oEvt, async)
+	{
+		if (oEvt.getTarget() == null)
+		{
+			oEvt.target = this;
+		}
+		oEvt.currentTarget = this;
+		var listenerMap = listeners.get(oEvt.getType());
+		if (listenerMap == null)
+		{
+			return;
+		}
+		var iterator = listenerMap.elements();
+		while (iterator.hasNext())
+		{
+			iterator.next().handleEvent(oEvt, async);
+		}
+		if (oEvt.getBubbles() && !oEvt.getPropagationStopped() 
+			&& this.parent != null)
+		{
+			this.parent.dispatchEvent(oEvt, async);
+		}
+		return !oEvt.getDefaultPrevented();
+	}
+	
+}

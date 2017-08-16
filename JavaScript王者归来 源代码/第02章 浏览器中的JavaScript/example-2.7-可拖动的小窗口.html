@@ -1,0 +1,60 @@
+	<HTML>
+<HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+	<!--
+	var currentMoveObj = null;         //当前拖动对象
+	var relLeft;         //鼠标按下位置相对对象位置
+	var relTop;
+	function f_mdown(obj)
+	{
+			 //当对象被按下时，记录该对象
+			 currentMoveObj = obj;                
+			 //setCapture()可以让对象捕捉到鼠标事件，跟随着鼠标做出响应
+			 currentMoveObj.setCapture();			
+			 //设置对象的定位方式为absolute，便于计算拖动位置
+			 currentMoveObj.style.position = "absolute";
+			 //记录鼠标按下时距离被移动物体的左上角的偏移量
+			 //以便在移动鼠标的时候正确计算位移
+			 relLeft = event.x - currentMoveObj.style.pixelLeft;
+			 relTop = event.y - currentMoveObj.style.pixelTop;
+	}
+	window.document.attachEvent('onmouseup',function(){
+				 //releaseCapture()执行和setCapture()相反的操作
+				 currentMoveObj.releaseCapture();
+				 currentMoveObj = null;      //当鼠标释放时同时释放拖动对象
+		});
+	function f_move(obj)
+	{
+		if(currentMoveObj != null)
+		{
+			//真正移动鼠标的时候，计算被移动物体的实际位置
+			currentMoveObj.style.pixelLeft=event.x-relLeft;
+			currentMoveObj.style.pixelTop=event.y-relTop;
+		}
+	}
+//-->
+</SCRIPT>
+<TITLE>Example 2.7 -- Drag & Drop</TITLE>
+</HEAD>
+<BODY>
+<TABLE width="100" border=1 onselectstart="return false" style="position:absolute;left:50;top:50" onmousedown="f_mdown(this)" onmousemove="f_move(this)">
+<TR>
+         <TD bgcolor="#CCCCCC" align="center" style="cursor:move">title1</TD>
+</TR>
+<TR>
+         <TD align="center" height="60">content</TD>
+</TR>
+</TABLE>
+
+<TABLE width="100" border=1 onselectstart="return false" 
+style="position:absolute;left:350;top:250" 
+onmousedown="f_mdown(this)" onmousemove="f_move(this)">
+<TR>
+         <TD bgcolor="#CCCCCC" align="center" style="cursor:move">title2</TD>
+</TR>
+<TR>
+         <TD align="center" height="60">content</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

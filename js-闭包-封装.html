@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.js"></script>
+		<script type="text/javascript">
+			(function() {   
+			   var _userId = 23492;   
+			   var _typeId = 'item';    
+			   var export1 = {}; 
+    
+			   function converter(userId) {          
+			     return +userId; 
+			   } 
+			    export1.getUserId = function() {         
+			       return converter(_userId);     
+			   } 
+			   export1.getTypeId = function() {          
+			      return _typeId; 
+			   }         
+			   window.export1 = export1;   //通过此方式输出
+			}());
+
+			  console.info(export1.getUserId()); // 23492 
+			  console.info(export1.getTypeId());  // item 
+			  console.info(export1._userId);    // undefined  
+			  console.info(export1._typeId);    // undefined       
+			  console.info(export1.converter); // undefined
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

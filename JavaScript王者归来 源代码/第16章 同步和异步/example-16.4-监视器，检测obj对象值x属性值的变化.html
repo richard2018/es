@@ -1,0 +1,49 @@
+	<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 16.4 监视器，检测obj对象值x属性值的变化</title>
+<script language="javascript" type="text/javascript">  
+<!--
+	//定义一个对象
+	var obj = new Object();
+	//设置一个x属性，值为100
+	obj.x = 100;
+	//定义一个观察者对象
+	var obsever = new Object();
+	//观察者对象的x初值和obj.x相同
+	obsever.x = obj.x;
+	//将obj设为被obsever观察的对象
+	obsever.target = obj;		
+	
+	//观察者观察X属性变化的函数
+	obsever.checkXProperties = function()
+	{
+		if(this.target.x != this.x)
+		{
+			var evt = {oldValue:this.x, value:this.target.x};
+			//发起onXPropertiesChange事件
+			this.onXPropertiesChange(evt);  
+			//更新x属性，使之等于被观察对象的x属性值
+			this.x = this.target.x;
+		}
+	}
+
+	//注册观察者的onXPropertiesChange事件
+	obsever.onXPropertiesChange = function(event)
+	{
+			//输出被改变的值和改变后的值
+		log.value+= "value change: from " + 
+			event.oldValue + " to " + event.value + "\n";
+	}
+
+	//启动计时器来"监视"x属性的变化
+	setInterval("obsever.checkXProperties()", 100); 
+-->
+</script>  
+</head>
+<body>   
+	<input id="val" type="text" value="200"/>
+	<button onclick="obj.x=val.value">change</button>
+	<br/><textarea style="width:400;height:100" id="log"></textarea>
+</body>   
+</html>

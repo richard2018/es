@@ -1,0 +1,52 @@
+.window_borderout
+{
+	width:100%; height:100%;
+	border:1px solid;
+	border-color:#d6d3ce #424142 #424142 #d6d3ce;
+	cursor:default;
+	-moz-user-select: none;
+}
+.window_borderin
+{
+	width:100%; height:100%;
+	border:1px solid;
+	border-color:#fff #848284 #848284 #fff;
+	background-color:#d6d3ce;
+}
+div>.window_borderout
+{
+	border-bottom:3px solid #424142;
+}
+div>.window_borderin
+{
+	width:auto; height:100%;
+}
+.window_title
+{
+	margin:1px; padding-left:2px;
+	width:auto; height:18px;
+	background-color:#5a71b5; color:#fff;
+	font:12px "ËÎÌו";
+	font-weight:bold;
+	line-height:18px;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr=#10246B,endColorStr=#a5cbf7,GradientType=1);
+}
+.window_title_sliver
+{
+	background-color:#808080;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorStr=#848284,endcolorstr=#c6c3c6,GradientType=1);
+}
+.window_title_button
+{
+	float:right;
+	position:relative;
+	left:-1px; top:2px;
+}
+.window_title_button input
+{
+	width:16px; height:14px;
+}
+.window_body
+{
+
+}

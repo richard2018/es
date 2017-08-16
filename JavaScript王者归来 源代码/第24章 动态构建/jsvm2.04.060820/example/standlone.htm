@@ -1,0 +1,59 @@
+<html>
+<head>
+<script 
+	src="../src/jsre.js"
+	debug="true"
+	classpath="./classes"
+	></script>
+<script>
+	function func001 ()
+	{
+		try
+		{
+			_import("org.jsvm.example.HelloWorld");
+			var obj = new HelloWorld();
+			obj.sayHello("jsvmer");
+		}
+		catch (ex)
+		{
+		 alert("err:" + ex);
+		}
+	}
+	
+	function func002 ()
+	{
+		try
+		{
+			_import("org.jsvm.example.HelloWorld");
+			HelloWorld.showNow();
+			// Class.forName("org.jsvm.example.HelloWorld").showNow();
+		}
+		catch (ex)
+		{
+		 alert("err:" + ex);
+		}
+	}
+	
+	function func003 ()
+	{
+		try
+		{
+			var obj = Class.forName("org.jsvm.example.RichClass").newInstance();
+			obj.test();
+		}
+		catch (ex)
+		{
+		 ex.printStackTrace();
+		}
+	}
+
+</script>
+</head>
+<body>
+
+	<button onclick="func001()" >say hello!</button>
+	<button onclick="func002()" >show now!</button>
+	<button onclick="func003()" >test rich class</button>
+	
+</body>
+</Html> 

@@ -1,0 +1,7 @@
+<script>
+function getData()
+{
+		alert(self.frames[0].document); //尝试访问框架里的非同源document
+}
+</script>
+<iframe src="http://www.google.com" onload="getData()"/>

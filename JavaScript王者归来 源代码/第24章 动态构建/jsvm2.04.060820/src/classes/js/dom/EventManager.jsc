@@ -1,0 +1,139 @@
+# language: JSVM2
+
+/**
+ * @fileoverview js.dom.EventManager class {@link http://jsvm.org/}
+ * @file		EventManager.jsc
+ * @author	Wan Changhua
+ * @version	2.01, 10/23/05
+ * @since		JSVM2.0
+ */
+
+package js.dom;
+
+import js.lang.System;
+import js.lang.BObject;
+import js.lang.NotSupportException;
+import js.lang.ArgumentException;
+import js.util.HashMap;
+
+/**
+ * the js.dom.EventManager instance.
+ * Inherit from BObject
+ * @author	Wan Changhua
+ * @version	2.01, 10/23/05
+ * @extends BObject
+ * @class This is the EventManager class.  
+ * @constructor
+ * @param <Object> cs
+ * @return an EventManager class
+ */
+
+class EventManager extends BObject ()
+{
+	/* Don't let anyone instantiate this class 
+	 */
+	throw new NotSupportException(EventManager.getName()
+		+ " cannot be instantiated.");
+}
+
+/**
+ * @private
+ */
+var registerMap = new HashMap();
+
+var getEventListenerByHanlder = function (fHandle, oScope)
+{
+	return registerMap.remove(fHandle);
+}
+var createEventListenerByHanlder = function (fHandle, oScope)
+{
+		var fpNotify = function (evt)
+		{
+			return fHandle.call(oScope, (evt || window.event));
+		}
+		registerMap.put(fHandle, fpNotify);
+		return fpNotify;
+}
+
+
+/**
+ * Binds the specified function to an event that fires
+ * on the object when the function is called.
+ *
+ * @param   oTarget	event target.
+ * @param   sType	event type.
+ * @param   fHandle pointer that specifies the function previously set using the attachEvent method.
+ * @param   oScope	event listener.
+ * @param   bUseCapture	use capture
+ * @returns	Returns one of the following possible values:
+ *					<code>true</code> The function is bound successfully to the event. 
+ *					<code>false</code> The function is not bound to the event. 
+ * @type boolean
+ */
+EventManager.attachEvent = function (oTarget, sType, fHandle, oScope, bUseCapture)
+{
+	try
+	{
+		var fpNotify = createEventListenerByHanlder(fHandle, oScope);
+		var useCapture = (bUseCapture == true);
+		if (oTarget.addEventListener)
+		{
+			oTarget.addEventListener(sType, fpNotify, useCapture);
+		}
+		else if (oTarget.attachEvent)
+		{
+			oTarget.attachEvent("on" + sType, fpNotify);
+			if (useCapture &&	oTarget.setCapture)
+			{
+				oTarget.setCapture();
+			}
+		}
+	}
+	catch (ex)
+	{
+		throw new ArgumentException(EventManager.getName()
+			+ ".attachEvent() arguments error.", ex);
+	}
+}
+
+/**
+ * Unbinds the specified function from the event, 
+ * so that the function stops receiving notifications 
+ * when the event fires on the object.
+ *
+ * @param   oTarget	event target.
+ * @param   sType	event type.
+ * @param   fHandle pointer that specifies the function previously set using the attachEvent method.
+ * @param   oScope	event listener.
+ * @param   bUseCapture	use capture
+ */
+EventManager.detachEvent = function (oTarget, sType, fHandle, oScope, bUseCapture)
+{
+	try
+	{
+		var fpNotify = getEventListenerByHanlder(fHandle, oScope);
+		if (fpNotify == null)
+		{
+			return;
+		}
+		var useCapture = (bUseCapture == true);
+		if (oTarget.removeEventListener)
+		{
+			oTarget.removeEventListener(sType, fpNotify, useCapture);
+		}
+		else if (oTarget.detachEvent)
+		{
+			oTarget.detachEvent("on" + sType, fpNotify);
+			if (useCapture &&	oTarget.releaseCapture)
+			{
+				oTarget.releaseCapture();
+			}
+		}
+		registerMap.remove(fHandle);
+	}
+	catch (ex)
+	{
+		throw new ArgumentException(EventManager.getName()
+			+ ".detachEvent() arguments error.", ex);
+	}
+}

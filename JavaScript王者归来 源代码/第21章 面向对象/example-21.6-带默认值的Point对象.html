@@ -1,0 +1,29 @@
+<html>
+<head>
+	<title>Example-21.6 带默认值的Point对象</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	function Point(x, y)
+	{
+		if(x) this.x = x;
+		if(y) this.y = y;
+	}
+	//设定Point对象的x、y默认值为0
+	Point.prototype.x = 0;
+	Point.prototype.y = 0;
+	//p1是一个默认(0,0)的对象
+	var p1 = new Point;
+	//p2赋予值(1,2)
+	var p2 = new Point(1,2);
+	dwn(p1.x+","+p1.y);
+	dwn(p2.x+","+p2.y);
+-->
+</script>
+</body>
+</html>

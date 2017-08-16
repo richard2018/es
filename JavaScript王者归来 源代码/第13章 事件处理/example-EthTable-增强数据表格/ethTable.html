@@ -1,0 +1,610 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<style type="text/css">
+body { 
+    font-family: "arial", "helvetica", "sans-serif", ""; 
+	font-size: 9pt; 
+    margin: 0px;
+	scrollbar-face-color:#efefe7;
+    scrollbar-highlight-color:#ffffff;
+    scrollbar-3dlight-color:#a5a5a5;
+    scrollbar-darkshadow-color:#a5a5a5;
+    scrollbar-shadow-color:#d6d6ce;
+    scrollbar-arrow-color:#003184;
+    scrollbar-track-color:#deded6;
+	}
+div.borderLine
+{
+	width:1px;
+	height:420px;
+	position:absolute;
+	background-color:#808080;
+}
+table { 
+    font-family: "arial", "helvetica", "sans-serif",""; 
+	font-size: 9pt; 
+	line-height: 150%; 
+	color: #000000;
+         }
+.display-tb2
+{
+	border-right: #808080 1px solid; 
+	border-top: #808080 1px solid; 
+	border-left: #808080 1px solid; 
+	border-bottom: #808080 1px solid;
+	border:0;
+	cellpadding:2;
+	cellspacing:0;
+	margin-top:2px;
+	border-collapse:collapse;
+}
+div.tableContainer
+{
+	overflow-x:auto;
+	width:760px;
+	dyn-behavior:expression(
+		this.onscroll == null?
+			(this.onscroll = function(){
+				var prefix = this.prefix == null?"":this.prefix;
+				if(event.srcElement.scrollLeft == event.srcElement.oldScroll) return;
+				var oGridBody = document.getElementById(prefix+"_GridBody");
+				oGridBody.style.width = parseInt(event.srcElement.clientWidth) + event.srcElement.scrollLeft + "px";
+				event.srcElement.oldScroll == event.srcElement.scrollLeft;
+			}):true,
+		this.onmousedown == null?
+			(this.onmousedown = function(){
+					if(self.currentTH != null) return;
+					var obj = document.elementFromPoint(event.x,event.y);
+					var objL = document.elementFromPoint(event.x - 1,event.y);
+
+					if(obj.tagName.toLowerCase() == "th") 
+					{
+					
+						if(objL.tagName.toLowerCase() == "th")
+						{
+							obj = objL;
+						}
+						if(obj.className == "fixed") return;
+						self.currentX = event.x;
+						self.currentTH = obj.childNodes[0];
+						self.currentTH.setCapture();
+						var oDiv = document.createElement("div");
+						oDiv.className = "borderLine";
+						document.body.appendChild(oDiv);
+
+						var offsetTop = -1;
+						var element = this;
+
+						while(element != null && element != element.document.body)
+						{
+							offsetTop += element.offsetTop;
+							element = element.offsetParent;
+						}
+
+						oDiv.style.top = offsetTop+4;
+						oDiv.style.left = event.x;
+						self.tmpLine = oDiv;
+					}
+			}):true,
+		this.onmouseup == null?
+			(this.onmouseup = function(){
+					if(self.currentTH != null)
+					{
+						var width = Math.round(parseInt(self.currentTH.clientWidth) + event.x - self.currentX);
+						if(width <= 0) width = 1;
+						var dt = parseInt(self.currentTH.style.width) - width;
+						self.currentTH.style.width = width;
+						__resizeCell.call(this, self.currentTH.columnIndex,self.currentTH.style.width,this.prefix);
+						self.currentX = event.x;
+						self.currentTH.releaseCapture();
+						self.currentTH = null;
+						document.body.removeChild(self.tmpLine);
+						self.tmpLine = null;
+					}	
+			}):true,
+		this.onmousemove == null?
+			(this.onmousemove = function(){
+					if(self.currentTH != null)
+					{
+						self.tmpLine.style.left = event.x;
+					}
+					event.cancelBubble = true;
+			}):true,
+		self.__resizeCell == null?
+			(self.__resizeCell = function(idx, width, prefix){
+										
+					prefix = prefix == null?"":prefix;
+					var cells = document.getElementById(prefix+"_GridBody_Cells");
+					var rows = cells.childNodes;
+					
+					if(width != null)
+					{
+						for (var i = 0; i < rows.length; i++)
+						{
+							var cell = rows[i].childNodes[idx].childNodes[0];
+							if(cell != null && cell.nodeType == 1) 
+							{
+								cell.style.width = width;
+								rows[i].childNodes[idx].width = width;
+								rows[i].childNodes[idx].style.width = width;
+							}
+							else 
+							{
+								rows[i].childNodes[idx].width = width;
+							}
+						}
+					}
+								
+					/*修正调节滚动条偏差像素的bug*/
+					if(this.fitSize == "auto") return;
+					if(false&&rows[1] != null && rows[1].childNodes[0] != null & rows[1].childNodes[0].clientWidth > 0)
+					{
+						document.getElementById(prefix+"_GridHead").childNodes[0].childNodes[0].childNodes[0].childNodes[0].style.width 
+								= rows[1].childNodes[0].clientWidth - 1;
+					}
+
+					if(rows[1] != null)
+					{
+						var titles = document.getElementById(prefix+"_GridHead").rows[0].childNodes;
+						for (var i = 0; i < titles.length; i++)
+						{
+							var columnIndex = titles[i].childNodes[0].columnIndex;
+
+							if(columnIndex != null)
+							{
+								if(rows[1].childNodes[columnIndex].clientWidth > 0)
+									titles[i].childNodes[0].style.width = rows[1].childNodes[columnIndex].clientWidth - 1; 
+							}
+						}
+					}
+
+				
+			}):true
+	)
+}
+div.bodyContainer
+{
+	height:400px;
+	width:760px;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+div.gridCell_standard
+{
+	width:100px;
+	overflow:hidden;
+	nw:expression(this.noWrap=true);
+	margin-left: 0px;
+	margin-right: 1px;
+	padding-left: 2px;
+	cursor:default;
+}
+div.gridCell_narrow
+{
+	width:30px;
+	overflow:hidden;
+	margin-left: 0px;
+	margin-right: 1px;
+	padding-left: 2px;
+	nw:expression(this.noWrap=true);
+	cursor:default;
+}
+th 
+{
+	border-right: #a4a6a4 1px solid; 
+	border-top: #a4a6a4 1px solid; 
+	border-left: #a4a6a4 1px solid; 
+	border-bottom: #a4a6a4 1px solid;
+	background-image: url(images/default/headerbg.gif);
+	background-color: #3377cc;
+        color:#ffffff;
+	font-style:normal;
+	font-weight:normal;
+	height:20px;
+	cursor:col-resize;
+	dyn-behavior:expression(
+		ondblclick == null?
+			(ondblclick = function()
+			{
+				var src = event.srcElement;
+				if(event.srcElement.tagName.toLowerCase()!="div")
+				{
+					src = src.childNodes[0];
+				}
+				src.style.width = "";
+				__resizeCell(src.columnIndex,src.clientWidth);
+			}):true
+	)
+}
+th.fixed
+{
+	border-right: #a4a6a4 1px solid; 
+	border-top: #a4a6a4 1px solid; 
+	border-left: #a4a6a4 1px solid; 
+	border-bottom: #a4a6a4 1px solid;
+	background-image: url(images/default/headerbg.gif);
+                color:#ffffff;
+	font-style:normal;
+	font-weight:normal;
+	height:20px;
+	cursor:default;
+}
+tr.odd
+{
+  border-right: #a4a6a4 1px solid; 
+	border-top: #a4a6a4 0px solid; 
+	border-left: #a4a6a4 0px solid; 
+	border-bottom: #a4a6a4 1px solid;
+	dyn-behavior:expression(
+		this.onmouseover == null?
+			(this.onmouseover = function()
+			{
+				if(!this.selected)
+					this.style.backgroundColor = "#E8EBF6";
+				event.cancelBubble = true;
+			}):true,
+		this.onmouseout == null?
+			(this.onmouseout = function()
+			{
+				if(!this.selected)
+					this.style.backgroundColor = "";
+			}):true,
+		this.ondblclick == null?
+			(this.ondblclick = function()
+			{
+				if(this.action == null)
+				{
+					return false;					
+				}
+				else if(this.action instanceof Function)
+				{
+					return this.action.call(this);
+				}
+				else return eval(this.action);
+			}):true,
+		this.onclick == null?
+			(this.onclick = function()
+			{
+				if(this.parentElement.selectedIndex != null)
+				{
+					if(this.parentElement.rows[this.parentElement.selectedIndex] != null)
+					{
+						this.parentElement.rows[this.parentElement.selectedIndex].style.backgroundColor = "";
+						this.parentElement.rows[this.parentElement.selectedIndex].selected = false;
+					}
+				}
+				this.parentElement.selectedIndex = this.rowIndex;
+				this.selected = true;
+				this.style.backgroundColor = "#CDD5ED";
+			}):true		
+	)
+}
+tr.even
+{
+  border-right: #a4a6a4 1px solid; 
+	border-top: #a4a6a4 0px solid; 
+	border-left: #a4a6a4 0px solid; 
+	border-bottom: #a4a6a4 1px solid;
+	dyn-behavior:expression(
+		this.onmouseover == null?
+			(this.onmouseover = function()
+			{
+				if(!this.selected)
+					this.style.backgroundColor = "#E8EBF6";
+				event.cancelBubble = true;
+			}):true,
+		this.onmouseout == null?
+			(this.onmouseout = function()
+			{
+				if(!this.selected)
+					this.style.backgroundColor = "";
+			}):true,
+		this.ondblclick == null?
+			(this.ondblclick = function()
+			{
+				if(this.action == null)
+				{
+					return false;					
+				}
+				else if(this.action instanceof Function)
+				{
+					return this.action.call(this);
+				}
+				else return eval(this.action);
+			}):true,
+		this.onclick == null?
+			(this.onclick = function()
+			{
+				if(this.parentElement.selectedIndex != null)
+				{
+					if(this.parentElement.rows[this.parentElement.selectedIndex] != null)
+					{
+						this.parentElement.rows[this.parentElement.selectedIndex].style.backgroundColor = "";
+						this.parentElement.rows[this.parentElement.selectedIndex].selected = false;
+					}
+				}
+				this.parentElement.selectedIndex = this.rowIndex;
+				this.selected = true;
+				this.style.backgroundColor = "#CDD5ED";
+			}):true		
+	)
+}
+td.odd_even
+{
+  border-right: #a4a6a4 1px solid; 
+	border-top: #a4a6a4 1px solid; 
+	border-left: #a4a6a4 1px solid; 
+	border-bottom: #a4a6a4 1px solid;
+	noWrap;
+}
+td.select-cell
+{
+  border-right: #a4a6a4 1px solid; 
+	border-top: #a4a6a4 1px solid; 
+	border-left: #a4a6a4 1px solid; 
+	border-bottom: #a4a6a4 1px solid;
+}
+</style>
+
+<body bgcolor="F6F6F6" style="padding:10 10 10 10">
+
+<div class="tableContainer" id="order_Container">
+<!--动态表格-->
+	<table cellpadding="0" class="display-tb2" style="margin-top: 2px;" cellspacing="0" border="0" id="order">
+	<tr>
+	<td>
+	<table id="_gridHead" cellpadding="0" class="display-tb2" style="margin-top: 0px;" cellspacing="0" border="0">
+		<thead>
+			<th class="fixed"><div columnIndex="0" class="gridCell_narrow">选择</div></th>
+			<th><div columnIndex="1" class="gridCell_standard">订单编号</div></th>
+			<th><div columnIndex="2" class="gridCell_standard">订货日期</div></th>
+			<th><div columnIndex="3" class="gridCell_standard">订货单位</div></th>
+			<th><div columnIndex="4" class="gridCell_standard">订单类别</div></th>
+			<th><div columnIndex="5" class="gridCell_standard">产品类别</div></th>
+			<th><div columnIndex="6" class="gridCell_standard">版本号</div></th>
+			<th><div columnIndex="7" class="gridCell_standard">订货金额</div></th>
+			<th><div columnIndex="8" class="gridCell_standard">订单状态</div></th>
+		</thead>
+	</table>
+	</td>
+	</tr>
+	<!--<tfoot> 共3页 </tfoot>-->
+	<tbody>
+	<tr>
+	<td colspan="9">
+	<div id="_GridBody" class="bodyContainer">
+    <table cellpadding="0" class="display-tb2" style="margin-top: 0px;" cellspacing="0" border="0">
+	<tbody id="_GridBody_Cells">
+	<tr class="odd" action="alert(this.childNodes[1].innerText)">
+	<td width="30px" class="select-cell">
+         <div class="gridCell_narrow"><input type="checkbox" name="id" value="2" /></div></td>
+	<td class="odd_even"><div class="gridCell_standard">DJPH001</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-02-02</div></td>
+	<td class="odd_even"><div class="gridCell_standard">19</div></td>
+	<td class="odd_even"><div class="gridCell_standard">直销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">5</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="even">
+	<td width="30px" class="select-cell">
+           <div class="gridCell_narrow"><input type="checkbox" name="id" value="3" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">DJPH001</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-02-02</div></td>
+	<td class="odd_even"><div class="gridCell_standard">19</div></td>
+	<td class="odd_even"><div class="gridCell_standard">购销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">5</div></td>
+	<td class="odd_even"><div class="gridCell_standard">21.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard"> </div></td></tr>
+	<tr class="odd">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="4" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">DJPH889</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-02-02</div></td>
+	<td class="odd_even"><div class="gridCell_standard">0</div></td>
+	<td class="odd_even"><div class="gridCell_standard">购销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">5</div></td>
+	<td class="odd_even"><div class="gridCell_standard">21.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="even">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="5" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">DJPH889</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-02-02</div></td>
+	<td class="odd_even"><div class="gridCell_standard">0</div></td>
+	<td class="odd_even"><div class="gridCell_standard">直销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">5</div></td>
+	<td class="odd_even"><div class="gridCell_standard">1.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard"> </div></td></tr>
+	<tr class="odd">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="6" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">tytutyjh465456</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-02-02</div></td>
+	<td class="odd_even"><div class="gridCell_standard">0</div></td>
+	<td class="odd_even"><div class="gridCell_standard">购销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">0</div></td>
+	<td class="odd_even"><div class="gridCell_standard">21.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">生产部已审核</div></td></tr>
+	<tr class="even">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="7" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">21.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">生产部已审核</div></td></tr>
+	<tr class="odd">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="8" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">总代已审核</div></td></tr>
+	<tr class="even">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="9" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">32.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="odd">
+	<td width="30px" class="select-cell">
+         <div class="gridCell_narrow"><input type="checkbox" name="id" value="10" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard"> </div></td></tr>
+	<tr class="even">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="11" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard"> </div></td></tr>
+	<tr class="odd">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="12" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="even">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="13" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="odd">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="14" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="even">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="15" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">21.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="odd">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="16" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="even">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="17" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">21.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="odd">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="18" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="even">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="19" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="odd">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="20" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	<tr class="even">
+	<td width="30px" class="select-cell">
+          <div class="gridCell_narrow"><input type="checkbox" name="id" value="21" /></div> </td>
+	<td class="odd_even"><div class="gridCell_standard">KDSZ2005050698</div></td>
+	<td class="odd_even"><div class="gridCell_standard">2005-05-05</div></td>
+	<td class="odd_even"><div class="gridCell_standard">-1</div></td>
+	<td class="odd_even"><div class="gridCell_standard">分销</div></td>
+	<td class="odd_even"><div class="gridCell_standard">TOTOR</div></td>
+	<td class="odd_even"><div class="gridCell_standard">10.2</div></td>
+	<td class="odd_even"><div class="gridCell_standard">12.0000</div></td>
+	<td class="odd_even"><div class="gridCell_standard">已取消</div></td></tr>
+	</tbody>
+	</table>
+	</div>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	<div style="height:15px"></div>
+</div>
+</body>
+</html>

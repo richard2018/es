@@ -1,0 +1,175 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>WebClock 漂亮的Web时钟</title>
+</head>
+<body>
+<DIV STYLE="position:absolute;zoom:1;width:400;height:300;top:133;left:155">
+<DIV ID="bg" STYLE="zoom:1.5;position:absolute;top:-57;left:-22;width:150;height:150;">
+<image src="novelty.gif" style="width:129px;height:129px;z-index:22" />
+</DIV>
+<DIV ID="h" STYLE="position:absolute;padding:5;width:129;height:129;">
+<image src="novelty_h.gif" style="width:129px;height:129px;z-index:22" />
+</DIV>
+<DIV ID="m" STYLE="position:absolute;padding:5;width:129;height:129;">
+<image src="novelty_m.gif" style="width:129px;height:129px;z-index:22" />
+</DIV>
+<DIV ID="s" STYLE="position:absolute;padding:5;width:129;height:129;">
+<image src="novelty_s.gif" style="width:129px;height:129px;z-index:22" />
+</DIV>
+<DIV ID="dot" STYLE="position:absolute;padding:5;width:129;height:129;">
+<image src="novelty_dot.gif" style="width:129px;height:129px;z-index:22" />
+</DIV>
+<div>
+<script>
+<!--
+//本例子应用了一个矩阵滤镜
+//用参数deg来表示旋转过的角度
+//定义一个常量2*PI/360，这个常量用来将角度换算为弧度
+var deg2radians = Math.PI * 2 / 360;
+function MatrixFilter(obj)
+{    
+    if(!obj.filters)return;
+   
+    var Matrix;
+	  //设置obj滤镜样式
+    for(p in obj.filters)
+    {       
+		if(p=="DXImageTransform.Microsoft.Matrix")
+			Matrix=obj.filters["DXImageTransform.Microsoft.Matrix"];  
+    }
+    if(!Matrix)
+    {
+        obj.style.filter+="progid:DXImageTransform.Microsoft.Matrix()";
+    }
+    Matrix=obj.filters["DXImageTransform.Microsoft.Matrix"];
+
+	  //复制一个矩阵
+    this.clone=function(Matrix2D_x)
+    {
+        if(Matrix2D_x.M11)Matrix.M11 = Matrix2D_x.M11;
+        if(Matrix2D_x.M12)Matrix.M12 = Matrix2D_x.M12;
+        if(Matrix2D_x.M21)Matrix.M21 = Matrix2D_x.M21;
+        if(Matrix2D_x.M22)Matrix.M22 = Matrix2D_x.M22;
+    }
+    
+    if(arguments[1])this.clone(arguments[1]);
+    
+	//用矩阵计算来进行向量旋转
+	//理解这些需要一定数学基础
+	//不过这不是本书所要讲述的内容
+
+	//向量旋转过某个角度
+    this.Rotate=function(deg)
+    {
+        rad = deg * deg2radians;
+        costheta = Math.cos(rad);
+        sintheta = Math.sin(rad);
+        var d=new Matrix2D(costheta,-sintheta,sintheta,costheta);
+        this.clone(Matrix2D.Mul(Matrix,d));
+    }
+
+	  //向量旋转到某个角度
+    this.RotateTo=function(deg)
+    {
+        rad = deg * deg2radians;
+        costheta = Math.cos(rad);
+        sintheta = Math.sin(rad);
+        var d=new Matrix2D(costheta,-sintheta,sintheta,costheta);
+        this.clone(d);
+    }
+
+	//向量绕点(sx,sy)旋转
+    this.RotateAt=function(deg,sx,sy)
+    {
+        rad = deg * deg2radians;
+        costheta = Math.cos(rad);
+        sintheta = Math.sin(rad);
+        var d=new Matrix2D(costheta,-sintheta,sintheta,costheta);
+        var x=sx-Matrix.Dx;
+        var y=sy-Matrix.Dy;
+        this.MoveTo(x*costheta+y*sintheta-x,-x*sintheta+y*costheta-y);
+        this.clone(Matrix2D.Mul(Matrix,d));       
+    }
+	 //向量绕点(sx,sy)旋转到某个角度
+    this.RotateToAt=function(deg,sx,sy)
+    {
+        rad = deg * deg2radians;
+        costheta = Math.cos(rad);
+        sintheta = Math.sin(rad);
+        var d=new Matrix2D(costheta,-sintheta,sintheta,costheta);
+        var x=sx;
+        var y=sy;
+        this.MoveTo(x-(x*costheta-y*sintheta),-(x*sintheta+y*costheta-x));
+        this.clone(d);
+    }
+	  
+	//向量移动到sx,sy点
+    this.MoveTo=function(sx,sy)
+    {
+        Matrix.Dx=sx;
+        Matrix.Dy=sy;
+    }
+	//转换为矩阵类型
+    this.toMatrix2D=function()
+    {
+        return new Matrix2D(Matrix.M11,Matrix.M12,Matrix.M21,Matrix.M22);
+    }
+	//沿x、y轴拉伸
+    this.ZoomBy=function(sx,sy)
+    {
+        var d=new Matrix2D(sx,0,0,sy);
+        this.clone(Matrix2D.Mul(Matrix,d));
+    }
+    this.toString=function()
+    {
+        return ""+Matrix.M11+" "+Matrix.M12+"\n"+Matrix.M21+" "+Matrix.M22+"\n"
+    }
+}
+//2D矩阵类型
+function Matrix2D()
+{
+    this.M11 = arguments[0]||1;
+    this.M12 = arguments[1]||0;
+    this.M21 = arguments[2]||0;
+    this.M22 = arguments[3]||1;
+	
+	//求矩阵交集（叉乘）
+    this.Mul_Matrix2D=function(Matrix2D_b)
+    {
+        var r=new Matrix2D();
+        r=Matrix2D.Mul(this,Matrix2D_b);        
+        return r;       
+    }
+    this.toString=function()
+    {
+        return ""+this.M11+" "+this.M12+"\n"+this.M21+" "+this.M22+"\n"
+    }
+}
+Matrix2D.Mul=function(Matrix2D_a,Matrix2D_b)
+{
+    var r=new Matrix2D();
+    r.M11=Matrix2D_a.M11*Matrix2D_b.M11+Matrix2D_a.M12*Matrix2D_b.M21;
+    r.M12=Matrix2D_a.M11*Matrix2D_b.M12+Matrix2D_a.M12*Matrix2D_b.M22;
+    r.M21=Matrix2D_a.M21*Matrix2D_b.M11+Matrix2D_a.M22*Matrix2D_b.M21;
+    r.M22=Matrix2D_a.M21*Matrix2D_b.M12+Matrix2D_a.M22*Matrix2D_b.M22;
+    return r;     
+}
+
+//秒针
+var ms=new MatrixFilter(s);
+
+//分针
+var mm=new MatrixFilter(m);
+
+//时针
+var mh=new MatrixFilter(h);
+		
+//启用计时器来每隔500毫秒重新计算矩阵旋转
+setInterval("ms.RotateToAt((new Date()).getSeconds()*6+6,69,69)",500);
+setInterval("mm.RotateToAt((new Date()).getMinutes()*6+6,69,69)",500);
+setInterval("mh.RotateToAt(((new Date()).getHours()+(new Date()).getMinutes()/60)*30,69,69)",500);
+-->
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+
+// Example HelloWorld Class
+
+_$package("org.jsvm.example");
+
+
+var HelloWorld = 
+	org.jsvm.example.HelloWorld = function ()
+{
+
+}
+
+// public method example
+HelloWorld.prototype.sayHello = function (name)
+{
+	alert("hello: " + name + "!");
+}
+
+// public static method example
+HelloWorld.showNow = function ()
+{
+	alert("now: " + new Date().toLocaleString());
+}
+
+

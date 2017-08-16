@@ -1,0 +1,22 @@
+<html>
+<head>
+	<title>Example-12.2 getAttribute和setAttribute</title>
+</head>
+<body>
+<script type="text/JavaScript">
+<!--
+var div1=document.createElement("div");
+//创建一个div
+div1.setAttribute("name","myDiv");
+//将div的name属性设为myDiv
+if(div1.outerHTML) alert(div1.outerHTML);
+//outerHTML属性可以查看一个DOM元素完整的HTML文本
+//在本章的后续部分会详细讨论到这个属性（注意这是一个只在IE中有效的属性）
+document.getElementsByTagName("body")[0].appendChild(div1);
+//将这个div加到body的内容中去
+if(document.body.outerHTML) alert(document.body.outerHTML);
+//可以查看到它确实出现在body的内层
+-->
+</script>
+</body>
+</html>

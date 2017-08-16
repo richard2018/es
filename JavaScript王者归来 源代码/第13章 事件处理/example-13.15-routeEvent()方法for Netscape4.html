@@ -1,0 +1,135 @@
+/*
+JavaScript Bible, Fourth Edition
+by Danny Goodman 
+John Wiley & Sons CopyRight 2001
+*/
+<HTML>
+<HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+//控制setDocRte复选框的钩选
+//确定是否要文档捕捉click事件
+function setDocCapture(enable) {
+	//captureEvents()在IE下对应用setCapture()
+    if (!enable) {
+        document.captureEvents(Event.CLICK);
+} else {
+	//releaseEvents()是和captureEvents()相反的操作
+        document.releaseEvents(Event.CLICK);
+        document.forms[0].setDocRte.checked = false;
+        docRoute = false;
+    }
+}
+//控制setLyrRte复选框的钩选
+//确定是否要层layer1捕捉click事件
+function setLayerCapture(enable) {
+    if (!enable) {
+        document.layer1.captureEvents(Event.CLICK);
+    } else {
+        document.layer1.releaseEvents(Event.CLICK);
+        document.forms[0].setLyrRte.checked = false;
+        layerRoute = false;
+    }
+}
+
+//是否将事件传给下一层的标志
+var docRoute = false;
+var layerRoute = false;
+
+//设置是否将事件传给下一层
+function setDocRoute(enable) {
+    docRoute = !enable;
+    document.forms[0].setDocShortCircuit.checked = false;
+    docShortCircuit = false;
+}
+function setLayerRoute(enable) {
+    layerRoute = !enable;
+    document.forms[0].setLyrShortCircuit.checked = false;
+    layerShortCircuit = false;
+}
+
+//快捷传播标志
+var docShortCircuit = false;
+var layerShortCircuit = false;
+//设置是否快捷传播事件
+function setDocShortcut(enable) {
+    docShortCircuit = !enable;
+    if (docShortCircuit) {
+        document.forms[0].setDocRte.checked = false;
+        docRoute = false;
+    }
+}
+function setLayerShortcut(enable) {
+    layerShortCircuit = !enable;
+    if (layerShortCircuit) {
+        document.forms[0].setLyrRte.checked = false;
+        layerRoute = false;
+    }
+}
+function doMainClick(e) {
+    if (e.target.type == "button") {
+        alert("Captured in top document");
+        if (docRoute) {
+			//利用routeEvent将事件传给下一个容器对象
+			//这个时候click事件将从documentElement向内层的元素传播
+//直到到达目标button
+            routeEvent(e);
+        } else if (docShortCircuit) {
+			//如果快捷传播，直接将事件传给layerButton2
+            document.layer1.document.forms[0].layerButton2.handleEvent(e);
+        }
+    }
+}
+document.captureEvents(Event.CLICK);
+document.onclick=doMainClick;
+</SCRIPT>
+</HEAD>
+<BODY>
+<B>Redirecting Event.CLICK</B>
+<HR>
+<FORM>
+<INPUT TYPE="checkbox" NAME="setDocCap"
+ onMouseDown="setDocCapture(this.checked)" CHECKED>Enable Document Capture&nbsp;
+<INPUT TYPE="checkbox" NAME="setDocRte"
+ onMouseDown ="setDocRoute(this.checked)">And let event continue
+<INPUT TYPE="checkbox" NAME="setDocShortCircuit" 
+onMouseDown ="setDocShortcut(this.checked)">Send event to 'layerButton2'<P>
+<INPUT TYPE="checkbox" NAME="setLyrCap"
+ onMouseDown ="setLayerCapture(this.checked)" CHECKED>Enable Layer Capture&nbsp;
+<INPUT TYPE="checkbox" NAME="setLyrRte"
+ onMouseDown ="setLayerRoute(this.checked)">And let event continue
+<INPUT TYPE="checkbox" NAME="setLyrShortCircuit" 
+onMouseDown ="setLayerShortcut(this.checked)">Send event to 'layerButton2'<P>
+<HR>
+<INPUT TYPE="button" VALUE="Button 'main1'" NAME="main1" 
+    onClick="alert('Event finally reached Button:' + this.name)">
+</FORM>
+<LAYER ID="layer1" LEFT=200 TOP=200 BGCOLOR="coral">
+<HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+function doLayerClick(e) {
+    if (e.target.type == "button") {
+alert("Captured in layer1");
+        if (layerRoute) {
+            routeEvent(e);
+        } else if (layerShortCircuit) {
+            document.forms[0].layerButton2.handleEvent(e);
+        }
+    }
+}
+layer1.captureEvents(Event.CLICK);
+layer1.onclick=doLayerClick;
+</SCRIPT>
+</HEAD> 
+<BODY> 
+<FORM> 
+&nbsp;layer1<BR><P><INPUT TYPE="button" VALUE="Button 'layerButton1'" 
+    NAME="layerButton1" 
+    onClick="alert('Event finally reached Button:' + this.name)"></P> 
+<P><INPUT TYPE="button" VALUE="Button 'layerButton2'" 
+    NAME="layerButton2" 
+    onClick="alert('Event finally reached Button:' + this.name)"></P>
+</FORM>
+</BODY>
+</LAYER>
+</BODY>
+</HTML>	

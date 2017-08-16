@@ -1,0 +1,19 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 13.11  利用闭包注册事件处理程序</title>
+</head>
+<body>   
+<button id="btn1">
+	Push me
+</button>
+<script language="javascript" type="text/javascript">   
+<!--
+	var btn1 = document.getElementById("btn1");
+	//为btn1添加click事件并且修正其中的this指针
+	btn1.addEventListener("click",,function(){return (function(){alert(this.tagName)}).call(btn1);},true);
+	//支持Events2.0的浏览器有效，IE6.0无效
+-->
+</script>  
+</body>   
+</html>

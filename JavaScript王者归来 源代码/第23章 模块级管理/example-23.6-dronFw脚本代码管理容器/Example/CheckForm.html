@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Language" content="zh-CN">
+<title>DronFw Example</title>
+<style type="text/css"> td,body{font-size:12px;}</style>
+<script type="text/javascript" src="../DronFw/boot.js" loadClass="CheckForm"></script>
+</head>
+<body>
+<h2>通用表单验证类</h2>
+<hr>
+
+<form name="form1" onsubmit="return cf.Check(this)">
+	test:<input type="text" name="test">不验证<br>
+	账号:<input type="text" check="^\S+$" warning="账号不能为空,且不能含有空格" name="id">不能为空<br>
+	密码:<input type="password" check="\S{6,}" warning="密码六位以上" name="id">六位以上<br>
+	电话:<input type="text" check="^\d+$" warning="电话号码含有非法字符" name="number" value=""><br>
+	相片上传:<input type="file" check="(.*)(\.jpg|\.bmp)$" warning="相片应该为JPG,BMP格式的" name="pic" value="1"><br>
+	出生日期:<input type="text" check="^\d{4}\-\d{1,2}-\d{1,2}$" warning="日期格式2004-08-10"  name="dt" value="">日期格式2004-08-10<br>
+	省份:
+	<select name="sel" check="^0$" warning="请选择所在省份">
+	<option value="">请选择
+	<option value="1">福建省
+	<option value="2">湖北省
+	</select>
+	<br>
+	选择你喜欢的运动:<br>
+	游泳<input type="checkbox" name="c" check="^0{2,}$" warning="请选择2项或以上">
+	篮球<input type="checkbox" name="c">
+	足球<input type="checkbox" name="c">
+	排球<input type="checkbox" name="c">
+	<br>
+	你的学历:
+	大学<input type="radio" name="r" check="^0$" warning="请选择一项学历">
+	中学<input type="radio" name="r">
+	小学<input type="radio" name="r">
+	<br>
+	个人介绍:
+	<textarea name="txts" check="^[\s|\S]{20,}$" warning="个人介绍不能为空,且不少于20字"></textarea>20个字以上
+	<input type="submit">
+</form>
+
+
+<script type="text/javascript">
+	var cf = new DronFw.Class.CheckForm();
+/*
+	CheckForm 类有一个方法：
+	Check(formobj)   提示错误信息并返回false，如无错，则返回true，用来控制表单是否提交
+*/
+</script>
+
+
+</body>
+</html>

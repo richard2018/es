@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title>Check Form</title>
+</head>
+<body>
+	<center>
+		<form name="myForm" action="a.html" 
+			onsubmit="return !/\s+/.test(document.myForm.textData.value) && /\d+/.test(document.myForm.numData.value) || alert('请输入正确的格式！') || false;">
+			<input name='textData' type="text" />
+			<input name='numData' type='text' />
+			<input type="submit"/>
+		</form>
+	</center>
+	<p>表单校验可以被轻易破解，简单地在浏览器栏上输入：JavaScript:document.myForm.onsubmit=function(){return true;};void(0);轻而易举地便让表单校验失效。</p>
+</body>
+</html>

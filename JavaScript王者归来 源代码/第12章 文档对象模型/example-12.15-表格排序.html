@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> Table Sort </TITLE>
+</HEAD>
+<BODY>
+	<table id="mytable">
+		<tr>
+			<td>1</td>
+			<td>akira</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>www.51js.com</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>test</td>
+		</tr>
+		<tr>
+			<td>0</td>
+			<td>JavaScript</td>
+		</tr>
+	</table></br>
+	<button onclick="SortTable(mytable)">Sort</button>
+</BODY>
+<script type="text/JavaScript">
+<!—
+//$each是一个迭代方法，它针对集合遍历其中的每一个元素，并将其作为参数执行闭包运算
+//这个函数以$符号开头的命名只是一种习惯
+function $each(collection, closure)
+{
+	//存放返回结果的数组
+	var ret = [];
+	
+//遍历集合中的每一个元素
+	for(var i = 0; i < collection.length; i++)
+	{
+		//用传入的闭包进行计算并将结果放入数组
+		ret.push(closure(collection[i]));
+	}
+	return ret;
+}
+function SortTable(table)
+{
+	var rows = $each(table.rows, function(x){
+			return x;
+		});
+	//上面通过调用$each得到的是一个由table的每一行tr元素构成的数组
+	//接下来对数组进行排序，排序依据的是第一行的序号，减去0是为了转换类型（回顾第5章）
+	rows.sort(function(x, y){
+		if(x.childNodes[0].innerText - 0 > y.childNodes[0].innerText - 0)
+		{
+			return 1;
+		}
+		else 
+			return -1;
+	});
+//将排序后的数组行通过appendChild重新添加到table中去
+	$each(rows, function(x){
+		x.parentElement.appendChild(x);
+		return x;
+	});
+}
+-->
+</script>
+</HTML>

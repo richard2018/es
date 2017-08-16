@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<compactdiscs xmlns="www.51js.com">
+	<compactdisc>
+		<artist type="individual">Frank Sinatra</artist>
+		<title numberoftracks="4">In The Wee Small Hours</title>
+		<tracks>
+			<track>In The Wee Small Hours</track>
+			<track>Mood Indigo</track>
+			<track>Glad To Be Unhappy</track>
+			<track>I Get Along Without You Very Well</track>
+		</tracks>
+		<price>$12.99</price>
+	</compactdisc>
+	<compactdisc>
+		<artist type="band">The Offspring</artist>
+		<title numberoftracks="5">Americana</title>
+		<tracks>
+			<track>Welcome</track>
+			<track>Have You Ever</track>
+			<track>Staring At The Sun</track>
+			<track>Pretty Fly (For A White Guy)</track>
+		</tracks>
+		<price>$12.99</price>
+	</compactdisc>
+</compactdiscs>

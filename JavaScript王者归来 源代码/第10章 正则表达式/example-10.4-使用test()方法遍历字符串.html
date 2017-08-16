@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Example-10.4 使用test()方法遍历字符串</title>
+</head>
+<body>
+<script type="text/JavaScript">
+<!--
+var str1 = "JavaScript is not Java";
+var str2 = "JavaScript is easy and JavaScript is fun. I love JavaScript!";
+var exp = /[Jj]ava(Script)?/g;	//匹配Java、java、JavaScript、javaScript的正则表达式
+var i = 0;
+var lastIndex = 0;
+while(exp.test(str1))
+//用while循环去遍历匹配str1，一共可以找到两个匹配项，一个是JavaScript，一个是Java
+{
+	i++;
+	lastIndex = exp.lastIndex; //记下最近匹配到的lastIndex
+}
+//最后循环结束时，exp.lastIndex会自动清零
+document.write(i + " matchs, last match index:" + lastIndex + "<br/>");
+i = 0;
+while(exp.test(str2))
+{
+	i++;
+	lastIndex = exp.lastIndex;  //记下最近匹配到的lastIndex
+}
+document.write(i + " matchs, last match index:" + lastIndex + "<br/>");
+//下面这一句不是必要的，因为循环结束时会自动清零
+exp.lastIndex = 0;
+-->
+</script>
+</body>
+</html>

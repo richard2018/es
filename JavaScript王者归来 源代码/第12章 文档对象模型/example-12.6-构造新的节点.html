@@ -1,0 +1,49 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 12.6 构造新的节点</title>
+</head>
+<body>
+<div id="doc">
+     <div>
+       Text in the first DIV.
+     </div>
+     <div id="DDD" class="secondClass">
+       Some text in the second DIV.
+     </div>
+     <div class="thirdClass">
+       Some text and <span id="SSS">element</span> in the third DIV.
+     </div>
+     <div class="fourthClass">
+       We can try <i>another elements</i>.
+       It will be much more <b>interesting</b>.
+     </div>
+     <div>
+       Text in the last DIV.
+     </div>
+  </div>
+
+<script>
+<!--
+    var main = document.getElementById('doc');
+	
+	//createAttribute()用来构造属性节点
+	var attr = document.createAttribute('temp');
+    attr.value = 'temporary';
+	
+	//setAttributeNode()可以将构造好的节点插入相应的Element节点中去
+	main.setAttributeNode(attr);
+
+    var output = main.getAttribute('temp');
+	
+	//createTextNode()用来构造新的Text节点
+    var text = document.createTextNode(output);
+
+	//通过appendChild将它插入Element节点
+	//createAttribute()、createTextNode()和我们之前见到过的createElement()是构造
+	//DOM节点的主要方法，它们分别构造不同类型的DOM节点
+	main.appendChild(text);
+-->
+</script>
+</body>
+</html>

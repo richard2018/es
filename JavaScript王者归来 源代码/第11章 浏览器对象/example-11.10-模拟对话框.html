@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Example-11.10 模拟对话框</title>
+</head>
+<body>
+<button onclick="opennew()">打开</button>
+<script type="text/JavaScript">
+<!--
+function opennew(){
+	//doucment.createElement可以用来构造新的DOM对象，这个函数在前面也见到过
+	//在下一章中将会有关于document和DOM更加详细的讨论
+	var w=document.createElement("div");
+
+	//下面一组style属性控制了模拟窗口的样式
+	//DOM提供的style属性可以很方便地让JavaScript控制元素的展现方式
+	//具体的内容依然留到下一章中详细讨论
+	w.style.top=50;
+	w.style.left=50;
+	w.style.height=100;
+	w.style.width=300;
+	w.style.position="absolute";
+	w.style.background="#00ffff";
+	w.style.paddingTop = 10;
+
+	//通过appendChild()方法将创建的div元素对象添加到body的内容中去
+	//这个方法也留待下一章进行比较系统的讨论
+	w.innerHTML+=("<center>I&nbsp;D&nbsp;:<input><br>密码:<input><br></center>");
+	document.body.appendChild(w);
+}
+-->
+</script>
+</body>
+</html>

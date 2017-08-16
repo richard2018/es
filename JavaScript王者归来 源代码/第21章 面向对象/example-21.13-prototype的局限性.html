@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title>Example-21.13</title>
+</head>
+<body>
+<script>
+<!--
+	function dwn(s)
+	{
+		document.write(s + "<br/>");
+	}
+	//定义一个类型ClassA，它的对象有一个引用类型的属性a（a是一个数组）
+	function ClassA()
+	{
+		this.a=[];
+	}
+	//定义一个类型ClassB
+	function ClassB()
+	{
+		this.b=function(){};
+	}
+	//ClassB以ClassA的对象为原型
+	ClassB.prototype=new ClassA();
+	//创建两个ClassB类型的对象
+	var objB1=new ClassB();
+	var objB2=new ClassB();
+	//改变objB1对象中的a属性的值
+	objB1.a.push(1,2,3);
+	dwn(objB2.a);
+//所有b的实例中的a成员全都变了！！这并不是这个例子所希望看到的。
+//原因是ClassA类型的对象中的a属性的类型是一个数组
+//而数组是一个引用类型的属性（回忆什么是值类型和引用类型）
+//ClassB的原型又引用ClassA的一个对象，因此
+//objB1和objB2共享了引用类型的原型属性a
+//于是通过两个中的任何一个操作a数组中的元素，结果都会导致a的值改变
+-->
+</script>
+</body>
+</html>

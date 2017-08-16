@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>Example 14.2 结构与表现分离</title>
+		<link rel="stylesheet" href="left.css" type="text/css" title="left"/> 
+		<link rel="alternate stylesheet" href="right.css" type="text/css" title="right"/>
+	</head>
+	<body>
+		<select onchange="alterStyleSheet(this.value)">
+			<option value="">--选择页面风格--</option>
+			<option value="left">left</option>
+			<option value="right">right</option>
+		</select>
+		<img id="Photo" alt="这是图片的位置"></img>
+		<p id="Content">这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字这是环绕的文字</p>
+		<script type="text/javascript">
+			//这个函数根据选择的页面风格标题替换相应的样式
+			function alterStyleSheet(title){
+				if(!title) return;
+				var _links = document.getElementsByTagName("link");
+				for(var i = 0; i < _links.length; i++)
+				{
+					var a = _links[i];
+					if(a.getAttribute('rel').indexOf('style') != -1 && a.getAttribute('title')) 
+						//如果是对应的被选择的页面风格
+						//那么将相应的link标记的disable属性设置为false
+						//否则设置为true禁用该样式，确保了一次只启用一种样式
+						a.disabled = a.getAttribute('title') == title?false:true;
+				}
+			}
+		</script>	
+	</body>
+</html>	

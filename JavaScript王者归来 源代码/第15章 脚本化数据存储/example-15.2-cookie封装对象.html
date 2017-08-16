@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Example 15.2 Cookie对象</title>
+</head>
+<body>   
+<script language="javascript" type="text/javascript">  
+<!--
+function dwn(s)
+{
+	document.write(s + "<br/>");
+}
+//定义一个Cookie对象
+function Cookie()
+{
+	//其实这里和上一个例子也没有太大的区别，只是将setCookie()和getCookie函数封装成了
+	//Cookie类型的对象方法，如果你忘了什么是对象封装，请回顾一下第7章的内容
+	//设置cookie内容
+this.set=function(name,value,expireTime){
+	//将信息拼装成cookie字符串保存
+        if(!expireTime)expireTime=new Date();
+        document.cookie=name+"="+value+";"+"expire="+expireTime.toGMTString();
+};
+//根据name获取cookie信息
+this.get=function(name){
+	//拆分和解析cookie字符串
+        var cookies=document.cookie.split("; ");
+        for(var i=0;i<cookies.length;i++)
+        {
+			//拆分name和value
+            var s=cookies[i].split("=");
+			//匹配name并返回相应的value
+            if(s[0]==name)return s[1];
+        }
+    }
+}
+
+//新建一个Cookie对象
+var cookie=new Cookie();
+
+//写入a、b、c三个cookie值
+cookie.set("a","15");
+cookie.set("b","25");
+cookie.set("c","35");
+
+//读取b和c的cookie值
+dwn("b=" + cookie.get("b"));
+dwn("c=" + cookie.get("c"));
+-->
+</script>  
+</body>   
+</html>

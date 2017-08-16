@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Example-12.4 Form的特殊属性</title>
+</head>
+<script type = "text/javascript">
+	function rcopy()
+	{
+		var t = document.form1.input1.value;
+			//在IE里，form元素可以直接通过name来访问
+		document.getElementsByTagName("form")[0].elements["input2"].value = t.split("").reverse().join("");
+			//不过考虑到兼容性，不推荐前面那种使用方式，这种是标准的用法
+			//form有elements属性，关于这个属性，本章的后续内容还会进一步讨论
+	}
+	function reset(o)
+	{
+		o.form.reset(); 
+		//表单元素的form属性引用了这个form，它的reset方法会重置表单元素的内容
+		//即将表单元素的value恢复到默认值
+		//用一个type=reset的input元素也可以实现这个默认效果
+	}
+</script>
+<body>
+<form name="form1">
+   <input name="input1"/>
+   <input name="input2" readonly/>
+   <button onclick="rcopy()">mirror</button>
+   <button onclick="reset(this)">reset</button>
+<form>
+</body>
+</html>

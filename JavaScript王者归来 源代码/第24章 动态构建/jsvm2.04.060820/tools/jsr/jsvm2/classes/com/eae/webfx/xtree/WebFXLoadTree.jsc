@@ -1,0 +1,94 @@
+# language: JSVM2
+
+/**
+ * @fileoverview com.eae.webfx.xtree.WebFXLoadTree class {@link http://jsvm.homolo.com/}
+ * @file		WebFXLoadTree.jsc
+ * @author	Emil A Eklund
+ * @Modifier: Changhua Wan
+ * @version	1.1, 07/01/05
+ */
+
+package com.eae.webfx.xtree;
+
+import com.eae.webfx.xtree.WebFXTreeConfig;
+import com.eae.webfx.xtree.WebFXTreeHandler;
+import com.eae.webfx.xtree.WebFXTreeAbstractNode;
+import com.eae.webfx.xtree.WebFXTreeItem;
+import com.eae.webfx.xtree.WebFXUtil;
+import com.eae.webfx.xtree.WebFXTree;
+
+/**
+ * Create a new WebFXLoadTree instance.
+ * Inherit from WebFXTree
+ * @author	Emil A Eklund (Modified by Wan Changhua)
+ * @version	1.1, 07/01/05
+ * @extends WebFXTree
+ * @class This is the webfx tree class.  
+ * @constructor
+ * @param {String} sText
+ * @param {String} sXmlSrc
+ * @param {String} sAction
+ * @param {String} sBehavior
+ * @param {String} sIcon
+ * @param {String} sOpenIcon
+ * @return A new WebFXTree object
+ */
+
+class WebFXLoadTree extends WebFXTree (sText, sXmlSrc, sAction, sBehavior, sIcon, sOpenIcon)
+{
+	// call super
+	//this.WebFXTree = WebFXTree;
+	//this.WebFXTree(sText, sAction, sBehavior, sIcon, sOpenIcon);
+
+	super.call(this, sText, sAction, sBehavior, sIcon, sOpenIcon);
+
+	// setup default property values
+	this.src = sXmlSrc;
+	this.loading = false;
+	this.loaded = false;
+	this.errorText = "";
+
+	// check start state and load if open
+	if (this.open)
+		WebFXUtil.startLoadXmlTree(this.src, this);
+	else {
+		// and create loading item if not
+		this._loadingItem = new WebFXTreeItem(WebFXTreeConfig.loadingText);
+		this.add(this._loadingItem);
+	}
+}
+
+//WebFXLoadTree.prototype = new WebFXTree;
+
+// override the expand method to load the xml file
+//WebFXLoadTree.prototype._webfxtree_expand = WebFXTree.prototype.expand;
+
+/**
+ * Expands all child nodes of self, 
+ * override the expand method to load the xml file.
+ */
+WebFXLoadTree.prototype.expand = function()
+{
+	if (!this.loaded && !this.loading) {
+		// load
+		WebFXUtil.startLoadXmlTree(this.src, this);
+	}
+	//this._webfxtree_expand();
+	super.prototype.expand.call(this);
+};
+
+
+/**
+ * Override the build method, builds an element of self in the given container.
+ * If an container is not provided, the current postion parent node is the container.
+ * Add by Wan Changhua (2005-07-01)
+ * @param {Element} container
+ */
+WebFXLoadTree.prototype.build = function(container)
+{
+	if (container == null) {
+		document.write(this.toString());
+	}	else {
+		container.innerHTML = this.toString();
+	}
+}

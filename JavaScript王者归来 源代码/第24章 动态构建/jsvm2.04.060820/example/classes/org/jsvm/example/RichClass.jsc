@@ -1,0 +1,22 @@
+# language: jsvm2
+
+package org.jsvm.example;
+
+import js.io.WebPrinter;
+
+
+class RichClass  ()
+{
+	this.printer = new js.io.WebPrinter();;
+}
+
+
+RichClass.prototype.test = function (name)
+{
+	this.printer.println(this.toString() + " is an instance of "
+		+ this.getClass().getName() + " class.");
+	this.printer.println("members:");
+	for (var p in this)
+		this.printer.println("\t" + p + ": " + this[p]);
+
+}
