@@ -1,0 +1,31 @@
+﻿<html>
+
+<head>
+	<title>title</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		function MyObject() {
+
+		}
+		function MyObjectEx() {
+
+		}
+		MyObjectEx.prototype = new MyObject();
+
+		var obj1 = new MyObject();
+		var obj2 = new MyObjectEx();
+		var obj3 = new Object();
+		// MyObject.prototype = obj3;
+		// console.info(MyObject.prototype) // 带constructor,__proto__
+		console.info(obj1)
+		console.info(Object.getPrototypeOf(obj1))
+		MyObject.prototype = obj3;
+		var obj11 = new MyObject();
+		// console.info(MyObject.prototype) // 带__proto__
+		console.info(Object.getPrototypeOf(obj11))
+	</script>
+</body>
+
+</html>

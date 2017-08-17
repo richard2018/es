@@ -1,0 +1,29 @@
+﻿<html>
+
+<head>
+	<title>title</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		function MyObject() {
+
+		}
+		function MyObjectEx() {
+
+		}
+		MyObjectEx.prototype = new MyObject();
+
+		var obj1 = new MyObject();
+		var obj2 = new MyObjectEx();
+		console.info(MyObject.prototype.__proto__);
+
+		// console.info(obj1.constructor == obj2.constructor)
+
+
+		var obj3 = new Object();
+		console.info(obj3.constructor.prototype == obj3.constructor.prototype.constructor.prototype.constructor.prototype)
+	</script>
+</body>
+
+</html>

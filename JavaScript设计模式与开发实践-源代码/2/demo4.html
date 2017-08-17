@@ -1,0 +1,22 @@
+﻿<html>
+
+<head>
+	<title>title</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		function MyObject() {
+		}
+		function MyObjectEx() {
+
+		}
+		var proto = new MyObject();
+		console.info(MyObject.prototype)
+		console.info(MyObject.prototype.constructor)
+		console.info(proto.constructor.prototype)
+		console.info(proto.constructor.prototype == MyObject.prototype)
+	</script>
+</body>
+
+</html>
