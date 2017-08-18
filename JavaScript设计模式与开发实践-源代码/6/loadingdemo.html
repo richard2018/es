@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<title>title</title>
+		
+	</head>
+	<body>
+	<script type="text/javascript">
+		var myImage = (function(){
+		var imgNode = document.createElement( 'img' );
+		document.body.appendChild( imgNode );
+		return {
+			setSrc: function( src ){
+				imgNode.src = src;
+			}
+		}
+	})();
+	var proxyImage = (function(){
+		var img = new Image;
+		img.onload = function(){
+			myImage.setSrc( this.src );
+		}
+		return {
+			setSrc: function(src){
+				myImage.setSrc('file:///E:/my_sources/es/JavaScript设计模式与开发实践-源代码/6/loading.gif');
+				//img.src = src;
+				myImage.setSrc(src);
+			}
+		}
+	})();
+	proxyImage.setSrc('http://avatar.csdn.net/9/1/A/1_lily_1.jpg');
+	</script>
+	</body>
+</html>

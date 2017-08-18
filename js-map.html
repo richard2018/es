@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+		var strategies = {
+    "t1": function (data) {
+        console.info("data : " + data);
+		console.info(arguments.callee);
+        return '平和体质';
+    },
+    "所有轻度偏颇体质": function (value, errorMsg) {
+        return '所有轻度偏颇体质';
+    },
+    handle(rule, data) {
+
+    }
+};
+
+console.info(strategies.t1());
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
