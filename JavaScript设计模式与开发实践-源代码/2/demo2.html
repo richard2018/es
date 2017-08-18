@@ -1,0 +1,25 @@
+﻿<html>
+
+<head>
+	<title>title</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		var obj1 = Object.prototype;
+		var num = 0;
+		for (var v1 in obj1) {
+			num++;
+		}
+		console.info(num)
+
+		function add() {
+
+		}
+		console.info(add.__proto__ === Object.prototype)
+		console.info(Object.prototype)
+		console.info(add.prototype)
+	</script>
+</body>
+
+</html>
