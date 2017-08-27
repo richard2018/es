@@ -6,16 +6,14 @@
     <head>
 
         <body>
-
+            <div id="div1">点击</div>
 
             <script type='text/javascript'>
-                var Event = (function () {
+                var Event2 = (function () {
                     var global = this;
-                    var Event;
                     var _default = 'default';
 
-                    
-                    Event = function () {
+                    var Event1 = function () {
                         var _listen,
                             _trigger,
                             _remove,
@@ -33,12 +31,16 @@
                                 }
                                 return ret;
                             };
+
+
                         _listen = function (key, fn, cache) {
                             if (!cache[key]) {
                                 cache[key] = [];
                             }
                             cache[key].push(fn);
                         };
+
+
                         _remove = function (key, cache, fn) {
                             if (cache[key]) {
                                 if (fn) {
@@ -52,6 +54,8 @@
                                 }
                             }
                         };
+
+
                         _trigger = function () {
                             var cache = _shift.call(arguments),
                                 key = _shift.call(arguments),
@@ -66,6 +70,8 @@
                                 return this.apply(_self, args);
                             });
                         };
+
+
                         _create = function (namespace) {
                             var namespace = namespace || _default;
                             var cache = {},
@@ -111,6 +117,9 @@
                                     namespaceCache[namespace] = ret)
                                 : ret;
                         };
+
+
+                        
                         return {
                             create: _create,
                             one: function (key, fn, last) {
@@ -131,8 +140,21 @@
                             }
                         };
                     }();
-                    return Event;
+
+
+                    console.info(Event1)
+                    return Event1;
                 })();
+
+
+                var div1 = document.getElementById('div1');
+                div1.onclick = function() {
+                    Event2.trigger("t1");
+                }
+
+                Event2.listen("t1", function() {
+                    console.info("xxxxx")
+                })
             </script>
 
         </body>
