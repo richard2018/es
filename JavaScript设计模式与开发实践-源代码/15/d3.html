@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title></title>
+    <script type='text/javascript'>
+        Function.prototype.before = function (beforefn) {
+            var __self = this;
+            return function () {
+                beforefn.apply(this, arguments);
+                return __self.apply(this, arguments);
+            }
+        }
+        document.getElementById = document.getElementById.before(function () {
+            alert(1);
+        });
+        var button = document.getElementById('button');
+
+        console.log(button);
+
+        window.onload = function () {
+            alert(1);
+        }
+        window.onload = (window.onload || function () { }).after(function () {
+            alert(2);
+        }).after(function () {
+            alert(3);
+        }).after(function () {
+            alert(4);
+        });
+
+
+        var before = function (fn, beforefn) {
+            return function () {
+                beforefn.apply(this, arguments);
+                return fn.apply(this, arguments);
+            }
+        }
+        var a = before(
+            function () { alert(3) },
+            function () { alert(2) }
+        );
+        a = before(a, function () { alert(1); });
+        a();
+
+    </script>
+
+    <head>
+
+        <body></body>
+
+</html>
