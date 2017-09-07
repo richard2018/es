@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <title></title>
+    <script type='text/javascript'></script>
+
+    <head>
+
+        <body>
+            <div>js方式的命令模式</div>
+            <button id="button1">刷新菜单</button>
+            <button id="button2">增加菜单</button>
+            <button id="button3">删除菜单</button>
+            <script type="text/javascript">
+                /* var setCommand = function (button, func) {
+                    button.onclick = function () {
+                        func();
+                    }
+                };
+                var MenuBar = {
+                    refresh: function () {
+                        console.log('刷新菜单界面');
+                    }
+                };
+                var RefreshMenuBarCommand = function (receiver) {
+                    return function () {
+                        receiver.refresh();
+                    }
+                };
+                var refreshMenuBarCommand = RefreshMenuBarCommand(MenuBar);
+                setCommand(button1, refreshMenuBarCommand); */
+
+                var MenuBar = {
+                    refresh: function () {
+                        console.log('刷新菜单界面');
+                    }
+                };
+                var RefreshMenuBarCommand = function (receiver) {
+                    return {
+                        execute: function () {
+                            receiver.refresh();
+                        }
+                    }
+                };
+                var setCommand = function (button, command) {
+                    button.onclick = function () {
+                        command.execute();
+                    }
+                };
+                var refreshMenuBarCommand = RefreshMenuBarCommand(MenuBar);
+                setCommand(button1, refreshMenuBarCommand);
+            </script>
+        </body>
+
+</html>
