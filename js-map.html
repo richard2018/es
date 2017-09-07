@@ -4,13 +4,21 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script type="text/javascript">
-		function pow(x) {
-			return x * x;
-		}
+		var strategies = {
+    "t1": function (data) {
+        console.info("data : " + data);
+		console.info(arguments.callee);
+        return '平和体质';
+    },
+    "所有轻度偏颇体质": function (value, errorMsg) {
+        return '所有轻度偏颇体质';
+    },
+    handle(rule, data) {
 
-		var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-		arr = arr.map(pow); // [1, 4, 9, 16, 25, 36, 49, 64, 81]
-		console.info(arr);
+    }
+};
+
+console.info(strategies.t1());
 		</script>
 	</head>
 	<body>
