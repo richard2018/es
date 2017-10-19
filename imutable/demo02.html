@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title></title>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.2/immutable.js"></script>
+    <script type='text/javascript'>
+    const map1 = Immutable.Map({
+            a: 1,
+            b: 2,
+            c: 3,
+            d: 4
+        })
+        const map2 = Immutable.Map({
+            c: 10,
+            a: 20,
+            t: 30
+        })
+        const obj = {
+            d: 100,
+            o: 200,
+            g: 300
+        }
+        const map3 = map1.merge(map2, obj);
+        console.info("map3 : " + map3)
+    </script>
+
+    <head>
+
+        <body></body>
+
+</html>

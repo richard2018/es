@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <title></title>
+    <script type='text/javascript'>
+    </script>
+
+    <head>
+
+        <body>
+            <canvas id="myCanvas" width="200" height="100" style="border:10px solid #000000;">
+                您的浏览器不支持 HTML5 canvas 标签。
+            </canvas>
+            <script type="text/javascript">
+                var c=document.getElementById("myCanvas");
+                var ctx=c.getContext("2d");
+                 
+                // 创建渐变
+                var grd=ctx.createLinearGradient(0,0,200,0);
+                grd.addColorStop(0,"red");
+                grd.addColorStop(1,"white");
+                 
+                // 填充渐变
+                ctx.fillStyle=grd;
+                ctx.fillRect(10,10,150,80);
+            </script>
+        </body>
+
+</html>

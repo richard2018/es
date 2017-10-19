@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <title></title>
+
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.2/immutable.js"></script>
+    <script>
+        var map1 = Immutable.Map({
+            a: 1,
+            b: 2,
+            c: 3
+        });
+        var map2 = map1.set('b', 2);
+        let b1 = map1.get('b'); // 2
+        let b2 = map2.get('b'); // 50
+        console.info("b1: " + b1);
+        console.info("b2: " + b2);
+        console.info("dd : " + (map1 == map2))
+
+        const list1 = Immutable.List([1, 2]);
+        const list2 = list1.push(3, 4, 5);
+        const list3 = list2.unshift(0);
+        const list4 = list1.concat(list2, list3);
+
+        console.info("list1 : " + list1)
+        console.info("list2 : " + list2)
+        console.info("list3 : " + list3)
+        console.info("list4 : " + list4)
+
+    </script>
+
+    <head>
+
+        <body></body>
+
+</html>

@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <title></title>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.2/immutable.js"></script>
+    <script type='text/javascript'>
+        // First consider:
+        const obj1 = {
+            a: 1,
+            b: 2,
+            c: 3
+        }
+        const obj2 = {
+            a: 1,
+            b: 2,
+            c: 3
+        }
+        obj1 !== obj2 // two different instances are always not equal with ===
+
+
+        const map1 = Immutable.Map({
+            a: 1,
+            b: 2,
+            c: 3
+        })
+        const map2 = Immutable.Map({
+            a: 1,
+            b: 2,
+            c: 3
+        })
+        console.info("map1 !== map2 " + (map1 == map2)); // two different instances are not reference-equal
+        console.info("equals : " + map1.equals(map2)); // but are value-equal if they have the same values
+        console.info("is : " + Immutable.is(map1, map2)); // alternatively can use the is() function
+        console.info("is : " + Object.is(map1, map2)); // alternatively can use the is() function
+
+
+
+        const map3 = Immutable.Map({
+            a: 1,
+            b: 2,
+            c: 3
+        })
+        const map4 = Immutable.Map({
+            a: 1,
+            b: 2,
+            c: 3
+        })
+        const set = Immutable.Set().add(map3)
+        console.info("has : " + set.has(map4)) // true because these are value-equal
+
+
+        const oddSquares = Immutable.Seq([1, 2, 3, 4, 5, 6, 7, 8])
+            .filter(x => x % 2 !== 0)
+            .map(x => x * x)
+            console.info("oddSquares :" + oddSquares)
+    </script>
+
+    <head>
+
+        <body></body>
+
+</html>
