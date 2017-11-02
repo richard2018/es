@@ -10,19 +10,19 @@ import { Seq } from 'immutable';
 @immutableRenderDecorator
 @CSSModules(styles, { allowMultiple: true })
 class Tabs extends Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-    ]),
-    defaultActiveIndex: PropTypes.number,
-    activeIndex: PropTypes.number,
-    onChange: PropTypes.func,
-  };
+	static propTypes = {
+		children: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.node),
+		PropTypes.node,
+		]),
+		defaultActiveIndex: PropTypes.number,
+		activeIndex: PropTypes.number,
+		onChange: PropTypes.func,
+	};
 
-  static defaultProps = {
-    onChange: () => {},
-  };
+	static defaultProps = {
+		onChange: () => {},
+	};
 
   constructor(props) {
     super(props);
@@ -40,18 +40,18 @@ class Tabs extends Component {
     }
 
     this.state = {
-      activeIndex,
-      prevIndex: activeIndex,
+		activeIndex,
+		prevIndex: activeIndex,
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if ('activeIndex' in nextProps) {
-      this.setState({
-        activeIndex: nextProps.activeIndex,
-      });
-    }
-  }
+	componentWillReceiveProps(nextProps) {
+		if ('activeIndex' in nextProps) {
+			this.setState({
+				activeIndex: nextProps.activeIndex,
+			});
+		}
+	}
 
   handleTabClick(activeIndex) {
     const prevIndex = this.state.activeIndex;

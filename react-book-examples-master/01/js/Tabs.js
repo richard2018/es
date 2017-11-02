@@ -5,48 +5,48 @@ import TabNav from './TabNav';
 import TabContent from './TabContent';
 
 class Tabs extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    classPrefix: PropTypes.string,
-    children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-    ]),
-    defaultActiveIndex: PropTypes.number,
-    activeIndex: PropTypes.number,
-    onChange: PropTypes.func,
-  };
+  	static propTypes = {
+		defaultActiveIndex: PropTypes.number,
+		className: PropTypes.string,
 
-  static defaultProps = {
-    classPrefix: 'tabs',
-    onChange: () => {},
-  };
+		children: PropTypes.oneOfType([
+			PropTypes.arrayOf(PropTypes.node),
+			PropTypes.node,
+		]),
+		classPrefix: PropTypes.string,
+		onChange: PropTypes.func,
+		
+		activeIndex: PropTypes.number,
+  	};
 
-  constructor(props) {
-    super(props);
+	static defaultProps = {
+			classPrefix: 'tabs',
+			onChange: () => {console.info('xxxx ')},
+	};
 
-    const currProps = this.props;
+	constructor(props) {
+		super(props);
+		const currProps = this.props;
+		this.handleTabClick = this.handleTabClick.bind(this);
 
-    this.handleTabClick = this.handleTabClick.bind(this);
+		let activeIndex;
+		if ('activeIndex' in currProps) {
+			activeIndex = currProps.activeIndex;
+		} else if ('defaultActiveIndex' in currProps) {
+			activeIndex = currProps.defaultActiveIndex;
+		}
 
-    let activeIndex;
-    if ('activeIndex' in currProps) {
-      activeIndex = currProps.activeIndex;
-    } else if ('defaultActiveIndex' in currProps) {
-      activeIndex = currProps.defaultActiveIndex;
-    }
-
-    this.state = {
-      activeIndex,
-      prevIndex: activeIndex,
-    };
-  }
+		this.state = {
+			activeIndex,
+			prevIndex: activeIndex,
+		};
+	}
 
   componentWillReceiveProps(nextProps) {
     if ('activeIndex' in nextProps) {
-      this.setState({
-        activeIndex: nextProps.activeIndex,
-      });
+		this.setState({
+			activeIndex: nextProps.activeIndex,
+		});
     }
   }
 
@@ -55,51 +55,48 @@ class Tabs extends Component {
 
     if (this.state.activeIndex !== activeIndex &&
         'defaultActiveIndex' in this.props) {
-      this.setState({
-        activeIndex,
-        prevIndex,
-      });
+       	this.setState({
+			activeIndex,
+			prevIndex,
+      	}); 
 
-      this.props.onChange({ activeIndex, prevIndex });
+      	// this.props.onChange({ activeIndex, prevIndex });
     }
   }
 
   renderTabNav() {
-    const { classPrefix, children } = this.props;
-
+	const { classPrefix, children } = this.props;
     return (
-      <TabNav
-        key="tabBar"
-        classPrefix={classPrefix}
-        onTabClick={this.handleTabClick}
-        panels={children}
-        activeIndex={this.state.activeIndex}
-      />
+		<TabNav
+			key="tabBar"
+			classPrefix={classPrefix}
+			onTabClick={this.handleTabClick}
+			panels={children}
+			activeIndex={this.state.activeIndex}
+		/>
     );
   }
 
   renderTabContent() {
     const { classPrefix, children } = this.props;
-
     return (
-      <TabContent
-        key="tabcontent"
-        classPrefix={classPrefix}
-        activeIndex={this.state.activeIndex}
-        panels={children}
-      />
+		<TabContent
+			key="tabcontent"
+			classPrefix={classPrefix}
+			activeIndex={this.state.activeIndex}
+			panels={children}
+		/>
     );
   }
 
   render() {
-    const { className } = this.props;
+	const { className } = this.props;
     const cx = classnames(className, 'ui-tabs');
-
     return (
-      <div className={cx}>
-        {this.renderTabNav()}
-        {this.renderTabContent()}
-      </div>
+		<div className={cx}>
+			{this.renderTabNav()}
+			{this.renderTabContent()}
+		</div>
     );
   }
 }

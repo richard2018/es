@@ -8,17 +8,17 @@ import styles from '../css/style.scss';
 import InkBar from './InkBar';
 
 function getOuterWidth(el) {
-  return el.offsetWidth;
+  	return el.offsetWidth;
 }
 
 function getOffset(el) {
-  const html = el.ownerDocument.documentElement;
-  const box = el.getBoundingClientRect();
+	const html = el.ownerDocument.documentElement;
+	const box = el.getBoundingClientRect();
 
-  return {
-    top: box.top + window.pageYOffset - html.clientTop,
-    left: box.left + window.pageXOffset - html.clientLeft,
-  };
+	return {
+		top: box.top + window.pageYOffset - html.clientTop,
+		left: box.left + window.pageXOffset - html.clientLeft,
+	};
 }
 
 @immutableRenderDecorator

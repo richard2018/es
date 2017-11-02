@@ -14,7 +14,6 @@ class Counter extends Component {
     });
   }
   render() {
-      console.info("xxxx...")
     return (
       <div>
         <p>{this.state.count}</p>
