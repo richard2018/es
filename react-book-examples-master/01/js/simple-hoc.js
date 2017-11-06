@@ -5,7 +5,7 @@ const simpleHoc = (WrappedComponent) => {
   return class extends Component {
     render() {
         console.info('enhance....');
-      return <WrappedComponent {...this.props}/>
+      	return <WrappedComponent {...this.props}/>
     }
   }
 }

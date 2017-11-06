@@ -10,6 +10,15 @@
 		var altwrite = document.write;
 		altwrite = altwrite.bind(document);
 		// altwrite('hello2');
+		
+	const extname = (filename) => {
+  /* TODO */
+  let dotIndex = filename.lastIndexOf(".");
+  dotIndex = dotIndex == -1 ? filename.length : dotIndex;
+  return filename.substring(dotIndex, filename.length);
+}
+
+console.info(extname("hello"));
 	</script>
 </head>
 
