@@ -6,3 +6,4 @@ build
 *.diff
 book.md
 coverage
+./idea
