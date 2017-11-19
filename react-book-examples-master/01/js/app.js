@@ -2,7 +2,7 @@ import React, { Component, PropTypes, cloneElement } from 'react';
 import ReactDOM from 'react-dom';
 import Tabs from './Tabs';
 import TabPane from './TabPane';
-
+import Counter from './Counter';
 class App extends Component {
   constructor(props) {
     super(props);
@@ -38,6 +38,7 @@ class App extends Component {
           <TabPane order="1" tab={'Tab 2'}>第二个 Tab 里的内容</TabPane>
           <TabPane order="2" tab={'Tab 3'}>第三个 Tab 里的内容</TabPane>
         </Tabs>
+        <Counter/>
       </div>
     );
   }
