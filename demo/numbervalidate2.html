@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>title</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="robots" content="index,follow" />
+	<script type="text/javascript" src="http://pic.qianmi.com/jslib/jquery/jquery-1.10.2.min.js"></script>
+</head>
+
+<body>
+<input style="width: 80px;"  maxlength="9" id="replygold" name="replygold" type="text" /> 
+<script type="text/javascript">
+$(function(){
+　　$('#replygold').bind('input propertychange',amountVal );
+});
+function amountVal(){
+    var replyGold=document.getElementById("replygold");
+    var regStrs = [
+                       ['[^\\d\\.]+$', ''], //禁止录入任何非数字和点
+                       ['\\.(\\d?)\\.+', '.$1'], //禁止录入两个以上的点
+                       ['^(\\d+\\.\\d{2}).+', '$1'] //禁止录入小数点后两位以上
+                   ];
+   for(i=0; i<regStrs.length; i++){
+       var reg = new RegExp(regStrs[i][0]);
+       replyGold.value = replyGold.value.replace(reg, regStrs[i][1]);
+   }
+}
+</script>
+
+</body>
+</html>

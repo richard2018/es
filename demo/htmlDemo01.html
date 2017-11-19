@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+let a = [1, 2, 3];
+let b = [];
+console.info('b '  + b);
+for (let i = 0; i< a.length; i++) {
+	b[i] = a[i];
+}
+console.info('b '  + b);
+
+let c = [...a];
+console.info('c : ' + c);
+
+// 解构赋值
+// 函数返回值，解构赋值
+function processInput(input) {
+	let left=1;
+	let right=2;
+	let top1=3;
+	let bottom=4;
+  return { left, right, top1, bottom };
+}
+
+const { left, right,top1,bottom2 } = processInput(3);
+console.info('bottom : ' + bottom2);
+console.info(processInput(3));
+
+// 用数组成员对变量赋值时，优先使用解构赋值
+const arr = [1, 2, 3, 4];
+const [first,second] = arr;
+console.info('first: ' + first);
+console.info('second: ' + second);
+
+// 函数的参数如果是对象的成员，优先使用解构赋值
+// best
+function getFullName({ firstName, lastName }) {
+	console.info('firstName: ' + firstName);
+	console.info('lastName: ' + lastName);
+}
+let obj = {
+	firstName: 'lee',
+	lastName: 'Feng'
+};
+getFullName(obj);
+
+
+
+// 字符串
+
+const a1 = 'foobar';
+const b1 = `foo${a1}bar`;
+const c1 = 'foobar';
+console.info('b1 : ' + b1);
+
+
+
+// promise
+
+var promise = new Promise(function(resolve, reject) {
+  // ... some code
+	let value = '100';
+	let error = 'error-01';
+  if (false){
+    resolve(value);
+  } else {
+    reject(error);
+  }
+});
+promise.then((res) =>{
+	console.info("then res : " + res);
+}).catch((res) => {
+console.info("error res : " +res);
+});
+</script>
+
+</body>
+</html>
