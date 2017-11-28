@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <title></title>
+    <script type='text/javascript'>
+        // 事件对象
+        var Event = function (obj) {
+            this.obj = obj;
+            this.getSource = function () {
+                return this.obj;
+            }
+        }
+        // 监听对象
+        var F2 = function () {
+            this.hander = function (event) {
+                var f2 = event.getSource();
+                console.log("f2 do something!");
+                f2.callback();
+            }
+        }
+        // 被监听对象
+        var F1 = function () {
+            this.abc = function () {
+                console.log("f1 do something one!");
+                // 创建事件对象
+                var e = new Event(this);
+                // 发布事件
+                this.f2.hander(e);
+                console.log("f1 do something two!");
+            }
+
+            this.on = function (f2) {
+                this.f2 = f2;
+            }
+
+            this.callback = function () {
+                console.log("f1 callback invoke!");
+            }
+        }
+        // 主函数
+        function main() {
+            var f1 = new F1();
+            var f2 = new F2();
+            // 加入监听
+            f1.on(f2);
+            f1.abc();
+        }
+        // 运行主函数
+        main();
+    </script>
+
+    <head>
+
+        <body></body>
+
+</html>
